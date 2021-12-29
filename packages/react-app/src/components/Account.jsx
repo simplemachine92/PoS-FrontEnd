@@ -67,7 +67,7 @@ export default function Account({
       modalButtons.push(
         <Button
           key="logoutbutton"
-          style={{ verticalAlign: "top", marginLeft: 8, marginTop: -6 }}
+          style={{ verticalAlign: "top", marginLeft: 8, marginTop: 2 }}
           shape="round"
           size="large"
           onClick={logoutOfWeb3Modal}
@@ -79,7 +79,7 @@ export default function Account({
       modalButtons.push(
         <Button
           key="loginbutton"
-          style={{ verticalAlign: "top", marginLeft: 8, marginTop: -6 }}
+          style={{ verticalAlign: "top", marginLeft: 8, marginTop: 2 }}
           shape="round"
           size="large"
           /* type={minimized ? "default" : "primary"}     too many people just defaulting to MM and having a bad time */

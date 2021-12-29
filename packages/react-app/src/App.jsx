@@ -10,7 +10,7 @@ import {
 } from "eth-hooks";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import React, { useCallback, useEffect, useState } from "react";
-import { HomeOutlined, BugOutlined } from "@ant-design/icons";
+import { HomeOutlined, BugOutlined, QuestionCircleOutlined, ReadOutlined } from "@ant-design/icons";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
 import {
@@ -276,17 +276,29 @@ function App(props) {
           >
             <Link to="/debug"></Link>
           </Menu.Item>
-          <Menu.Item key="/hints">
-            <Link to="/hints">Hints</Link>
+          <Menu.Item
+            icon={
+              <QuestionCircleOutlined
+                type="message"
+                style={{ paddingTop: 20, paddingLeft: 18, fontSize: "30px", color: "#08c" }}
+                theme="outlined"
+              />
+            }
+            key="/hints"
+          >
+            <Link to="/hints"></Link>
           </Menu.Item>
-          <Menu.Item key="/exampleui">
-            <Link to="/exampleui">ExampleUI</Link>
-          </Menu.Item>
-          <Menu.Item key="/mainnetdai">
-            <Link to="/mainnetdai">Mainnet DAI</Link>
-          </Menu.Item>
-          <Menu.Item key="/subgraph">
-            <Link to="/subgraph">Subgraph</Link>
+          <Menu.Item
+            icon={
+              <ReadOutlined
+                type="message"
+                style={{ paddingTop: 20, paddingLeft: 18, fontSize: "30px", color: "#08c" }}
+                theme="outlined"
+              />
+            }
+            key="/exampleui"
+          >
+            <Link to="/exampleui"></Link>
           </Menu.Item>
         </Menu>
         <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
