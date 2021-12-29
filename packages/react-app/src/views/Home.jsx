@@ -1,8 +1,8 @@
 import { React, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { useContractReader } from "eth-hooks";
+import { useContractReader, usePoller } from "eth-hooks";
 import { Spin, Menu, Button, Dropdown, Space, message } from "antd";
-import { DownOutlined, UserOutlined } from "@ant-design/icons";
+import { DownOutlined, UserOutlined, BarsOutlined } from "@ant-design/icons";
+import { useEventListener } from "eth-hooks/events/useEventListener";
 import { ethers, utils } from "ethers";
 
 /**
@@ -11,14 +11,29 @@ import { ethers, utils } from "ethers";
  * @param {*} readContracts contracts from current chain already pre-loaded using ethers contract module. More here https://docs.ethers.io/v5/api/contract/contract/
  * @returns react component
  */
-function Home({ yourLocalBalance, writeContracts, readContracts, purpose, tx }) {
+function Home({ yourLocalBalance, writeContracts, readContracts, tx, localProvider }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
-  const [image, setImage] = useState();
 
-  function handleButtonClick(e) {
+  const [image, setImage] = useState();
+  const [chunk, setChunk] = useState([1]);
+
+  const purpose = useContractReader(readContracts, "CryptoChunks", "tokenURI", [chunk]);
+
+  const events = useEventListener(readContracts, "CryptoChunks", "Transfer", localProvider, 13864307);
+
+  async function handleButtonClick(e) {
     message.info("Confirm Tx to Mint 1");
-    console.log("click left button", e);
+    try {
+      const mint1Tx = await tx(
+        writeContracts.CryptoChunks.mintItem(utils.parseEther("1"), {
+          value: utils.parseEther("0.02"),
+        }),
+      );
+      await mint1Tx.wait();
+    } catch (e) {
+      console.log("Error:", e);
+    }
   }
 
   async function handleMenuClick(e) {
@@ -71,15 +86,6 @@ function Home({ yourLocalBalance, writeContracts, readContracts, purpose, tx }) 
     </Menu>
   );
 
-  /* if (_numToMint == 1) {
-    return 0.02 ether;
-} else if (_numToMint == 3) {
-    return 0.05 ether;
-} else if (_numToMint == 5) {
-    return 0.07 ether;
-} else if (_numToMint == 10) {
-    return 0.10 ether; */
-
   useEffect(() => {
     if (purpose) {
       const json = atob(purpose.substring(29));
@@ -88,19 +94,37 @@ function Home({ yourLocalBalance, writeContracts, readContracts, purpose, tx }) 
     }
   }, [purpose]);
 
+  /* async function getTransfers() {
+    setChunk(events[events.length - 1].args.tokenId);
+    console.log(chunk);
+    //gg
+  } */
+
+  usePoller(async () => {
+    if (events && events.length !== 0) {
+      setChunk(events[events.length - 1].args.tokenId);
+      const json = atob(purpose.substring(29));
+      const result = JSON.parse(json);
+      setImage(result.image);
+      //console.log(events);
+    }
+  }, 1500);
+
   return (
-    <div style={{ width: "auto", margin: "auto", paddingTop: 60, minHeight: 800 }}>
-      <h3>CryptoChunks: Phunks On-Chained</h3>
-      {image == undefined ? (
+    <div style={{ width: "auto", margin: "auto", paddingTop: 20, minHeight: 800 }}>
+      <h1>CryptoChunks: Phunks On-Chained</h1>
+      <h3>Latest Chunk: Chunk #{events == undefined ? null : chunk.toString()}</h3>
+
+      {events == undefined ? (
         <Spin style={{ margion: "auto" }} />
       ) : (
-        <div style={{ width: "auto", margin: "auto", paddingBottom: 10, paddingTop: 10 }}>
+        <div style={{ width: "auto", margin: "auto", paddingBottom: 15, paddingTop: 10 }}>
           <img src={image} height={300} />
         </div>
       )}
       <Space align="center" />
-      <Dropdown.Button onClick={handleButtonClick} overlay={menu}>
-        Mint
+      <Dropdown.Button onClick={handleButtonClick} overlay={menu} icon={<BarsOutlined />}>
+        Mint 1
       </Dropdown.Button>
     </div>
   );

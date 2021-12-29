@@ -20719,7 +20719,7 @@ tr.ant-table-expanded-row > td {
   overflow-y: auto;
   text-align: left;
   list-style-type: none;
-  background-color: #fff;
+  background-color: rgba(100, 0, 0, 200);
   background-clip: padding-box;
   border-radius: 4px;
   outline: 0;
