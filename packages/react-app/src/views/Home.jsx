@@ -9,7 +9,7 @@ import { ethers } from "ethers";
  * @param {*} readContracts contracts from current chain already pre-loaded using ethers contract module. More here https://docs.ethers.io/v5/api/contract/contract/
  * @returns react component
  */
-function Home({ yourLocalBalance, readContracts }) {
+function Home({ yourLocalBalance, readContracts, writeContracts, tx, localProvider }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
   const purpose = useContractReader(readContracts, "YourContract", "purpose");

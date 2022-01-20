@@ -2,311 +2,226 @@ pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
 import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/utils/Strings.sol";
-import "./ToColor.sol";
-import "./strings.sol";
 
-import "base64-sol/base64.sol";
+contract GreenPill_Pages is ERC721, Ownable {
+    /*///////////////////////////////////////////////////////////////
+                              EVENTS
+    //////////////////////////////////////////////////////////////*/
 
-contract SvgPunks {
-    function punkImage(uint16 index) public view returns (bytes memory) {}
+    // Don't forgetti!
 
-    function punkAttributes(uint16 index)
-        external
-        view
-        returns (string memory text)
-    {}
+    /*///////////////////////////////////////////////////////////////
+                              STORAGE
+    //////////////////////////////////////////////////////////////*/
 
-    function punkImageSvg(uint16 index)
-        external
-        view
-        returns (string memory svg)
-    {}
-}
-
-contract OC_PHUNKS is ERC721, Ownable, ReentrancyGuard {
     using Counters for Counters.Counter;
-    using Strings for uint16;
-    using Strings for uint256;
-    using ToColor for bytes3;
-    using strings for *;
-
-    uint256 private constant limit = 9999;
 
     Counters.Counter private _tokenIds;
 
-    string _symbol = unicode"OϾ";
-
-    SvgPunks svgP;
-
-    mapping(uint16 => bool) public isNormied;
-
-    mapping(uint256 => bytes3) public color;
-
-    string internal constant SVG_HEADER_NORMIE =
-        '<svg xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" version="1.2" viewBox="0 0 24 24"';
-
-    // get Phunked (on-chain)
     string internal constant SVG_HEADER =
-        '<svg xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" version="1.2" viewBox="0 0 24 24" transform="scale (-1, 1)" transform-origin="center"';
+        '<svg viewBox="0 0 750 750" width="3000" height="3000" xmlns="http://www.w3.org/2000/svg"><image width="100%" height="100%" href="data:image/svg+xml;base64,';
 
-    // larva labs has a foot fetish
-    string internal constant SVG_FOOTER = "</svg>";
+    string internal constant SVG_FOOTER = "/></svg>";
 
-    bytes16 private constant _HEX_SYMBOLS = "0123456789abcdef";
+    // Prevent replay
+    mapping(uint256 => bool) private usedNonces;
 
-    constructor(address chainPunks)
-        ERC721("Chunks, Phunks On-Chained", _symbol)
-    {
-        svgP = SvgPunks(chainPunks);
+    /*///////////////////////////////////////////////////////////////
+                              STRUCTOR
+    //////////////////////////////////////////////////////////////*/
+
+    constructor() ERC721("GreenPill Pages", "GP") {
         transferOwnership(0xb010ca9Be09C382A9f31b79493bb232bCC319f01);
+
+        /* INITIAL_CHAIN_ID = block.chainid;
+        INITIAL_DOMAIN_SEPARATOR = computeDomainSeparator(); */
     }
 
-    function getCostForMinting(uint256 _numToMint)
-        private
-        view
-        returns (uint256)
+    /*///////////////////////////////////////////////////////////////
+                               LOGIC
+    //////////////////////////////////////////////////////////////*/
+
+    function getMessageHash(
+        address _to,
+        string memory _message,
+        uint256 _nonce
+    ) public pure returns (bytes32) {
+        return keccak256(abi.encodePacked(_to, _message, _nonce));
+    }
+
+    function getEthSignedMessageHash(bytes32 _messageHash)
+        public
+        pure
+        returns (bytes32)
     {
-        require(
-            _tokenIds.current() + _numToMint <= limit,
-            "There aren't that many left."
-        );
-        if (_numToMint == 1) {
-            return 0.02 ether;
-        } else if (_numToMint == 3) {
-            return 0.05 ether;
-        } else if (_numToMint == 5) {
-            return 0.07 ether;
-        } else if (_numToMint == 10) {
-            return 0.10 ether;
-        } else {
-            revert("Unsupported mint amount");
-        }
-    }
-
-    function setNormied(uint16 index, bool isNormie) public payable {
-        require(msg.value >= 10 ether, "don't be cheap");
-        require(ownerOf(index) == msg.sender, "Not Owner");
-
-        isNormied[index] = isNormie;
-    }
-
-    function randomizeBackground(uint16 index) public payable {
-        require(msg.value >= .01 ether, "don't be cheap");
-        require(ownerOf(index) == msg.sender, "Not Owner");
-
-        bytes32 predictableRandom = keccak256(
-            abi.encodePacked(
-                blockhash(block.number - 1),
-                msg.sender,
-                address(this),
-                index
-            )
-        );
-        color[index] =
-            bytes2(predictableRandom[0]) |
-            (bytes2(predictableRandom[1]) >> 8) |
-            (bytes3(predictableRandom[2]) >> 16);
-    }
-
-    function checkIsNormied(uint16 index) public view returns (string memory) {
-        if (isNormied[index] == true) {
-            string memory normie = "true";
-            return normie;
-        } else {
-            string memory normie = "false";
-            return normie;
-        }
-    }
-
-    /**
-     * @notice Improved version of CryptoPunks:Data, reduces gas significantly..
-     */
-    function getPunkImage(uint16 index)
-        private
-        view
-        returns (string memory svg)
-    {
-        bytes memory pixels = svgP.punkImage(index);
-
-        if (isNormied[index] == true) {
-            svg = string(
-                abi.encodePacked(
-                    SVG_HEADER_NORMIE,
-                    ' style="background-color:#',
-                    color[index].toColor(),
-                    '">'
-                )
-            );
-        } else {
-            svg = string(
-                abi.encodePacked(
-                    SVG_HEADER,
-                    ' style="background-color:#',
-                    color[index].toColor(),
-                    '">'
-                )
-            );
-        }
-
-        bytes memory buffer = new bytes(8);
-        for (uint256 y = 0; y < 24; y++) {
-            for (uint256 x = 0; x < 24; x++) {
-                uint256 p = (y * 24 + x) * 4;
-                if (uint8(pixels[p + 3]) > 0) {
-                    for (uint256 i = 0; i < 4; i++) {
-                        uint8 value = uint8(pixels[p + i]);
-                        buffer[i * 2 + 1] = _HEX_SYMBOLS[value & 0xf];
-                        value >>= 4;
-                        buffer[i * 2] = _HEX_SYMBOLS[value & 0xf];
-                    }
-                    svg = string(
-                        abi.encodePacked(
-                            svg,
-                            '<rect x="',
-                            x.toString(),
-                            '" y="',
-                            y.toString(),
-                            '" width="1" height="1" fill="#',
-                            string(buffer),
-                            '"/>'
-                        )
-                    );
-                }
-            }
-        }
-        svg = string(abi.encodePacked(svg, SVG_FOOTER));
-    }
-
-    /**
-     * @notice Assemble these phunkers.
-     */
-    // prettier-ignore
-    function constructTokenURI(uint16 id) private view returns (string memory) {
-
-        string memory _punkSVG = Base64.encode(bytes(getPunkImage(id)));
-
+        /*
+        Signature is produced by signing a keccak256 hash with the following format:
+        "\x19Ethereum Signed Message\n" + len(msg) + msg
+        */
         return
-            string(
+            keccak256(
                 abi.encodePacked(
-                    "data:application/json;base64,",
-                    Base64.encode(
-                        bytes(
-                            abi.encodePacked(
-                                '{"name":"',
-                                'OC',
-                                ' Phunk #',
-                                id.toString(),
-                                '", "attributes": "',
-                                svgP.punkAttributes(id),
-                                '", "color": "',
-                                color[id].toColor(),
-                                '", "normied": "',
-                                checkIsNormied(id),
-                                '", "image": "',
-                                "data:image/svg+xml;base64,",
-                                _punkSVG,
-                                '"}'
-                            )
-                        )
-                    )
+                    "\x19Ethereum Signed Message:\n32",
+                    _messageHash
                 )
             );
     }
 
-    function convert(uint256 _a) private pure returns (uint16) {
-        return uint16(_a);
+    function verify(
+        address _signer,
+        address _to,
+        string memory _message,
+        uint256 _nonce,
+        bytes memory signature
+    ) public {
+        require(!usedNonces[_nonce]);
+        usedNonces[_nonce] = true;
+
+        bytes32 messageHash = getMessageHash(_to, _message, _nonce);
+        bytes32 ethSignedMessageHash = getEthSignedMessageHash(messageHash);
+
+        //return recoverSigner(ethSignedMessageHash, signature) == _signer;
+
+        require(recoverSigner(ethSignedMessageHash, signature) == _signer);
+
+        uint256 id = _tokenIds.current();
+        _mint(msg.sender, id);
     }
 
-    /**
-     * @notice Receives json from constructTokenURI
-     */
-    // prettier-ignore
-    function tokenURI(uint256 _id)
+    /* function claimPage(string memory babyRage, bytes memory signature)
         public
         view
-        override     
-        returns (string memory)
+        returns (bool)
     {
-        require(_id <= limit, "non-existant");
-        require(_exists(_id), "not exist");
+        //require(!usedNonces[nonce]);
+        //usedNonces[nonce] = true;
 
-        uint16 id = convert(_id);
+        // this recreates the message that was signed on the client
+        bytes32 message = prefixed(keccak256(abi.encode(babyRage)));
 
-        return constructTokenURI(id);
-    }
+        require(recoverSigner(message, signature) == owner());
 
-    function initCollection() public payable onlyOwner {
-        require(_tokenIds.current() == 0, "only for init collection");
+        return true;
+    } */
 
-        uint256 id0 = _tokenIds.current();
-        _mint(msg.sender, id0);
+    /* function DOMAIN_SEPARATOR() public view virtual returns (bytes32) {
+        return
+            block.chainid == INITIAL_CHAIN_ID
+                ? INITIAL_DOMAIN_SEPARATOR
+                : computeDomainSeparator();
+    } */
 
-        for (uint256 i = 0; i < 50; i++) {
-            _tokenIds.increment();
-
-            uint256 id = _tokenIds.current();
-            _mint(msg.sender, id);
-
-            bytes32 predictableRandom = keccak256(
-                abi.encodePacked(
-                    blockhash(block.number - 1),
-                    msg.sender,
-                    address(this),
-                    id
+    /* function computeDomainSeparator() internal view virtual returns (bytes32) {
+        return
+            keccak256(
+                abi.encode(
+                    keccak256(
+                        "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
+                    ),
+                    keccak256(bytes("coomer")),
+                    keccak256("1"),
+                    block.chainid,
+                    address(this)
                 )
             );
-            color[id] =
-                bytes2(predictableRandom[0]) |
-                (bytes2(predictableRandom[1]) >> 8) |
-                (bytes3(predictableRandom[2]) >> 16);
-        }
+    } */
+
+    /* function DOMAIN_SEPARATOR() public view virtual returns (bytes32) {
+        return block.chainid == INITIAL_CHAIN_ID ? INITIAL_DOMAIN_SEPARATOR : computeDomainSeparator();
     }
 
-    //function mint(uint256 _numToMint) public payable nonReentrant() {
-    function mintItem(uint256 _numToMint) public payable nonReentrant {
-        require(_tokenIds.current() < limit, "mint limit met");
-        require(
-            _tokenIds.current() + _numToMint <= limit,
-            "There aren't that many left."
-        );
-        uint256 costForMinting = getCostForMinting(_numToMint);
-        require(
-            msg.value >= costForMinting,
-            "Too little sent, please send more eth."
-        );
-
-        for (uint256 i = 0; i < _numToMint; i++) {
-            _tokenIds.increment();
-
-            uint256 id = _tokenIds.current();
-            _mint(msg.sender, id);
-
-            bytes32 predictableRandom = keccak256(
-                abi.encodePacked(
-                    blockhash(block.number - 1),
-                    msg.sender,
-                    address(this),
-                    id
+    function computeDomainSeparator() internal view virtual returns (bytes32) {
+        return
+            keccak256(
+                abi.encode(
+                    keccak256("EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"),
+                    keccak256(bytes(name)),
+                    keccak256("1"),
+                    block.chainid,
+                    address(this)
                 )
             );
-            color[id] =
-                bytes2(predictableRandom[0]) |
-                (bytes2(predictableRandom[1]) >> 8) |
-                (bytes3(predictableRandom[2]) >> 16);
+    } */
+
+    /* function permit(
+        address recipient,
+        address spender,
+        uint256 value,
+        uint256 deadline,
+        uint8 v,
+        bytes32 r,
+        bytes32 s
+    ) public virtual {
+        require(deadline >= block.timestamp, "PERMIT_DEADLINE_EXPIRED");
+
+        // Unchecked because the only math done is incrementing
+        // the owner's nonce which cannot realistically overflow.
+        unchecked {
+            bytes32 digest = keccak256(
+                abi.encodePacked(
+                    "\x19\x01",
+                    DOMAIN_SEPARATOR(),
+                    keccak256(abi.encode(GREETING_TYPEHASH, owner, spender, value, nonces[owner]++, deadline))
+                )
+            );
+
+            // "Greeting(address recipient,address author,uint256 nonce,uint256 time)"
+
+            address recoveredAddress = ecrecover(digest, v, r, s);
+
+            require(recoveredAddress != address(0) && recoveredAddress == owner, "INVALID_SIGNER");
+
+            allowance[recoveredAddress][spender] = value;
         }
+
+        emit Approval(owner, spender, value);
+    } */
+
+    /*///////////////////////////////////////////////////////////////
+                            SIG LOGIC
+    //////////////////////////////////////////////////////////////*/
+
+    /// signature methods.
+    function splitSignature(bytes memory sig)
+        internal
+        pure
+        returns (
+            uint8 v,
+            bytes32 r,
+            bytes32 s
+        )
+    {
+        require(sig.length == 65);
+
+        assembly {
+            // first 32 bytes, after the length prefix.
+            r := mload(add(sig, 32))
+            // second 32 bytes.
+            s := mload(add(sig, 64))
+            // final byte (first byte of the next 32 bytes).
+            v := byte(0, mload(add(sig, 96)))
+        }
+
+        return (v, r, s);
     }
 
-    function withdraw() public onlyOwner {
-        (bool success, ) = msg.sender.call{value: address(this).balance}("");
-        require(success, "Transfer failed.");
+    function recoverSigner(bytes32 message, bytes memory sig)
+        internal
+        pure
+        returns (address)
+    {
+        (uint8 v, bytes32 r, bytes32 s) = splitSignature(sig);
+
+        return ecrecover(message, v, r, s);
     }
 
-    /**
-     * @notice Fallback for accepting eth
-     */
-    receive() external payable {}
+    /* /// builds a prefixed hash to mimic the behavior of eth_sign.
+    function prefixed(bytes32 hash) internal pure returns (bytes32) {
+        return
+            keccak256(
+                abi.encodePacked("\x19Ethereum Signed Message:\n32", hash)
+            );
+    } */
 }

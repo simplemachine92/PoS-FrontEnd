@@ -55,7 +55,7 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.mainnet; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.rinkeby; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true;
@@ -256,7 +256,7 @@ function App(props) {
             icon={
               <HomeOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 18, fontSize: "30px", color: "#08c" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
                 theme="outlined"
               />
             }
@@ -268,7 +268,7 @@ function App(props) {
             icon={
               <BugOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 18, fontSize: "30px", color: "#08c" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
                 theme="outlined"
               />
             }
@@ -280,7 +280,7 @@ function App(props) {
             icon={
               <QuestionCircleOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 18, fontSize: "30px", color: "#08c" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
                 theme="outlined"
               />
             }
@@ -292,7 +292,7 @@ function App(props) {
             icon={
               <ReadOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 18, fontSize: "30px", color: "#08c" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
                 theme="outlined"
               />
             }
@@ -349,7 +349,7 @@ function App(props) {
             */}
 
           <Contract
-            name="CryptoChunks"
+            name="GreenPill_Pages"
             price={price}
             signer={userSigner}
             provider={localProvider}
