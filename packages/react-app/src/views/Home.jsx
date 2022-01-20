@@ -15,61 +15,71 @@ function Home({ yourLocalBalance, readContracts }) {
   const purpose = useContractReader(readContracts, "YourContract", "purpose");
 
   return (
-    <div style={{ minHeight: 800 }}>
-      <div style={{ margin: 32 }}>
-        <span style={{ marginRight: 8 }}>📝</span>
-        This Is Your *Minimal* App Home. <br />
-        <br />
-        This version of scaffold-eth is meant to be a boiler-plate for projects. It has an affixed menu and minimal
-        styling.
-        <br />
-        <br />
-        You can start editing it in{" "}
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          packages/react-app/views/Home.jsx
-        </span>
-      </div>
-      <div style={{ margin: 32 }}>
-        <span style={{ marginRight: 8 }}>🤓</span>
-        The "purpose" variable from our contract is{" "}
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          {purpose}
-        </span>
-      </div>
-      <div style={{ margin: 32 }}>
-        <span style={{ marginRight: 8 }}>🤖</span>
-        An example prop of your balance{" "}
-        <span style={{ fontWeight: "bold", color: "green" }}>({ethers.utils.formatEther(yourLocalBalance)})</span> was
-        passed into the
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          Home.jsx
-        </span>{" "}
-        component from
-        <span
-          className="highlight"
-          style={{ marginLeft: 4, /* backgroundColor: "#f9f9f9", */ padding: 4, borderRadius: 4, fontWeight: "bolder" }}
-        >
-          App.jsx
-        </span>
-      </div>
-      <div style={{ margin: 32 }}>
-        <span style={{ marginRight: 8 }}>💭</span>
-        Check out the <Link to="/hints">"Hints"</Link> tab for more tips.
-      </div>
-      <div style={{ margin: 32 }}>
-        <span style={{ marginRight: 8 }}>🛠</span>
-        Tinker with your smart contract using the <Link to="/debug">"Debug Contract"</Link> tab.
-      </div>
-    </div>
+    <body>
+      <main>
+        <section class="coordination-hero background-bubble">
+          <div class="hero-container">
+            <div class="coordination-party-hero-description">
+              <h2>GREENPILLED:</h2>
+              <h1>Regenerative CryptoEconomics</h1>
+            </div>
+            <div class="green-pill">
+              <img src="image/greenpill-socialimage.svg" />
+            </div>
+          </div>
+        </section>
+      </main>
+      <footer class="footer-container background-greenpill">
+        <section class="green-pill-form-section">
+          <div>
+            <h1>Make a Pledge:</h1>
+            <form class="form">
+              <label for="percentage">I've been GreenPilled! </label>
+              <label for="percentage">I Pledge</label>
+              <input type="text" id="percentage" name="percentage" placeholder="25%" value="25%" />
+              <label for="percentage">of my Wealth Above </label>
+              <input type="text" id="amount" name="amount" placeholder="$10mm" value="$10mm" />
+              <label for="cause">to the cause of</label>
+              <input
+                type="text"
+                id="cause"
+                name="cause"
+                placeholder="Public Goods Funding"
+                value="Public Goods Funding"
+              />
+
+              <div class="buttons-green-pill">
+                <button type="button">
+                  <img src="image/arrow-green-pill.svg" alt="arrow" />
+                  <a href="javascript:alert('This is a simple tool created by the Gitcoin community to facilitate pledges to support a more Solarpunk world.');">
+                    What’s this?
+                  </a>
+                </button>
+
+                <button
+                  id="target"
+                  type="button"
+                  data-kinetics-attraction=""
+                  data-kinetics-attraction-chance=".99"
+                  data-kinetics-attraction-grow="20"
+                  data-kinetics-attraction-type="drone"
+                  data-kinetics-attraction-radius="1.7"
+                >
+                  <img src="image/tweet-icon.svg" alt="tweet" />
+                  <p>Tweet</p>
+                </button>
+              </div>
+            </form>
+          </div>
+        </section>
+        <div class="gitcoin-brand">
+          <a href="https://gitcoindao.com">
+            <img src="/image/gitcoindao_sign.svg" alt="gitcoinDAO" />
+          </a>{" "}
+          &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; <a href="https://t.me/+g9TM8i7GpxAzMGUx">Join the Telegram</a>
+        </div>
+      </footer>
+    </body>
   );
 }
 

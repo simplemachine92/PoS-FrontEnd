@@ -412,8 +412,6 @@ function App(props) {
         </Route>
       </Switch>
 
-      <ThemeSwitch />
-
       {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
 
       {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}

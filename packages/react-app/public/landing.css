@@ -1,0 +1,317 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+p {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Abel", sans-serif;
+  max-width: 1600px;
+  margin: auto;
+  background-color: #ffff;
+  color: #0e0333;
+}
+
+@media (min-width: 1313px) {
+  body {
+    font-size: 140%;
+  }
+}
+
+@media (max-width: 1600px) {
+  body {
+    font-size: 120%;
+  }
+}
+
+@media (max-width: 992px) {
+  body {
+    font-size: 110%;
+  }
+}
+
+@media (max-width: 688px) {
+  body {
+    font-size: 100%;
+  }
+}
+
+nav {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+}
+
+a {
+  outline: none;
+  text-decoration: none;
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+main {
+  max-width: 2000px;
+  margin: auto;
+}
+
+.hero-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-top: 0px;
+  margin-bottom: 188px;
+}
+
+h1 {
+  font-size: 30px;
+  text-align: center;
+  margin: 0px;
+}
+
+h2 {
+  font-size: 50px;
+  text-align: center;
+  margin: 0px;
+}
+
+.coordination-party-hero-description {
+  width: 472px;
+  margin: 0 auto;
+}
+
+.coordination-party-hero-description .title {
+  font-family: "Space Mono", monospace, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 64px;
+  color: #0e0333;
+  text-align: left;
+  margin-bottom: 4px;
+  line-height: 130%;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.gitcoin-brand {
+  display: flex;
+
+  padding-top: 154px;
+  padding-bottom: 154px;
+  justify-content: center;
+  align-items: center;
+}
+
+.gitcoin-brand img {
+  width: 178px;
+}
+
+/* Form Styles */
+.form {
+  display: flex;
+  max-width: 478px;
+  margin: 0 auto;
+  flex-direction: column;
+  place-items: center;
+  font-family: Space Mono, sans-serif;
+}
+
+.form label {
+  width: 552px;
+  height: 44px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 30px;
+  line-height: 46px;
+  text-align: center;
+  color: #0e0333;
+}
+
+.form label.top {
+  margin-top: 52px;
+}
+
+.form input {
+  width: 100%;
+  height: 80px;
+  background: #e6fff9;
+  border: 1px solid #02e2ac;
+  border-radius: 8px;
+  outline: none;
+  text-align: center;
+  font-size: 30px;
+  font-family: Space Mono, sans-serif;
+  color: #02e2ac;
+}
+
+.form input::placeholder {
+  margin-top: 100px;
+  color: #02e2ac;
+  font-family: Space Mono, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+}
+
+.buttons-green-pill {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 48px;
+}
+
+.buttons-green-pill a {
+  width: 147px;
+  height: 30px;
+  font-family: Space Mono, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 30px;
+  text-align: right;
+  text-decoration: underline;
+  color: #6f3ff5;
+}
+
+/* first button*/
+.buttons-green-pill button:first-child {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+}
+
+.buttons-green-pill button:first-child img {
+  width: 13px;
+  height: 13px;
+  margin-right: 13px;
+}
+
+/* second button */
+
+.buttons-green-pill button:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 184px;
+  height: 60px;
+  background: #02e2ac;
+  border-radius: 8px;
+  cursor: pointer;
+  border: none;
+}
+
+.buttons-green-pill button:last-child img {
+  width: 30px;
+  height: 30px;
+  margin-right: 22px;
+  margin-left: 26px;
+}
+
+.buttons-green-pill button:last-child p {
+  width: 67px;
+  height: 24px;
+  font-family: Libre Franklin, Arial, Space Mono, sans-serif;
+  font-weight: bold;
+  font-size: 20px;
+  line-height: 24px;
+  text-align: right;
+  letter-spacing: 0.05em;
+  color: #e6fff9;
+  margin-right: 38px;
+}
+
+/* End */
+
+/* GreenPill */
+.background-bubble {
+  background-image: url(../image/background-top-bubble.svg);
+}
+
+.background-greenpill {
+  background-image: url(../image/background-greenpill.svg);
+}
+
+/* Responsive Style */
+@media (max-width: 1280px) {
+  .hero-container {
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .coordination-hero-description {
+    margin: 0;
+  }
+
+  .coordination-hero-description .title {
+    font-size: 64px;
+    text-align: center;
+    justify-content: center;
+    color: #ffcc00;
+  }
+}
+
+@media (max-width: 760px) {
+  .form label {
+    width: 500px;
+  }
+}
+
+@media (max-width: 560px) {
+  .coordination-party-hero-description {
+    width: 100%;
+  }
+
+  .coordination-party-hero-description .title {
+    text-align: center;
+    width: 500px;
+    font-size: 36px;
+  }
+
+  .form {
+    padding: 0 2%;
+  }
+
+  .gitcoin-brand {
+    padding-top: 16px;
+  }
+
+  .form label {
+    width: 100%;
+  }
+}
+
+@media (max-width: 390px) {
+  .form {
+    padding: 0 4%;
+  }
+
+  .form label,
+  .form input,
+  .form input::placeholder {
+    font-size: 18px;
+  }
+
+  .buttons-green-pill {
+    flex-direction: column;
+    place-items: center;
+    gap: 4px;
+  }
+}
