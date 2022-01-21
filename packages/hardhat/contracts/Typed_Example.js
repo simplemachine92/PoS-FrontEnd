@@ -1,24 +1,24 @@
-//placeholder for v control, this will be updated to an Autograph scheme next
+// EIP712 TypedData Scheme, used on signing dashboard, here for ref.
 
 const eip712Example = {
   types: {
-    set: [
+    signature: [
       { name: "sender", type: "address" },
-      { name: "x", type: "uint" },
-      { name: "deadline", type: "uint" },
+      { name: "sig_number", type: "uint" },
+      { name: "timestamp", type: "uint" },
     ],
   },
   //make sure to replace verifyingContract with address of deployed contract
-  primaryType: "set",
+  primaryType: "signature",
   domain: {
-    name: "SetTest",
-    version: "1",
+    name: "GreenPill_Pages",
+    version: "0",
     chainId: 4,
-    verifyingContract: "0x35b6093edF572B85C76FA818B0b00ad5C024a5eb",
+    verifyingContract: "0xf1d7f9bba3b842379dD65547e79f368b846A874B",
   },
   message: {
     sender: "0xb010ca9Be09C382A9f31b79493bb232bCC319f01",
-    x: "1",
-    deadline: "1",
+    sig_number: "1",
+    timestamp: "1674300858",
   },
 };

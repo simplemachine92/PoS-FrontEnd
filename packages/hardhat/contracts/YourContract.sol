@@ -7,17 +7,49 @@ import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
 contract GreenPill_Pages is ERC721, Ownable {
+    /*///////////////////////////////////////////////////////////////
+                              EVENTS
+    //////////////////////////////////////////////////////////////*/
+
+    // Don't forget, bub.
+
+    /*///////////////////////////////////////////////////////////////
+                           EIP-712 STORAGE
+    //////////////////////////////////////////////////////////////*/
+
+    /* address public constant morpheus =
+        0xb010ca9Be09C382A9f31b79493bb232bCC319f01; */
+
+    address oneder = 0xb010ca9Be09C382A9f31b79493bb232bCC319f01;
+
+    /* bytes32 internal immutable EIP712DOMAIN; */
+
+    // Prevent replay
+    mapping(uint256 => bool) private usedNonces;
+
+    /*///////////////////////////////////////////////////////////////
+                              STRUCTOR
+    //////////////////////////////////////////////////////////////*/
+
     constructor() ERC721("GreenPill Pages", "GP") {
         transferOwnership(0xb010ca9Be09C382A9f31b79493bb232bCC319f01);
+
+        /* EIP712DOMAIN = computeDomain(); */
     }
 
+    /*///////////////////////////////////////////////////////////////
+                               LOGIC
+    //////////////////////////////////////////////////////////////*/
+
+    //prettier-ignore
     function executeSetIfSignatureMatch(
         bytes memory _signature,
         address sender,
-        uint256 deadline,
-        uint256 x
+        uint256 sigNumber,
+        uint256 timestamp
     ) external view returns (bool) {
-        require(block.timestamp < deadline, "Signed transaction expired");
+        /* require(!usedNonces[_nonce]);
+        usedNonces[_nonce] = true; */
 
         (uint8 v, bytes32 r, bytes32 s) = splitSignature(_signature);
 
@@ -26,19 +58,21 @@ contract GreenPill_Pages is ERC721, Ownable {
                 keccak256(
                     "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
                 ),
-                keccak256(bytes("SetTest")),
-                keccak256(bytes("1")),
+                keccak256(bytes("GreenPill_Pages")),
+                keccak256(bytes("0")),
                 block.chainid,
                 address(this)
             )
         );
 
+        // msg.sender isn't working here... address literals are fine
         bytes32 hashStruct = keccak256(
             abi.encode(
-                keccak256("set(address sender,uint x,uint deadline)"),
+                keccak256("signature(address sender,address recipient,uint sig_number,uint timestamp)"),
                 sender,
-                x,
-                deadline
+                oneder,
+                sigNumber,
+                timestamp
             )
         );
 
@@ -51,6 +85,25 @@ contract GreenPill_Pages is ERC721, Ownable {
 
         return (true);
     }
+
+    /*///////////////////////////////////////////////////////////////
+                             SIG LOGIC
+    //////////////////////////////////////////////////////////////*/
+
+    /* function computeDomain() internal view virtual returns (bytes32) {
+        return
+            keccak256(
+                abi.encode(
+                    keccak256(
+                        "EIP712Domain(string name,string version,uint256 chainId,address verifyingContract)"
+                    ),
+                    keccak256(bytes("GreenPill Pages")),
+                    keccak256(bytes("0")),
+                    block.chainid,
+                    address(this)
+                )
+            );
+    } */
 
     function splitSignature(bytes memory sig)
         private
