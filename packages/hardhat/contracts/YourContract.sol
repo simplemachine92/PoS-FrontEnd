@@ -19,9 +19,9 @@ contract GreenPill_Pages is ERC721, Ownable {
     Counters.Counter private _tokenIds;
 
     struct Token {
-        uint160 receiver;
+        string recipient;
         string sigNum;
-        string stamp;
+        string timestamp;
         string writtenMsg;
     }
 
@@ -44,7 +44,7 @@ contract GreenPill_Pages is ERC721, Ownable {
 
     bytes32 public constant AUTOGRAPH_TYPEHASH =
         keccak256(
-            "signature(address sender,address recipient,uint sig_number,uint timestamp,string msg)"
+            "signature(address sender,address recipient,string sig_number,string timestamp,string msg)"
         );
 
     // Prevent replay
@@ -68,18 +68,14 @@ contract GreenPill_Pages is ERC721, Ownable {
     //prettier-ignore
     function mintIfSigned(
         bytes memory _signature, 
-        uint256 sigNumber,
-        uint256 timestamp,
+        string memory sigNumber,
+        string memory _timestamp,
         string memory message
     ) external {
         require(balanceOf(msg.sender) < 1, "One per Address");
 
         /* require(!usedNonces[_nonce]);
         usedNonces[_nonce] = true; */
-
-        uint160 cAddress = uint160(msg.sender);
-
-        //string memory sAddress = toAsciiString(msg.sender);
 
         (uint8 v, bytes32 r, bytes32 s) = splitSignature(_signature);
 
@@ -90,10 +86,10 @@ contract GreenPill_Pages is ERC721, Ownable {
                 oneder,
                 // Signature will be invalid if it isn't to caller
                 // EIP712: "Addresses are encoded as uint160"
-                cAddress,
-                sigNumber,
-                timestamp,
+                uint160(msg.sender),
                 // EIP712: "values bytes and string are encoded as a keccak256 hash"
+                keccak256(bytes(sigNumber)),
+                keccak256(bytes(_timestamp)),
                 keccak256(bytes(message))
             )
         );
@@ -112,9 +108,9 @@ contract GreenPill_Pages is ERC721, Ownable {
 
         tokens.push(
             Token({
-                receiver: cAddress,
-                sigNum: sigNumber.toString(),
-                stamp: timestamp.toString(),
+                recipient: toAsciiString(msg.sender),
+                sigNum: sigNumber,
+                timestamp: _timestamp,
                 writtenMsg: message
             })
         );
@@ -134,6 +130,30 @@ contract GreenPill_Pages is ERC721, Ownable {
 
         return string(
             abi.encodePacked(
+                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 750" class="eUO0AJ6Hus" xmlns:xlink="http://www.w3.org/1999/xlink"><foreignObject x="0" y="0" width="750" height="750"><div xmlns="http://www.w3.org/1999/xhtml"><style>svg.eUO0AJ6Hus,svg.eUO0AJ6Hus *{box-sizing:border-box;margin:0;padding:0;border:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-wrap:break-word;overflow:hidden}</style>',
+                '<div style="background-image:url(https://ipfs.io/ipfs/QmbNJsPMxvdq8UDFDPRsUsqg7sPRG636GtuDJCe7Loin1r);position:absolute;top:0px;right:0px;width:100%;height:100%;"/>',
+                '<div style="position:absolute;top:20px;left:10px;width:100%;height:100%;font-size:20px;line-height:38px;padding:80px;font-family:&#39;Abel&#39;,sans-serif;white-space:pre-wrap">',
+                '{ <br />"signer": 0x00de4b13153673bcae2616b67bf822500d325fc3, <br />',
+                '"og_recipient": ',
+                tokens[id].recipient,
+                ', <br />',
+                '"version": 0, <br />',
+                '"msg": ',
+                tokens[id].writtenMsg,
+                ', <br />}',
+                '</div><div style="position:absolute;background:rgba(0,0,0,.3);bottom:0;width:100%;height:100px;z-index:1;color:#fff;padding:0 35px;font-size:26px;line-height:1;font-weight:700;display:flex;align-items:center;justify-content:space-between;font-family:Helvetica,Arial,sans-serif"><span>SIG# 1</span><div style="display:flex;flex-direction:column;font-weight:lighter;text-align:right;flex-shrink:0;font-size:14px;gap:1px;height:100%;justify-content:center"><span>Minted at: 2022-01-13 01:01:04 AM UTC</span><span>By: 0xc2172a6315c1d7f6855768f843c420ebb36eda97</span></div></div></div></foreignObject></svg>'
+            )
+        );
+    }
+
+    /**
+     * @notice Generate SVG using tParams by index
+     */
+    /* function generateSVG(uint256 id) private view returns (string memory) {
+        // prettier-ignore
+
+        return string(
+            abi.encodePacked(
                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 750" class="eUO0AJ6Hus" xmlns:xlink="http://www.w3.org/1999/xlink">',
                 '<foreignObject x="0" y="0" width="750" height="750">',
                 '<div xmlns="http://www.w3.org/1999/xhtml">',
@@ -141,13 +161,9 @@ contract GreenPill_Pages is ERC721, Ownable {
                 '<div style="background-image:url(https://ipfs.io/ipfs/QmbNJsPMxvdq8UDFDPRsUsqg7sPRG636GtuDJCe7Loin1r);position:absolute;top:0px;right:0px;width:100%;height:100%;"/>',
                 '<div style="position:absolute;top:20px;left:10px;width:100%;height:100%;font-size:20px;line-height:38px;padding:80px;font-family:&#39;Abel&#39;,sans-serif;white-space:pre-wrap">',
                 '{',
-                '"name": GreenPill_Pages,',
                 '"signer": 0x00de4b13153673bcae2616b67bf822500d325fc3,',
                 '"recipient": ',
-                tokens[id].receiver,
-                ',',
-                '"timestamp": ',
-                tokens[id].stamp,
+                tokens[id].recipient,
                 ',',
                 '"version": 0,',
                 '"msg": ',
@@ -157,7 +173,7 @@ contract GreenPill_Pages is ERC721, Ownable {
             )
         );
     }
-
+ */
     /**
      * @notice Generate SVG, b64 encode it, construct an ERC721 token URI.
      */
@@ -180,21 +196,17 @@ contract GreenPill_Pages is ERC721, Ownable {
                         bytes(
                             abi.encodePacked(
                                 '{"signed_to":"',
-                                tokens[cID].receiver,
+                                tokens[cID].recipient,
+                                '", "timestamp":"',
+                                tokens[cID].timestamp,
                                 '", "signature_num":"',
                                 tokens[cID].sigNum,
-                                '", "sig_timestamp":"',
-                                tokens[cID].stamp,
                                 '", "message":"',
                                 tokens[cID].writtenMsg,
                                 '", "image": "',
                                 "data:image/svg+xml;base64,",
                                 pageSVG,
                                 '"}'
-
-                                /* uint256 sigNum;
-                                uint256 stamp;
-                                string writtenMsg; */
                             )
                         )
                     )
