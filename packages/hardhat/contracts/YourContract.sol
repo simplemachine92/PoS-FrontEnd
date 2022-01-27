@@ -26,6 +26,7 @@ contract GreenPill_Pages is ERC721, Ownable {
     }
 
     Token[] private tokens;
+
     /*///////////////////////////////////////////////////////////////
                                EVENTS
     //////////////////////////////////////////////////////////////*/
@@ -131,49 +132,23 @@ contract GreenPill_Pages is ERC721, Ownable {
         return string(
             abi.encodePacked(
                 '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 750" class="eUO0AJ6Hus" xmlns:xlink="http://www.w3.org/1999/xlink"><foreignObject x="0" y="0" width="750" height="750"><div xmlns="http://www.w3.org/1999/xhtml"><style>svg.eUO0AJ6Hus,svg.eUO0AJ6Hus *{box-sizing:border-box;margin:0;padding:0;border:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-wrap:break-word;overflow:hidden}</style>',
-                '<div style="background-image:url(https://ipfs.io/ipfs/QmbNJsPMxvdq8UDFDPRsUsqg7sPRG636GtuDJCe7Loin1r);position:absolute;top:0px;right:0px;width:100%;height:100%;"/>',
                 '<div style="position:absolute;top:20px;left:10px;width:100%;height:100%;font-size:20px;line-height:38px;padding:80px;font-family:&#39;Abel&#39;,sans-serif;white-space:pre-wrap">',
-                '{ <br />"signer": 0x00de4b13153673bcae2616b67bf822500d325fc3, <br />',
-                '"og_recipient": ',
+                '<svg xmlns="http://www.w3.org/2000/svg" width="199.96" height="199.96" viewBox="0 0 199.96 199.96"><circle cx="99.98" cy="99.98" r="99.48" fill="#f6cf46" stroke="#000" stroke-miterlimit="10"/><g><path d="M247,629.4c.2,19.13,17.69,31.13,33.65,27.52,7.41-1.68,13-5.68,17.65-11.5,6.86-8.63,13.79-17.2,20.68-25.8q11.69-14.6,23.35-29.2c4.8-6,7.36-12.8,6.57-20.45-1.26-12.3-7.75-20.74-19.65-24.62-11-3.59-22.5-.09-30.22,9.09-3.18,3.79-6.21,7.71-9.31,11.57C277.8,580.84,266,595.7,254,610.49,249.53,616,246.9,622.2,247,629.4Z" transform="translate(-200.02 -499.78)" fill="#fff"/><path d="M247,629.4c-.08-7.2,2.55-13.36,7-18.91C266,595.7,277.8,580.84,289.7,566c3.1-3.86,6.13-7.78,9.31-11.57,7.72-9.18,19.21-12.68,30.22-9.09,11.9,3.88,18.39,12.32,19.65,24.62.79,7.65-1.77,14.46-6.57,20.45Q330.61,605,319,619.62c-6.89,8.6-13.82,17.17-20.68,25.8-4.61,5.82-10.24,9.82-17.65,11.5C264.67,660.53,247.18,648.53,247,629.4Zm30.71-42.21c-8.09,10.35-16.3,19.95-23.43,30.29-5,7.21-4.35,15.44-.38,23.3a11,11,0,0,0,7.62,6c10.15,2.43,18.7-.29,25.35-8.3s13.22-16.42,19.81-24.66a25.9,25.9,0,0,0,1.41-2.28ZM311.15,608c7.89-10,15.69-19.12,22.6-28.86,5.31-7.49,5.08-15.89.93-24.12a10.43,10.43,0,0,0-7.17-5.81c-10.15-2.51-18.68.1-25.4,8.09-4.83,5.74-9.42,11.69-14.11,17.56-2.27,2.84-4.52,5.71-7.06,8.92Zm-37.9,44.66c8.86.25,15.8-3.19,21.19-10.05,6-7.64,12.13-15.21,18.19-22.83a25.27,25.27,0,0,0,1.44-2.23c-1.63-2.58-2.91-1.67-4.21-.06-5,6.23-10.15,12.32-14.93,18.7-5.59,7.46-11.94,13.7-21.39,15.87C273.45,652.11,273.4,652.35,273.25,652.69ZM343,565.76c0,8.66-3.87,15.59-9.24,22-5,6-9.83,12.18-14.71,18.3-1.17,1.47-2.25,3-3.25,4.36.78,1.87,1.74,2.43,3.09,1.3a17.74,17.74,0,0,0,2.25-2.48c5.41-6.71,10.83-13.41,16.18-20.17a43,43,0,0,0,4.07-5.9A21.32,21.32,0,0,0,343,565.76Z" transform="translate(-200.02 -499.78)"/><path d="M277.69,587.19l30.38,24.36a25.9,25.9,0,0,1-1.41,2.28c-6.59,8.24-13.08,16.55-19.81,24.66s-15.2,10.73-25.35,8.3a11,11,0,0,1-7.62-6c-4-7.86-4.6-16.09.38-23.3C261.39,607.14,269.6,597.54,277.69,587.19Z" transform="translate(-200.02 -499.78)" fill="#01e2ac"/><path d="M311.15,608l-30.21-24.22c2.54-3.21,4.79-6.08,7.06-8.92,4.69-5.87,9.28-11.82,14.11-17.56,6.72-8,15.25-10.6,25.4-8.09a10.43,10.43,0,0,1,7.17,5.81c4.15,8.23,4.38,16.63-.93,24.12C326.84,588.91,319,598,311.15,608Z" transform="translate(-200.02 -499.78)" fill="#5bf1cd"/><path d="M273.25,652.69c.15-.34.2-.58.29-.6,9.45-2.17,15.8-8.41,21.39-15.87,4.78-6.38,9.95-12.47,14.93-18.7,1.3-1.61,2.58-2.52,4.21.06a25.27,25.27,0,0,1-1.44,2.23c-6.06,7.62-12.17,15.19-18.19,22.83C289.05,649.5,282.11,652.94,273.25,652.69Z" transform="translate(-200.02 -499.78)" fill="#12c094"/><path d="M343,565.76a21.32,21.32,0,0,1-1.61,17.39,43,43,0,0,1-4.07,5.9c-5.35,6.76-10.77,13.46-16.18,20.17a17.74,17.74,0,0,1-2.25,2.48c-1.35,1.13-2.31.57-3.09-1.3,1-1.35,2.08-2.89,3.25-4.36,4.88-6.12,9.67-12.31,14.71-18.3C339.13,581.35,343,574.42,343,565.76Z" transform="translate(-200.02 -499.78)" fill="#12c094"/></g></svg>',
+                '<br /><br />{ <br />"signer": 0x00de4b13153673bcae2616b67bf822500d325fc3, <br />',
+                '"time": ',
+                tokens[id].timestamp,
+                ', <br />"recipient": ',
                 tokens[id].recipient,
                 ', <br />',
                 '"version": 0, <br />',
                 '"msg": ',
                 tokens[id].writtenMsg,
                 ', <br />}',
-                '</div><div style="position:absolute;background:rgba(0,0,0,.3);bottom:0;width:100%;height:100px;z-index:1;color:#fff;padding:0 35px;font-size:26px;line-height:1;font-weight:700;display:flex;align-items:center;justify-content:space-between;font-family:Helvetica,Arial,sans-serif"><span>SIG# 1</span><div style="display:flex;flex-direction:column;font-weight:lighter;text-align:right;flex-shrink:0;font-size:14px;gap:1px;height:100%;justify-content:center"><span>Minted at: 2022-01-13 01:01:04 AM UTC</span><span>By: 0xc2172a6315c1d7f6855768f843c420ebb36eda97</span></div></div></div></foreignObject></svg>'
+                '</div></div></foreignObject></svg>'
             )
         );
     }
 
-    /**
-     * @notice Generate SVG using tParams by index
-     */
-    /* function generateSVG(uint256 id) private view returns (string memory) {
-        // prettier-ignore
-
-        return string(
-            abi.encodePacked(
-                '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 750 750" class="eUO0AJ6Hus" xmlns:xlink="http://www.w3.org/1999/xlink">',
-                '<foreignObject x="0" y="0" width="750" height="750">',
-                '<div xmlns="http://www.w3.org/1999/xhtml">',
-                '<style>svg.eUO0AJ6Hus,svg.eUO0AJ6Hus *{box-sizing:border-box;margin:0;padding:0;border:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-wrap:break-word;overflow:hidden}</style>',
-                '<div style="background-image:url(https://ipfs.io/ipfs/QmbNJsPMxvdq8UDFDPRsUsqg7sPRG636GtuDJCe7Loin1r);position:absolute;top:0px;right:0px;width:100%;height:100%;"/>',
-                '<div style="position:absolute;top:20px;left:10px;width:100%;height:100%;font-size:20px;line-height:38px;padding:80px;font-family:&#39;Abel&#39;,sans-serif;white-space:pre-wrap">',
-                '{',
-                '"signer": 0x00de4b13153673bcae2616b67bf822500d325fc3,',
-                '"recipient": ',
-                tokens[id].recipient,
-                ',',
-                '"version": 0,',
-                '"msg": ',
-                tokens[id].writtenMsg,
-                ',',
-                '</div><div style="position:absolute;background:rgba(0,0,0,.3);bottom:0;width:100%;height:100px;z-index:1;color:#fff;padding:0 35px;font-size:26px;line-height:1;font-weight:700;display:flex;align-items:center;justify-content:space-between;font-family:Helvetica,Arial,sans-serif"><span>SIG# 1</span><div style="display:flex;flex-direction:column;font-weight:lighter;text-align:right;flex-shrink:0;font-size:14px;gap:1px;height:100%;justify-content:center"><span>Minted at: 2022-01-13 01:01:04 AM UTC</span><span>By: 0xc2172a6315c1d7f6855768f843c420ebb36eda97</span></div></div></div></foreignObject></svg>'
-            )
-        );
-    }
- */
     /**
      * @notice Generate SVG, b64 encode it, construct an ERC721 token URI.
      */
