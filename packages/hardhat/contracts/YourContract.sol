@@ -66,6 +66,9 @@ contract GreenPill_Pages is ERC721, Ownable {
                              MINT LOGIC
     //////////////////////////////////////////////////////////////*/
 
+    /**
+     * @notice Allows a single mint if msg.sender has a valid signed msg
+     */
     //prettier-ignore
     function mintIfSigned(
         bytes memory _signature, 
@@ -204,6 +207,9 @@ contract GreenPill_Pages is ERC721, Ownable {
                              SIG LOGIC
     //////////////////////////////////////////////////////////////*/
 
+    /**
+     * @notice https://eips.ethereum.org/EIPS/eip-712
+     */
     function DOMAIN_SEPARATOR() public view virtual returns (bytes32) {
         return
             block.chainid == INITIAL_CHAIN_ID

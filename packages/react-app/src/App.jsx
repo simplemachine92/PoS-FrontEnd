@@ -10,7 +10,7 @@ import {
 } from "eth-hooks";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import React, { useCallback, useEffect, useState } from "react";
-import { HomeOutlined, BugOutlined, QuestionCircleOutlined, ReadOutlined } from "@ant-design/icons";
+import { HomeOutlined, BugOutlined, QuestionCircleOutlined, ReadOutlined, UserOutlined } from "@ant-design/icons";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
 import {
@@ -33,6 +33,7 @@ import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
 import { Home, ExampleUI, Hints, Subgraph } from "./views";
 import { useStaticJsonRPC } from "./hooks";
+import SignatorViewer from "./SignatorViewer";
 
 const { ethers } = require("ethers");
 /*
@@ -230,6 +231,22 @@ function App(props) {
     });
   }, [setInjectedProvider]);
 
+  const [chainList, setChainList] = useState([]);
+
+  useEffect(() => {
+    const getChainList = async () => {
+      try {
+        const rawChainList = await fetch("https://chainid.network/chains.json");
+        const chainListJson = await rawChainList.json();
+
+        setChainList(chainListJson);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    getChainList();
+  }, []);
+
   useEffect(() => {
     if (web3Modal.cachedProvider) {
       loadWeb3Modal();
@@ -266,6 +283,18 @@ function App(props) {
           </Menu.Item>
           <Menu.Item
             icon={
+              <UserOutlined
+                type="message"
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
+                theme="outlined"
+              />
+            }
+            key="/signatures"
+          >
+            <Link to="/signatures"></Link>
+          </Menu.Item>
+          <Menu.Item
+            icon={
               <BugOutlined
                 type="message"
                 style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
@@ -275,18 +304,6 @@ function App(props) {
             key="/debug"
           >
             <Link to="/debug"></Link>
-          </Menu.Item>
-          <Menu.Item
-            icon={
-              <QuestionCircleOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
-                theme="outlined"
-              />
-            }
-            key="/hints"
-          >
-            <Link to="/hints"></Link>
           </Menu.Item>
           <Menu.Item
             icon={
@@ -341,6 +358,15 @@ function App(props) {
             localProvider={localProvider}
           />
         </Route>
+        <Route path="/view">
+          <SignatorViewer
+            mainnetProvider={mainnetProvider}
+            injectedProvider={injectedProvider}
+            address={address}
+            loadWeb3Modal={loadWeb3Modal}
+            chainList={chainList}
+          />
+        </Route>
         <Route exact path="/debug">
           {/*
                 🎛 this scaffolding is full of commonly used components
@@ -358,7 +384,7 @@ function App(props) {
             contractConfig={contractConfig}
           />
         </Route>
-        <Route path="/hints">
+        <Route path="/signatures">
           <Hints
             address={address}
             yourLocalBalance={yourLocalBalance}
