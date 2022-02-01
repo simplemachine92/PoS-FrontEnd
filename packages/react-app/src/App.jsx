@@ -170,7 +170,8 @@ function App(props) {
   ]);
 
   // keep track of a variable from the contract in the local React state:
-  const purpose = useContractReader(readContracts, "CryptoChunks", "tokenURI", [100]);
+  const purpose = useContractReader(readContracts, "na", "balanceOf", [address]);
+  //console.log(purpose);
 
   //
   // 🧫 DEBUG 👨🏻‍🔬

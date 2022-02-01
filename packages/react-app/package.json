@@ -44,6 +44,7 @@
     "isomorphic-fetch": "^3.0.0",
     "json-url": "^3.0.0",
     "node-watch": "^0.7.1",
+    "pdf-lib": "^1.17.1",
     "postcss": "^8.2.6",
     "qrcode.react": "^1.0.0",
     "react": "^17.0.2",

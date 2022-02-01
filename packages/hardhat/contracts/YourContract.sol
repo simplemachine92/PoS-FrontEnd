@@ -8,7 +8,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import {Base64} from "base64-sol/base64.sol";
 
-contract GreenPill_Pages is ERC721, Ownable {
+contract GreenPill_Pages is ERC721Enumerable, Ownable {
     using Counters for Counters.Counter;
     using Strings for uint256;
 
