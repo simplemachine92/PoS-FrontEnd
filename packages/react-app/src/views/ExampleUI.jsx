@@ -19,7 +19,6 @@ export default function ExampleUI({
   const [newPurpose, setNewPurpose] = useState("loading...");
   const [ready, setReady] = useState(false);
   const [sData, setData] = useState();
-  const [svg, setSVG] = useState();
 
   /**
    * converts a base64 encoded data url SVG image to a PNG image
@@ -95,41 +94,6 @@ export default function ExampleUI({
     console.log(pdfBytes);
   }
 
-  async function modifyPdf() {
-    // Fetch an existing PDF document
-    const url = "https://pdf-lib.js.org/assets/with_update_sections.pdf";
-    const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
-
-    // Load a PDFDocument from the existing PDF bytes
-    const pdfDoc = await PDFDocument.load(existingPdfBytes);
-
-    // Embed the Helvetica font
-    const helveticaFont = await pdfDoc.embedFont(StandardFonts.Helvetica);
-
-    // Get the first page of the document
-    const pages = pdfDoc.getPages();
-    const firstPage = pages[0];
-
-    // Get the width and height of the first page
-    const { width, height } = firstPage.getSize();
-
-    // Draw a string of text diagonally across the first page
-    firstPage.drawText("This text was added with JavaScript!", {
-      x: 5,
-      y: height / 2 + 300,
-      size: 50,
-      font: helveticaFont,
-      color: rgb(0.95, 0.1, 0.1),
-      rotate: degrees(-45),
-    });
-
-    // Serialize the PDFDocument to bytes (a Uint8Array)
-    const pdfBytes = await pdfDoc.save();
-
-    // Trigger the browser to download the PDF document
-    download(pdfBytes, "pdf-lib_modification_example.pdf", "application/pdf");
-  }
-
   useEffect(async () => {
     if (address) {
       let balance = await readContracts.GreenPill_Pages.balanceOf(address);
@@ -145,14 +109,10 @@ export default function ExampleUI({
         let decoded = atob(cleaned);
         let json = JSON.parse(decoded);
         console.log(json.image);
-        setSVG(json.image);
 
         let b64png = await base64SvgToBase64Png(json.image, 762.233, 1016.63);
 
         insertPage(b64png);
-        //let b64cleaned = b64png.replace("data:image/png;base64,", "");
-        //console.log(b64cleaned);
-        //width 762.233
       }
     }
   }, [address]);
