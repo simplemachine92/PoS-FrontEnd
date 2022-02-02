@@ -140,7 +140,9 @@ export default function ExampleUI({
         <div style={{ marginTop: 30 }}>
           <h2>(This is a token gate)</h2>
           <h1>If this persists, you aren't hodling.</h1>
-          <Spin />
+          <br />
+          <h3>If you have been signed to, navigate to /signatures, click view signature</h3>
+          <h3>Then navigate to /debug, and enter your signature attributes into "Mintifsignedto"</h3>
         </div>
       )}
     </div>

@@ -156,7 +156,9 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
       }}
     >
       {ready ? (
-        <div style={{ marginTop: 30 }}>
+        <div style={{ marginTop: 0 }}>
+          <h2>Recipients</h2>
+          <h1>If "View Copy" isn't working, refresh.</h1>
           <List
             bordered
             dataSource={sData}
