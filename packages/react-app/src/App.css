@@ -1,3 +1,6 @@
+@import url("https://fonts.googleapis.com/css?family=Space+Mono:400,700|Libre+Franklin:400,600|Miriam+Libre:400");
 .App {
   text-align: center;
+  background-color: "#12032c";
+  font-family: "Space Mono";
 }

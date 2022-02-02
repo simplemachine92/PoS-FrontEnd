@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useContractReader } from "eth-hooks";
 import { ethers } from "ethers";
+import { Divider } from "antd";
+import { Hints } from ".";
 
 /**
  * web3 props can be passed from '../App.jsx' into your local view component for use
@@ -15,7 +17,13 @@ function Home({ yourLocalBalance, readContracts, writeContracts, tx, localProvid
   const purpose = useContractReader(readContracts, "YourContract", "purpose");
 
   return (
-    <body>
+    <body
+      style={{
+        fontFamily: "Space Mono",
+        backgroundColor: "#12032c",
+        backgroundImage: "url(" + "./background_pattern.svg" + ")",
+      }}
+    >
       <main>
         <section class="coordination-hero background-bubble">
           <div class="hero-container">
@@ -33,11 +41,14 @@ function Home({ yourLocalBalance, readContracts, writeContracts, tx, localProvid
         <section class="green-pill-form-section">
           <div>
             <h1>Make a Pledge:</h1>
+            <h1>I've been GreenPilled! </h1>
             <form class="form">
-              <label for="percentage">I've been GreenPilled! </label>
               <label for="percentage">I Pledge</label>
               <input type="text" id="percentage" name="percentage" placeholder="25%" value="25%" />
               <label for="percentage">of my Wealth Above </label>
+              <br />
+              <br />
+              <label for="percentage">Above </label>
               <input type="text" id="amount" name="amount" placeholder="$10mm" value="$10mm" />
               <label for="cause">to the cause of</label>
               <input
@@ -47,6 +58,10 @@ function Home({ yourLocalBalance, readContracts, writeContracts, tx, localProvid
                 placeholder="Public Goods Funding"
                 value="Public Goods Funding"
               />
+              <br />
+              <br />
+              <Divider />
+              <Hints />
 
               <div class="buttons-green-pill">
                 <button type="button">

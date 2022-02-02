@@ -258,6 +258,7 @@ function App(props) {
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
+
       <Affix>
         <NetworkDisplay
           NETWORKCHECK={NETWORKCHECK}
@@ -268,12 +269,16 @@ function App(props) {
           USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
         />
 
-        <Menu style={{ textAlign: "left" }} selectedKeys={[location.pathname]} mode="horizontal">
+        <Menu
+          style={{ textAlign: "left", backgroundColor: "#12032c" }}
+          selectedKeys={[location.pathname]}
+          mode="horizontal"
+        >
           <Menu.Item
             icon={
               <HomeOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#00dda6" }}
                 theme="outlined"
               />
             }
@@ -285,7 +290,7 @@ function App(props) {
             icon={
               <UserOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#00dda6" }}
                 theme="outlined"
               />
             }
@@ -297,7 +302,7 @@ function App(props) {
             icon={
               <BugOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#00dda6" }}
                 theme="outlined"
               />
             }
@@ -309,7 +314,7 @@ function App(props) {
             icon={
               <ReadOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#00dda6" }}
                 theme="outlined"
               />
             }
@@ -347,6 +352,7 @@ function App(props) {
           )}
         </div>
       </Affix>
+
       <Switch>
         <Route exact path="/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
