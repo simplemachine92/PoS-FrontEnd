@@ -134,9 +134,9 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
 
             data.link = await insertPage(b64png);
             console.log(data);
+            setReady(true);
           });
           setData(myData);
-          setReady(true);
         } else {
           console.log("No data available");
         }
