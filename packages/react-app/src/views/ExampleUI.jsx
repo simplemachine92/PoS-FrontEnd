@@ -37,7 +37,7 @@ export default function ExampleUI({
         canvas.width = width;
         canvas.height = height;
         let ctx = canvas.getContext("2d");
-        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, -20, 0, canvas.width, canvas.height);
         try {
           let data = canvas.toDataURL("image/png");
           resolve(data);
