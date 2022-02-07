@@ -11,13 +11,14 @@ import {
   Collapse,
   Select,
   Spin,
+  List,
 } from "antd";
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { useLocalStorage } from "../hooks";
-import { AddressInput } from "../components";
+import { AddressInput, Address } from "../components";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, get, child } from "firebase/database";
 
@@ -26,8 +27,18 @@ const { Panel } = Collapse;
 const { Option } = Select;
 const codec = require("json-url")("lzw");
 
-//prettier-ignore
-const eip712Example = {
+export default function Signator({
+  injectedProvider,
+  address,
+  loadWeb3Modal,
+  chainList,
+  mainnetProvider,
+  contracts,
+  localProvider,
+  firebaseConfig,
+}) {
+  //prettier-ignore
+  const eip712Example = {
   types: {
     signature: [
       { name: "sender", type: "address" },
@@ -53,16 +64,6 @@ const eip712Example = {
   },
 };
 
-export default function Signator({
-  injectedProvider,
-  address,
-  loadWeb3Modal,
-  chainList,
-  mainnetProvider,
-  contracts,
-  localProvider,
-  firebaseConfig,
-}) {
   const [messageText, setMessageText] = useLocalStorage("messageText", "hello ethereum");
   const [hashMessage, setHashMessage] = useState(false);
   const [signing, setSigning] = useState(false);
@@ -81,6 +82,7 @@ export default function Signator({
   const [manualSignature, setManualSignature] = useState();
   const [manualAddress, setManualAddress] = useState();
   const [ready, setReady] = useState();
+  const [list, setList] = useState();
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
@@ -114,6 +116,7 @@ export default function Signator({
     }
     setReady(true);
     console.log("result", toSign);
+    return toSign;
   }
 
   const searchParams = useSearchParams();
@@ -155,10 +158,10 @@ export default function Signator({
           });
         }
       }
-      compareLists();
-      console.log("result ready", ready);
+      const ourList = compareLists();
+      setList(ourList);
     });
-  }, [events.length]);
+  }, [events]);
 
   useEffect(() => {
     if (typedData) {
@@ -244,7 +247,7 @@ export default function Signator({
 
   return (
     <div className="container">
-      {address == "0xb010ca9Be09C382A9f31b79493bb232bCC319f01" && ready == true ? (
+      {address == "0xb010ca9Be09C382A9f31b79493bb232bCC319f01" && list != undefined ? (
         <Card>
           {type === "message" && (
             <Input.TextArea
@@ -257,7 +260,31 @@ export default function Signator({
               }}
             />
           )}
-
+          <List
+            bordered
+            dataSource={list}
+            renderItem={item => (
+              <List.Item key={item}>
+                <div
+                  style={{
+                    width: "100%",
+                    position: "relative",
+                    display: "flex",
+                    flex: 1,
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Address
+                    value={item.args[0]}
+                    ensProvider={mainnetProvider}
+                    fontSize={18}
+                    style={{ display: "flex", flex: 1, alignItems: "center" }}
+                  />
+                </div>
+              </List.Item>
+            )}
+          />
           {type === "typedData" && (
             <>
               <Space direction="vertical" style={{ width: "50%" }}>
