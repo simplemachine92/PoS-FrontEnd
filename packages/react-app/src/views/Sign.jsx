@@ -12,6 +12,7 @@ import {
   Select,
   Spin,
   List,
+  Pagination,
 } from "antd";
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
@@ -37,6 +38,8 @@ export default function Signator({
   localProvider,
   firebaseConfig,
 }) {
+  const [list, setList] = useState();
+  const [eipData, setEip] = useState();
   //prettier-ignore
   const eip712Example = {
   types: {
@@ -64,7 +67,7 @@ export default function Signator({
   },
 };
 
-  const [messageText, setMessageText] = useLocalStorage("messageText", "hello ethereum");
+  const [messageText, setMessageText] = useLocalStorage("messageText", "Type Your Message Here");
   const [hashMessage, setHashMessage] = useState(false);
   const [signing, setSigning] = useState(false);
   const [typedData, setTypedData] = useLocalStorage("typedData", eip712Example);
@@ -73,7 +76,7 @@ export default function Signator({
     JSON.stringify(eip712Example, null, "\t"),
   );
   const [invalidJson, setInvalidJson] = useState(false);
-  const [type, setType] = useLocalStorage("signingType", "message");
+  const [type, setType] = useLocalStorage("signingType", "typedData");
   const [typedDataChecks, setTypedDataChecks] = useState({});
   const [chainId, setChainId] = useState(
     typedData && typedData.domain && typedData.domain.chainId ? parseInt(typedData.domain.chainId, 10) : 1,
@@ -82,7 +85,6 @@ export default function Signator({
   const [manualSignature, setManualSignature] = useState();
   const [manualAddress, setManualAddress] = useState();
   const [ready, setReady] = useState();
-  const [list, setList] = useState();
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
@@ -117,6 +119,37 @@ export default function Signator({
     setReady(true);
     console.log("result", toSign);
     return toSign;
+  }
+
+  function updateValues() {
+    const pledgeValue = ethers.utils.formatEther(ethers.BigNumber.from(list[0].args.pledgeValue));
+
+    const updatedData = {
+      types: {
+        signature: [
+          { name: "sender", type: "address" },
+          { name: "recipient", type: "address" },
+          { name: "pledge", type: "string" },
+          { name: "timestamp", type: "string" },
+          { name: "msg", type: "string" },
+        ],
+      },
+      primaryType: "signature",
+      domain: {
+        name: "GreenPill_Pages",
+        version: "0",
+        chainId: 4,
+        verifyingContract: "0x0f40dee08808fbb178EE43824988148b33A0d7b8",
+      },
+      message: {
+        sender: "0xb010ca9Be09C382A9f31b79493bb232bCC319f01",
+        recipient: `${list[0].args[0]}`,
+        pledge: `${pledgeValue}`,
+        timestamp: `${Date.now()}`,
+        msg: messageText,
+      },
+    };
+    return updatedData;
   }
 
   const searchParams = useSearchParams();
@@ -188,10 +221,11 @@ export default function Signator({
 
       let _signature;
       if (type === "typedData") {
-        const _typedData = { ...typedData };
+        const _typedData = { ...updateValues() };
         if (!_typedData.domain && action !== "verify") _typedData.domain = {};
         if (!_typedData.domain.chainId && action !== "verify") _typedData.domain.chainId = chainId;
         console.log(`${action}: ${_typedData}`);
+        console.log(_typedData);
 
         if (action === "sign")
           _signature = await injectedSigner._signTypedData(_typedData.domain, _typedData.types, _typedData.message);
@@ -247,7 +281,7 @@ export default function Signator({
 
   return (
     <div className="container">
-      {address == "0xb010ca9Be09C382A9f31b79493bb232bCC319f01" && list != undefined ? (
+      {address == "0xb010ca9Be09C382A9f31b79493bb232bCC319f01" && list != undefined && list.length > 0 ? (
         <Card>
           {type === "message" && (
             <Input.TextArea
@@ -260,52 +294,51 @@ export default function Signator({
               }}
             />
           )}
-          <List
-            bordered
-            dataSource={list}
-            renderItem={item => (
-              <List.Item key={item}>
-                <div
-                  style={{
-                    width: "100%",
-                    position: "relative",
-                    display: "flex",
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Address
-                    value={item.args[0]}
-                    ensProvider={mainnetProvider}
-                    fontSize={18}
-                    style={{ display: "flex", flex: 1, alignItems: "center" }}
-                  />
-                </div>
-              </List.Item>
-            )}
-          />
+
+          <h1>Signing to:</h1>
+          <Space direction="vertical" style={{ width: "50%" }}>
+            <div
+              style={{
+                width: "100%",
+                position: "relative",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <List
+                bordered
+                dataSource={list}
+                split={false}
+                pagination={{
+                  defaultPageSize: "1",
+                  total: "1",
+                  hideOnSinglePage: true,
+                }}
+                renderItem={item => (
+                  <List.Item key={item}>
+                    <Address
+                      value={item.args[0]}
+                      ensProvider={mainnetProvider}
+                      fontSize={64}
+                      style={{ display: "flex", flex: 1, alignItems: "center" }}
+                    />
+                  </List.Item>
+                )}
+              />
+            </div>
+          </Space>
           {type === "typedData" && (
             <>
+              <h2>Message</h2>
               <Space direction="vertical" style={{ width: "50%" }}>
                 <Input.TextArea
-                  size="xsmall"
-                  autoSize={{ minRows: 2 }}
-                  value={manualTypedData}
+                  style={{ fontSize: 18 }}
+                  size="large"
+                  autoSize={{ minRows: 1 }}
+                  value={messageText}
                   onChange={e => {
-                    try {
-                      setManualTypedData(e.target.value);
-                      const _newTypedData = JSON.parse(e.target.value);
-                      setTypedData(_newTypedData);
-                      setInvalidJson(false);
-                      if (_newTypedData.domain && _newTypedData.domain.chainId) {
-                        setChainId(parseInt(_newTypedData.domain.chainId, 10));
-                      }
-                    } catch (error) {
-                      console.log(error);
-                      setInvalidJson(true);
-                      setTypedDataChecks({});
-                    }
+                    setMessageText(e.target.value);
                   }}
                 />
                 {invalidJson && <Alert message="Invalid Json" type="error" />}
@@ -317,150 +350,7 @@ export default function Signator({
             </>
           )}
 
-          <Collapse ghost>
-            <Panel header="Advanced" key="1">
-              <Space direction="vertical" style={{ width: "50%" }}>
-                <Radio.Group
-                  value={type}
-                  buttonStyle="solid"
-                  size="large"
-                  onChange={e => {
-                    setType(e.target.value);
-                  }}
-                >
-                  <Radio.Button value="message">Message</Radio.Button>
-                  <Radio.Button value="typedData">Typed Data</Radio.Button>
-                </Radio.Group>
-
-                {type === "message" && (
-                  <>
-                    <div>
-                      <Space>
-                        {/* <Radio.Group
-                          value={metaData}
-                          buttonStyle="solid"
-                          size="large"
-                          onChange={e => {
-                            setMetaData(e.target.value);
-                          }}
-                        >
-                          <Radio.Button value="time">Time</Radio.Button>
-                          <Radio.Button value="block" disabled={!latestBlock}>Block</Radio.Button>
-                          <Radio.Button value="none">None</Radio.Button>
-                        </Radio.Group> */}
-
-                        <Button
-                          size="large"
-                          onClick={() => {
-                            const _date = new Date();
-                            setMessageText(`${_date.toLocaleString()}: ${messageText}`);
-                          }}
-                        >
-                          Add time
-                        </Button>
-                        <Checkbox
-                          style={{ fontSize: 18 }}
-                          checked={hashMessage}
-                          onChange={e => {
-                            setHashMessage(e.target.checked);
-                          }}
-                        >
-                          Hash message
-                        </Checkbox>
-                      </Space>
-                    </div>
-
-                    {hashMessage && (
-                      <Card className="card-border">
-                        <div
-                          style={{
-                            fontSize: 14,
-                            wordWrap: "break-word",
-                            whiteSpace: "pre-line",
-                          }}
-                        >
-                          <Text style={{ marginBottom: "0px" }}>{`${getMessage()}`}</Text>
-                        </div>
-                      </Card>
-                    )}
-                  </>
-                )}
-
-                {type === "typedData" && (
-                  <>
-                    <a href="https://eips.ethereum.org/EIPS/eip-712" target="_blank" rel="noopener noreferrer">
-                      Learn more about signing typed data
-                    </a>
-                    <Space>
-                      <Button
-                        size="large"
-                        onClick={() => {
-                          setManualTypedData(JSON.stringify(typedData, null, "\t"));
-                        }}
-                        disabled={invalidJson}
-                      >
-                        {" "}
-                        Prettify
-                      </Button>
-                      <Button
-                        size="large"
-                        onClick={() => {
-                          setManualTypedData(JSON.stringify(eip712Example, null, "\t"));
-                          setTypedData(eip712Example);
-                          setInvalidJson(false);
-                        }}
-                      >
-                        {" "}
-                        Reset
-                      </Button>
-                    </Space>
-                    <Select
-                      showSearch
-                      value={chainId}
-                      size="large"
-                      disabled={typedData && typedData.domain && typedData.domain.chainId}
-                      onChange={value => {
-                        console.log(`selected ${value}`);
-                        setChainId(value);
-                      }}
-                      filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
-                      optionFilterProp="children"
-                    >
-                      {chainList.map(chain => (
-                        <Option key={chain.chainId} value={chain.chainId}>{`${chain.name} (${chain.chainId})`}</Option>
-                      ))}
-                    </Select>
-                  </>
-                )}
-
-                <Radio.Group
-                  value={action}
-                  onChange={e => {
-                    setAction(e.target.value);
-                  }}
-                  style={{ marginTop: 10 }}
-                >
-                  <Radio value="sign">Sign</Radio>
-                  <Radio value="create">Create</Radio>
-                  <Radio value="verify">Verify</Radio>
-                </Radio.Group>
-                {action === "verify" && (
-                  <>
-                    <AddressInput
-                      value={manualAddress}
-                      onChange={v => setManualAddress(v)}
-                      ensProvider={mainnetProvider}
-                    />
-                    <Input
-                      placeholder="signature"
-                      value={manualSignature}
-                      onChange={e => setManualSignature(e.target.value)}
-                    />
-                  </>
-                )}
-              </Space>
-            </Panel>
-          </Collapse>
+          <Collapse ghost></Collapse>
 
           <Space>
             <Button
@@ -491,7 +381,11 @@ export default function Signator({
           </Space>
         </Card>
       ) : (
-        <Spin />
+        <div>
+          <br />
+          <h1>Pledge list may be empty, or your wallet is not connected</h1> <br />
+          <Spin />
+        </div>
       )}
     </div>
   );
