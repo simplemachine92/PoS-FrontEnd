@@ -103,12 +103,6 @@ export default function Signator({
     return _params;
   }
 
-  /*  let result =
-    arrOne.length === arrTwo.length &&
-    dbList.recipient.every(function (element) {
-      return arrTwo.includes(element);
-    }); */
-
   function compareLists() {
     for (let x = 0; x < eventList.length; x++) {
       if (dbList.includes(eventList[x])) {
@@ -116,8 +110,6 @@ export default function Signator({
       } else if (eventList[x] != undefined) {
         // push to to-do
         toSign.push(objectList[x]);
-        //toSign.push(dbList[x]);
-        //console.log("result3", toSign);
       }
     }
     setReady(true);
@@ -166,29 +158,7 @@ export default function Signator({
       compareLists();
       console.log("result ready", ready);
     });
-  }, [events]);
-
-  /*  useEffect(async () => {
-    const dbRef = ref(getDatabase(app));
-    get(child(dbRef, `gp/`))
-      .then(snapshot => {
-        if (snapshot.exists()) {
-          snapshot.forEach(sig => {
-            let message = sig.val().message;
-
-            let sigMsg = message.msg;
-            let sigRecipient = message.recipient;
-            let sigTime = message.timestamp;
-          })},
-          }, []); */
-
-  // If you want to call a function on a new block
-  /*
-  useOnBlock(mainnetProvider, () => {
-    console.log(`⛓ A new mainnet block is here: ${mainnetProvider.blockNumber}`);
-    setLatestBlock(mainnetProvider.blockNumber);
-  });
-  */
+  }, [events.length]);
 
   useEffect(() => {
     if (typedData) {
@@ -244,7 +214,6 @@ export default function Signator({
 
         searchParams.set("message", _message);
       }
-      // console.log(_signature)
 
       if (action === "sign") console.log(`Success! ${_signature},`);
 
