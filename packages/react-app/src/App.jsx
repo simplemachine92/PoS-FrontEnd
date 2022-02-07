@@ -11,6 +11,7 @@ import {
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import React, { useCallback, useEffect, useState } from "react";
 import { HomeOutlined, BugOutlined, QuestionCircleOutlined, ReadOutlined, UserOutlined } from "@ant-design/icons";
+import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
 import {
@@ -160,6 +161,8 @@ function App(props) {
 
   // Load in your local 📝 contract and read a value from it:
   const readContracts = useContractLoader(localProvider, contractConfig);
+
+  const events = useEventListener(readContracts, "GreenPill_Pages", "Pledge", localProvider, "10100000");
 
   // If you want to make 🔐 write transactions to your contracts, use the userSigner:
   const writeContracts = useContractLoader(userSigner, contractConfig, localChainId);
@@ -414,6 +417,7 @@ function App(props) {
             contracts={readContracts}
             localProvider={localProvider}
             firebaseConfig={firebaseConfig}
+            events={events}
           />
         </Route>
         <Route path="/mainnetdai">

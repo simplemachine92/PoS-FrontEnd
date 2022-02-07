@@ -17,7 +17,6 @@ import {
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { useEventListener } from "eth-hooks/events/useEventListener";
 import { useLocalStorage } from "../hooks";
 import { AddressInput, Address } from "../components";
 import { initializeApp } from "firebase/app";
@@ -37,9 +36,9 @@ export default function Signator({
   contracts,
   localProvider,
   firebaseConfig,
+  events,
 }) {
   const [list, setList] = useState();
-  const [eipData, setEip] = useState();
   //prettier-ignore
   const eip712Example = {
   types: {
@@ -71,10 +70,6 @@ export default function Signator({
   const [hashMessage, setHashMessage] = useState(false);
   const [signing, setSigning] = useState(false);
   const [typedData, setTypedData] = useLocalStorage("typedData", eip712Example);
-  const [manualTypedData, setManualTypedData] = useLocalStorage(
-    "manualTypedData",
-    JSON.stringify(eip712Example, null, "\t"),
-  );
   const [invalidJson, setInvalidJson] = useState(false);
   const [type, setType] = useLocalStorage("signingType", "typedData");
   const [typedDataChecks, setTypedDataChecks] = useState({});
@@ -84,7 +79,6 @@ export default function Signator({
   const [action, setAction] = useState("sign");
   const [manualSignature, setManualSignature] = useState();
   const [manualAddress, setManualAddress] = useState();
-  const [ready, setReady] = useState();
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
@@ -100,25 +94,9 @@ export default function Signator({
 
   let toSign = [];
 
-  const events = useEventListener(contracts, "GreenPill_Pages", "Pledge", localProvider, "10100000");
-
   function useSearchParams() {
     const _params = new URLSearchParams(useLocation().search);
     return _params;
-  }
-
-  function compareLists() {
-    for (let x = 0; x < eventList.length; x++) {
-      if (dbList.includes(eventList[x])) {
-        // do nothing
-      } else if (eventList[x] != undefined) {
-        // push to to-do
-        toSign.push(objectList[x]);
-      }
-    }
-    setReady(true);
-    console.log("result", toSign);
-    return toSign;
   }
 
   function updateValues() {
@@ -183,16 +161,24 @@ export default function Signator({
           dbList.push(message.recipient);
         });
         console.log("dblist", dbList);
-        if (dbList.length > 0) {
+        if (dbList.length) {
           events.forEach(pledge => {
             eventList.push(pledge.args.pledgee);
+            console.log("event list", eventList);
             objectList.push(pledge);
-            console.log("eDebug", eventList);
+            console.log("object list", objectList);
+            for (let x = 0; x < eventList.length; x++) {
+              if (dbList.includes(eventList[x])) {
+                // do nothing
+              } else if (eventList[x] != undefined) {
+                // push to to-do
+                toSign.push(objectList[x]);
+                setList(toSign);
+              }
+            }
           });
         }
       }
-      const ourList = compareLists();
-      setList(ourList);
     });
   }, [events]);
 
