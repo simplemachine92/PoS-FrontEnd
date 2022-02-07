@@ -2,6 +2,7 @@ import { SyncOutlined } from "@ant-design/icons";
 import { utils, ethers } from "ethers";
 import { Button, Card, DatePicker, Divider, Input, Progress, Slider, Spin, Switch } from "antd";
 import React, { useState, useEffect } from "react";
+import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Address, Balance, Events } from "../components";
 import { PDFDocument, degrees } from "pdf-lib";
 

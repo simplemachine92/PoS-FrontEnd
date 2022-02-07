@@ -18,6 +18,16 @@ contract GreenPill_Pages is ERC721Enumerable, Ownable {
 
     Counters.Counter private _tokenIds;
 
+    uint256 public price = 0.0001337 ether;
+
+    uint256 public constant pledgeLimitPerUser = 1;
+
+    mapping(address => uint256) public pledgeLimit;
+
+    address immutable gitcoin = 0xde21F729137C5Af1b01d73aF1dC21eFfa2B8a0d6;
+
+    //address[] public pledgers;
+
     struct Token {
         string recipient;
         string sigNum;
@@ -31,7 +41,11 @@ contract GreenPill_Pages is ERC721Enumerable, Ownable {
                                EVENTS
     //////////////////////////////////////////////////////////////*/
 
-    // Don't forget, bub.
+    event Pledge(
+        address indexed pledgee,
+        uint256 indexed pledgeValue,
+        string indexed handle
+    );
 
     /*///////////////////////////////////////////////////////////////
                            EIP-712 STORAGE
@@ -67,14 +81,33 @@ contract GreenPill_Pages is ERC721Enumerable, Ownable {
     //////////////////////////////////////////////////////////////*/
 
     /**
+     * @notice Pledges ETH to GTC & "whitelists" pledger
+     */
+    function pledge(string calldata _twitter) public payable {
+        require(
+            pledgeLimit[msg.sender] < pledgeLimitPerUser,
+            "One pledge per address"
+        );
+        require(msg.value >= price);
+
+        (bool success, ) = gitcoin.call{value: msg.value}("");
+        require(success, "could not send");
+
+        pledgeLimit[msg.sender] = pledgeLimit[msg.sender] + 1;
+        //pledgers.push(msg.sender);
+
+        emit Pledge(msg.sender, msg.value, _twitter);
+    }
+
+    /**
      * @notice Allows a single mint if msg.sender has a valid signed msg
      */
     //prettier-ignore
     function mintIfSigned(
-        bytes memory _signature, 
-        string memory sigNumber,
-        string memory _timestamp,
-        string memory message
+        bytes calldata _signature, 
+        string calldata _sigNumber,
+        string calldata _timestamp,
+        string calldata _message
     ) external {
         require(balanceOf(msg.sender) < 1, "One per Address");
 
@@ -92,9 +125,9 @@ contract GreenPill_Pages is ERC721Enumerable, Ownable {
                 // EIP712: "Addresses are encoded as uint160"
                 uint160(msg.sender),
                 // EIP712: "values bytes and string are encoded as a keccak256 hash"
-                keccak256(bytes(sigNumber)),
+                keccak256(bytes(_sigNumber)),
                 keccak256(bytes(_timestamp)),
-                keccak256(bytes(message))
+                keccak256(bytes(_message))
             )
         );
 
@@ -113,9 +146,9 @@ contract GreenPill_Pages is ERC721Enumerable, Ownable {
         tokens.push(
             Token({
                 recipient: toAsciiString(msg.sender),
-                sigNum: sigNumber,
+                sigNum: _sigNumber,
                 timestamp: _timestamp,
-                writtenMsg: message
+                writtenMsg: _message
             })
         );
 

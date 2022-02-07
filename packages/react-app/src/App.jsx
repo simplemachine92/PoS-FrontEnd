@@ -31,7 +31,7 @@ import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, ExampleUI, Hints, Subgraph } from "./views";
+import { Home, ExampleUI, Hints, Subgraph, Sign } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import SignatorViewer from "./SignatorViewer";
 
@@ -82,6 +82,16 @@ function App(props) {
   const [address, setAddress] = useState();
   const [selectedNetwork, setSelectedNetwork] = useState(networkOptions[0]);
   const location = useLocation();
+
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  };
 
   const targetNetwork = NETWORKS[selectedNetwork];
 
@@ -306,7 +316,7 @@ function App(props) {
           >
             <Link to="/debug"></Link>
           </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
             icon={
               <ReadOutlined
                 type="message"
@@ -317,7 +327,7 @@ function App(props) {
             key="/exampleui"
           >
             <Link to="/exampleui"></Link>
-          </Menu.Item>
+          </Menu.Item> */}
         </Menu>
         <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
           <div style={{ display: "flex", flex: 1, alignItems: "center" }}>
@@ -391,20 +401,19 @@ function App(props) {
             yourLocalBalance={yourLocalBalance}
             mainnetProvider={mainnetProvider}
             price={price}
+            firebaseConfig={firebaseConfig}
           />
         </Route>
-        <Route path="/exampleui">
-          <ExampleUI
-            address={address}
-            userSigner={userSigner}
+        <Route path="/sign">
+          <Sign
             mainnetProvider={mainnetProvider}
+            injectedProvider={injectedProvider}
+            address={address}
+            loadWeb3Modal={loadWeb3Modal}
+            chainList={chainList}
+            contracts={readContracts}
             localProvider={localProvider}
-            yourLocalBalance={yourLocalBalance}
-            price={price}
-            tx={tx}
-            writeContracts={writeContracts}
-            readContracts={readContracts}
-            purpose={purpose}
+            firebaseConfig={firebaseConfig}
           />
         </Route>
         <Route path="/mainnetdai">
