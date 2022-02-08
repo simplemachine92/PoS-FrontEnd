@@ -41,11 +41,7 @@ contract GreenPill_Pages is ERC721Enumerable, Ownable {
                                EVENTS
     //////////////////////////////////////////////////////////////*/
 
-    event Pledge(
-        address indexed pledgee,
-        uint256 indexed pledgeValue,
-        string indexed handle
-    );
+    event Pledge(address indexed pledgee, uint256 indexed pledgeValue);
 
     /*///////////////////////////////////////////////////////////////
                            EIP-712 STORAGE
@@ -83,7 +79,7 @@ contract GreenPill_Pages is ERC721Enumerable, Ownable {
     /**
      * @notice Pledges ETH to GTC & "whitelists" pledger
      */
-    function pledge(string calldata _twitter) public payable {
+    function pledge() public payable {
         require(
             pledgeLimit[msg.sender] < pledgeLimitPerUser,
             "One pledge per address"
@@ -96,7 +92,7 @@ contract GreenPill_Pages is ERC721Enumerable, Ownable {
         pledgeLimit[msg.sender] = pledgeLimit[msg.sender] + 1;
         //pledgers.push(msg.sender);
 
-        emit Pledge(msg.sender, msg.value, _twitter);
+        emit Pledge(msg.sender, msg.value);
     }
 
     /**

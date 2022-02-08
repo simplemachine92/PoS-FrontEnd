@@ -407,6 +407,7 @@ function App(props) {
             mainnetProvider={mainnetProvider}
             price={price}
             firebaseConfig={firebaseConfig}
+            events={events}
           />
         </Route>
         <Route path="/sign">

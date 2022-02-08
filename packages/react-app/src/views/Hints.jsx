@@ -1,16 +1,13 @@
-import { utils } from "ethers";
-import { Select, Spin, List, Space, Button, message } from "antd";
+import { Select, Spin, Space, Table, Input } from "antd";
 import React, { useState, useEffect } from "react";
-import { Address, AddressInput } from "../components";
-import { useTokenList } from "eth-hooks/dapps/dex";
+import { Address } from "../components";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, get, child } from "firebase/database";
-import { Link } from "react-router-dom";
-import { PDFDocument, degrees } from "pdf-lib";
+import { PDFDocument } from "pdf-lib";
 
 const { Option } = Select;
 
-export default function Hints({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig }) {
+export default function Hints({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
   const [ready, setReady] = useState(false);
   const [sData, setData] = useState();
@@ -139,56 +136,79 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
       });
   }, []);
 
+  const [value, setValue] = useState("");
+
+  const [dataSource, setDataSource] = useState(myData);
+
+  const FilterByNameInput = (
+    <Input
+      placeholder="Search by Address (Case Sensitive)"
+      value={value}
+      onChange={e => {
+        const currValue = e.target.value;
+        setValue(currValue);
+        const filteredData = sData.filter(entry => entry.recipient.includes(currValue));
+        setDataSource(filteredData);
+      }}
+    />
+  );
+
+  const columns = [
+    {
+      title: FilterByNameInput,
+      dataIndex: "recipient",
+      render: record =>
+        record != undefined ? (
+          <Address
+            value={record}
+            ensProvider={mainnetProvider}
+            fontSize={18}
+            style={{ display: "flex", flex: 1, alignItems: "center" }}
+          />
+        ) : (
+          <Spin />
+        ),
+      key: "1",
+    },
+    {
+      title: "Pledge",
+      dataIndex: "pledge",
+
+      sorter: (a, b) => a.pledge - b.pledge,
+      sortDirections: ["ascend"],
+    },
+    {
+      title: "Book",
+      dataIndex: "link",
+      render: record =>
+        record != undefined ? (
+          <Space size="middle">
+            <a href={record}>View Copy</a>
+          </Space>
+        ) : (
+          <Spin />
+        ),
+    },
+  ];
+
   return (
     <div
       style={{
-        width: 600,
-        margin: "20px auto",
-        padding: 20,
+        width: "200px auto",
+        margin: "10px auto",
+        paddingLeft: 200,
+        paddingRight: 200,
         paddingBottom: 50,
       }}
     >
       {ready ? (
         <div style={{ marginTop: 0 }}>
-          <h2>Recipients</h2>
-          <h1>If "View Copy" isn't working, refresh.</h1>
-          <List
-            bordered
-            dataSource={sData}
-            renderItem={item => (
-              <List.Item key={item.recipient}>
-                <div
-                  style={{
-                    width: "100%",
-                    position: "relative",
-                    display: "flex",
-                    flex: 1,
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <Address
-                    value={item.recipient}
-                    ensProvider={mainnetProvider}
-                    fontSize={18}
-                    style={{ display: "flex", flex: 1, alignItems: "center" }}
-                  />
-                  <Link
-                    to={`/view?typedData=${
-                      item.typedData + "&addresses=" + item.sender + "&signatures=" + item.signature
-                    }`}
-                    style={{ paddingLeft: 20, paddingRight: 20 }}
-                  >
-                    View Signature
-                  </Link>
-                  <a href={item.link}>View Copy</a>
-                </div>
-              </List.Item>
-            )}
-          />
+          <h2>Signed Pledges</h2>
+
+          <Table columns={columns} dataSource={dataSource} />
         </div>
       ) : (
-        <div style={{ marginTop: 30 }}>
+        <div style={{ marginTop: 10 }}>
           <Spin />
         </div>
       )}
