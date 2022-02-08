@@ -212,7 +212,7 @@ export default function Tweets({ yourLocalBalance, mainnetProvider, price, addre
     >
       {ready ? (
         <div style={{ marginTop: 0 }}>
-          <h2>Tweet to a Pledger</h2>
+          <h1>Tweet to Recently Signed</h1>
 
           <Table columns={columns} dataSource={dataSource} />
         </div>
