@@ -159,7 +159,7 @@ export default function Signator({
         verifyingContract: contracts.GreenPill_Pages.address,
       },
       message: {
-        sender: "0x00De4B13153673BCAE2616b67bf822500d325Fc3",
+        sender: "0xDDF369C3bf18b1B12EA295d597B943b955eF4671",
         recipient: `${list[0].args[0]}`,
         pledge: `${pledgeValue}`,
         timestamp: `${Date.now()}`,
@@ -393,8 +393,6 @@ export default function Signator({
                   type="primary"
                   onClick={action !== "sign" ? signMessage : injectedProvider ? signMessage : loadWeb3Modal}
                   disabled={
-                    (address !== "0xb010ca9Be09C382A9f31b79493bb232bCC319f01" &&
-                      "0x00de4b13153673bcae2616b67bf822500d325fc3") ||
                     (type === "typedData" && (!typedDataChecks.hash || invalidJson)) ||
                     (action === "verify" && (!ethers.utils.isAddress(manualAddress) || !manualSignature))
                   }
