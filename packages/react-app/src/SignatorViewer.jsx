@@ -1,11 +1,4 @@
-import {
-  CheckCircleTwoTone,
-  CloseCircleTwoTone,
-  DeleteOutlined,
-  QrcodeOutlined,
-  TwitterOutlined,
-  InfoOutlined,
-} from "@ant-design/icons";
+import { CheckCircleTwoTone, CloseCircleTwoTone, QrcodeOutlined, InfoOutlined } from "@ant-design/icons";
 import {
   Alert,
   Button,
@@ -78,7 +71,7 @@ const checkEip1271 = async (provider, address, message, signature) => {
   }
 };
 
-function SignatorViewer({ injectedProvider, mainnetProvider, address, loadWeb3Modal, chainList }) {
+function SignatorViewer({ injectedProvider, mainnetProvider, address, loadWeb3Modal, chainList, writeContracts, tx }) {
   function useSearchParams() {
     const _params = new URLSearchParams(useLocation().search);
     return _params;
@@ -118,6 +111,8 @@ function SignatorViewer({ injectedProvider, mainnetProvider, address, loadWeb3Mo
     const decompressTypedData = async () => {
       if (compressedTypedData) {
         const _typedData = await codec.decompress(compressedTypedData);
+        console.log("typed", _typedData);
+        console.log("sig", signatures[0]);
         setTypedData(_typedData);
       }
     };
@@ -241,30 +236,6 @@ function SignatorViewer({ injectedProvider, mainnetProvider, address, loadWeb3Mo
     }
   };
 
-  const removeSignature = i => {
-    if (signatures.length > 1) {
-      const _signatures = [...signatures];
-      _signatures.splice(i, 1);
-      searchParams.set("signatures", _signatures.join());
-      setSignatures(_signatures);
-    } else {
-      searchParams.delete("signatures");
-      setSignatures();
-    }
-
-    if (addresses.length > 1) {
-      const _addresses = [...addresses];
-      _addresses.splice(i, 1);
-      searchParams.set("addresses", _addresses.join());
-      setSignatures(_addresses);
-    } else {
-      searchParams.delete("addresses");
-      setSignatures();
-    }
-
-    history.push(`${location.pathname}?${searchParams.toString()}`);
-  };
-
   const [qrModalVisible, setQrModalVisible] = useState(false);
 
   const showModal = () => {
@@ -297,6 +268,30 @@ function SignatorViewer({ injectedProvider, mainnetProvider, address, loadWeb3Mo
                 <Button type="link" onClick={showModal}>
                   <QrcodeOutlined style={{ fontSize: 24, color: "#1890ff" }} />
                 </Button>
+                {typedData != undefined && address == typedData.message.recipient ? (
+                  <Button
+                    style={{ padding: "4px 15px" }}
+                    type="primary"
+                    onClick={async () => {
+                      try {
+                        console.log("pledge", typedData);
+                        const txCur = await tx(
+                          writeContracts.GreenPill_Pages.mintIfSigned(
+                            signatures[0],
+                            typedData.message.pledge,
+                            typedData.message.timestamp,
+                            typedData.message.msg,
+                          ),
+                        );
+                        await txCur.wait();
+                      } catch (e) {
+                        console.log("mint failed", e);
+                      }
+                    }}
+                  >
+                    Mint
+                  </Button>
+                ) : null}
               </Row>
             }
           >
@@ -370,16 +365,6 @@ function SignatorViewer({ injectedProvider, mainnetProvider, address, loadWeb3Mo
                       )}
                       <div style={{ marginLeft: 10 }}>
                         <Tooltip title={addressChecks[index]}>{_indicator}</Tooltip>
-                      </div>
-                      <div style={{ marginLeft: 10 }}>
-                        <Tooltip title="Delete">
-                          <DeleteOutlined
-                            onClick={() => {
-                              removeSignature(index);
-                            }}
-                            style={{ fontSize: 24 }}
-                          />
-                        </Tooltip>
                       </div>
                     </div>
                     <div style={{ marginTop: 10 }}>

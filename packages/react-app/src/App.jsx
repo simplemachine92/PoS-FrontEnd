@@ -379,6 +379,8 @@ function App(props) {
             address={address}
             loadWeb3Modal={loadWeb3Modal}
             chainList={chainList}
+            writeContracts={writeContracts}
+            tx={tx}
           />
         </Route>
         <Route exact path="/debug">

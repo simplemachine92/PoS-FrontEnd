@@ -23,6 +23,7 @@ import { AddressInput, Address } from "../components";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, set, get, child } from "firebase/database";
+import { Share } from "react-twitter-widgets";
 
 const { Text } = Typography;
 const { Panel } = Collapse;
@@ -351,7 +352,7 @@ export default function Signator({
           </Space>
           {type === "typedData" && (
             <>
-              <h2>Message</h2>
+              <h1>Message:</h1>
               <Space direction="vertical" style={{ width: "50%" }}>
                 <Input.TextArea
                   style={{ fontSize: 18 }}
@@ -387,7 +388,6 @@ export default function Signator({
             >
               {action !== "sign" ? action : injectedProvider ? action : "Connect account to sign"}
             </Button>
-
             {signing && (
               <Button
                 size="large"
@@ -399,6 +399,11 @@ export default function Signator({
                 Cancel
               </Button>
             )}
+            <Share
+              url="https://andrewsuzuki.com"
+              style={{ paddingTop: 50 }}
+              options={{ text: "DEFAULT TEXT", size: "large" }}
+            />
           </Space>
         </Card>
       ) : (
