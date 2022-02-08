@@ -1,14 +1,14 @@
-import { Select, Spin, Space, Table, Input } from "antd";
+import { Select, Spin, Space, Table, Input, Card } from "antd";
 import React, { useState, useEffect } from "react";
 import { Address } from "../components";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, get, child } from "firebase/database";
 import { PDFDocument } from "pdf-lib";
-import { Link } from "react-router-dom";
+import { Share } from "react-twitter-widgets";
 
 const { Option } = Select;
 
-export default function Hints({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
+export default function Tweets({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
   const [ready, setReady] = useState(false);
   const [sData, setData] = useState();
@@ -179,29 +179,21 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
       sortDirections: ["ascend"],
     },
     {
-      title: "Book",
-      dataIndex: "link",
-      render: record =>
-        record != undefined ? (
-          <Space size="middle">
-            <a href={record}>View Copy</a>
-          </Space>
-        ) : (
-          <Spin />
-        ),
-    },
-    {
-      title: "Signature",
+      title: "Engage",
       dataIndex: "",
       render: record =>
         record != undefined ? (
-          <Link
-            to={`/view?typedData=${
-              record.typedData + "&addresses=" + record.sender + "&signatures=" + record.signature
-            }`}
-          >
-            View
-          </Link>
+          <Space size="middle">
+            <Share
+              url={`https://greenpill.party/view?typedData=${
+                record.typedData + "&addresses=" + record.sender + "&signatures=" + record.signature
+              }`}
+              options={{
+                dnt: true,
+                text: `I just signed a copy of Green_Pill for ${record.recipient}, View it @`,
+              }}
+            />
+          </Space>
         ) : (
           <Spin />
         ),
@@ -211,16 +203,16 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
   return (
     <div
       style={{
-        width: "200px auto",
+        width: "10px auto",
         margin: "10px auto",
-        paddingLeft: 200,
-        paddingRight: 200,
-        paddingBottom: 50,
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingBottom: 20,
       }}
     >
       {ready ? (
         <div style={{ marginTop: 0 }}>
-          <h2>Signed Pledges</h2>
+          <h2>Tweet to a Pledger</h2>
 
           <Table columns={columns} dataSource={dataSource} />
         </div>

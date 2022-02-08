@@ -10,6 +10,8 @@ import {
   Typography,
   Collapse,
   Select,
+  Row,
+  Col,
   Spin,
   Form,
   List,
@@ -24,6 +26,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, set, get, child } from "firebase/database";
 import { Share } from "react-twitter-widgets";
+import Tweets from "./Tweets";
 
 const { Text } = Typography;
 const { Panel } = Collapse;
@@ -303,57 +306,20 @@ export default function Signator({
   };
 
   return (
-    <div className="container">
+    <div
+      style={{
+        width: "10px auto",
+        margin: "10px auto",
+        paddingLeft: 20,
+        paddingRight: 20,
+        paddingBottom: 20,
+      }}
+    >
       {userReady ? (
-        <Card>
-          {type === "message" && (
-            <Input.TextArea
-              style={{ fontSize: 18 }}
-              size="large"
-              autoSize={{ minRows: 1 }}
-              value={messageText}
-              onChange={e => {
-                setMessageText(e.target.value);
-              }}
-            />
-          )}
-          <h1>Signing to:</h1>
-          <Space direction="vertical" style={{ width: "50%" }}>
-            <div
-              style={{
-                width: "100%",
-                position: "relative",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <List
-                bordered
-                dataSource={list}
-                split={false}
-                pagination={{
-                  defaultPageSize: "1",
-                  total: "1",
-                  hideOnSinglePage: true,
-                }}
-                renderItem={item => (
-                  <List.Item key={item}>
-                    <Address
-                      value={item.args[0]}
-                      ensProvider={mainnetProvider}
-                      fontSize={64}
-                      style={{ display: "flex", flex: 1, alignItems: "center" }}
-                    />
-                  </List.Item>
-                )}
-              />
-            </div>
-          </Space>
-          {type === "typedData" && (
-            <>
-              <h1>Message:</h1>
-              <Space direction="vertical" style={{ width: "50%" }}>
+        <Row>
+          <Col span={12}>
+            <Card>
+              {type === "message" && (
                 <Input.TextArea
                   style={{ fontSize: 18 }}
                   size="large"
@@ -363,49 +329,104 @@ export default function Signator({
                     setMessageText(e.target.value);
                   }}
                 />
-                {invalidJson && <Alert message="Invalid Json" type="error" />}
-                {/* typedDataChecks.domain===false&&<Alert message="No domain specified" type="info" /> */}
-                {typedDataChecks.types === false && <Alert message="Missing types" type="error" />}
-                {typedDataChecks.message === false && <Alert message="Missing message" type="error" />}
-                {!invalidJson && !typedDataChecks.hash && <Alert message="Invalid EIP-712 input data" type="error" />}
+              )}
+              <h1>Signing to:</h1>
+              <Space direction="vertical" style={{ width: "auto" }}>
+                <div
+                  style={{
+                    width: "10px auto",
+                    margin: "10px auto",
+                    paddingLeft: 20,
+                    paddingRight: 20,
+                    paddingBottom: 20,
+                  }}
+                >
+                  <List
+                    bordered
+                    dataSource={list}
+                    split={false}
+                    pagination={{
+                      defaultPageSize: "1",
+                      total: "1",
+                      hideOnSinglePage: true,
+                    }}
+                    renderItem={item => (
+                      <List.Item key={item}>
+                        <Address
+                          value={item.args[0]}
+                          ensProvider={mainnetProvider}
+                          fontSize={32}
+                          style={{ display: "flex", flex: 1, alignItems: "center" }}
+                        />
+                      </List.Item>
+                    )}
+                  />
+                </div>
               </Space>
-            </>
-          )}
-          <Collapse ghost></Collapse>
-          <Space>
-            <Button
-              size="large"
-              type="primary"
-              onClick={action !== "sign" ? signMessage : injectedProvider ? signMessage : loadWeb3Modal}
-              disabled={
-                (address !== "0xb010ca9Be09C382A9f31b79493bb232bCC319f01" &&
-                  "0x00de4b13153673bcae2616b67bf822500d325fc3") ||
-                (type === "typedData" && (!typedDataChecks.hash || invalidJson)) ||
-                (action === "verify" && (!ethers.utils.isAddress(manualAddress) || !manualSignature))
-              }
-              loading={signing}
-              style={{ marginTop: 10 }}
-            >
-              {action !== "sign" ? action : injectedProvider ? action : "Connect account to sign"}
-            </Button>
-            {signing && (
-              <Button
-                size="large"
-                onClick={() => {
-                  setSigning(false);
-                }}
-                style={{ marginTop: 10 }}
-              >
-                Cancel
-              </Button>
-            )}
-            <Share
-              url="https://andrewsuzuki.com"
-              style={{ paddingTop: 50 }}
-              options={{ text: "DEFAULT TEXT", size: "large" }}
+              {type === "typedData" && (
+                <>
+                  <h1>Message:</h1>
+                  <Space direction="vertical" style={{ width: "50%" }}>
+                    <Input.TextArea
+                      style={{ fontSize: 18 }}
+                      size="large"
+                      autoSize={{ minRows: 1 }}
+                      value={messageText}
+                      onChange={e => {
+                        setMessageText(e.target.value);
+                      }}
+                    />
+                    {invalidJson && <Alert message="Invalid Json" type="error" />}
+                    {/* typedDataChecks.domain===false&&<Alert message="No domain specified" type="info" /> */}
+                    {typedDataChecks.types === false && <Alert message="Missing types" type="error" />}
+                    {typedDataChecks.message === false && <Alert message="Missing message" type="error" />}
+                    {!invalidJson && !typedDataChecks.hash && (
+                      <Alert message="Invalid EIP-712 input data" type="error" />
+                    )}
+                  </Space>
+                </>
+              )}
+              <Collapse ghost></Collapse>
+              <Space>
+                <Button
+                  size="large"
+                  type="primary"
+                  onClick={action !== "sign" ? signMessage : injectedProvider ? signMessage : loadWeb3Modal}
+                  disabled={
+                    (address !== "0xb010ca9Be09C382A9f31b79493bb232bCC319f01" &&
+                      "0x00de4b13153673bcae2616b67bf822500d325fc3") ||
+                    (type === "typedData" && (!typedDataChecks.hash || invalidJson)) ||
+                    (action === "verify" && (!ethers.utils.isAddress(manualAddress) || !manualSignature))
+                  }
+                  loading={signing}
+                  style={{ marginTop: 10 }}
+                >
+                  {action !== "sign" ? action : injectedProvider ? action : "Connect account to sign"}
+                </Button>
+                {signing && (
+                  <Button
+                    size="large"
+                    onClick={() => {
+                      setSigning(false);
+                    }}
+                    style={{ marginTop: 10 }}
+                  >
+                    Cancel
+                  </Button>
+                )}
+              </Space>
+            </Card>
+          </Col>
+
+          <Col span={12}>
+            <Tweets
+              address={address}
+              mainnetProvider={mainnetProvider}
+              firebaseConfig={firebaseConfig}
+              events={events}
             />
-          </Space>
-        </Card>
+          </Col>
+        </Row>
       ) : (
         <div style={{ margintop: 50 }}>
           <Form
