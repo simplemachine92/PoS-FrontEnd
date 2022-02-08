@@ -11,6 +11,7 @@ import {
   Collapse,
   Select,
   Spin,
+  Form,
   List,
   Pagination,
 } from "antd";
@@ -20,6 +21,7 @@ import { useHistory, useLocation } from "react-router-dom";
 import { useLocalStorage } from "../hooks";
 import { AddressInput, Address } from "../components";
 import { initializeApp } from "firebase/app";
+import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, set, get, child } from "firebase/database";
 
 const { Text } = Typography;
@@ -79,12 +81,45 @@ export default function Signator({
   const [action, setAction] = useState("sign");
   const [manualSignature, setManualSignature] = useState();
   const [manualAddress, setManualAddress] = useState();
+  const [userReady, setUser] = useState();
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
   // Get a reference to the database service
   const database = getDatabase(app);
+
+  const auth = getAuth();
+
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      setUser(uid);
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
+
+  const onFinish = values => {
+    signInWithEmailAndPassword(auth, values.email, values.password)
+      .then(userCredential => {
+        // Signed in
+        const user = userCredential.user;
+      })
+      .catch(error => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+      });
+    console.log("Success:", values);
+  };
+
+  const onFinishFailed = errorInfo => {
+    console.log("Failed:", errorInfo);
+  };
 
   let dbList = [];
 
@@ -117,7 +152,7 @@ export default function Signator({
         name: "GreenPill_Pages",
         version: "0",
         chainId: 4,
-        verifyingContract: "0x0f40dee08808fbb178EE43824988148b33A0d7b8",
+        verifyingContract: contracts.GreenPill_Pages.address,
       },
       message: {
         sender: "0xb010ca9Be09C382A9f31b79493bb232bCC319f01",
@@ -248,7 +283,8 @@ export default function Signator({
         searchParams.set("addresses", manualAddress);
       }
 
-      history.push(`/view?${searchParams.toString()}`);
+      window.location.reload(false);
+      //history.push(`/view?${searchParams.toString()}`);
 
       setSigning(false);
     } catch (e) {
@@ -267,7 +303,7 @@ export default function Signator({
 
   return (
     <div className="container">
-      {address == "0xb010ca9Be09C382A9f31b79493bb232bCC319f01" && list != undefined && list.length > 0 ? (
+      {userReady ? (
         <Card>
           {type === "message" && (
             <Input.TextArea
@@ -280,7 +316,6 @@ export default function Signator({
               }}
             />
           )}
-
           <h1>Signing to:</h1>
           <Space direction="vertical" style={{ width: "50%" }}>
             <div
@@ -335,15 +370,15 @@ export default function Signator({
               </Space>
             </>
           )}
-
           <Collapse ghost></Collapse>
-
           <Space>
             <Button
               size="large"
               type="primary"
               onClick={action !== "sign" ? signMessage : injectedProvider ? signMessage : loadWeb3Modal}
               disabled={
+                (address !== "0xb010ca9Be09C382A9f31b79493bb232bCC319f01" &&
+                  "0x00de4b13153673bcae2616b67bf822500d325fc3") ||
                 (type === "typedData" && (!typedDataChecks.hash || invalidJson)) ||
                 (action === "verify" && (!ethers.utils.isAddress(manualAddress) || !manualSignature))
               }
@@ -367,10 +402,71 @@ export default function Signator({
           </Space>
         </Card>
       ) : (
-        <div>
-          <br />
-          <h1>Pledge list may be empty, or your wallet is not connected</h1> <br />
-          <Spin />
+        <div style={{ margintop: 50 }}>
+          <Form
+            name="basic"
+            labelCol={{
+              span: 8,
+            }}
+            wrapperCol={{
+              span: 8,
+              margintop: 10,
+            }}
+            initialValues={{
+              remember: true,
+            }}
+            onFinish={onFinish}
+            onFinishFailed={onFinishFailed}
+            autoComplete="off"
+          >
+            <Form.Item
+              label="email"
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your username!",
+                },
+              ]}
+            >
+              <Input />
+            </Form.Item>
+
+            <Form.Item
+              label="password"
+              name="password"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your password!",
+                },
+              ]}
+            >
+              <Input.Password />
+            </Form.Item>
+
+            <Form.Item
+              name="remember"
+              valuePropName="checked"
+              wrapperCol={{
+                offset: 8,
+                span: 8,
+              }}
+            >
+              <Checkbox>Remember me</Checkbox>
+            </Form.Item>
+
+            <Form.Item
+              wrapperCol={{
+                offset: 8,
+                span: 8,
+              }}
+            >
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
+            </Form.Item>
+          </Form>
         </div>
       )}
     </div>
