@@ -1,9 +1,6 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { useContractReader } from "eth-hooks";
-import { Form, Button, InputNumber } from "antd";
-import { ethers } from "ethers";
+import { Button, InputNumber } from "antd";
 
 const { utils, BigNumber } = require("ethers");
 
@@ -24,21 +21,16 @@ export const StyledButton = styled(Button)`
  * @param {*} readContracts contracts from current chain already pre-loaded using ethers contract module. More here https://docs.ethers.io/v5/api/contract/contract/
  * @returns react component
  */
-function Home({ yourLocalBalance, readContracts, writeContracts, tx, localProvider, address }) {
+function Home({ writeContracts, tx }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
   const [uValue, setU] = useState("0.0001337");
-  const purpose = useContractReader(readContracts, "YourContract", "purpose");
-
-  const onFinishFailed = errorInfo => {
-    console.log("Failed:", errorInfo);
-  };
 
   return (
     <div>
       <main>
         <br />
-        <h3 class="title">Take the Green Pill, Anon:</h3>
+        <h3 class="title">Take the Green Pill:</h3>
         <h3 class="title">Regenerative CryptoEconomics</h3>
 
         <section className="coordination-hero background-bubble">
