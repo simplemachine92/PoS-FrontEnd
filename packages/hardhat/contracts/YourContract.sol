@@ -47,7 +47,7 @@ contract GreenPill_Pages is ERC721Enumerable, Ownable {
                            EIP-712 STORAGE
     //////////////////////////////////////////////////////////////*/
 
-    address oWocki = 0xDDF369C3bf18b1B12EA295d597B943b955eF4671;
+    address oneder = 0xb010ca9Be09C382A9f31b79493bb232bCC319f01;
 
     uint256 internal immutable INITIAL_CHAIN_ID;
 
@@ -116,7 +116,7 @@ contract GreenPill_Pages is ERC721Enumerable, Ownable {
             abi.encode(
                 AUTOGRAPH_TYPEHASH,
                 // Will be wockis address in live v
-                oWocki,
+                oneder,
                 // Signature will be invalid if it isn't to caller
                 // EIP712: "Addresses are encoded as uint160"
                 uint160(msg.sender),
@@ -133,7 +133,7 @@ contract GreenPill_Pages is ERC721Enumerable, Ownable {
         address signer = ecrecover(hash, v, r, s);
 
         // Will be wockis address in live v
-        require(signer == oWocki, "MyFunction: invalid signature");
+        require(signer == oneder, "MyFunction: invalid signature");
         require(signer != address(0), "ECDSA: invalid signature");
 
         _tokenIds.increment();

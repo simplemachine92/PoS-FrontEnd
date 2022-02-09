@@ -43,7 +43,7 @@ export default function Address(props) {
   let displayAddress = address?.substr(0, 5) + "...";
 
   if (validEnsCheck) {
-    displayAddress = ens;
+    displayAddress = ens.substr(0, 5);
   } else if (props.size === "short") {
     displayAddress += "..." + address.substr(-4);
   } else if (props.size === "long") {

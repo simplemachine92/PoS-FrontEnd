@@ -209,26 +209,21 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
   ];
 
   return (
-    <div
-      style={{
-        width: "200px auto",
-        margin: "10px auto",
-        paddingLeft: 200,
-        paddingRight: 200,
-        paddingBottom: 50,
-      }}
-    >
-      {ready ? (
-        <div style={{ marginTop: 0 }}>
-          <h2>Signed Pledges</h2>
+    <div className="coordination-hero background-bubble" style={{ height: 500, marginTop: 40 }}>
+      <div className="form2">
+        {ready ? (
+          <div style={{}}>
+            <h2>Signed Pledges</h2>
+            <br />
 
-          <Table columns={columns} dataSource={dataSource} />
-        </div>
-      ) : (
-        <div style={{ marginTop: 10 }}>
-          <Spin />
-        </div>
-      )}
+            <Table columns={columns} dataSource={dataSource} />
+          </div>
+        ) : (
+          <div style={{}}>
+            <Spin />
+          </div>
+        )}
+      </div>
     </div>
   );
 }

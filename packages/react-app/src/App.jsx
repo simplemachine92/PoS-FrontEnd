@@ -370,6 +370,7 @@ function App(props) {
             readContracts={readContracts}
             tx={tx}
             localProvider={localProvider}
+            address={address}
           />
         </Route>
         <Route path="/view">
