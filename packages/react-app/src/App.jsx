@@ -382,6 +382,7 @@ function App(props) {
             chainList={chainList}
             writeContracts={writeContracts}
             tx={tx}
+            firebaseConfig={firebaseConfig}
           />
         </Route>
         <Route exact path="/debug">

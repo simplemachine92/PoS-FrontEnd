@@ -141,6 +141,14 @@ h5 {
   line-height: 120%;
 }
 
+a {
+  color: hotpink;
+}
+
+a:hover {
+  color: rgb(191, 107, 247);
+}
+
 .footer-container {
   display: flex;
   flex-direction: column;

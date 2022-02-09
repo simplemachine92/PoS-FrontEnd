@@ -1,12 +1,25 @@
+import styled from "styled-components";
 import { Select, Spin, Space, Table, Input } from "antd";
 import React, { useState, useEffect } from "react";
 import { Address } from "../components";
+
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, get, child } from "firebase/database";
-import { PDFDocument } from "pdf-lib";
+
 import { Link } from "react-router-dom";
 
 const { Option } = Select;
+
+export const StyledTable = styled(Table)`
+  height: 100%;
+
+  border-width: 0px;
+  border-color: #454545;
+  outline: 0;
+  &:hover {
+    color: #454545;
+  }
+`;
 
 export default function Hints({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
@@ -15,80 +28,6 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-
-  async function insertPage(png) {
-    // These should be Uint8Arrays or ArrayBuffers
-    // This data can be obtained in a number of different ways
-    // If your running in a Node environment, you could use fs.readFile()
-    // In the browser, you could make a fetch() call and use res.arrayBuffer()
-    const pngImageBytes = png;
-
-    // url: replace with full pdf URL for final version. This is only the 2nd page..
-    const url = "https://ipfs.io/ipfs/QmYPtjsQ5nAUFbdNeqZUsmmHLCPtdjbX7NMLjjvJFcitJk";
-    const existingPdfBytes = await fetch(url).then(res => res.arrayBuffer());
-
-    // Load a PDFDocument from the existing PDF bytes
-    const pdfDoc = await PDFDocument.load(existingPdfBytes);
-
-    // Create a new PDFDocument
-    //const pdfDoc = await PDFDocument.create();
-
-    // Embed the JPG image bytes and PNG image bytes
-    const pngImage = await pdfDoc.embedPng(pngImageBytes);
-
-    // Get the width/height of the JPG image scaled down to 25% of its original size
-
-    // Get the width/height of the PNG image scaled down to 50% of its original size
-    const pngDims = pngImage.scale(0.4);
-
-    // Add a blank page to the document
-    const page = pdfDoc.getPage(0);
-
-    // Draw the PNG image near the lower right corner of the JPG image
-    page.drawImage(pngImage, {
-      x: page.getWidth() / 2 - pngDims.width / 2,
-      y: page.getHeight() / 2 - pngDims.height / 2,
-      width: pngDims.width,
-      height: pngDims.height,
-    });
-
-    // Serialize the PDFDocument to bytes (a Uint8Array)
-    const pdfBytes = await pdfDoc.save();
-
-    var blob = new Blob([pdfBytes], { type: "application/pdf" });
-    var link = window.URL.createObjectURL(blob);
-
-    return link;
-  }
-
-  /**
-   * converts a base64 encoded data url SVG image to a PNG image
-   * @param originalBase64 data url of svg image
-   * @param width target width in pixel of PNG image
-   * @return {Promise<String>} resolves to png data url of the image
-   */
-  async function base64SvgToBase64Png(originalBase64, width, height) {
-    return new Promise(resolve => {
-      let img = document.createElement("img");
-      img.onload = function () {
-        document.body.appendChild(img);
-        let canvas = document.createElement("canvas");
-        let ratio = img.clientWidth / img.clientHeight || 1;
-        document.body.removeChild(img);
-        canvas.width = width;
-        canvas.height = height;
-        let ctx = canvas.getContext("2d");
-        ctx.drawImage(img, -20, 0, canvas.width, canvas.height);
-        try {
-          let data = canvas.toDataURL("image/png");
-          resolve(data);
-        } catch (e) {
-          resolve(null);
-        }
-      };
-      img.src = originalBase64;
-    });
-  }
 
   let myData = [];
 
@@ -120,14 +59,16 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
             myData.push(message);
             console.log(myData);
           });
-          myData.forEach(async data => {
+          /* myData.forEach(async data => {
+            console.log("my data", myData);
             let b64png = await base64SvgToBase64Png(data.imageData, 762.233, 1016.63);
 
             data.link = await insertPage(b64png);
             console.log(data);
             setReady(true);
-          });
+          }); */
           setData(myData);
+          setReady(true);
         } else {
           console.log("No data available");
         }
@@ -178,7 +119,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
       sorter: (a, b) => a.pledge - b.pledge,
       sortDirections: ["ascend"],
     },
-    {
+    /* {
       title: "Book",
       dataIndex: "link",
       render: record =>
@@ -189,7 +130,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
         ) : (
           <Spin />
         ),
-    },
+    }, */
     {
       title: "Signature",
       dataIndex: "",
@@ -209,14 +150,14 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
   ];
 
   return (
-    <div className="coordination-hero background-bubble" style={{ height: 500, marginTop: 40 }}>
-      <div className="form2">
+    <div className="coordination-hero background-bubble" style={{ height: "auto", width: "auto", marginTop: 40 }}>
+      <div className="">
         {ready ? (
           <div style={{}}>
             <h2>Signed Pledges</h2>
             <br />
 
-            <Table columns={columns} dataSource={dataSource} />
+            <StyledTable columns={columns} dataSource={dataSource} />
           </div>
         ) : (
           <div style={{}}>

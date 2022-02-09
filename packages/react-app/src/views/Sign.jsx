@@ -159,7 +159,7 @@ export default function Signator({
         verifyingContract: contracts.GreenPill_Pages.address,
       },
       message: {
-        sender: "0xDDF369C3bf18b1B12EA295d597B943b955eF4671",
+        sender: "0xb010ca9Be09C382A9f31b79493bb232bCC319f01",
         recipient: `${list[0].args[0]}`,
         pledge: `${pledgeValue}`,
         timestamp: `${Date.now()}`,
