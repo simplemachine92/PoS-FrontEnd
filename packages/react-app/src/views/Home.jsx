@@ -15,56 +15,46 @@ function Home({ yourLocalBalance, readContracts, writeContracts, tx, localProvid
   const purpose = useContractReader(readContracts, "YourContract", "purpose");
 
   return (
-    <body>
+    <div>
       <main>
-        <section class="coordination-hero background-bubble">
-          <div class="hero-container">
-            <div class="coordination-party-hero-description">
-              <h2>GREENPILLED:</h2>
-              <h1>Regenerative CryptoEconomics</h1>
-            </div>
-            <div class="green-pill">
+        <h2>GREENPILLED:</h2>
+        <h2>Regen CryptoEconomics</h2>
+        <section className="coordination-hero background-bubble">
+          <div className="hero-container">
+            <div className="green-pill">
               <img src="image/greenpill-socialimage.svg" />
             </div>
           </div>
         </section>
       </main>
-      <footer class="footer-container background-greenpill">
-        <section class="green-pill-form-section">
+      <footer className="footer-container background-greenpill">
+        <section className="green-pill-form-section">
           <div>
-            <h1>Make a Pledge:</h1>
-            <form class="form">
-              <label for="percentage">I've been GreenPilled! </label>
-              <label for="percentage">I Pledge</label>
-              <input type="text" id="percentage" name="percentage" placeholder="25%" value="25%" />
-              <label for="percentage">of my Wealth Above </label>
-              <input type="text" id="amount" name="amount" placeholder="$10mm" value="$10mm" />
-              <label for="cause">to the cause of</label>
+            <h2>Make a Pledge:</h2>
+            <h1>Receive a digitally signed copy of Green Pill</h1>
+            <h1>by pledging at least 0.01337 ETH to Public Goods</h1>
+            <br />
+            <form className="form">
+              <label htmlFor="percentage">I Pledge</label>
+              <input type="text" id="percentage" name="percentage" placeholder="25%" defaultValue="25%" />
+              <label htmlFor="percentage">of my Wealth Above </label>
+              <input type="number" min="0.01337" id="amount" name="amount" defaultValue="0.01337" step="0.1" />
+              <label htmlFor="cause">to the cause of</label>
               <input
                 type="text"
                 id="cause"
                 name="cause"
                 placeholder="Public Goods Funding"
-                value="Public Goods Funding"
+                defaultValue="Public Goods Funding"
               />
-
-              <div class="buttons-green-pill">
+              <div className="buttons-green-pill">
                 <button type="button">
                   <img src="image/arrow-green-pill.svg" alt="arrow" />
                   <a href="javascript:alert('This is a simple tool created by the Gitcoin community to facilitate pledges to support a more Solarpunk world.');">
                     What’s this?
                   </a>
                 </button>
-
-                <button
-                  id="target"
-                  type="button"
-                  data-kinetics-attraction=""
-                  data-kinetics-attraction-chance=".99"
-                  data-kinetics-attraction-grow="20"
-                  data-kinetics-attraction-type="drone"
-                  data-kinetics-attraction-radius="1.7"
-                >
+                <button id="target" type="button">
                   <img src="image/tweet-icon.svg" alt="tweet" />
                   <p>Tweet</p>
                 </button>
@@ -72,14 +62,16 @@ function Home({ yourLocalBalance, readContracts, writeContracts, tx, localProvid
             </form>
           </div>
         </section>
-        <div class="gitcoin-brand">
+        <div className="gitcoin-brand">
           <a href="https://gitcoindao.com">
             <img src="/image/gitcoindao_sign.svg" alt="gitcoinDAO" />
-          </a>{" "}
+          </a>
+          {""}
+          {""}
           &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; <a href="https://t.me/+g9TM8i7GpxAzMGUx">Join the Telegram</a>
         </div>
       </footer>
-    </body>
+    </div>
   );
 }
 

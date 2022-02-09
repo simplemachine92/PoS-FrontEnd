@@ -40,7 +40,7 @@ export default function Address(props) {
   const ensSplit = ens && ens.split(".");
   const validEnsCheck = ensSplit && ensSplit[ensSplit.length - 1] === "eth";
   const etherscanLink = blockExplorerLink(address, props.blockExplorer);
-  let displayAddress = address?.substr(0, 5) + "..." + address?.substr(-4);
+  let displayAddress = address?.substr(0, 5) + "...";
 
   if (validEnsCheck) {
     displayAddress = ens;
@@ -91,7 +91,7 @@ export default function Address(props) {
             </a>
           </Text>
         ) : (
-          <Text copyable={{ text: address }}>
+          <Text>
             <a
               style={{ color: currentTheme === "light" ? "#222222" : "#ddd" }}
               target="_blank"

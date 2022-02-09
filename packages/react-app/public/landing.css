@@ -68,11 +68,10 @@ main {
 }
 
 .hero-container {
-  width: 100%;
+  width: 99.2%;
   display: flex;
   align-items: center;
   margin-top: 0px;
-  margin-bottom: 188px;
 }
 
 h1 {
@@ -113,6 +112,7 @@ h2 {
 
   padding-top: 154px;
   padding-bottom: 154px;
+  padding-right: 35px;
   justify-content: center;
   align-items: center;
 }
