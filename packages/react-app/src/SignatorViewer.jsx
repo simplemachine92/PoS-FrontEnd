@@ -26,8 +26,8 @@ import { getDatabase, ref, onValue, get, child } from "firebase/database";
 import styled from "styled-components";
 import { PDFDocument } from "pdf-lib";
 import { useHistory, useLocation } from "react-router-dom";
+import { create, urlSource } from "ipfs-http-client";
 import { Address } from "./components";
-import { set } from "store";
 
 const codec = require("json-url")("lzw");
 
@@ -35,6 +35,18 @@ const { Text } = Typography;
 /*
     Welcome to the Signator Viewer!
 */
+
+const auth =
+  "Basic " + Buffer.from("24yc2yN47pWEYp2zgXxC60wNzO2" + ":" + "112e132550e4bbf77c70ebd817eb3c10").toString("base64");
+
+const ipfs = create({
+  host: "https://ipfs.infura.io",
+  port: 5001,
+  protocol: "https",
+  headers: {
+    authorization: auth,
+  },
+});
 
 export const StyledButton = styled(Button)`
   height: 100%;
@@ -114,6 +126,7 @@ function SignatorViewer({
   const [compressedTypedData] = useState(searchParams.get("typedData"));
   const [ready, setReady] = useState(false);
   const [sData, setData] = useState();
+  const [pblob, setBlob] = useState();
   const [sigLink, setLink] = useState();
   const [dataImage, setImage] = useState();
   const [typedData, setTypedData] = useState();
@@ -141,6 +154,35 @@ function SignatorViewer({
     console.log(searchParams.get("message"), searchParams.get("typedData"));
     history.push(`/`);
   }
+
+  const openInNewTab = url => {
+    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    if (newWindow) newWindow.opener = null;
+  };
+
+  const onClickUrl = url => {
+    return () => openInNewTab(url);
+  };
+
+  const clickUpload = async () => {
+    console.log("file data", sData);
+    //upload here
+
+    let ipfile = {
+      // The contents of the file (see below for definition)
+      content: pblob,
+    };
+
+    //const url = "https://ipfs.infura.io";
+    //const ipfs = create({ url });
+
+    const file = await ipfs.add(ipfile);
+    console.log("file", file);
+  };
+
+  const onClickBook = async url => {
+    return () => openInNewTab(url);
+  };
 
   async function insertPage(png) {
     // These should be Uint8Arrays or ArrayBuffers
@@ -182,6 +224,7 @@ function SignatorViewer({
     const pdfBytes = await pdfDoc.save();
 
     var blob = new Blob([pdfBytes], { type: "application/pdf" });
+    setBlob(blob);
     var link = window.URL.createObjectURL(blob);
 
     return link;
@@ -261,6 +304,8 @@ function SignatorViewer({
                 //for (let x = 0; x < myData.length; x++)
                 if (data.recipient == newData.message.recipient) {
                   let b64png = await base64SvgToBase64Png(data.imageData, 762.233, 1016.63);
+
+                  //let svgBlob = new Blob([svgBoiler], { type: "image/svg+xml" });
 
                   data.link = await insertPage(b64png);
                   console.log("link", data.link);
@@ -422,14 +467,48 @@ function SignatorViewer({
           {sigLink != undefined && dataImage != undefined ? (
             <div>
               <Image preview={false} width={200} src={dataImage} />
+              <br />
+              <Space direction="vertical" style={{ width: "auto" }}></Space>
+              <StyledButton
+                style={{ padding: "4px 15px", marginRight: 20 }}
+                type="primary"
+                onClick={async () => {
+                  try {
+                    console.log("pledge", typedData);
+                    console.log("link", sigLink);
+                    const txCur = await tx(
+                      writeContracts.GreenPill_Pages.mintIfSigned(
+                        signatures[0],
+                        typedData.message.pledge,
+                        typedData.message.timestamp,
+                        typedData.message.msg,
+                      ),
+                    );
+                    await txCur.wait();
+                  } catch (e) {
+                    console.log("mint failed", e);
+                  }
+                }}
+              >
+                Mint
+              </StyledButton>
+              <StyledButton style={{ padding: "4px 15px" }} type="primary" onClick={onClickUrl(sigLink)}>
+                View Book
+              </StyledButton>
+              <StyledButton style={{ padding: "4px 15px", marginLeft: 20 }} type="primary" onClick={clickUpload}>
+                Upload to IPFS
+              </StyledButton>
             </div>
           ) : (
-            <Spin />
+            <div>
+              Loading your page... this may take a moment
+              <br />
+              <Spin />
+            </div>
           )}
           <Space direction="vertical" style={{ width: "auto" }}></Space>
 
           <Collapse ghost></Collapse>
-          <Space></Space>
         </Card>
       </div>
       <Modal title="Scan Signatorio" visible={qrModalVisible} onOk={closeModal} onCancel={closeModal}>
@@ -443,144 +522,87 @@ function SignatorViewer({
         />
       </Modal>
       <div className="container">
-        <Card>
-          <Card
-            className="card-border"
-            title={
-              <Row justify="center" align="middle">
-                {typedData != undefined ? (
-                  <div>
-                    <StyledButton
-                      style={{ padding: "4px 15px", marginRight: 20 }}
-                      type="primary"
-                      onClick={async () => {
-                        try {
-                          console.log("pledge", typedData);
-                          console.log("link", sigLink);
-                          const txCur = await tx(
-                            writeContracts.GreenPill_Pages.mintIfSigned(
-                              signatures[0],
-                              typedData.message.pledge,
-                              typedData.message.timestamp,
-                              typedData.message.msg,
-                            ),
-                          );
-                          await txCur.wait();
-                        } catch (e) {
-                          console.log("mint failed", e);
-                        }
-                      }}
-                    >
-                      Mint
-                    </StyledButton>
-                    <StyledButton
-                      style={{ padding: "4px 15px" }}
-                      type="primary"
-                      onClick={async () => {
-                        try {
-                          console.log("pledge", typedData);
-                          const txCur = await tx(
-                            writeContracts.GreenPill_Pages.mintIfSigned(
-                              signatures[0],
-                              typedData.message.pledge,
-                              typedData.message.timestamp,
-                              typedData.message.msg,
-                            ),
-                          );
-                          await txCur.wait();
-                        } catch (e) {
-                          console.log("mint failed", e);
-                        }
-                      }}
-                    >
-                      View Book
-                    </StyledButton>
-                  </div>
-                ) : null}
-              </Row>
-            }
-          >
-            {message ? (
-              <Text style={{ fontSize: 18, marginBottom: "0px" }}>{`${message}`}</Text>
-            ) : (
-              <div style={{ textAlign: "left" }}>
-                <Input.TextArea
-                  size="large"
-                  autoSize={{ minRows: 2 }}
-                  value={typedData && JSON.stringify(showAll === true ? typedData : typedData.message, null, "\t")}
-                  style={{ marginBottom: 10 }}
+        <Card className="card-border">
+          {message ? (
+            <Text style={{ fontSize: 18, marginBottom: "0px" }}>{`${message}`}</Text>
+          ) : (
+            <div style={{ textAlign: "left" }}>
+              <Input.TextArea
+                size="large"
+                autoSize={{ minRows: 2 }}
+                value={typedData && JSON.stringify(showAll === true ? typedData : typedData.message, null, "\t")}
+                style={{ marginBottom: 10 }}
+              />
+              <Space>
+                <Popover
+                  content={
+                    <Space direction="vertical">
+                      <Typography>Domain:</Typography>
+                      <Input.TextArea
+                        size="large"
+                        autoSize={{ minRows: 2 }}
+                        value={typedData && JSON.stringify(typedData.domain, null, "\t")}
+                      />
+                      {typedData &&
+                        typedData.domain &&
+                        typedData.domain.chainId &&
+                        chainList &&
+                        chainList.length > 0 && (
+                          <Text code>
+                            {chainList.find(element => element.chainId === typedData.domain.chainId).name}
+                          </Text>
+                        )}
+                    </Space>
+                  }
+                >
+                  <StyledButton size="small" shape="circle" icon={<InfoOutlined />} />
+                </Popover>
+                <Switch
+                  checkedChildren="all"
+                  unCheckedChildren="msg"
+                  onChange={checked => {
+                    setShowAll(checked);
+                  }}
                 />
-                <Space>
-                  <Popover
-                    content={
-                      <Space direction="vertical">
-                        <Typography>Domain:</Typography>
-                        <Input.TextArea
-                          size="large"
-                          autoSize={{ minRows: 2 }}
-                          value={typedData && JSON.stringify(typedData.domain, null, "\t")}
-                        />
-                        {typedData &&
-                          typedData.domain &&
-                          typedData.domain.chainId &&
-                          chainList &&
-                          chainList.length > 0 && (
-                            <Text code>
-                              {chainList.find(element => element.chainId === typedData.domain.chainId).name}
-                            </Text>
-                          )}
-                      </Space>
-                    }
-                  >
-                    <StyledButton size="small" shape="circle" icon={<InfoOutlined />} />
-                  </Popover>
-                  <Switch
-                    checkedChildren="all"
-                    unCheckedChildren="msg"
-                    onChange={checked => {
-                      setShowAll(checked);
-                    }}
-                  />
-                </Space>
-              </div>
-            )}
-          </Card>
+              </Space>
+            </div>
+          )}
+        </Card>
 
-          <List
-            header={<Text style={{ fontSize: 18 }}>Signatures</Text>}
-            bordered
-            locale={{ emptyText: "No signatures" }}
-            dataSource={signatures}
-            renderItem={(item, index) => {
-              let _indicator;
-              if (addressChecks[index] === "MATCH") {
-                _indicator = <CheckCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#52c41a" />;
-              } else if (addressChecks[index] === "MISMATCH") {
-                _indicator = <CloseCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#ff4d4f" />;
-              } else {
-                _indicator = <Alert message="Invalid" type="error" />;
-              }
+        <List
+          header={<Text style={{ fontSize: 18 }}>Signatures</Text>}
+          bordered
+          locale={{ emptyText: "No signatures" }}
+          dataSource={signatures}
+          renderItem={(item, index) => {
+            let _indicator;
+            if (addressChecks[index] === "MATCH") {
+              _indicator = <CheckCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#52c41a" />;
+            } else if (addressChecks[index] === "MISMATCH") {
+              _indicator = <CloseCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#ff4d4f" />;
+            } else {
+              _indicator = <Alert message="Invalid" type="error" />;
+            }
 
-              return (
-                <List.Item key={item} style={{ display: "block" }}>
-                  <div>
-                    <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      {addresses[index] && ethers.utils.isAddress(addresses[index]) && (
-                        <Address address={addresses[index]} ensProvider={mainnetProvider} fontSize={24} />
-                      )}
-                      <div style={{ marginLeft: 10 }}>
-                        <Tooltip title={addressChecks[index]}>{_indicator}</Tooltip>
-                      </div>
-                    </div>
-                    <div style={{ marginTop: 10 }}>
-                      <Text copyable>{`${item}`}</Text>
+            return (
+              <List.Item key={item} style={{ display: "block" }}>
+                <div>
+                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
+                    {addresses[index] && ethers.utils.isAddress(addresses[index]) && (
+                      <Address address={addresses[index]} ensProvider={mainnetProvider} fontSize={24} />
+                    )}
+                    <div style={{ marginLeft: 10 }}>
+                      <Tooltip title={addressChecks[index]}>{_indicator}</Tooltip>
                     </div>
                   </div>
-                </List.Item>
-              );
-            }}
-          />
-        </Card>
+                  <div style={{ marginTop: 10 }}>
+                    <Text copyable>{`${item}`}</Text>
+                  </div>
+                </div>
+              </List.Item>
+            );
+          }}
+        />
       </div>
     </>
   );

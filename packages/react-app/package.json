@@ -41,6 +41,7 @@
     "fortmatic": "^2.2.1",
     "graphiql": "^1.4.7",
     "graphql": "^15.3.0",
+    "ipfs-http-client": "^56.0.1",
     "isomorphic-fetch": "^3.0.0",
     "json-url": "^3.0.0",
     "node-watch": "^0.7.1",
