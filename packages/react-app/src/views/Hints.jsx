@@ -31,6 +31,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
 
   let myData = [];
 
+  // We'll need a separate db for vitaliks signings - dont forget
   useEffect(async () => {
     const dbRef = ref(getDatabase(app));
     get(child(dbRef, `gp/`))
@@ -150,7 +151,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
   ];
 
   return (
-    <div className="coordination-hero background-bubble" style={{ height: "auto", width: "auto", marginTop: 40 }}>
+    <div className="replace later" style={{ height: "auto", width: "auto", marginTop: 40 }}>
       <div className="">
         {ready ? (
           <div style={{}}>
