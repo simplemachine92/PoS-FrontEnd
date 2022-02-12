@@ -14,11 +14,11 @@ html {
 }
 
 body {
-  font-family: "Abel", sans-serif;
+  font-family: Space Mono;
   max-width: 1600px;
   margin: auto;
-  background-color: #ffff;
-  color: #0e0333;
+  background-color: #2bcfd9;
+  color: #207191;
 }
 
 @media (min-width: 1313px) {
@@ -63,7 +63,7 @@ img {
 }
 
 main {
-  max-width: 2000px;
+  max-width: 1400px;
   margin: auto;
 }
 
@@ -72,6 +72,25 @@ main {
   display: flex;
   align-items: center;
   margin-top: 0px;
+  position: relative;
+  max-width: 1400px;
+}
+
+.hero-container .btn {
+  position: absolute;
+  margin: auto;
+  top: 52%;
+  left: 75.9%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #ffe171;
+  color: #207191;
+  font-size: 2vw;
+  padding: 1vw 6vw;
+  border: none;
+  cursor: pointer;
+
+  text-align: center;
 }
 
 h1 {
@@ -100,11 +119,13 @@ h3 {
 }
 
 h4 {
-  font-size: 50px;
+  font-size: 30px;
+  padding-left: 50px;
+  padding-right: 50px;
   text-align: center;
   margin: 0px;
-  font-size: 4vw;
-  color: #0e0333;
+  font-size: 3vw;
+  color: #207191;
   text-align: center;
   text-justify: center;
   margin-top: 4px;
@@ -112,11 +133,11 @@ h4 {
 }
 
 h5 {
-  font-size: 50px;
+  font-size: 30px;
   text-align: center;
   margin: 0px;
   font-size: 8vw;
-  color: #0e0333;
+  color: #ffe171;
   text-align: center;
   text-justify: center;
   margin-top: 4px;
@@ -146,12 +167,18 @@ a {
 }
 
 a:hover {
-  color: rgb(191, 107, 247);
+  color: #ffe171;
 }
 
 .footer-container {
   display: flex;
   flex-direction: column;
+}
+
+.pledge-container {
+  position: relative;
+  top: -25vw;
+  z-index: 1;
 }
 
 .gitcoin-brand {
@@ -160,6 +187,7 @@ a:hover {
   padding-top: 70px;
   padding-bottom: 154px;
   padding-right: 35px;
+  padding-left: 35px;
   justify-content: center;
   align-items: center;
 }
@@ -206,15 +234,16 @@ a:hover {
 .form input {
   width: 100%;
   height: 80px;
-  background: #e6fff9;
-  border: 1px solid #02e2ac;
+  background: #31dbe5;
+
+  border: 1px solid #207191;
   border-radius: 8px;
   outline: none;
   text-align: center;
   font-size: 30px;
   font-size: 4vw;
   font-family: Space Mono, sans-serif;
-  color: #02e2ac;
+  color: #ffffff;
 }
 
 hover {
@@ -304,7 +333,15 @@ hover {
 
 /* GreenPill */
 .background-bubble {
+  max-width: 1400px auto;
   background-image: url(../image/background-top-bubble.svg);
+  background-color: #2bcfd9;
+}
+
+.background-pledge {
+  max-width: 1400px auto;
+  background-image: url(../image/reee.svg);
+  background-color: #2bcfd9;
 }
 
 .background-greenpill {

@@ -66,23 +66,26 @@ export default function Address(props) {
           target="_blank"
           href={etherscanLink}
           rel="noopener noreferrer"
-        >
-          <Blockies seed={address.toLowerCase()} size={8} scale={2} />
-        </a>
+        ></a>
       </span>
     );
   }
 
   return (
     <span>
-      <span style={{ verticalAlign: "middle" }}>
-        <Blockies seed={address.toLowerCase()} size={4} scale={props.fontSize ? props.fontSize / 7 : 4} />
-      </span>
-      <span style={{ verticalAlign: "middle", paddingLeft: 5, fontSize: props.fontSize ? props.fontSize : 28 }}>
+      <span style={{ verticalAlign: "middle" }}></span>
+      <span
+        style={{
+          verticalAlign: "middle",
+          paddingLeft: 5,
+          fontSize: props.fontSize ? props.fontSize : 18,
+          color: "#207191",
+        }}
+      >
         {props.onChange ? (
           <Text editable={{ onChange: props.onChange }} copyable={{ text: address }}>
             <a
-              style={{ color: currentTheme === "light" ? "#222222" : "#ddd" }}
+              style={{ color: currentTheme === "light" ? "#207191" : "#207191" }}
               target="_blank"
               href={etherscanLink}
               rel="noopener noreferrer"
@@ -93,7 +96,7 @@ export default function Address(props) {
         ) : (
           <Text>
             <a
-              style={{ color: currentTheme === "light" ? "#222222" : "#ddd" }}
+              style={{ color: currentTheme === "light" ? "#207191" : "#207191" }}
               target="_blank"
               href={etherscanLink}
               rel="noopener noreferrer"

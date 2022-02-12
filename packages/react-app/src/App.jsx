@@ -32,9 +32,21 @@ import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, ExampleUI, Hints, Subgraph, Sign } from "./views";
+import { Home, ExampleUI, Hints, Subgraph, Sign, Pledge } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import SignatorViewer from "./SignatorViewer";
+import styled from "styled-components";
+
+export const StyledMenu = styled(Menu)`
+  height: 100%;
+  background: #7ee6cd;
+  border-width: 0px;
+  &:hover {
+    color: #454545;
+    background: #7ee6cd;
+    border-color: red;
+  }
+`;
 
 const { ethers } = require("ethers");
 /*
@@ -273,21 +285,12 @@ function App(props) {
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
       <Affix>
-        <NetworkDisplay
-          NETWORKCHECK={NETWORKCHECK}
-          localChainId={localChainId}
-          selectedChainId={selectedChainId}
-          targetNetwork={targetNetwork}
-          logoutOfWeb3Modal={logoutOfWeb3Modal}
-          USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
-        />
-
-        <Menu style={{ textAlign: "left" }} selectedKeys={[location.pathname]} mode="horizontal">
+        <StyledMenu style={{ textAlign: "left" }} selectedKeys={[location.pathname]} mode="horizontal">
           <Menu.Item
             icon={
               <HomeOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
                 theme="outlined"
               />
             }
@@ -299,7 +302,7 @@ function App(props) {
             icon={
               <UserOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
                 theme="outlined"
               />
             }
@@ -311,7 +314,7 @@ function App(props) {
             icon={
               <BugOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
                 theme="outlined"
               />
             }
@@ -323,7 +326,7 @@ function App(props) {
             icon={
               <ReadOutlined
                 type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
                 theme="outlined"
               />
             }
@@ -331,7 +334,7 @@ function App(props) {
           >
             <Link to="/exampleui"></Link>
           </Menu.Item> */}
-        </Menu>
+        </StyledMenu>
         <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
           <div style={{ display: "flex", flex: 1, alignItems: "center" }}>
             {USE_NETWORK_SELECTOR && (
@@ -383,6 +386,16 @@ function App(props) {
             writeContracts={writeContracts}
             tx={tx}
             firebaseConfig={firebaseConfig}
+          />
+        </Route>
+        <Route path="/pledge">
+          <Pledge
+            yourLocalBalance={yourLocalBalance}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            tx={tx}
+            localProvider={localProvider}
+            address={address}
           />
         </Route>
         <Route exact path="/debug">

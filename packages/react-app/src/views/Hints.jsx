@@ -5,15 +5,19 @@ import { Address } from "../components";
 
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, get, child } from "firebase/database";
+import { Footer, Quotes, AboutTheBook, GitcoinBar } from "../components";
 
 import { Link } from "react-router-dom";
 
 const { Option } = Select;
 
 export const StyledTable = styled(Table)`
-  height: 100%;
+  height: 80%;
+  width: 80%;
+  margin: auto;
+  color: #454545;
 
-  border-width: 0px;
+  border-width: 1px;
   border-color: #454545;
   outline: 0;
   &:hover {
@@ -151,17 +155,21 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
   ];
 
   return (
-    <div className="replace later" style={{ height: "auto", width: "auto", marginTop: 40 }}>
+    <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
+      <div className="container px-5 mx-auto mt-10">
+        <img alt="discord" className="mb-8 -mt-2 object-center inline-block" src="assets/Gitcoinbar.svg" />
+      </div>
       <div className="">
         {ready ? (
-          <div style={{}}>
-            <h2>Signed Pledges</h2>
+          <div>
+            <br />
+            <h4>Signed Pledges</h4>
             <br />
 
             <StyledTable columns={columns} dataSource={dataSource} />
           </div>
         ) : (
-          <div style={{}}>
+          <div>
             <Spin />
           </div>
         )}
