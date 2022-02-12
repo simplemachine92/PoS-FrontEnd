@@ -26,7 +26,11 @@ function Home({ writeContracts, tx }) {
   // in this case, let's keep track of 'purpose' variable from our contract
   const [uValue, setU] = useState("0.0001337");
 
-  return <div></div>;
+  {
+    /* <section className="coordination-hero background-bubble"> */
+  }
+
+  return <div className="pledge"></div>;
 }
 
 export default Home;
