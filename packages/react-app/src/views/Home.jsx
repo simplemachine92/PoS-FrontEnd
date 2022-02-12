@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { Button, InputNumber } from "antd";
+import { Footer, Quotes, AboutTheBook, GitcoinBar } from "../components";
 
 const { utils, BigNumber } = require("ethers");
 
@@ -26,7 +27,14 @@ function Home({ writeContracts, tx }) {
   // in this case, let's keep track of 'purpose' variable from our contract
   const [uValue, setU] = useState("0.0001337");
 
-  return <div></div>;
+  return (
+    <>
+      <GitcoinBar />
+      <AboutTheBook />
+      <Quotes />
+      <Footer />
+    </>
+  );
 }
 
 export default Home;

@@ -21,3 +21,8 @@ export { default as L2Bridge } from "./L2Bridge";
 export { default as NetworkDisplay } from "./NetworkDisplay";
 export { default as FaucetHint } from "./FaucetHint";
 export { default as NetworkSwitch } from "./NetworkSwitch";
+export { default as Footer } from "./Footer";
+export { default as Socials } from "./Socials";
+export { default as Quotes } from "./Quotes";
+export { default as AboutTheBook } from "./AboutTheBook";
+export { default as GitcoinBar } from "./GitcoinBar";
