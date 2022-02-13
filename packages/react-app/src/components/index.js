@@ -26,3 +26,4 @@ export { default as Socials } from "./Socials";
 export { default as Quotes } from "./Quotes";
 export { default as AboutTheBook } from "./AboutTheBook";
 export { default as GitcoinBar } from "./GitcoinBar";
+export { default as IntroHeader } from "./IntroHeader";
