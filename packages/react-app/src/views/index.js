@@ -4,3 +4,4 @@ export { default as Hints } from "./Hints";
 export { default as Subgraph } from "./Subgraph";
 export { default as Sign } from "./Sign";
 export { default as Tweets } from "./Tweets";
+export { default as Pledge } from "./Pledge";
