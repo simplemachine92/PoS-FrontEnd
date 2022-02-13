@@ -10,7 +10,14 @@ import {
 } from "eth-hooks";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import React, { useCallback, useEffect, useState } from "react";
-import { HomeOutlined, BugOutlined, QuestionCircleOutlined, ReadOutlined, UserOutlined } from "@ant-design/icons";
+import {
+  HomeOutlined,
+  BugOutlined,
+  QuestionCircleOutlined,
+  ReadOutlined,
+  UserOutlined,
+  BookOutlined,
+} from "@ant-design/icons";
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
@@ -297,6 +304,18 @@ function App(props) {
             key="/"
           >
             <Link to="/"></Link>
+          </Menu.Item>
+          <Menu.Item
+            icon={
+              <BookOutlined
+                type="message"
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
+                theme="outlined"
+              />
+            }
+            key="/pledge"
+          >
+            <Link to="/pledge"></Link>
           </Menu.Item>
           <Menu.Item
             icon={

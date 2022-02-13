@@ -4,16 +4,17 @@ import { Socials } from ".";
 
 export default function Footer() {
   return (
-    <div className="container mx-auto bg-green-skyblue">
+    <div className="container mx-auto mt-20">
       <Socials />
-      <Divider />
-      <div>
+      <Divider style={{ backgroundColor: "black" }} />
+
+      <div className="text-3xl font-spacemono">
         <img
           alt="discord"
-          className="h-30 w-50 mb-8 object-center inline-block"
+          className="h-30 w-50 mb-8 object-center inline-block align-middle"
           src="assets/socialmedia/built_by_gitcoin_community.svg"
         />{" "}
-        | <a>Join the Telegram</a>
+        <span className="align-middle">| Join the Telegram</span>
       </div>
     </div>
   );
