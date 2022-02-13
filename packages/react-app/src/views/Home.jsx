@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { Button, InputNumber } from "antd";
-import { Footer, Quotes, AboutTheBook, GitcoinBar } from "../components";
+import { Footer, Quotes, AboutTheBook, GitcoinBar, IntroHeader } from "../components";
 
 const { utils, BigNumber } = require("ethers");
 
@@ -29,12 +29,16 @@ function Home({ writeContracts, tx }) {
 
   return (
     <>
+      <IntroHeader />
       <GitcoinBar />
       <AboutTheBook />
       <Quotes />
       <Footer />
     </>
   );
+
+  //<section className="coordination-hero background-bubble">
+  // return <div className="pledge"></div>;
 }
 
 export default Home;

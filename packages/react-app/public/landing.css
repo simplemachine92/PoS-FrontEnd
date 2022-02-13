@@ -58,8 +58,8 @@ a {
 
 img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  object-fit: contain;
 }
 
 main {
@@ -120,11 +120,9 @@ h3 {
 
 h4 {
   font-size: 30px;
-  padding-left: 50px;
-  padding-right: 50px;
   text-align: center;
   margin: 0px;
-  font-size: 3vw;
+  font-size: 4vw;
   color: #207191;
   text-align: center;
   text-justify: center;
@@ -171,8 +169,9 @@ a:hover {
 }
 
 .footer-container {
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  top: -25vw;
+  z-index: 1;
 }
 
 .pledge-container {
@@ -333,12 +332,6 @@ hover {
 
 /* GreenPill */
 .background-bubble {
-  max-width: 1400px auto;
-  background-image: url(../image/background-top-bubble.svg);
-  background-color: #2bcfd9;
-}
-
-.background-pledge {
   max-width: 1400px auto;
   background-image: url(../image/reee.svg);
   background-color: #2bcfd9;
