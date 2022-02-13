@@ -21,7 +21,7 @@ export const StyledButton = styled(Button)`
  * @param {*} readContracts contracts from current chain already pre-loaded using ethers contract module. More here https://docs.ethers.io/v5/api/contract/contract/
  * @returns react component
  */
-function Pledge({ writeContracts, tx }) {
+function Order({ writeContracts, tx }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
   const [uValue, setU] = useState("0.0001337");
@@ -34,7 +34,7 @@ function Pledge({ writeContracts, tx }) {
 
         <div className="hero-container">
           <img src="image/reee.svg" />
-          <button class="btn">Pre-order</button>
+          <button class="btn">Boulder Book Store</button>
         </div>
 
         <footer className="pledge-container background-greenpill">
@@ -47,10 +47,10 @@ function Pledge({ writeContracts, tx }) {
 
               <h4>Simply pledge at least 0.01337 ETH to Public Goods to be added to the signing list</h4>
               <br />
-
+              <br />
               <InputNumber
                 className="form"
-                style={{ width: "80%", margin: "auto" }}
+                style={{ width: "90%", margin: "auto" }}
                 bordered={false}
                 controls={false}
                 onChange={e => {
@@ -69,22 +69,25 @@ function Pledge({ writeContracts, tx }) {
                   }
                 }}
               />
-
-              <StyledButton
-                type="buttons-green-pill"
-                className=""
-                style={{ marginTop: 40, width: "30%" }}
-                onClick={async () => {
-                  try {
-                    const txCur = await tx(writeContracts.GreenPill_Pages.pledge({ value: utils.parseEther(uValue) }));
-                    await txCur.wait();
-                  } catch {
-                    console.log("button pledge failed");
-                  }
-                }}
-              >
-                Submit
-              </StyledButton>
+              <div className="form2">
+                <StyledButton
+                  type="buttons-green-pill"
+                  className=""
+                  style={{ marginTop: 40, width: "30%" }}
+                  onClick={async () => {
+                    try {
+                      const txCur = await tx(
+                        writeContracts.GreenPill_Pages.pledge({ value: utils.parseEther(uValue) }),
+                      );
+                      await txCur.wait();
+                    } catch {
+                      console.log("button pledge failed");
+                    }
+                  }}
+                >
+                  Submit
+                </StyledButton>
+              </div>
             </div>
           </section>
 
@@ -102,4 +105,4 @@ function Pledge({ writeContracts, tx }) {
   );
 }
 
-export default Pledge;
+export default Order;

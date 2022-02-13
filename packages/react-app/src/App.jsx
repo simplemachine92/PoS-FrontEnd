@@ -32,7 +32,7 @@ import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, ExampleUI, Hints, Subgraph, Sign, Pledge } from "./views";
+import { Home, ExampleUI, Hints, Subgraph, Sign, Pledge, Order } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
@@ -390,6 +390,16 @@ function App(props) {
         </Route>
         <Route path="/pledge">
           <Pledge
+            yourLocalBalance={yourLocalBalance}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            tx={tx}
+            localProvider={localProvider}
+            address={address}
+          />
+        </Route>
+        <Route path="/order">
+          <Order
             yourLocalBalance={yourLocalBalance}
             writeContracts={writeContracts}
             readContracts={readContracts}
