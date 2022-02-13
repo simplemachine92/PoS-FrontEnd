@@ -1,7 +1,6 @@
 const colors = require("tailwindcss/colors");
 
 module.exports = {
-  mode: "jit",
   purge: {
     content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
     options: {},
@@ -32,6 +31,9 @@ module.exports = {
         red: {
           bloodred: "#ea1e5047",
           soldout: "#EB1E50",
+        },
+        yellow: {
+          pos: "#FFE171",
         },
       },
     },
