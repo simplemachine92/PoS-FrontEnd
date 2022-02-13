@@ -36,6 +36,9 @@ function Home({ writeContracts, tx }) {
       <Footer />
     </>
   );
+
+  //<section className="coordination-hero background-bubble">
+  // return <div className="pledge"></div>;
 }
 
 export default Home;

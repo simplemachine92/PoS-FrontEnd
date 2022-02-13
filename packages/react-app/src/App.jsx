@@ -376,6 +376,16 @@ function App(props) {
             address={address}
           />
         </Route>
+        <Route path="/pledge">
+          <Pledge
+            yourLocalBalance={yourLocalBalance}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            tx={tx}
+            localProvider={localProvider}
+            address={address}
+          />
+        </Route>
         <Route path="/view">
           <SignatorViewer
             mainnetProvider={mainnetProvider}

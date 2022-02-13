@@ -37,15 +37,14 @@ function Pledge({ writeContracts, tx }) {
           <button class="btn">Pre-order</button>
         </div>
 
-        <footer className="pledge-container background-greenpill">
+        <footer className="footer-container background-greenpill">
           <section className="green-pill-form-section">
             <div>
               <h5>Make a Pledge</h5>
               <br />
-              <h4>Receive your Page signed by Vitalik now, and a signed digital copy upon release in September</h4>
+              <h4>Receive a digitally signed page!</h4>
               <br />
-
-              <h4>Simply pledge at least 0.01337 ETH to Public Goods to be added to the signing list</h4>
+              <h4>pledge at least 0.01337 ETH to Public Goods</h4>
               <br />
               <br />
               <InputNumber

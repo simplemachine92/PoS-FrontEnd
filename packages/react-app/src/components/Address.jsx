@@ -74,14 +74,7 @@ export default function Address(props) {
   return (
     <span>
       <span style={{ verticalAlign: "middle" }}></span>
-      <span
-        style={{
-          verticalAlign: "middle",
-          paddingLeft: 5,
-          fontSize: props.fontSize ? props.fontSize : 18,
-          color: "#207191",
-        }}
-      >
+      <span style={{ verticalAlign: "middle", paddingLeft: 5, fontSize: props.fontSize ? props.fontSize : 18 }}>
         {props.onChange ? (
           <Text editable={{ onChange: props.onChange }} copyable={{ text: address }}>
             <a
