@@ -75,6 +75,19 @@ main {
   position: relative;
   max-width: 1400px;
 }
+.hero-container2,
+td {
+  text-align: center;
+  margin: 0px;
+  padding-right: 50px;
+  font-size: 2.5vw;
+  color: #ffe171;
+  text-align: center;
+  text-justify: center;
+  margin-top: 4px;
+  margin-left: 28%;
+  line-height: 120%;
+}
 
 .hero-container .btn {
   position: absolute;
@@ -176,6 +189,14 @@ a:hover {
 
 .pledge-container {
   position: relative;
+
+  top: -25vw;
+  z-index: 1;
+}
+
+.pledge-container2 {
+  position: relative;
+  padding-left: 25%;
   top: -25vw;
   z-index: 1;
 }

@@ -26,68 +26,106 @@ function Order({ writeContracts, tx }) {
   // in this case, let's keep track of 'purpose' variable from our contract
   const [uValue, setU] = useState("0.0001337");
 
+  /*  const columns = [
+    {
+        title: "Retailer",
+        dataIndex: "pledge",
+  
+        sorter: (a, b) => a.pledge - b.pledge,
+        sortDirections: ["ascend"],
+      },] */
+
   return (
     <>
       <div>
         {/* <h3 class="title">Take the Green Pill:</h3>
           <h3 class="title">Regenerative CryptoEconomics</h3> */}
 
-        <div className="hero-container">
-          <img src="image/reee.svg" />
-          <button class="btn">Boulder Book Store</button>
-        </div>
+        <form action="https://www.boulderbookstore.net/">
+          <div className="hero-container">
+            <img src="image/reee.svg" />
+            {/* Fix button redirect */}
 
-        <footer className="pledge-container background-greenpill">
+            <button class="btn">Boulder Book Store</button>
+          </div>
+        </form>
+
+        <footer className="pledge-container">
+          <h5>Pre-Order Now</h5>
+
+          <br />
+          {/* <a href="https://www.amazon.com/gp/product/164421248X">Amazon</a> <br />
+              <a href="https://www.target.com/s?searchTerm=9781644212486">Target</a> */}
+
           <section className="green-pill-form-section">
-            <div>
-              <h5>Make a Pledge</h5>
-              <br />
-              <h4>Receive your Page signed by Vitalik now, and a signed digital copy upon release in September</h4>
-              <br />
+            <div className="hero-container2">
+              <table>
+                <thead></thead>
+                <tbody>
+                  <tr>
+                    <td>Books-A-Million</td>
+                    <td>
+                      <a href="https://www.booksamillion.com/p/9781644212486">Click Here</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Barnes & Noble</td>
+                    <td>
+                      <a href="https://www.barnesandnoble.com/w/proof-of-stake-vitalik-buterin/1140789169?ean=9781644212486&st=AFF&2sid=Random%20House%20Inc_8373827_NA&sourceId=AFFRandom%20House%20Inc">
+                        Click Here
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Bookshop.org</td>
+                    <td>
+                      <a href="https://bookshop.org/books/proof-of-stake-essays-on-the-making-of-ethereum-and-the-future-of-the-internet/9781644212486">
+                        Click Here
+                      </a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Indie Bound</td>
+                    <td>
+                      <a href="https://www.indiebound.org/book/9781644212486">Click Here</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Amazon</td>
+                    <td>
+                      <a href="https://www.amazon.com/gp/product/164421248X">Click Here</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Target</td>
+                    <td>
+                      <a href="https://www.target.com/s?searchTerm=9781644212486">Click Here</a>
+                    </td>
+                  </tr>
 
-              <h4>Simply pledge at least 0.01337 ETH to Public Goods to be added to the signing list</h4>
-              <br />
-              <br />
-              <InputNumber
-                className="form"
-                style={{ width: "90%", margin: "auto" }}
-                bordered={false}
-                controls={false}
-                onChange={e => {
-                  const currValue = String(e);
-                  setU(currValue);
-                  console.log("changin", uValue);
-                }}
-                step={0.1}
-                defaultValue={0.0001337}
-                onPressEnter={async () => {
-                  try {
-                    const txCur = await tx(writeContracts.GreenPill_Pages.pledge({ value: utils.parseEther(uValue) }));
-                    await txCur.wait();
-                  } catch {
-                    console.log("pledge failed");
-                  }
-                }}
-              />
-              <div className="form2">
-                <StyledButton
-                  type="buttons-green-pill"
-                  className=""
-                  style={{ marginTop: 40, width: "30%" }}
-                  onClick={async () => {
-                    try {
-                      const txCur = await tx(
-                        writeContracts.GreenPill_Pages.pledge({ value: utils.parseEther(uValue) }),
-                      );
-                      await txCur.wait();
-                    } catch {
-                      console.log("button pledge failed");
-                    }
-                  }}
-                >
-                  Submit
-                </StyledButton>
-              </div>
+                  <tr>
+                    <td>Hudson</td>
+                    <td>
+                      <a href="https://www.hudsonbooksellers.com/book/9781644212486">Click Here</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>Walmart</td>
+                    <td>
+                      <a href="https://www.walmart.com/ip/Proof-of-Stake-Essays-on-the-Making-of-Ethereum-and-the-Future-of-the-Internet-Paperback-9781644212486/678274718">
+                        Click Here
+                      </a>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td>Powells</td>
+                    <td>
+                      <a href="https://www.powells.com/book/-9781644212486">Click Here</a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </section>
 

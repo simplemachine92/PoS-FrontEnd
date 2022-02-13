@@ -32,17 +32,20 @@ function Pledge({ writeContracts, tx }) {
         {/* <h3 class="title">Take the Green Pill:</h3>
           <h3 class="title">Regenerative CryptoEconomics</h3> */}
 
-        <div className="hero-container">
-          <img src="image/reee.svg" />
-          <button class="btn">Pre-order</button>
-        </div>
+        <form action="/order">
+          <div className="hero-container">
+            <img src="image/reee.svg" />
+            {/* Fix button redirect */}
 
+            <button class="btn">Pre-order</button>
+          </div>
+        </form>
         <footer className="footer-container background-greenpill">
           <section className="green-pill-form-section">
             <div>
               <h5>Make a Pledge</h5>
               <br />
-              <h4>Receive a digitally signed page!</h4>
+              <h4>Receive a digitally signed book plate (and an optional to mint NFT)</h4>
               <br />
               <h4>pledge at least 0.01337 ETH to Public Goods</h4>
               <br />
