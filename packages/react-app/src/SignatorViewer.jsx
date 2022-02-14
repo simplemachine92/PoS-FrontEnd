@@ -472,57 +472,55 @@ function SignatorViewer({
 
   return (
     <>
-      <div style={{ paddingTop: 20 }}>
-        <Card>
-          <h1>Book Plate (Signed Page)</h1>
-          <br />
-          {dataImage != undefined ? (
-            <div>
-              <Image preview={false} width={200} src={dataImage} />
-              <br />
-              <Space direction="vertical" style={{ width: "auto" }}></Space>
-              {address ? (
-                <Button
-                  style={{ padding: "4px 15px", marginRight: 20 }}
-                  type="primary"
-                  onClick={async () => {
-                    try {
-                      console.log("pledge", typedData);
-                      console.log("link", sigLink);
-                      const txCur = await tx(
-                        writeContracts.ProofOfStake_Pages.mintIfSigned(
-                          signatures[0],
-                          typedData.message.pledge,
-                          typedData.message.timestamp,
-                          typedData.message.msg,
-                        ),
-                      );
-                      await txCur.wait();
-                    } catch (e) {
-                      console.log("mint failed", e);
-                    }
-                  }}
-                >
-                  Mint (If Owner)
-                </Button>
-              ) : (
-                <Button type="primary" style={{ marginRight: 20, padding: "4px 15px" }} onClick={loadWeb3Modal}>
-                  Connect to Mint (If Owner)
-                </Button>
-              )}
-              <Button style={{ padding: "4px 15px" }} type="primary" onClick={getBook} loading={loading.loading}>
-                {loading.buttonText}
+      <div style={{ paddingTop: 20, background: "#2bcfd9" }}>
+        <h1>Book Plate (Signed Page)</h1>
+        <br />
+        {dataImage != undefined ? (
+          <div>
+            <Image preview={false} width={200} src={dataImage} />
+            <br />
+            <Space direction="vertical" style={{ width: "auto" }}></Space>
+            {address ? (
+              <Button
+                style={{ padding: "4px 15px", marginRight: 20, marginBottom: 20 }}
+                type="primary"
+                onClick={async () => {
+                  try {
+                    console.log("pledge", typedData);
+                    console.log("link", sigLink);
+                    const txCur = await tx(
+                      writeContracts.ProofOfStake_Pages.mintIfSigned(
+                        signatures[0],
+                        typedData.message.pledge,
+                        typedData.message.timestamp,
+                        typedData.message.msg,
+                      ),
+                    );
+                    await txCur.wait();
+                  } catch (e) {
+                    console.log("mint failed", e);
+                  }
+                }}
+              >
+                Mint (If Owner)
               </Button>
-            </div>
-          ) : (
-            <div>
-              <Spin />
-            </div>
-          )}
-          <Space direction="vertical" style={{ width: "auto" }}></Space>
+            ) : (
+              <Button type="primary" style={{ marginRight: 20, padding: "4px 15px" }} onClick={loadWeb3Modal}>
+                Connect to Mint (If Owner)
+              </Button>
+            )}
+            <Button style={{ padding: "4px 15px" }} type="primary" onClick={getBook} loading={loading.loading}>
+              {loading.buttonText}
+            </Button>
+          </div>
+        ) : (
+          <div>
+            <Spin />
+          </div>
+        )}
+        <Space direction="vertical" style={{ width: "auto" }}></Space>
 
-          <Collapse ghost></Collapse>
-        </Card>
+        <Collapse ghost></Collapse>
       </div>
       <Modal title="Scan Signatorio" visible={qrModalVisible} onOk={closeModal} onCancel={closeModal}>
         <QR
@@ -534,8 +532,8 @@ function SignatorViewer({
           imageSettings={{ excavate: false }}
         />
       </Modal>
-      <div className="container">
-        <Card className="card-border">
+      <div>
+        <Card className="">
           {message ? (
             <Text style={{ fontSize: 18, marginBottom: "0px" }}>{`${message}`}</Text>
           ) : (
@@ -577,45 +575,38 @@ function SignatorViewer({
                     setShowAll(checked);
                   }}
                 />
+                <List
+                  locale={{ emptyText: "No signatures" }}
+                  dataSource={signatures}
+                  renderItem={(item, index) => {
+                    let _indicator;
+                    if (addressChecks[index] === "MATCH") {
+                      _indicator = <CheckCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#52c41a" />;
+                    } else if (addressChecks[index] === "MISMATCH") {
+                      _indicator = <CloseCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#ff4d4f" />;
+                    } else {
+                      _indicator = <Alert message="Invalid" type="error" />;
+                    }
+
+                    return (
+                      <List.Item key={item} style={{}}>
+                        <div>
+                          {addresses[index] && ethers.utils.isAddress(addresses[index]) && (
+                            <Address address={addresses[index]} ensProvider={mainnetProvider} fontSize={24} />
+                          )}
+
+                          <Tooltip style={{ marginLeft: 10 }} title={addressChecks[index]}>
+                            {_indicator}
+                          </Tooltip>
+                        </div>
+                      </List.Item>
+                    );
+                  }}
+                />
               </Space>
             </div>
           )}
         </Card>
-
-        <List
-          header={<Text style={{ fontSize: 18 }}>Signatures</Text>}
-          bordered
-          locale={{ emptyText: "No signatures" }}
-          dataSource={signatures}
-          renderItem={(item, index) => {
-            let _indicator;
-            if (addressChecks[index] === "MATCH") {
-              _indicator = <CheckCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#52c41a" />;
-            } else if (addressChecks[index] === "MISMATCH") {
-              _indicator = <CloseCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#ff4d4f" />;
-            } else {
-              _indicator = <Alert message="Invalid" type="error" />;
-            }
-
-            return (
-              <List.Item key={item} style={{ display: "block" }}>
-                <div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    {addresses[index] && ethers.utils.isAddress(addresses[index]) && (
-                      <Address address={addresses[index]} ensProvider={mainnetProvider} fontSize={24} />
-                    )}
-                    <div style={{ marginLeft: 10 }}>
-                      <Tooltip title={addressChecks[index]}>{_indicator}</Tooltip>
-                    </div>
-                  </div>
-                  <div style={{ marginTop: 10 }}>
-                    <Text copyable>{`${item}`}</Text>
-                  </div>
-                </div>
-              </List.Item>
-            );
-          }}
-        />
       </div>
     </>
   );
