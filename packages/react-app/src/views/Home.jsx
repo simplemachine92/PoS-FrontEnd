@@ -73,7 +73,7 @@ function Home({ writeContracts, tx }) {
             />
             <div className="form2">
               <StyledButton
-                type="buttons-green-pill"
+                type="primary"
                 className=""
                 style={{ marginTop: 40, width: "30%" }}
                 onClick={async () => {

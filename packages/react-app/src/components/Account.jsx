@@ -66,6 +66,7 @@ export default function Account({
     if (web3Modal.cachedProvider) {
       modalButtons.push(
         <Button
+          type="primary"
           key="logoutbutton"
           style={{ verticalAlign: "top", marginLeft: 8, marginTop: 2 }}
           shape="round"
@@ -78,6 +79,7 @@ export default function Account({
     } else {
       modalButtons.push(
         <Button
+          type="primary"
           key="loginbutton"
           style={{ verticalAlign: "top", marginLeft: 8, marginTop: 2 }}
           shape="round"

@@ -146,7 +146,7 @@ a {
 }
 
 a:hover {
-  color: rgb(191, 107, 247);
+  color: #ffe171;
 }
 
 .footer-container {
@@ -220,6 +220,20 @@ a:hover {
 hover {
   background-color: #02e2ac;
   border-color: #02e2ac;
+}
+
+.ant-btn-primary {
+  color: #000000;
+  border-width: 0px;
+  background-color: rgb(253 224 71);
+}
+.ant-btn-primary:hover {
+  color: #000000;
+  background: #55ffd7;
+}
+.ant-btn-primary:focus {
+  color: #000000;
+  background-color: #ffe171;
 }
 
 .form input::placeholder {

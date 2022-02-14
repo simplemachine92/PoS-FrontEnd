@@ -48,17 +48,6 @@ const ipfs = create({
   },
 });
 
-export const StyledButton = styled(Button)`
-  height: 100%;
-  background: #02e2ac;
-  border-width: 0px;
-  &:hover {
-    color: #454545;
-    background: #7ee6cd;
-    border-color: red;
-  }
-`;
-
 const checkEip1271 = async (provider, address, message, signature) => {
   try {
     const eip1271Spec = {
@@ -124,7 +113,11 @@ function SignatorViewer({
 
   const [message] = useState(searchParams.get("message"));
   const [compressedTypedData] = useState(searchParams.get("typedData"));
-  const [ready, setReady] = useState(false);
+  const [loading, setLoading] = useState({
+    loading: false,
+    buttonText: "View Book",
+    isDisabled: false,
+  });
   const [sData, setData] = useState();
   const [pblob, setBlob] = useState();
   const [sigLink, setLink] = useState();
@@ -155,8 +148,30 @@ function SignatorViewer({
     history.push(`/`);
   }
 
+  const getBook = async () => {
+    console.log(sData);
+    setLoading({
+      loading: true,
+      buttonText: "Loading ( Large File )",
+      isDisabled: false,
+    });
+    let b64png = await base64SvgToBase64Png(sData.imageData, 762.233, 1016.63);
+
+    //let svgBlob = new Blob([svgBoiler], { type: "image/svg+xml" });
+
+    let fetched = await insertPage(b64png);
+
+    console.log("fetched", fetched);
+    window.open(fetched);
+    setLoading({
+      loading: false,
+      buttonText: "View Book",
+      isDisabled: false,
+    });
+  };
+
   const openInNewTab = url => {
-    const newWindow = window.open(url, "_blank", "noopener,noreferrer");
+    const newWindow = window.open(url);
     if (newWindow) newWindow.opener = null;
   };
 
@@ -207,7 +222,7 @@ function SignatorViewer({
     // Get the width/height of the JPG image scaled down to 25% of its original size
 
     // Get the width/height of the PNG image scaled down to 50% of its original size
-    const pngDims = pngImage.scale(0.4);
+    const pngDims = pngImage.scale(0.5);
 
     // Add a blank page to the document
     const page = pdfDoc.getPage(1);
@@ -225,7 +240,7 @@ function SignatorViewer({
 
     var blob = new Blob([pdfBytes], { type: "application/pdf" });
     setBlob(blob);
-    var link = window.URL.createObjectURL(blob);
+    var link = URL.createObjectURL(blob);
 
     return link;
   }
@@ -303,19 +318,11 @@ function SignatorViewer({
 
                 //for (let x = 0; x < myData.length; x++)
                 if (data.recipient == newData.message.recipient) {
-                  let b64png = await base64SvgToBase64Png(data.imageData, 762.233, 1016.63);
-
-                  //let svgBlob = new Blob([svgBoiler], { type: "image/svg+xml" });
-
-                  data.link = await insertPage(b64png);
-                  console.log("link", data.link);
-                  setReady(true);
-                  setLink(data.link);
                   //`url("data:image/svg+xml,${svgString}")`;
                   setImage(data.imageData);
+                  setData(data);
                 }
               });
-              setData(myData);
             }
           };
 
@@ -459,18 +466,51 @@ function SignatorViewer({
     setQrModalVisible(false);
   };
 
+  //prettier-ignore
   return (
     <>
-      <div style={{ paddingTop: 20 }}>
-        <Card>
-          <h1>Page</h1>
-          {sigLink != undefined && dataImage != undefined ? (
-            <div>
-              <Image preview={false} width={200} src={dataImage} />
-              <br />
-              <Space direction="vertical" style={{ width: "auto" }}></Space>
-              <StyledButton
-                style={{ padding: "4px 15px", marginRight: 20 }}
+      <div className="background-greenpill" style={{ paddingTop: 20,  }}>
+        
+        <Space direction="horizontal" style={{ width: "auto" }}>
+          signed by
+          <List
+            locale={{ emptyText: "No signatures" }}
+            dataSource={signatures}
+            renderItem={(item, index) => {
+              let _indicator;
+              if (addressChecks[index] === "MATCH") {
+                _indicator = <CheckCircleTwoTone style={{ fontSize: 18, marginLeft: 5 }} twoToneColor="#52c41a" />;
+              } else if (addressChecks[index] === "MISMATCH") {
+                _indicator = <CloseCircleTwoTone style={{ fontSize: 18 }} twoToneColor="#ff4d4f" />;
+              } else {
+                _indicator = <Alert message="Invalid" type="error" />;
+              }
+
+              return (
+                <List.Item className="h3" key={item} style={{}}>
+                  <div>
+                    {addresses[index] && ethers.utils.isAddress(addresses[index]) && (
+                      <Address address={addresses[index]} ensProvider={mainnetProvider} fontSize={24} />
+                    )}
+
+                    <Tooltip title={addressChecks[index]}>
+                      {_indicator}
+                    </Tooltip>
+                  </div>
+                </List.Item>
+              );
+            }}
+          />
+        </Space>
+        <br />
+        {dataImage != undefined ? (
+          <div>
+            <Image preview={false} width={200} src={dataImage} />
+            <br />
+
+            {address ? (
+              <Button
+                style={{ padding: "4px 15px", marginRight: 20, marginBottom: 20 }}
                 type="primary"
                 onClick={async () => {
                   try {
@@ -490,26 +530,24 @@ function SignatorViewer({
                   }
                 }}
               >
-                Mint
-              </StyledButton>
-              <StyledButton style={{ padding: "4px 15px" }} type="primary" onClick={onClickUrl(sigLink)}>
-                View Book
-              </StyledButton>
-              <StyledButton style={{ padding: "4px 15px", marginLeft: 20 }} type="primary" onClick={clickUpload}>
-                Upload to IPFS
-              </StyledButton>
-            </div>
-          ) : (
-            <div>
-              Loading your page... this may take a moment
-              <br />
-              <Spin />
-            </div>
-          )}
-          <Space direction="vertical" style={{ width: "auto" }}></Space>
-
-          <Collapse ghost></Collapse>
-        </Card>
+                Mint (If Owner)
+              </Button>
+            ) : (
+              <Button type="primary" style={{ marginBottom: 20, marginRight: 20, padding: "4px 15px" }} onClick={loadWeb3Modal}>
+                Connect to Mint (If Owner)
+              </Button>
+            )}
+            <Button style={{ padding: "4px 15px" }} type="primary" onClick={getBook} loading={loading.loading}>
+              {loading.buttonText}
+            </Button>
+          </div>
+        ) : (
+          <div>
+            <Spin />
+          </div>
+        )}
+        <Space direction="vertical" style={{ width: "auto" }}></Space>
+        <Collapse ghost></Collapse>
       </div>
       <Modal title="Scan Signatorio" visible={qrModalVisible} onOk={closeModal} onCancel={closeModal}>
         <QR
@@ -521,12 +559,13 @@ function SignatorViewer({
           imageSettings={{ excavate: false }}
         />
       </Modal>
-      <div className="container">
-        <Card className="card-border">
+      <div>
+        <Card className="" style={{ paddingTop: 20, background: "#02e2ac" }}>
           {message ? (
             <Text style={{ fontSize: 18, marginBottom: "0px" }}>{`${message}`}</Text>
           ) : (
             <div style={{ textAlign: "left" }}>
+              Signed Message Details
               <Input.TextArea
                 size="large"
                 autoSize={{ minRows: 2 }}
@@ -535,11 +574,12 @@ function SignatorViewer({
               />
               <Space>
                 <Popover
+                  style={{ paddingTop: 20, background: "#2bcfd9" }}
                   content={
                     <Space direction="vertical">
                       <Typography>Domain:</Typography>
                       <Input.TextArea
-                        size="large"
+                        size="xsmall"
                         autoSize={{ minRows: 2 }}
                         value={typedData && JSON.stringify(typedData.domain, null, "\t")}
                       />
@@ -555,7 +595,7 @@ function SignatorViewer({
                     </Space>
                   }
                 >
-                  <StyledButton size="small" shape="circle" icon={<InfoOutlined />} />
+                  <Button size="small" shape="circle" icon={<InfoOutlined />} />
                 </Popover>
                 <Switch
                   checkedChildren="all"
@@ -568,41 +608,6 @@ function SignatorViewer({
             </div>
           )}
         </Card>
-
-        <List
-          header={<Text style={{ fontSize: 18 }}>Signatures</Text>}
-          bordered
-          locale={{ emptyText: "No signatures" }}
-          dataSource={signatures}
-          renderItem={(item, index) => {
-            let _indicator;
-            if (addressChecks[index] === "MATCH") {
-              _indicator = <CheckCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#52c41a" />;
-            } else if (addressChecks[index] === "MISMATCH") {
-              _indicator = <CloseCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#ff4d4f" />;
-            } else {
-              _indicator = <Alert message="Invalid" type="error" />;
-            }
-
-            return (
-              <List.Item key={item} style={{ display: "block" }}>
-                <div>
-                  <div style={{ display: "flex", alignItems: "center", justifyContent: "center" }}>
-                    {addresses[index] && ethers.utils.isAddress(addresses[index]) && (
-                      <Address address={addresses[index]} ensProvider={mainnetProvider} fontSize={24} />
-                    )}
-                    <div style={{ marginLeft: 10 }}>
-                      <Tooltip title={addressChecks[index]}>{_indicator}</Tooltip>
-                    </div>
-                  </div>
-                  <div style={{ marginTop: 10 }}>
-                    <Text copyable>{`${item}`}</Text>
-                  </div>
-                </div>
-              </List.Item>
-            );
-          }}
-        />
       </div>
     </>
   );
