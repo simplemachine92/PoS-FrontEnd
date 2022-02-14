@@ -5,17 +5,6 @@ import { Footer, Quotes, AboutTheBook, GitcoinBar, IntroHeader } from "../compon
 
 const { utils, BigNumber } = require("ethers");
 
-export const StyledButton = styled(Button)`
-  height: 100%;
-  background: #02e2ac;
-  border-width: 0px;
-  &:hover {
-    color: #454545;
-    background: #7ee6cd;
-    border-color: red;
-  }
-`;
-
 /**
  * web3 props can be passed from '../App.jsx' into your local view component for use
  * @param {*} yourLocalBalance balance on current network
