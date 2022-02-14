@@ -143,7 +143,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
   ];
 
   return (
-    <div className="background-greenpill" style={{ height: "auto", width: "auto", marginTop: 20 }}>
+    <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
       <div className="container px-5 mx-auto mt-10">
         <img alt="discord" className="mb-8 -mt-2 object-center inline-block" src="assets/Gitcoinbar.svg" />
       </div>

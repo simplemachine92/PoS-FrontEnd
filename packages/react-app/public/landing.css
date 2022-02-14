@@ -200,11 +200,11 @@ h6 {
 }
 
 a {
-  color: white;
+  color: rgb(253 224 71);
 }
 
 a:hover {
-  color: #ffe171;
+  color: rgb(156, 154, 154);
 }
 
 .footer-container {
