@@ -106,6 +106,20 @@ td2 {
   text-align: center;
 }
 
+.ant-btn-primary {
+  color: #000000;
+  border-width: 0px;
+  background-color: rgb(253 224 71);
+}
+.ant-btn-primary:hover {
+  color: #000000;
+  background: #55ffd7;
+}
+.ant-btn-primary:focus {
+  color: #000000;
+  background-color: #ffe171;
+}
+
 h1 {
   font-size: 30px;
   text-align: center;

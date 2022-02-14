@@ -66,6 +66,7 @@ export default function Account({
     if (web3Modal.cachedProvider) {
       modalButtons.push(
         <Button
+          type="primary"
           key="logoutbutton"
           style={{ verticalAlign: "top", marginLeft: 8, marginTop: 8 }}
           shape="square"
@@ -79,14 +80,7 @@ export default function Account({
       modalButtons.push(
         <Button
           key="loginbutton"
-          style={{
-            verticalAlign: "top",
-            marginLeft: 8,
-            marginTop: 8,
-            backgroundColor: "#FFE171",
-            color: "grey",
-            fontWeight: "strong",
-          }}
+          type="primary"
           shape="square"
           size="medium"
           /* type={minimized ? "default" : "primary"}     too many people just defaulting to MM and having a bad time */

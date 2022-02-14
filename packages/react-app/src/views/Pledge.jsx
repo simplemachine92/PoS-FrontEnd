@@ -13,6 +13,11 @@ export const StyledButton = styled(Button)`
     background: #7ee6cd;
     border-color: red;
   }
+  ,
+  &:focus {
+    color: #000000;
+    background-color: #ffe171;
+  }
 `;
 
 /**
@@ -21,7 +26,7 @@ export const StyledButton = styled(Button)`
  * @param {*} readContracts contracts from current chain already pre-loaded using ethers contract module. More here https://docs.ethers.io/v5/api/contract/contract/
  * @returns react component
  */
-function Pledge({ writeContracts, tx }) {
+function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
   const [uValue, setU] = useState("0.0001337");
@@ -71,24 +76,29 @@ function Pledge({ writeContracts, tx }) {
                   }
                 }}
               />
-
-              <StyledButton
-                type="buttons-green-pill"
-                className=""
-                style={{ marginTop: 40, width: "30%" }}
-                onClick={async () => {
-                  try {
-                    const txCur = await tx(
-                      writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
-                    );
-                    await txCur.wait();
-                  } catch {
-                    console.log("button pledge failed");
-                  }
-                }}
-              >
-                Submit
-              </StyledButton>
+              {address ? (
+                <StyledButton
+                  type="buttons-green-pill"
+                  className=""
+                  style={{ marginTop: 40, width: "30%" }}
+                  onClick={async () => {
+                    try {
+                      const txCur = await tx(
+                        writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
+                      );
+                      await txCur.wait();
+                    } catch {
+                      console.log("button pledge failed");
+                    }
+                  }}
+                >
+                  Submit
+                </StyledButton>
+              ) : (
+                <StyledButton style={{ marginTop: 40, width: "30%" }} onClick={loadWeb3Modal}>
+                  Connect to pledge
+                </StyledButton>
+              )}
             </div>
           </section>
 

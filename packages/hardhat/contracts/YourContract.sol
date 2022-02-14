@@ -105,7 +105,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
         string calldata _timestamp,
         string calldata _message
     ) external {
-        require(balanceOf(msg.sender) < 1, "One per Address");
+        require(balanceOf(msg.sender) < 1, "UNIQUE: One per Address");
 
         /* require(!usedNonces[_nonce]);
         usedNonces[_nonce] = true; */
@@ -154,7 +154,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
     }
 
     /*///////////////////////////////////////////////////////////////
-                             TOKEN URI
+                            TOKEN LOGIC
     //////////////////////////////////////////////////////////////*/
 
     /**
@@ -179,6 +179,43 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
                 '</tspan></text></svg>'
             )
         );
+    }
+
+    /**
+     * @notice SOULBOUND: Block transfers.
+     */
+    function _beforeTokenTransfer(
+        address from,
+        address to,
+        uint256 tokenId
+    ) internal virtual override(ERC721Enumerable) {
+        require(
+            from == address(0) || to == address(0),
+            "SOULBOUND: Non-Transferable"
+        );
+        super._beforeTokenTransfer(from, to, tokenId);
+    }
+
+    /**
+     * @notice SOULBOUND: Block approvals.
+     */
+    function setApprovalForAll(address operator, bool _approved)
+        public
+        virtual
+        override(ERC721)
+    {
+        revert("SOULBOUND: Non-Approvable");
+    }
+
+    /**
+     * @notice SOULBOUND: Block approvals.
+     */
+    function approve(address to, uint256 tokenId)
+        public
+        virtual
+        override(ERC721)
+    {
+        revert("SOULBOUND: Non-Approvable");
     }
 
     /**

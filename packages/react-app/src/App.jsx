@@ -410,6 +410,7 @@ function App(props) {
             readContracts={readContracts}
             tx={tx}
             localProvider={localProvider}
+            loadWeb3Modal={loadWeb3Modal}
             address={address}
           />
         </Route>
