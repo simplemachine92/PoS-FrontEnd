@@ -4,6 +4,7 @@ import React from "react";
 
 export default function IntroHeader() {
   return (
+    // We need proper resizing on book image, button, and fix the "Coming Soon" styling
     <div className="flex flex-wrap mt-10">
       <div className="flex flex-wrap w-1/2 justify-center items-center">
         <div className="max-w-md">

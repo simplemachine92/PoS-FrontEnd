@@ -2,6 +2,7 @@ import React from "react";
 
 export default function GitcoinBar() {
   return (
+    // Bar should be fitting screen, hand may need to be repositioned but heres a start.
     <div className="container relative mx-auto mt-10">
       <img alt="discord" className="mb-8 -mt-2 object-fill " src="assets/Gitcoinbar.svg" />
       <img

@@ -47,12 +47,12 @@ export default function AboutTheBook() {
       </div>
       <div className="container px-5 mx-auto">
         <h6>About the book</h6>
-        <h3>
+        <h3 className="text-left">
           These writings, collected from his essays before and during the rise of Ethereum, reveal Buterin to be a vivid
           and imaginative writer, with context from media studies scholar Nathan Schneider.
         </h3>
         <br />
-        <h3>
+        <h3 className="text-left">
           While many around him were focused on seeing the value of their tokens rise, he was working through the
           problems and possibilities of crafting an Internet-native world.
         </h3>
