@@ -8,9 +8,7 @@ export default function IntroHeader() {
       <div className="flex flex-wrap w-1/2 justify-center items-center">
         <div className="max-w-md">
           <div class="mx-auto text-center mt-4 backdrop-blur-md">
-            <p class="leading-relaxed text-lg mt-10 text-3xl font-bold text-green-header font-spacemono">
-              [INSERT BOOK]
-            </p>
+            <img alt="discord" className="mb-8 -mt-2 object-scale-down " src="assets/book.svg" />
             <div className="mt-10">
               <a
                 href="https://www.google.com"
