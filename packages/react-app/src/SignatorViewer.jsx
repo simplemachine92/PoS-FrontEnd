@@ -479,9 +479,9 @@ function SignatorViewer({
             renderItem={(item, index) => {
               let _indicator;
               if (addressChecks[index] === "MATCH") {
-                _indicator = <CheckCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#52c41a" />;
+                _indicator = <CheckCircleTwoTone style={{ fontSize: 18, marginLeft: 5 }} twoToneColor="#52c41a" />;
               } else if (addressChecks[index] === "MISMATCH") {
-                _indicator = <CloseCircleTwoTone style={{ fontSize: 24 }} twoToneColor="#ff4d4f" />;
+                _indicator = <CloseCircleTwoTone style={{ fontSize: 18 }} twoToneColor="#ff4d4f" />;
               } else {
                 _indicator = <Alert message="Invalid" type="error" />;
               }
@@ -493,7 +493,7 @@ function SignatorViewer({
                       <Address address={addresses[index]} ensProvider={mainnetProvider} fontSize={24} />
                     )}
 
-                    <Tooltip style={{ marginLeft: 10 }} title={addressChecks[index]}>
+                    <Tooltip title={addressChecks[index]}>
                       {_indicator}
                     </Tooltip>
                   </div>
@@ -533,7 +533,7 @@ function SignatorViewer({
                 Mint (If Owner)
               </Button>
             ) : (
-              <Button type="primary" style={{ marginRight: 20, padding: "4px 15px" }} onClick={loadWeb3Modal}>
+              <Button type="primary" style={{ marginBottom: 20, marginRight: 20, padding: "4px 15px" }} onClick={loadWeb3Modal}>
                 Connect to Mint (If Owner)
               </Button>
             )}
@@ -565,6 +565,7 @@ function SignatorViewer({
             <Text style={{ fontSize: 18, marginBottom: "0px" }}>{`${message}`}</Text>
           ) : (
             <div style={{ textAlign: "left" }}>
+              Signed Message Details
               <Input.TextArea
                 size="large"
                 autoSize={{ minRows: 2 }}
