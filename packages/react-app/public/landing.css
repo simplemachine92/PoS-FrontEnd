@@ -134,15 +134,15 @@ h2 {
 
 h3 {
   font-family: "Space Mono", monospace, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 38px;
-  font-size: 4vw;
-  color: #0e0333;
+  text-align: center;
+  margin: 0px;
+  font-size: 2vw;
+  color: #ffffff;
   text-align: center;
   text-justify: center;
   margin-top: 4px;
-  line-height: 120%;
+
+  line-height: 161%;
 }
 
 h4 {
@@ -167,6 +167,18 @@ h5 {
   text-justify: center;
   margin-top: 4px;
   line-height: 120%;
+}
+
+h6 {
+  text-align: center;
+  margin: 0px;
+  font-size: 3vw;
+  color: #ffe171;
+  text-align: center;
+  text-justify: center;
+  margin-top: 4px;
+
+  line-height: 161%;
 }
 
 .coordination-party-hero-description {
