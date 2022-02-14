@@ -181,7 +181,7 @@ function App(props) {
   // Load in your local 📝 contract and read a value from it:
   const readContracts = useContractLoader(localProvider, contractConfig);
 
-  const events = useEventListener(readContracts, "GreenPill_Pages", "Pledge", localProvider, "10100000");
+  const events = useEventListener(readContracts, "ProofOfStake_Pages", "Pledge", localProvider, "10100000");
 
   // If you want to make 🔐 write transactions to your contracts, use the userSigner:
   const writeContracts = useContractLoader(userSigner, contractConfig, localChainId);
@@ -292,6 +292,14 @@ function App(props) {
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
       <Affix>
+        <NetworkDisplay
+          NETWORKCHECK={NETWORKCHECK}
+          localChainId={localChainId}
+          selectedChainId={selectedChainId}
+          targetNetwork={targetNetwork}
+          logoutOfWeb3Modal={logoutOfWeb3Modal}
+          USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
+        />
         <StyledMenu style={{ textAlign: "left" }} selectedKeys={[location.pathname]} mode="horizontal">
           <Menu.Item
             icon={
@@ -445,7 +453,7 @@ function App(props) {
             */}
 
           <Contract
-            name="GreenPill_Pages"
+            name="ProofOfStake_Pages"
             price={price}
             signer={userSigner}
             provider={localProvider}

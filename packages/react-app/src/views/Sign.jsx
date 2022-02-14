@@ -153,16 +153,16 @@ export default function Signator({
       },
       primaryType: "signature",
       domain: {
-        name: "GreenPill_Pages",
+        name: "ProofOfStake_Pages",
         version: "0",
         chainId: 4,
-        verifyingContract: contracts.GreenPill_Pages.address,
+        verifyingContract: contracts.ProofOfStake_Pages.address,
       },
       message: {
         sender: "0xb010ca9Be09C382A9f31b79493bb232bCC319f01",
         recipient: `${list[0].args[0]}`,
         pledge: `${pledgeValue}`,
-        timestamp: `${Date.now()}`,
+        timestamp: String(Date.now()),
         msg: messageText,
       },
     };

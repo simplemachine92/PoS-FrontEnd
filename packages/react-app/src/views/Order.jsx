@@ -59,7 +59,7 @@ function Order({ writeContracts, tx }) {
 
           <section className="green-pill-form-section">
             <div className="hero-container2">
-              <table>
+              <table className="td2">
                 <thead></thead>
                 <tbody>
                   <tr>

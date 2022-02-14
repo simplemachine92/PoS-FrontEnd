@@ -477,7 +477,7 @@ function SignatorViewer({
                     console.log("pledge", typedData);
                     console.log("link", sigLink);
                     const txCur = await tx(
-                      writeContracts.GreenPill_Pages.mintIfSigned(
+                      writeContracts.ProofOfStake_Pages.mintIfSigned(
                         signatures[0],
                         typedData.message.pledge,
                         typedData.message.timestamp,

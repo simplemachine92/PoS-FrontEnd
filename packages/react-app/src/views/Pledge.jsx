@@ -78,7 +78,9 @@ function Pledge({ writeContracts, tx }) {
                 style={{ marginTop: 40, width: "30%" }}
                 onClick={async () => {
                   try {
-                    const txCur = await tx(writeContracts.GreenPill_Pages.pledge({ value: utils.parseEther(uValue) }));
+                    const txCur = await tx(
+                      writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
+                    );
                     await txCur.wait();
                   } catch {
                     console.log("button pledge failed");
