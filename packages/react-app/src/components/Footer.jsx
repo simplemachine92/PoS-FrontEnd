@@ -4,17 +4,16 @@ import { Socials } from ".";
 
 export default function Footer() {
   return (
+    //prettier-ignore
     <div className="container mx-auto mt-20">
       <Socials />
       <Divider style={{ backgroundColor: "black" }} />
-
-      <div className="text-3xl font-spacemono">
-        <img
-          alt="discord"
-          className="h-30 w-50 mb-8 object-center inline-block align-middle"
-          src="assets/socialmedia/built_by_gitcoin_community.svg"
-        />{" "}
-        <span className="align-middle">| Join the Telegram</span>
+    
+      <div className="gitcoin-brand">
+        <a href="https://gitcoindao.com">
+          <img src="assets/socialmedia/built_by_gitcoin_community.svg" alt="gitcoinDAO" />
+        </a>&nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp;
+        <a className="align-middle">Join the Telegram</a>
       </div>
     </div>
   );

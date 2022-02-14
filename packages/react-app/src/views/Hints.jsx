@@ -124,18 +124,6 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
       sorter: (a, b) => a.pledge - b.pledge,
       sortDirections: ["ascend"],
     },
-    /* {
-      title: "Book",
-      dataIndex: "link",
-      render: record =>
-        record != undefined ? (
-          <Space size="middle">
-            <a href={record}>View Copy</a>
-          </Space>
-        ) : (
-          <Spin />
-        ),
-    }, */
     {
       title: "Signature",
       dataIndex: "",
@@ -155,7 +143,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
   ];
 
   return (
-    <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
+    <div className="background-greenpill" style={{ height: "auto", width: "auto", marginTop: 20 }}>
       <div className="container px-5 mx-auto mt-10">
         <img alt="discord" className="mb-8 -mt-2 object-center inline-block" src="assets/Gitcoinbar.svg" />
       </div>

@@ -168,10 +168,6 @@ function SignatorViewer({
       buttonText: "View Book",
       isDisabled: false,
     });
-    //console.log("link", sData.link);
-    /* 
-    setLink(sData.link);
-    onClickUrl(sData.link); */
   };
 
   const openInNewTab = url => {
@@ -472,7 +468,7 @@ function SignatorViewer({
 
   return (
     <>
-      <div style={{ paddingTop: 20, background: "#2bcfd9" }}>
+      <div className="background-greenpill" style={{ paddingTop: 20, background: "#2bcfd9" }}>
         <h1>Book Plate (Signed Page)</h1>
         <br />
         {dataImage != undefined ? (
