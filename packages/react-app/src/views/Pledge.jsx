@@ -50,10 +50,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
             <div>
               <h5>Make a Pledge</h5>
 
-              <h4 className="p-8 text-white">
+              <h3 className="p-8 text-white">
                 Receive a digitally signed book plate (with your full digital copy upon release) and an optional to mint
                 "Soulbound" NFT 👀
-              </h4>
+              </h3>
 
               <InputNumber
                 className="form"
@@ -103,16 +103,16 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
           </section>
 
           <div>
-            <p className="p-10 italic">
+            <h3 className="p-10 auto-mx text-white italic text-xs">
               For pledges made here, 90% of funds go to the Gitcoin Grants matching pool and 10% to our publishing
               partner, Seven Stories Press, for supporting public goods in independent publishing. For book copies
               purchased here or anywhere, Vitalik has committed all of his proceeds to Gitcoin Grants.
-            </p>
+            </h3>
           </div>
 
           <div className="gitcoin-brand">
             <a href="https://gitcoindao.com">
-              <img src="/image/gitcoindao_sign.svg" alt="gitcoinDAO" />
+              <img src="assets/socialmedia/built_by_gitcoin_community.svg" alt="gitcoinDAO" />
             </a>
             {""}
             {""}
