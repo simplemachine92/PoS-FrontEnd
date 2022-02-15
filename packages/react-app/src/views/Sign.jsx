@@ -193,7 +193,7 @@ export default function Signator({
 
   useEffect(async () => {
     const dbRef = ref(getDatabase(app));
-    get(child(dbRef, `gp/`)).then(snapshot => {
+    get(child(dbRef, `PoS/`)).then(snapshot => {
       if (snapshot.exists()) {
         snapshot.forEach(sig => {
           let message = sig.val().message;
@@ -258,7 +258,7 @@ export default function Signator({
         const _compressedData = await codec.compress(_typedData);
 
         const db = database;
-        set(ref(db, "gp/" + _typedData.message.recipient), {
+        set(ref(db, `PoS/` + _typedData.message.recipient), {
           signature: _signature,
           message: _typedData.message,
           typedData: _compressedData,

@@ -278,7 +278,7 @@ function SignatorViewer({
 
   useEffect(async () => {
     const dbRef = ref(getDatabase(app));
-    get(child(dbRef, `gp/`))
+    get(child(dbRef, `PoS/`))
       .then(snapshot => {
         if (snapshot.exists()) {
           snapshot.forEach(sig => {
