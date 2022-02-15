@@ -7,6 +7,15 @@
 p {
   margin: 0;
   padding: 0;
+  font-family: "Space Mono", monospace, sans-serif;
+  text-align: center;
+
+  font-size: 1.5vw;
+  color: #ffffff;
+  text-align: center;
+  text-justify: center;
+
+  line-height: 161%;
 }
 
 html {
@@ -118,6 +127,20 @@ td2 {
 .ant-btn-primary:focus {
   color: #000000;
   background-color: #ffe171;
+}
+
+.signing {
+  font-style: italic;
+  font-family: "Space Mono", monospace, sans-serif;
+  text-align: center;
+  margin: 0px;
+  font-size: 2vw;
+  color: #ffffff;
+  text-align: center;
+  text-justify: center;
+  margin-top: 4px;
+
+  line-height: 161%;
 }
 
 h1 {
