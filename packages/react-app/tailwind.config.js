@@ -3,12 +3,16 @@ const colors = require("tailwindcss/colors");
 module.exports = {
   purge: {
     content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html"],
-    options: {},
+    options: {
+      safelist: ["headerBackground"],
+    },
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-      backgroundImage: {},
+      backgroundImage: {
+        headerBackground: "url('/src/assets/Header_Background.svg')",
+      },
       colors: {
         orange: colors.orange,
         green: {

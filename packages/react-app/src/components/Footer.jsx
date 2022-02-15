@@ -8,7 +8,7 @@ export default function Footer() {
     <div className="container mx-auto mt-20 mb-3">
       <Socials />
       <Divider style={{ backgroundColor: "black" }} />
-      <BottomLinks/>
+      <BottomLinks daoLogo="assets/socialmedia/built_by_gitcoin_community.svg" />
     </div>
   );
 }
