@@ -7,7 +7,7 @@ export default function IntroHeader() {
     // We need proper resizing on book image, button, and fix the "Coming Soon" styling
     <div className="flex flex-wrap mt-10">
       <div className="flex flex-wrap w-1/2 justify-center items-center">
-        <div className="max-w-md">
+        <div className="max-w-md bg-white py-10 px-20">
           <div class="mx-auto text-center mt-4 backdrop-blur-md">
             <img alt="discord" className="mb-8 -mt-2 object-scale-down " src="assets/book.svg" />
             <div className="mt-10">
