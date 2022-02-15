@@ -302,66 +302,23 @@ function App(props) {
           USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
         />
         <StyledMenu style={{ textAlign: "left" }} selectedKeys={[location.pathname]} mode="horizontal">
-          <Menu.Item
-            icon={
-              <HomeOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
-                theme="outlined"
-              />
-            }
-            key="/"
-          >
+          <Menu.Item key="Home" icon={<HomeOutlined />}>
+            Home
             <Link to="/"></Link>
           </Menu.Item>
-          <Menu.Item
-            icon={
-              <BookOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
-                theme="outlined"
-              />
-            }
-            key="/pledge"
-          >
+          <Menu.Item key="mail" icon={<BookOutlined />}>
+            Pledge
             <Link to="/pledge"></Link>
           </Menu.Item>
-          <Menu.Item
-            icon={
-              <UserOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
-                theme="outlined"
-              />
-            }
-            key="/signatures"
-          >
-            <Link to="/signatures"></Link>
-          </Menu.Item>
-          <Menu.Item
-            icon={
-              <ShoppingCartOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
-                theme="outlined"
-              />
-            }
-            key="/order"
-          >
+          <Menu.Item key="order" icon={<ShoppingCartOutlined />}>
+            Pre-Order
             <Link to="/order"></Link>
           </Menu.Item>
-          <Menu.Item
-            icon={
-              <BugOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
-                theme="outlined"
-              />
-            }
-            key="/debug"
-          >
-            <Link to="/debug"></Link>
+          <Menu.Item key="signatures" icon={<UserOutlined />}>
+            Leaderboard
+            <Link to="/signatures"></Link>
           </Menu.Item>
+
           {/* <Menu.Item
             icon={
               <ReadOutlined

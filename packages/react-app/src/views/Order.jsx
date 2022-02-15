@@ -91,74 +91,9 @@ function Order({ writeContracts, tx }) {
 
         <footer className="pledge-container">
           <h5>Pre-Order Now</h5>
-          <br />
-          {/* <a href="https://www.amazon.com/gp/product/164421248X">Amazon</a> <br />
-              <a href="https://www.target.com/s?searchTerm=9781644212486">Target</a> */}
-          <section className="green-pill-form-section">
-            <div className="">
-              <table className="text-center text-white mx-auto p-5">
-                <thead></thead>
-                <tbody>
-                  <tr>
-                    <td className="p-3">
-                      <a href="https://www.booksamillion.com/p/9781644212486">Books-A-Million</a>
-                    </td>
-                    <td className="p-3">
-                      <a href="https://www.barnesandnoble.com/w/proof-of-stake-vitalik-buterin/1140789169?ean=9781644212486&st=AFF&2sid=Random%20House%20Inc_8373827_NA&sourceId=AFFRandom%20House%20Inc">
-                        Barnes & Noble
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3">
-                      <a href="https://bookshop.org/books/proof-of-stake-essays-on-the-making-of-ethereum-and-the-future-of-the-internet/9781644212486">
-                        Bookshop.org
-                      </a>
-                    </td>
-                    <td className="p-3">
-                      <a href="https://www.indiebound.org/book/9781644212486">Indie Bound</a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="p-3">
-                      <a href="https://www.amazon.com/gp/product/164421248X">Amazon</a>
-                    </td>
-
-                    <td className="p-3">
-                      <a href="https://www.target.com/s?searchTerm=9781644212486">Target</a>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className="p-3">
-                      <a href="https://www.hudsonbooksellers.com/book/9781644212486">Hudson</a>
-                    </td>
-
-                    <td className="p-3">
-                      <a href="https://www.walmart.com/ip/Proof-of-Stake-Essays-on-the-Making-of-Ethereum-and-the-Future-of-the-Internet-Paperback-9781644212486/678274718">
-                        Walmart
-                      </a>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <td className="p-3">
-                      <a href="https://www.powells.com/book/-9781644212486">Powells</a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </section>
 
           <section className="text-gray-600 body-font">
-            <div className="container px-5 py-24 mx-auto">
-              <div className="text-center mb-20">
-                <h1 className="sm:text-3xl text-2xl font-medium text-center title-font text-gray-900 mb-4">
-                  Boulder Book Store
-                </h1>
-                <p className="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">Pre-Order Now</p>
-              </div>
+            <div className="container px-5 py-6 mx-auto">
               <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
                 {buyLinks.map(item => (
                   <div className="p-2 sm:w-1/2 w-full">
