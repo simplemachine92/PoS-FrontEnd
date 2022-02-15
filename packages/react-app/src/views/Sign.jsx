@@ -243,6 +243,7 @@ export default function Signator({
       setSigning(true);
 
       const injectedSigner = action === "sign" && injectedProvider.getSigner();
+      console.log("signer", injectedProvider.getSigner);
 
       let _signature;
       if (type === "typedData") {

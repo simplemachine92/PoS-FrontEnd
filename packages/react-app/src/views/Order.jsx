@@ -58,70 +58,55 @@ function Order({ writeContracts, tx }) {
               <a href="https://www.target.com/s?searchTerm=9781644212486">Target</a> */}
 
           <section className="green-pill-form-section">
-            <div className="hero-container2">
-              <table className="td2">
+            <div className="">
+              <table className="text-center text-white mx-auto p-5">
                 <thead></thead>
                 <tbody>
                   <tr>
-                    <td>Books-A-Million</td>
-                    <td>
-                      <a href="https://www.booksamillion.com/p/9781644212486">Click Here</a>
+                    <td className="p-3">
+                      <a href="https://www.booksamillion.com/p/9781644212486">Books-A-Million</a>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>Barnes & Noble</td>
-                    <td>
+                    <td className="p-3">
                       <a href="https://www.barnesandnoble.com/w/proof-of-stake-vitalik-buterin/1140789169?ean=9781644212486&st=AFF&2sid=Random%20House%20Inc_8373827_NA&sourceId=AFFRandom%20House%20Inc">
-                        Click Here
+                        Barnes & Noble
                       </a>
                     </td>
                   </tr>
                   <tr>
-                    <td>Bookshop.org</td>
-                    <td>
+                    <td className="p-3">
                       <a href="https://bookshop.org/books/proof-of-stake-essays-on-the-making-of-ethereum-and-the-future-of-the-internet/9781644212486">
-                        Click Here
+                        Bookshop.org
                       </a>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>Indie Bound</td>
-                    <td>
-                      <a href="https://www.indiebound.org/book/9781644212486">Click Here</a>
+                    <td className="p-3">
+                      <a href="https://www.indiebound.org/book/9781644212486">Indie Bound</a>
                     </td>
                   </tr>
                   <tr>
-                    <td>Amazon</td>
-                    <td>
-                      <a href="https://www.amazon.com/gp/product/164421248X">Click Here</a>
+                    <td className="p-3">
+                      <a href="https://www.amazon.com/gp/product/164421248X">Amazon</a>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>Target</td>
-                    <td>
-                      <a href="https://www.target.com/s?searchTerm=9781644212486">Click Here</a>
+
+                    <td className="p-3">
+                      <a href="https://www.target.com/s?searchTerm=9781644212486">Target</a>
                     </td>
                   </tr>
 
                   <tr>
-                    <td>Hudson</td>
-                    <td>
-                      <a href="https://www.hudsonbooksellers.com/book/9781644212486">Click Here</a>
+                    <td className="p-3">
+                      <a href="https://www.hudsonbooksellers.com/book/9781644212486">Hudson</a>
                     </td>
-                  </tr>
-                  <tr>
-                    <td>Walmart</td>
-                    <td>
+
+                    <td className="p-3">
                       <a href="https://www.walmart.com/ip/Proof-of-Stake-Essays-on-the-Making-of-Ethereum-and-the-Future-of-the-Internet-Paperback-9781644212486/678274718">
-                        Click Here
+                        Walmart
                       </a>
                     </td>
                   </tr>
 
                   <tr>
-                    <td>Powells</td>
-                    <td>
-                      <a href="https://www.powells.com/book/-9781644212486">Click Here</a>
+                    <td className="p-3">
+                      <a href="https://www.powells.com/book/-9781644212486">Powells</a>
                     </td>
                   </tr>
                 </tbody>

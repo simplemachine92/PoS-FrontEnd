@@ -90,7 +90,7 @@ td2 {
   margin: 0px;
   padding-right: 50px;
   font-size: 2.5vw;
-  color: #ffe171;
+  color: white;
   text-align: center;
   text-justify: center;
   margin-top: 4px;
@@ -227,7 +227,7 @@ a {
 }
 
 a:hover {
-  color: rgb(156, 154, 154);
+  color: rgb(255, 255, 255);
 }
 
 .footer-container {

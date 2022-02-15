@@ -12,8 +12,8 @@ import { Link } from "react-router-dom";
 const { Option } = Select;
 
 export const StyledTable = styled(Table)`
-  height: 80%;
-  width: 80%;
+  height: 70%;
+  width: 70%;
   margin: auto;
   color: #454545;
 
@@ -144,9 +144,6 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
 
   return (
     <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
-      <div className="container px-5 mx-auto mt-10">
-        <img alt="discord" className="mb-8 -mt-2 object-center inline-block" src="assets/Gitcoinbar.svg" />
-      </div>
       <div className="">
         {ready ? (
           <div>

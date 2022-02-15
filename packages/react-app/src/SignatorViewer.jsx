@@ -510,7 +510,7 @@ function SignatorViewer({
 
             {address ? (
               <Button
-                style={{ padding: "4px 15px", marginRight: 20, marginBottom: 20 }}
+                style={{ padding: "4px 15px", marginBottom: 20 }}
                 type="primary"
                 onClick={async () => {
                   try {
@@ -537,9 +537,10 @@ function SignatorViewer({
                 Connect to Mint (If Owner)
               </Button>
             )}
-            <Button style={{ padding: "4px 15px" }} type="primary" onClick={getBook} loading={loading.loading}>
+            {/* Enable when book releases and we have full pdf */}
+            {/* <Button style={{ padding: "4px 15px" }} type="primary" onClick={getBook} loading={loading.loading}>
               {loading.buttonText}
-            </Button>
+            </Button> */}
           </div>
         ) : (
           <div>
