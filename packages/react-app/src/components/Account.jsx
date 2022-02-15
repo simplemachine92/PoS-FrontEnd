@@ -94,7 +94,7 @@ export default function Account({
   const display = minimized ? (
     ""
   ) : (
-    <span>
+    <span className="mt-3">
       {web3Modal && web3Modal.cachedProvider ? (
         <>{address && <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />}</>
       ) : useBurner ? (
@@ -118,7 +118,7 @@ export default function Account({
   );
 
   return (
-    <div>
+    <div className="flex flex-row">
       {display}
       {modalButtons}
     </div>

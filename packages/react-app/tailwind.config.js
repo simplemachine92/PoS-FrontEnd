@@ -35,6 +35,7 @@ module.exports = {
         },
         yellow: {
           pos: "#FFE171",
+          poslight: "#FFF8DB",
         },
       },
     },

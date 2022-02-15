@@ -17,6 +17,7 @@ import {
   ReadOutlined,
   UserOutlined,
   BookOutlined,
+  ShoppingCartOutlined,
 } from "@ant-design/icons";
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
@@ -336,6 +337,18 @@ function App(props) {
             key="/signatures"
           >
             <Link to="/signatures"></Link>
+          </Menu.Item>
+          <Menu.Item
+            icon={
+              <ShoppingCartOutlined
+                type="message"
+                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
+                theme="outlined"
+              />
+            }
+            key="/order"
+          >
+            <Link to="/order"></Link>
           </Menu.Item>
           <Menu.Item
             icon={
