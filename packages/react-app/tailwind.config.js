@@ -19,6 +19,7 @@ module.exports = {
           "light-green": "#E2F3EC",
           imgBg: "#9ED5AA",
           skyblue: "#39d0d8",
+          posblue: "#207191",
         },
         purple: {
           overlay: "#240871",

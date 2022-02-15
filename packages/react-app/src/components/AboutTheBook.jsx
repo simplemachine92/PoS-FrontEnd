@@ -3,17 +3,17 @@ import React from "react";
 export default function AboutTheBook() {
   return (
     <>
-      <div className="container px-5 mx-auto mt-10">
-        <h6>🤖 Public Goods R Good ❤️</h6>
+      <div className="container px-5 mx-auto mt-10 font-spacemono">
+        <h6 className="text-yellow-pos font-bold text-3xl">🤖 Public Goods R Good ❤️</h6>
         <br />
-        <h3>
+        <h3 className="text-2xl">
           Vitalik has committed his proceeds from sales of this book to support open-source public goods through Gitcoin
           Grants. Proof of Stake is published under a Creative Commons license for all the world to share.{" "}
         </h3>
         <br />
-        <h6>❤️✍️ Get it signed, support public goods 🤖❤️</h6>
+        <h6 className="text-yellow-pos font-bold text-3xl">❤️✍️ Get it signed, support public goods 🤖❤️</h6>
 
-        <h3>
+        <h3 className="text-2xl">
           Digital and print books will be available in Fall 2022—but before then, you can order a signed copy. Proceeds
           from signed digital copies go 100% to funding public goods.
         </h3>
@@ -51,15 +51,15 @@ export default function AboutTheBook() {
           </div>
         </div>
       </div>
-      <div className="container px-5 mx-auto">
-        <h6>About the book</h6>
+      <div className="container px-5 mx-auto font-spacemono">
+        <h6 className="text-yellow-pos font-bold text-3xl">About the book</h6>
         <br />
-        <h3 className="text-left">
+        <h3 className="text-left text-2xl">
           These writings, collected from his essays before and during the rise of Ethereum, reveal Buterin to be a vivid
           and imaginative writer, with context from media studies scholar Nathan Schneider.
         </h3>
         <br />
-        <h3 className="text-left">
+        <h3 className="text-left text-2xl">
           While many around him were focused on seeing the value of their tokens rise, he was working through the
           problems and possibilities of crafting an Internet-native world.
         </h3>

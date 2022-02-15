@@ -17,13 +17,13 @@ function Home({ writeContracts, tx }) {
   const [uValue, setU] = useState("0.0001337");
 
   return (
-    <>
+    <div>
       <IntroHeader />
       <GitcoinBar />
       <AboutTheBook />
       <Quotes />
       <Footer />
-    </>
+    </div>
   );
 
   //<section className="coordination-hero background-bubble">

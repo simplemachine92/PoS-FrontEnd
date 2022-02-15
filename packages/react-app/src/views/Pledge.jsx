@@ -69,7 +69,9 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 defaultValue={0.0001337}
                 onPressEnter={async () => {
                   try {
-                    const txCur = await tx(writeContracts.GreenPill_Pages.pledge({ value: utils.parseEther(uValue) }));
+                    const txCur = await tx(
+                      writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
+                    );
                     await txCur.wait();
                   } catch {
                     console.log("pledge failed");

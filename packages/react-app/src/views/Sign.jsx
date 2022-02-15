@@ -58,7 +58,7 @@ export default function Signator({
   },
   primaryType: "signature",
   domain: {
-    name: "GreenPill_Pages",
+    name: "ProofOfStake_Pages",
     version: "0",
     chainId: 4,
     verifyingContract: "0x0f40dee08808fbb178EE43824988148b33A0d7b8",
