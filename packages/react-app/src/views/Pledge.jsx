@@ -49,11 +49,11 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
           <section className="green-pill-form-section">
             <div>
               <h5>Make a Pledge</h5>
-              <br />
-              <h4>Receive a digitally signed book plate (and an optional to mint NFT)</h4>
-              <br />
-              <h4>pledge at least 0.01337 ETH to Public Goods</h4>
-              <br />
+
+              <h4 className="p-8 text-white">
+                Receive a digitally signed book plate (with your full digital copy upon release) and an optional to mint
+                "Soulbound" NFT 👀
+              </h4>
 
               <InputNumber
                 className="form"
@@ -101,6 +101,14 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               )}
             </div>
           </section>
+
+          <div>
+            <p className="p-10 italic">
+              For pledges made here, 90% of funds go to the Gitcoin Grants matching pool and 10% to our publishing
+              partner, Seven Stories Press, for supporting public goods in independent publishing. For book copies
+              purchased here or anywhere, Vitalik has committed all of his proceeds to Gitcoin Grants.
+            </p>
+          </div>
 
           <div className="gitcoin-brand">
             <a href="https://gitcoindao.com">

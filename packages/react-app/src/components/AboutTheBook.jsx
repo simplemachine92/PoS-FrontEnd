@@ -52,13 +52,6 @@ export default function AboutTheBook() {
         </div>
       </div>
       <div className="container px-5 mx-auto">
-        <p className="">
-          For pledges made here, funds will go 90% to the Gitcoin Grants matching pool and 10% to our publishing
-          partner, Seven Stories Press, for supporting public goods in independent publishing. For book copies purchased
-          here or anywhere, Vitalik has committed all of his proceeds to Gitcoin Grants.
-        </p>
-        <br />
-        <br />
         <h6>About the book</h6>
         <br />
         <h3 className="text-left">
