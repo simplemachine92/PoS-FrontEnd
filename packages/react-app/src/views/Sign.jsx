@@ -21,7 +21,7 @@ import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useLocalStorage } from "../hooks";
-import { AddressInput, Address } from "../components";
+import { AddressInput, Address, Footer } from "../components";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, set, get, child } from "firebase/database";
@@ -494,6 +494,7 @@ export default function Signator({
           </Form>
         </div>
       )}
+      <Footer />
     </div>
   );
 }

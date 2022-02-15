@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { Button, InputNumber } from "antd";
+import { Footer } from "../components";
 
 const { utils, BigNumber } = require("ethers");
 
@@ -50,7 +51,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
             <div>
               <h5>Make a Pledge</h5>
 
-              <h3 className="p-8 text-white">
+              <h3 className="text-2xl p-10">
                 Receive a digitally signed book plate (with your full digital copy upon release) and an optional to mint
                 "Soulbound" NFT 👀
               </h3>
@@ -112,14 +113,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
             </h3>
           </div>
 
-          <div className="gitcoin-brand">
-            <a href="https://gitcoindao.com">
-              <img src="assets/socialmedia/built_by_gitcoin_community.svg" alt="gitcoinDAO" />
-            </a>
-            {""}
-            {""}
-            &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; <a href="https://t.me/+g9TM8i7GpxAzMGUx">Join the Telegram</a>
-          </div>
+          <Footer />
         </footer>
       </div>
     </>

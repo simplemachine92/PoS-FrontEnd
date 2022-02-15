@@ -68,7 +68,7 @@ export default function Account({
         <Button
           type="primary"
           key="logoutbutton"
-          style={{ verticalAlign: "top", marginLeft: 8, marginTop: 8 }}
+          style={{ verticalAlign: "top", marginLeft: 8, marginTop: -1 }}
           shape="square"
           size="medium"
           onClick={logoutOfWeb3Modal}
@@ -94,26 +94,9 @@ export default function Account({
   const display = minimized ? (
     ""
   ) : (
-    <span className="mt-3">
-      {web3Modal && web3Modal.cachedProvider ? (
-        <>{address && <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />}</>
-      ) : useBurner ? (
-        ""
-      ) : isContract ? (
-        <>
-          {address && <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />}
-          <Balance address={address} provider={localProvider} price={price} />
-        </>
-      ) : (
-        ""
-      )}
-      {useBurner && web3Modal && !web3Modal.cachedProvider ? (
-        <>
-          <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />
-        </>
-      ) : (
-        <></>
-      )}
+    <span className="mt-0">
+      {web3Modal && web3Modal.cachedProvider ? <></> : useBurner ? "" : isContract ? <></> : ""}
+      {useBurner && web3Modal && !web3Modal.cachedProvider ? <></> : <></>}
     </span>
   );
 

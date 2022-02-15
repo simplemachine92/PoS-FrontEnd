@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Select, Spin, Space, Table, Input } from "antd";
 import React, { useState, useEffect } from "react";
-import { Address } from "../components";
+import { Address, BottomLinks } from "../components";
 
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, get, child } from "firebase/database";
@@ -148,7 +148,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
         {ready ? (
           <div>
             <br />
-            <h4>Signed Pledges</h4>
+            <h6 className="text-yellow-pos font-bold text-3xl">Signed Pledges</h6>
             <br />
 
             <StyledTable columns={columns} dataSource={dataSource} />
@@ -159,6 +159,8 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
           </div>
         )}
       </div>
+      <br />
+      <BottomLinks />
     </div>
   );
 }
