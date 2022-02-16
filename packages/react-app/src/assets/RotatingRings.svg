@@ -1,10 +1,10 @@
-<svg width="1656" height="1664" viewBox="0 0 1656 1664" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg width="2100" height="2100" viewBox="0 0 1656 1664" fill="none" xmlns="http://www.w3.org/2000/svg">
 <animateTransform attributeName="transform"
                           attributeType="XML"
                           type="rotate"
                           from="0 0 0"
                           to="360 0 0"
-                          dur="30s"
+                          dur="10s"
                           repeatCount="indefinite"/>
 <path d="M827.411 1019.96V1663.33" stroke="#5BF1CD" stroke-width="1.5" stroke-miterlimit="10"/>
 <path d="M827.411 0V632.901" stroke="#5BF1CD" stroke-width="1.5" stroke-miterlimit="10"/>
