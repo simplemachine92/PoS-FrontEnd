@@ -22,30 +22,22 @@ export default function AboutTheBook() {
         <div className="flex flex-wrap -m-4">
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-3/4 text-center">
-              <a href="" target="_blank" rel="noreferrer">
-                <img
-                  alt="twitter"
-                  className="h-3/4 w-50 mb-8 object-center inline-block"
-                  src="assets/Physical_copy1.svg"
-                />
+              <a href="/order" target="_blank" rel="noreferrer">
+                <img className="h-3/4 w-50 mb-8 object-center inline-block" src="assets/Physical_copy1.svg" />
               </a>
             </div>
           </div>
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-full text-center">
-              <a href="" target="_blank" rel="noreferrer">
-                <img
-                  alt="discord"
-                  className="h-3/4 w-50 mb-8 -mt-2 object-center inline-block"
-                  src="assets/Pledge1.svg"
-                />
+              <a href="/pledge" target="_blank" rel="noreferrer">
+                <img className="h-3/4 w-50 mb-8 -mt-2 object-center inline-block" src="assets/Pledge1.svg" />
               </a>
             </div>
           </div>
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-3/4 text-center">
-              <a href="" target="_blank" rel="noreferrer">
-                <img alt="discord" className="h-3/4 w-50 object-center inline-block" src="assets/Download.svg" />
+              <a href="/signatures" target="_blank" rel="noreferrer">
+                <img className="h-3/4 w-50 object-center inline-block" src="assets/Download.svg" />
               </a>
             </div>
           </div>
