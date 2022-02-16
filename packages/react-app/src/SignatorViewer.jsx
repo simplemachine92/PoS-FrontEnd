@@ -533,8 +533,8 @@ function SignatorViewer({
                 Mint (If Owner)
               </Button>
             ) : (
-              <Button type="primary" style={{ marginBottom: 20, marginRight: 20, padding: "4px 15px" }} onClick={loadWeb3Modal}>
-                Connect to Mint (If Owner)
+              <Button type="primary" style={{ marginBottom: 20, padding: "4px 15px" }} onClick={loadWeb3Modal}>
+                Connect to Mint
               </Button>
             )}
             {/* Enable when book releases and we have full pdf */}
