@@ -8,12 +8,21 @@ export default function BottomLinks({ daoLogo }) {
         className="flex title-font font-medium items-center justify-center text-gray-900"
       >
         <img src={daoLogo || "/image/gitcoindao_sign.svg"} className="h-16" alt="gitcoinDAO" />
+        <span style={{ color: "#5bf1cd" }} className="text-white pl-5">
+          &
+        </span>{" "}
       </a>
-      <p className="text-3xl text-gray-500 sm:ml-6 sm:mt-4 mt-2 text-white font-spacemono">
-        <span className="text-white">|</span>{" "}
+      <a
+        href="https://moonshotcollective.space/"
+        className="flex title-font font-medium items-center justify-center text-gray-900"
+      >
+        <img src={"/image/logo-moon-stake.svg" || daoLogo} className="h-16 pl-5" alt="gitcoinDAO" />
+      </a>
+      <p className="text-xl text-gray-500 sm:ml-6 sm:mt-4 mt-2 text-white font-spacemono">
+        {/* <span className="text-white">|</span>{" "}
         <a href="https://t.me/+g9TM8i7GpxAzMGUx" className="text-white">
           Join the Telegram
-        </a>
+        </a> */}
       </p>
     </div>
   );
