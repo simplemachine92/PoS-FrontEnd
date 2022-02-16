@@ -4,21 +4,15 @@ export default function AboutTheBook() {
   return (
     <>
       <div className="container px-5 mx-auto mt-10 font-spacemono">
-        <h6 className="text-yellow-pos font-bold text-3xl">🤖 Public Goods R Good ❤️</h6>
-        <br />
-        <h3 className="text-2xl">
-          Vitalik has committed his proceeds from sales of this book to support open-source public goods through Gitcoin
-          Grants. Proof of Stake is published under a Creative Commons license for all the world to share.{" "}
-        </h3>
         <br />
         <h6 className="text-yellow-pos font-bold text-3xl">❤️✍️ Get it signed, support public goods 🤖❤️</h6>
-
+        <br />
         <h3 className="text-2xl">
           Digital and print books will be available in Fall 2022—but before then, you can order a signed copy. Proceeds
           from signed digital copies go 100% to funding public goods.
         </h3>
       </div>
-      <div className="container px-5 mx-auto mt-20">
+      <div className="container px-5 mx-auto mt-20 mb-20">
         <div className="flex flex-wrap -m-4">
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-3/4 text-center">
@@ -31,6 +25,11 @@ export default function AboutTheBook() {
             <div className="h-full text-center">
               <a href="/pledge" target="_blank" rel="noreferrer">
                 <img className="h-3/4 w-50 mb-8 -mt-2 object-center inline-block" src="assets/Pledge1.svg" />
+                <p className=" auto-mx text-white italic text-xs">
+                  For pledges made here, 90% of funds go to the Gitcoin Grants matching pool and 10% to our publishing
+                  partner, Seven Stories Press, for supporting public goods in independent publishing. For book copies
+                  purchased here or anywhere, Vitalik has committed all of his proceeds to Gitcoin Grants.
+                </p>
               </a>
             </div>
           </div>
@@ -40,6 +39,7 @@ export default function AboutTheBook() {
                 <img className="h-3/4 w-50 object-center inline-block" src="assets/Download.svg" />
               </a>
             </div>
+            <br />
           </div>
         </div>
       </div>

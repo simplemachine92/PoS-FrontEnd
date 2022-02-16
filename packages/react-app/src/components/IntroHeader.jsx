@@ -12,7 +12,7 @@ export default function IntroHeader() {
             <div class="text-center mt-4 backdrop-blur-md">
               <img alt="Book" className="mb-8 ml-1" src="assets/book_and_shadow.svg" />
               <a
-                href="/order"
+                href="https://www.boulderbookstore.net/product/proof"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-10 font-spacemono bg-yellow-300 px-10 py-2 mr-10 text-lg text-gray-900 font-semibold rounded hover:text-white"
