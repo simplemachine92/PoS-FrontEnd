@@ -25,9 +25,8 @@ export default function IntroHeader() {
       </div>
       <div className="flex flex-wrap w-1/2 pl-16">
         <div class="md:w-1/2 md:pr-12 md:py-8">
-          <h1 class="sm:text-3xl text-2xl font-medium title-font mb-2 text-yellow-300">Coming Soon</h1>
-          <p className="mt-10 text-6xl font-normal font-bold leading-relaxed">Proof of Stake</p>
-          <p class="leading-relaxed text-base text-green-skyblue">By Vitalik Buterin</p>
+          <img alt="Title" className="mb-8" src="assets/proof_of_stake_home_title.svg" />
+          <p class="leading-relaxed text-base text-gray-700 font-spacemono float-right">By Vitalik Buterin</p>
         </div>
       </div>
     </div>
