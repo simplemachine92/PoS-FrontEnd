@@ -106,7 +106,24 @@ td2 {
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   background-color: #ffe171;
-  color: #207191;
+  color: #000000;
+  font-size: 1.5vw;
+  padding: 1vw 6vw;
+  border: none;
+  cursor: pointer;
+
+  text-align: center;
+}
+
+.hero-container .btn:hover {
+  position: absolute;
+  margin: auto;
+  top: 52%;
+  left: 75.9%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #ffe171;
+  color: #ffffff;
   font-size: 1.5vw;
   padding: 1vw 6vw;
   border: none;
@@ -227,7 +244,7 @@ a {
 }
 
 a:hover {
-  color: rgb(209, 209, 209);
+  color: #fde047;
 }
 
 .footer-container {

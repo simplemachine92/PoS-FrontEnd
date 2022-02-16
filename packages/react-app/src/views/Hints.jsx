@@ -136,7 +136,8 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
         )}
       </div>
       <br />
-      <BottomLinks />
+      <Quotes />
+      <Footer />
     </div>
   );
 }

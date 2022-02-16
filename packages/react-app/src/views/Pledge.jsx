@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { Button, InputNumber } from "antd";
-import { Footer } from "../components";
+import { Footer, Quotes } from "../components";
 
 const { utils, BigNumber } = require("ethers");
 
@@ -46,7 +46,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
             <button class="btn">Pre-order</button>
           </div>
         </form>
-        <footer className="footer-container background-greenpill">
+        <footer className="footer-container">
           <section className="green-pill-form-section">
             <div>
               <h5>Make a Pledge</h5>
@@ -99,7 +99,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 </StyledButton>
               ) : (
                 <StyledButton style={{ marginTop: 40, width: "30%" }} onClick={loadWeb3Modal}>
-                  Connect to pledge
+                  Connect
                 </StyledButton>
               )}
             </div>
@@ -112,7 +112,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               purchased here or anywhere, Vitalik has committed all of his proceeds to Gitcoin Grants.
             </h3>
           </div>
-
+          <Quotes />
           <Footer />
         </footer>
       </div>

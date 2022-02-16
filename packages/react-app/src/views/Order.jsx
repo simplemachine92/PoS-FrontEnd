@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
 import { Button, InputNumber } from "antd";
-import { Footer } from "../components";
+import { Footer, Quotes } from "../components";
 
 const { utils, BigNumber } = require("ethers");
 
@@ -121,7 +121,7 @@ function Order({ writeContracts, tx }) {
               </div>
             </div>
           </section>
-          {/* FOOTER */}
+          <Quotes />
           <Footer />
         </footer>
       </div>
