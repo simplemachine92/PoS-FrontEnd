@@ -86,12 +86,12 @@ function Order({ writeContracts, tx }) {
             <img src="assets/pre-order.svg" />
             {/* Fix button redirect */}
 
-            <button className="btn">Boulder Book Store</button>
+            <button className="btn text-5xl font-bold hover:text-yellow-poslight">Boulder Book Store</button>
           </div>
         </form>
 
         <footer className="pledge-container">
-          <h5>Pre-Order Now</h5>
+          <h5 className="text-2xl">Pre-Order Now</h5>
 
           <section className="text-gray-600 body-font">
             <div className="container px-5 py-6 mx-auto">
