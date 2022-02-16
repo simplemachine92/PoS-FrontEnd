@@ -236,6 +236,21 @@ a:hover {
   z-index: 1;
 }
 
+.ant-table-thead > tr > th {
+  color: black;
+  background: #7ee6cd;
+}
+
+/* //Modify list text and background color   */
+.ant-table-tbody > tr > th {
+  color: white;
+  background: #3071b9;
+}
+
+/* .ant-table-thead {
+  background-color: rgb(127, 127, 127);
+} */
+
 .pledge-container {
   position: relative;
 

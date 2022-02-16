@@ -12,7 +12,7 @@ export default function IntroHeader() {
             <img alt="discord" className="mb-8 -mt-2 object-scale-down " src="assets/book.svg" />
             <div className="mt-10">
               <a
-                href="https://www.google.com"
+                href="/order"
                 target="_blank"
                 rel="noreferrer"
                 className="mt-10 font-spacemono bg-yellow-300 px-8 py-4 text-3xl text-gray-900 font-semibold rounded hover:text-white text-base"

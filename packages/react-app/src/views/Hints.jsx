@@ -11,20 +11,6 @@ import { Link } from "react-router-dom";
 
 const { Option } = Select;
 
-export const StyledTable = styled(Table)`
-  height: 70%;
-  width: 70%;
-  margin: auto;
-  color: #454545;
-
-  border-width: 1px;
-  border-color: #454545;
-  outline: 0;
-  &:hover {
-    color: #454545;
-  }
-`;
-
 export default function Hints({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
   const [ready, setReady] = useState(false);
@@ -106,12 +92,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
       dataIndex: "recipient",
       render: record =>
         record != undefined ? (
-          <Address
-            value={record}
-            ensProvider={mainnetProvider}
-            fontSize={18}
-            style={{ display: "flex", flex: 1, alignItems: "center" }}
-          />
+          <Address class="text-black mx-auto" value={record} ensProvider={mainnetProvider} />
         ) : (
           <Spin />
         ),
@@ -130,6 +111,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
       render: record =>
         record != undefined ? (
           <Link
+            class="text-black mx-auto"
             to={`/view?typedData=${
               record.typedData + "&addresses=" + record.sender + "&signatures=" + record.signature
             }`}
@@ -146,12 +128,11 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
     <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
       <div className="">
         {ready ? (
-          <div>
-            <br />
+          <div className="container mx-auto">
             <h6 className="text-yellow-pos font-bold text-3xl">Signed Pledges</h6>
             <br />
 
-            <StyledTable columns={columns} dataSource={dataSource} />
+            <Table columns={columns} dataSource={dataSource} />
           </div>
         ) : (
           <div>

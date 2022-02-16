@@ -40,7 +40,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
 
         <form action="/order">
           <div className="hero-container">
-            <img src="image/reee.svg" />
+            <img src="assets/headerfix.svg" />
             {/* Fix button redirect */}
 
             <button class="btn">Pre-order</button>
