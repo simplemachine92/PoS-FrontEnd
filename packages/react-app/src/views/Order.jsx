@@ -86,9 +86,7 @@ function Order({ writeContracts, tx }) {
             <img src="assets/pre-order.svg" />
             {/* Fix button redirect */}
 
-            <button className="btn text-5xl font-bold hover:text-yellow-poslight">
-              Signed Copy: Boulder Book Store
-            </button>
+            <button className="btn text-5xl hover:text-yellow-poslight">Signed Copy: Boulder Book Store</button>
           </div>
         </form>
 
