@@ -91,6 +91,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
             pledgeLimit[msg.sender] < pledgeLimitPerUser,
             "One pledge per address"
         );
+        require(pledgeOpen == true);
         require(msg.value >= price);
 
         (bool success, ) = gitcoin.call{value: msg.value}("");

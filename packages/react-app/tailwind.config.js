@@ -11,7 +11,8 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        headerBackground: "url('/src/assets/Header_Background.svg')",
+        headerBackground: "url('/src/assets/Header_only_bg.svg')",
+        ringsBackground: "url('/src/assets/RotatingRings.svg')",
       },
       colors: {
         orange: colors.orange,
@@ -53,7 +54,7 @@ module.exports = {
       "1/2": "50%",
       "3/4": "75%",
       full: "100%",
-      intro: "890px",
+      intro: "1656px",
       "intro-mobile": "450px",
     },
   },
