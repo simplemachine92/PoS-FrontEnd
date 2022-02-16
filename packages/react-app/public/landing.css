@@ -223,7 +223,7 @@ h6 {
 }
 
 a {
-  color: rgb(253 224 71);
+  color: #000000;
 }
 
 a:hover {
@@ -353,15 +353,6 @@ hover {
 }
 
 .buttons-green-pill a {
-  width: 147px;
-  height: 30px;
-  font-family: Space Mono, sans-serif;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 20px;
-  line-height: 30px;
-  text-align: right;
-  text-decoration: underline;
   color: #6f3ff5;
 }
 

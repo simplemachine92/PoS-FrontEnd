@@ -90,12 +90,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
     {
       title: FilterByNameInput,
       dataIndex: "recipient",
-      render: record =>
-        record != undefined ? (
-          <Address class="text-black mx-auto" value={record} ensProvider={mainnetProvider} />
-        ) : (
-          <Spin />
-        ),
+      render: record => (record != undefined ? <Address value={record} ensProvider={mainnetProvider} /> : <Spin />),
       key: "1",
     },
     {
