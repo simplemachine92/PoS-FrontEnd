@@ -10,7 +10,7 @@ export default function IntroHeader() {
         <div className="max-w-md py-10 px-10">
           <div className="py-10 px-10 backdrop-filter backdrop-blur-xl rounded-lg">
             <div class="text-center mt-4 backdrop-blur-md">
-              <img alt="Book" className="mb-8 -mt-2 object-scale-down " src="assets/book.svg" />
+              <img alt="Book" className="mb-8" src="assets/book_and_shadow.svg" />
               <a
                 href="https://www.google.com"
                 target="_blank"
