@@ -10,12 +10,12 @@ export default function IntroHeader() {
         <div className="max-w-md py-10 px-10">
           <div className="py-10 px-10 backdrop-filter backdrop-blur-xl rounded-lg">
             <div class="text-center mt-4 backdrop-blur-md">
-              <img alt="Book" className="mb-8" src="assets/book_and_shadow.svg" />
+              <img alt="Book" className="mb-8 ml-1" src="assets/book_and_shadow.svg" />
               <a
-                href="https://www.google.com"
+                href="/order"
                 target="_blank"
                 rel="noreferrer"
-                className="mt-10 font-spacemono bg-yellow-300 px-20 py-4 text-lg text-gray-900 font-semibold rounded hover:text-white"
+                className="mt-10 font-spacemono bg-yellow-300 px-10 py-2 mr-10 text-lg text-gray-900 font-semibold rounded hover:text-white"
               >
                 Pre-order
               </a>
