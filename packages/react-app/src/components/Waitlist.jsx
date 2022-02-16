@@ -26,46 +26,42 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
 
   let toSign = [];
 
-  useEffect(
-    async () => {
-      const dbRef = ref(getDatabase(app));
-      get(child(dbRef, `PoS/`)).then(snapshot => {
-        if (snapshot.exists()) {
-          snapshot.forEach(sig => {
-            let message = sig.val().message;
-            dbList.push(message.recipient);
-          });
-          console.log("dblist", dbList);
-          if (dbList.length) {
-            events.forEach(pledge => {
-              eventList.push(pledge.args.pledgee);
-              console.log("event list", eventList);
-              objectList.push(pledge);
-              console.log("object list", objectList);
-              for (let x = 0; x < eventList.length; x++) {
-                if (dbList.includes(eventList[x])) {
-                  // do nothing
-                } else if (eventList[x] != undefined) {
-                  // push to to-do
+  useEffect(async () => {
+    const dbRef = ref(getDatabase(app));
+    get(child(dbRef, `PoS/`)).then(snapshot => {
+      if (snapshot.exists()) {
+        snapshot.forEach(sig => {
+          let message = sig.val().message;
+          dbList.push(message.recipient);
+        });
+        console.log("dblist", dbList);
+        if (dbList.length) {
+          events.forEach(pledge => {
+            eventList.push(pledge.args.pledgee);
+            console.log("event list", eventList);
+            objectList.push(pledge);
+            console.log("object list", objectList);
+            for (let x = 0; x < eventList.length; x++) {
+              if (dbList.includes(eventList[x])) {
+                // do nothing
+              } else {
+                // push to to-do
 
-                  let toPush = JSON.parse(JSON.stringify(objectList[x]));
-                  console.log("to push", toPush);
-                  toPush.address = objectList[x].args[0];
-                  toSign.push(toPush);
-                  setList(toSign);
-                  setReady2(true);
+                let toPush = JSON.parse(JSON.stringify(objectList[x]));
+                console.log("to push", toPush);
+                toPush.address = objectList[x].args[0];
+                toSign.push(toPush);
+                setList(toSign);
 
-                  console.log("list", toSign);
-                }
+                console.log("list", toSign);
               }
-            });
-          }
+            }
+          });
+          setReady2(true);
         }
-      });
-    },
-    [events],
-    [mainnetProvider],
-  );
+      }
+    });
+  }, [events]);
 
   const [value2, setValue2] = useState("");
 
@@ -75,11 +71,11 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
     <Input
       placeholder="Search by Address (Case Sensitive)"
       value={value2}
-      onChange={f => {
-        const currValue2 = f.target.value;
-        setValue2(currValue2);
-        const filteredData2 = list.filter(entry2 => entry2.address.includes(currValue2));
-        setDataSource2(filteredData2);
+      onChange={e => {
+        const currValue = e.target.value;
+        setValue2(currValue);
+        const filteredData = list.filter(entry => entry.address.includes(currValue));
+        setDataSource2(filteredData);
       }}
     />
   );
@@ -88,16 +84,8 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
     {
       title: FilterByNameInput2,
       dataIndex: "address",
-      render: record2 =>
-        ready2 == true && record2 != undefined ? <Address value={record2} ensProvider={mainnetProvider} /> : <Spin />,
+      render: record => (record != undefined ? <Address value={record} ensProvider={mainnetProvider} /> : <Spin />),
       key: "1",
-    },
-    {
-      title: "Pledge",
-      dataIndex: "pledge",
-
-      sorter: (a, b) => a.pledge - b.pledge,
-      sortDirections: ["ascend"],
     },
   ];
 
@@ -105,7 +93,7 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
     <div className="">
       {ready2 == true ? (
         <div className="container mx-auto">
-          <h6 className="text-yellow-pos font-bold text-3xl">Signature Waitlist</h6>
+          <h6 className="text-yellow-pos font-bold text-3xl">Search The Waitlist</h6>
           <br />
           <Table pagination={{ pageSize: 5 }} columns={columns2} dataSource={dataSource2} />
         </div>

@@ -111,7 +111,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
               record.typedData + "&addresses=" + record.sender + "&signatures=" + record.signature
             }`}
           >
-            View
+            Click to View
           </Link>
         ) : (
           <Spin />
