@@ -81,7 +81,7 @@ function Order({ writeContracts, tx }) {
         {/* <h3 className="title">Take the Green Pill:</h3>
           <h3 className="title">Regenerative CryptoEconomics</h3> */}
 
-        <form action="https://www.boulderbookstore.net/">
+        <form action="https://www.boulderbookstore.net/product/proof">
           <div className="hero-container">
             <img src="assets/pre-order.svg" />
             {/* Fix button redirect */}
