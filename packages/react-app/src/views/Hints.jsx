@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Select, Spin, Space, Table, Input, List } from "antd";
 import React, { useState, useEffect } from "react";
-import { Address, BottomLinks } from "../components";
+import { Address, BottomLinks, Waitlist } from "../components";
 
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, get, child } from "firebase/database";
@@ -14,7 +14,6 @@ const { Option } = Select;
 export default function Hints({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
   const [ready, setReady] = useState(false);
-  const [list, setList] = useState();
   const [sData, setData] = useState();
 
   // Initialize Firebase
@@ -70,49 +69,6 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
       });
   }, []);
 
-  let dbList = [];
-
-  let objectList = [];
-
-  let eventList = [];
-
-  let toSign = [];
-
-  useEffect(async () => {
-    const dbRef = ref(getDatabase(app));
-    get(child(dbRef, `PoS/`)).then(snapshot => {
-      if (snapshot.exists()) {
-        snapshot.forEach(sig => {
-          let message = sig.val().message;
-          dbList.push(message.recipient);
-        });
-        console.log("dblist", dbList);
-        if (dbList.length) {
-          events.forEach(pledge => {
-            eventList.push(pledge.args.pledgee);
-            console.log("event list", eventList);
-            objectList.push(pledge);
-            console.log("object list", objectList);
-            for (let x = 0; x < eventList.length; x++) {
-              if (dbList.includes(eventList[x])) {
-                // do nothing
-              } else if (eventList[x] != undefined) {
-                // push to to-do
-
-                let toPush = JSON.parse(JSON.stringify(objectList[x]));
-                console.log("to push", toPush);
-                toPush.address = objectList[x].args[0];
-                toSign.push(toPush);
-                setList(toSign);
-                console.log("list", toSign);
-              }
-            }
-          });
-        }
-      }
-    });
-  }, [events]);
-
   const [value, setValue] = useState("");
 
   const [dataSource, setDataSource] = useState(myData);
@@ -163,22 +119,6 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
     },
   ];
 
-  const columns2 = [
-    {
-      title: FilterByNameInput,
-      dataIndex: "address",
-      render: record => (record != undefined ? <Address value={record} ensProvider={mainnetProvider} /> : <Spin />),
-      key: "1",
-    },
-    {
-      title: "Pledge",
-      dataIndex: "pledge",
-
-      sorter: (a, b) => a.pledge - b.pledge,
-      sortDirections: ["ascend"],
-    },
-  ];
-
   return (
     <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
       <div className="">
@@ -187,11 +127,8 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
             <h6 className="text-yellow-pos font-bold text-3xl">Signed Pledges</h6>
             <br />
 
-            <Table columns={columns} dataSource={dataSource} />
-
-            <h6 className="text-yellow-pos font-bold text-3xl">Awaiting Signature</h6>
-            <br />
-            <Table columns={columns2} dataSource={list} />
+            <Table pagination={{ pageSize: 5 }} columns={columns} dataSource={dataSource} />
+            <Waitlist events={events} firebaseConfig={firebaseConfig} mainnetProvider={mainnetProvider} />
           </div>
         ) : (
           <div>
