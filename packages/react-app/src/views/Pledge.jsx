@@ -30,7 +30,7 @@ export const StyledButton = styled(Button)`
 function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
-  const [uValue, setU] = useState("0.0001337");
+  const [uValue, setU] = useState("0.1337002");
 
   return (
     <>
@@ -65,7 +65,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                   setU(currValue);
                 }}
                 step={0.1}
-                defaultValue={0.1337}
+                defaultValue={0.1337002}
                 onPressEnter={async () => {
                   try {
                     const txCur = await tx(
