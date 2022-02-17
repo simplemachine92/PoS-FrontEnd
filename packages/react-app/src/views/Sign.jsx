@@ -370,6 +370,8 @@ export default function Signator({
                   <Space direction="vertical" style={{ width: "50%" }}>
                     <Input.TextArea
                       style={{ fontSize: 18 }}
+                      maxLength={60}
+                      showCount={true}
                       size="large"
                       autoSize={{ minRows: 1 }}
                       value={messageText}

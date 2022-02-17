@@ -51,7 +51,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
                            EIP-712 STORAGE
     //////////////////////////////////////////////////////////////*/
 
-    address one = 0xb010ca9Be09C382A9f31b79493bb232bCC319f01;
+    address one = 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045;
 
     uint256 internal immutable INITIAL_CHAIN_ID;
 
