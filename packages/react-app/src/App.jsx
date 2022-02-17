@@ -287,6 +287,10 @@ function App(props) {
     }
   }, [loadWeb3Modal]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   const faucetAvailable = localProvider && localProvider.connection && targetNetwork.name.indexOf("local") !== -1;
 
   return (
