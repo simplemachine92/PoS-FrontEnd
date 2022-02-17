@@ -155,7 +155,7 @@ export default function Signator({
       domain: {
         name: "ProofOfStake_Pages",
         version: "0",
-        chainId: 4,
+        chainId: 1,
         verifyingContract: contracts.ProofOfStake_Pages.address,
       },
       message: {

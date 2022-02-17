@@ -20,17 +20,19 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
 
     bool public pledgeOpen;
 
-    uint256 public price = 0.0001337 ether;
+    uint256 internal constant price = 0.1337 ether;
 
-    uint256 public constant pledgeLimitPerUser = 1;
+    uint256 internal constant pledgeLimitPerUser = 1;
 
-    uint256 publisherSplit = 10;
+    uint256 internal constant publisherSplit = 10;
 
     mapping(address => uint256) public pledgeLimit;
 
-    address immutable gitcoin = 0xde21F729137C5Af1b01d73aF1dC21eFfa2B8a0d6;
+    //prettier-ignore
+    address internal immutable gitcoin = 0xde21F729137C5Af1b01d73aF1dC21eFfa2B8a0d6;
 
-    address immutable sevenStories = 0xa62bA93BeFab6bb76B8fbc732c9135460bD23D25;
+    //prettier-ignore
+    address internal immutable sevenStories = 0xa62bA93BeFab6bb76B8fbc732c9135460bD23D25;
 
     struct Token {
         string recipient;
@@ -51,8 +53,8 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
                            EIP-712 STORAGE
     //////////////////////////////////////////////////////////////*/
 
-    address one = 0xb010ca9Be09C382A9f31b79493bb232bCC319f01;
-    // vitalik.eth 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045;
+    //prettier-ignore
+    address internal immutable vitalik = 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045;
 
     uint256 internal immutable INITIAL_CHAIN_ID;
 
@@ -128,7 +130,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
             abi.encode(
                 AUTOGRAPH_TYPEHASH,
                 // Will be wockis address in live v
-                one,
+                vitalik,
                 // Signature will be invalid if it isn't to caller &&
                 // EIP712: "Addresses are encoded as uint160"
                 uint160(msg.sender),
@@ -144,11 +146,8 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
         );
         address signer = ecrecover(hash, v, r, s);
 
-        // Will be vitaliks address in live v
-        require(signer == one, "MyFunction: invalid signature");
+        require(signer == vitalik, "MyFunction: invalid signature");
         require(signer != address(0), "ECDSA: invalid signature");
-
-        require(signer != address(0) && signer == one, "INVALID_SIGNATURE");
 
         _tokenIds.increment();
         uint256 id = _tokenIds.current();

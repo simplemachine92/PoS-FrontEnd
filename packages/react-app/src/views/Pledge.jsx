@@ -66,7 +66,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                   console.log("changin", uValue);
                 }}
                 step={0.1}
-                defaultValue={0.0001337}
+                defaultValue={0.1337}
                 onPressEnter={async () => {
                   try {
                     const txCur = await tx(
