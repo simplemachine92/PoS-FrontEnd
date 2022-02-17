@@ -22,6 +22,12 @@ html {
   scroll-behavior: smooth;
 }
 
+.shadow {
+  -webkit-filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+  /* Similar syntax to box-shadow */
+}
+
 body {
   font-family: Space Mono;
   max-width: 1600px;
