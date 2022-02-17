@@ -159,7 +159,7 @@ export default function Signator({
         verifyingContract: contracts.ProofOfStake_Pages.address,
       },
       message: {
-        sender: "0xb010ca9Be09C382A9f31b79493bb232bCC319f01",
+        sender: `${address}`,
         recipient: `${list[0].args[0]}`,
         pledge: `${pledgeValue}`,
         timestamp: String(Date.now()),
