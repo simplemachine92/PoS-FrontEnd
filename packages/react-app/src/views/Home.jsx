@@ -24,7 +24,7 @@ export const StyledButton = styled(Button)`
 function Home({ writeContracts, tx }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
-  const [uValue, setU] = useState("0.0001337");
+  const [uValue, setU] = useState("0.1337002");
 
   return (
     <div>
@@ -47,7 +47,7 @@ function Home({ writeContracts, tx }) {
             <h5>Make a Pledge:</h5>
             <br />
             <h4>Receive a digitally signed copy of Green Pill</h4>
-            <h4>by pledging at least 0.01337 ETH to Public Goods</h4>
+            <h4>by pledging at least 0.1337 ETH to Public Goods</h4>
             <br />
             <br />
             <InputNumber
@@ -61,7 +61,7 @@ function Home({ writeContracts, tx }) {
                 console.log("changin", uValue);
               }}
               step={0.1}
-              defaultValue={0.1337}
+              defaultValue={0.1337002}
               onPressEnter={async () => {
                 try {
                   const txCur = await tx(writeContracts.GreenPill_Pages.pledge({ value: utils.parseEther(uValue) }));
