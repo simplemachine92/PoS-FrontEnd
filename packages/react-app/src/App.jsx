@@ -57,10 +57,10 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.rinkeby; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.mainnet; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
-const DEBUG = true;
+const DEBUG = false;
 const NETWORKCHECK = true;
 const USE_BURNER_WALLET = false; // toggle burner wallet feature
 const USE_NETWORK_SELECTOR = false;
@@ -307,18 +307,7 @@ function App(props) {
           >
             <Link to="/signatures"></Link>
           </Menu.Item>
-          <Menu.Item
-            icon={
-              <BugOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#000000" }}
-                theme="outlined"
-              />
-            }
-            key="/debug"
-          >
-            <Link to="/debug"></Link>
-          </Menu.Item>
+
           {/* <Menu.Item
             icon={
               <ReadOutlined
