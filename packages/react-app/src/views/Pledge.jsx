@@ -38,14 +38,13 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
         {/* <h3 class="title">Take the Green Pill:</h3>
           <h3 class="title">Regenerative CryptoEconomics</h3> */}
 
-        <form action="/order">
-          <div className="hero-container">
-            <img src="assets/Header_pledge.svg" />
-            {/* Fix button redirect */}
+        <div className="hero-container">
+          <img src="assets/Header_pledge.svg" />
+          {/* Fix button redirect */}
 
-            <button class="btn">Pre-order</button>
-          </div>
-        </form>
+          <button class="btn">Pledge below 👇</button>
+        </div>
+
         <footer className="footer-container">
           <section className="green-pill-form-section">
             <div>

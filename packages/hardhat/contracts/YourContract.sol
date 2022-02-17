@@ -51,7 +51,8 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
                            EIP-712 STORAGE
     //////////////////////////////////////////////////////////////*/
 
-    address one = 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045;
+    address one = 0xb010ca9Be09C382A9f31b79493bb232bCC319f01;
+    // vitalik.eth 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045;
 
     uint256 internal immutable INITIAL_CHAIN_ID;
 
@@ -61,9 +62,6 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
         keccak256(
             "signature(address sender,address recipient,string pledge,string timestamp,string msg)"
         );
-
-    // Prevent replay
-    mapping(uint256 => bool) private usedNonces;
 
     /*///////////////////////////////////////////////////////////////
                               STRUCTOR
@@ -96,8 +94,8 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
             pledgeLimit[msg.sender] < pledgeLimitPerUser,
             "One pledge per address"
         );
-        require(pledgeOpen == true);
-        require(msg.value >= price);
+        require(pledgeOpen == true, "Pledging is currently closed");
+        require(msg.value >= price, "Min Pledge is 0.1337 ETH");
 
         uint sShare = (msg.value * publisherSplit) / 100;
 
@@ -124,9 +122,6 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
     ) external {
         require(balanceOf(msg.sender) < 1, "UNIQUE: One per Address");
 
-        /* require(!usedNonces[_nonce]);
-        usedNonces[_nonce] = true; */
-
         (uint8 v, bytes32 r, bytes32 s) = splitSignature(_signature);
 
         bytes32 hashStruct = keccak256(
@@ -152,6 +147,8 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
         // Will be vitaliks address in live v
         require(signer == one, "MyFunction: invalid signature");
         require(signer != address(0), "ECDSA: invalid signature");
+
+        require(signer != address(0) && signer == one, "INVALID_SIGNATURE");
 
         _tokenIds.increment();
         uint256 id = _tokenIds.current();
@@ -219,7 +216,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
             abi.encodePacked(
                 '<svg xmlns="http://www.w3.org/2000/svg" width="8.42in" height="11.38in" viewBox="0 0 606.27 819.53">',
                 '<defs><style>.a{fill:none;stroke:#d9c8db;stroke-miterlimit:10;stroke-width:2px;}.b{font-size:60px;fill:#e96b5d;}.b,.q{font-family:BodoniSvtyTwoOSITCTT-Bold, "Bodoni 72 Oldstyle";font-weight:700;}.c,.e,.h,.j,.k,.s,.t{letter-spacing:0.02em;}.d,.l,.q{fill:#9b4a8d;}.d{letter-spacing:0.02em;}.e{fill:#9b4a8c;}.f,.g,.h,.o{fill:#0cb6ea;}.f,.g{font-size:55px;font-family:BodoniSvtyTwoOSITCTT-BookIt, "Bodoni 72 Oldstyle";font-weight:400;font-style:italic;}.f{letter-spacing:0.02em;}.i,.k{fill:#50ae58;}.i,.r,.u,.v{letter-spacing:0.02em;}.j,.m{fill:#f18a14;}.n,.r,.t{fill:#336d36;}.p{fill:#6d302c;}.q{font-size:30px;}.s,.u{fill:#000;}</style></defs><rect width="100%" height="100%" fill="white"/><rect class="a" x="21.87" y="169.54" width="562.52" height="562.52"/><text class="b" transform="translate(74.59 50.94)"><tspan class="c">P</tspan><tspan class="d" x="35.04" y="0">R</tspan><tspan class="c" x="74.46" y="0">O</tspan><tspan class="d" x="118.26" y="0">O</tspan><tspan class="e" x="162.06" y="0">F </tspan><tspan class="f" x="207.24" y="0">o</tspan><tspan class="g" x="233.75" y="0">f</tspan><tspan class="h" x="248.54" y="0" xml:space="preserve"></tspan><tspan class="i" x="269.06" y="0">ST</tspan><tspan class="j" x="336.38" y="0">AK</tspan><tspan class="k" x="420.86" y="0">E</tspan></text><polygon class="l" points="302.87 85.41 301.8 89.02 301.8 193.94 302.87 195 351.57 166.21 302.87 85.41"/><polygon class="m" points="302.87 85.41 254.17 166.21 302.87 195 302.87 144.08 302.87 85.41"/><polygon class="n" points="302.87 204.22 302.27 204.95 302.27 242.32 302.87 244.07 351.6 175.45 302.87 204.22"/><polygon class="o" points="302.87 244.07 302.87 204.22 254.17 175.45 302.87 244.07"/><polygon class="p" points="302.87 195 351.56 166.21 302.87 144.08 302.87 195"/><polygon class="l" points="254.17 166.21 302.87 195 302.87 144.08 254.17 166.21"/><text class="q" transform="translate(184.82 767.07)"></text>',
-                '<text transform="translate(75 352.85)" font-size="16" font-family="ArialMT, Arial">{<tspan x="0" y="28.8">"signer": 0xAb5801a7D398351b8bE11C439e05C5B3259aeC9B,</tspan>',
+                '<text transform="translate(75 352.85)" font-size="16" font-family="ArialMT, Arial">{<tspan x="0" y="28.8">"signer": 0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045,</tspan>',
                 '<tspan x="0" y="57.6">"timestamp": ',
                 tokens[id].timestamp,
                 ',</tspan><tspan x="0" y="86.4" xml:space="preserve">"recipient": 0x',

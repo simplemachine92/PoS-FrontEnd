@@ -8,7 +8,7 @@ export default function IntroHeader() {
     <div className="flex flex-wrap bg-ringsBackground bg-no-repeat bg-right bg-auto">
       <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
         <div className="max-w-md py-10">
-          <div className="py-10 backdrop-filter rounded-lg content-center">
+          <div className="py-0 backdrop-filter rounded-lg content-center">
             <img alt="Book" className="mb-8 ml-7" src="assets/book_and_shadow.svg" />
             <button
               class="px-14 ml-6 py-2 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
