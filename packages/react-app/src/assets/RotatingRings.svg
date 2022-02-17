@@ -4,7 +4,7 @@
                           type="rotate"
                           from="0 0 0"
                           to="360 0 0"
-                          dur="10s"
+                          dur="30s"
                           repeatCount="indefinite"/>
 <path d="M827.411 1019.96V1663.33" stroke="#5BF1CD" stroke-width="1.5" stroke-miterlimit="10"/>
 <path d="M827.411 0V632.901" stroke="#5BF1CD" stroke-width="1.5" stroke-miterlimit="10"/>
