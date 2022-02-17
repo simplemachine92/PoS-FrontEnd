@@ -12,11 +12,12 @@ export default function IntroHeader() {
             <div className="text-center">
               <img alt="Book" className="mb-8 ml-1" src="assets/book_and_shadow.svg" />
               <button
-                href="https://www.boulderbookstore.net/product/proof"
                 class="font-spacemono px-12 py-2 mr-10 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                type="button"
+                type="btn btn-primary"
               >
-                Pre-order
+                <a href="https://www.boulderbookstore.net/product/proof" class="btn btn-primary">
+                  Pre-Order
+                </a>
               </button>
             </div>
           </div>
