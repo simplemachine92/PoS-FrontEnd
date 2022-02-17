@@ -63,7 +63,6 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 onChange={e => {
                   const currValue = String(e);
                   setU(currValue);
-                  console.log("changin", uValue);
                 }}
                 step={0.1}
                 defaultValue={0.1337}
@@ -73,9 +72,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                       writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
                     );
                     await txCur.wait();
-                  } catch {
-                    console.log("pledge failed");
-                  }
+                  } catch {}
                 }}
               />
               {address ? (
