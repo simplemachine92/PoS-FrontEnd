@@ -473,7 +473,7 @@ function SignatorViewer({
       <div className="background-greenpill" style={{ paddingTop: 20, background: "#2bcfd9" }}>
         
         <Space direction="horizontal" style={{ width: "auto" }}>
-          signed by
+          {/* signed by
           <List
             locale={{ emptyText: "No signatures" }}
             dataSource={signatures}
@@ -501,7 +501,7 @@ function SignatorViewer({
                 </List.Item>
               );
             }}
-          />
+          /> */}
         </Space>
         <br />
         {dataImage != undefined ? (

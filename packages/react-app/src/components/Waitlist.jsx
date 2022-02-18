@@ -1,13 +1,9 @@
-import styled from "styled-components";
 import { Select, Spin, Space, Table, Input, List } from "antd";
 import React, { useState, useEffect } from "react";
 import { Address, BottomLinks } from "../components";
 
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, get, child } from "firebase/database";
-import { Footer, Quotes, AboutTheBook, GitcoinBar } from "../components";
-
-import { Link } from "react-router-dom";
 
 export default function Waitlist({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
@@ -42,7 +38,7 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
             objectList.push(pledge);
             console.log("object list", objectList);
             for (let x = 0; x < eventList.length; x++) {
-              if (dbList.includes(eventList[x])) {
+              if (!dbList.includes(eventList[x])) {
                 // do nothing
               } else {
                 // push to to-do
@@ -54,10 +50,10 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
                 setList(toSign);
 
                 console.log("list", toSign);
+                setReady2(true);
               }
             }
           });
-          setReady2(true);
         }
       }
     });
@@ -74,7 +70,7 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
       onChange={e => {
         const currValue = e.target.value;
         setValue2(currValue);
-        const filteredData = list.filter(entry => entry.address.includes(currValue));
+        const filteredData = toSign.filter(entry => entry.address.includes(currValue));
         setDataSource2(filteredData);
       }}
     />
@@ -90,18 +86,8 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
   ];
 
   return (
-    <div className="">
-      {ready2 == true ? (
-        <div className="container mx-auto">
-          <h6 className="text-yellow-pos font-bold text-3xl">Search The Waitlist</h6>
-          <br />
-          <Table pagination={{ pageSize: 5 }} columns={columns2} dataSource={dataSource2} />
-        </div>
-      ) : (
-        <div>
-          <Spin />
-        </div>
-      )}
+    <div>
+      <h3>🚧 Waitlist is being upgraded. Made a pledge? We will be signing soon! 🚧</h3>
     </div>
   );
 }

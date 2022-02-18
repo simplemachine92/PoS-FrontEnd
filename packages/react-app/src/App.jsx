@@ -34,6 +34,7 @@ import {
   NetworkDisplay,
   FaucetHint,
   NetworkSwitch,
+  AfterPledge,
 } from "./components";
 import { NETWORKS, ALCHEMY_KEY } from "./constants";
 import externalContracts from "./contracts/external_contracts";
@@ -379,6 +380,17 @@ function App(props) {
         </Route>
         <Route path="/pledge">
           <Pledge
+            yourLocalBalance={yourLocalBalance}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            tx={tx}
+            localProvider={localProvider}
+            loadWeb3Modal={loadWeb3Modal}
+            address={address}
+          />
+        </Route>
+        <Route path="/complete">
+          <AfterPledge
             yourLocalBalance={yourLocalBalance}
             writeContracts={writeContracts}
             readContracts={readContracts}

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import { Button, InputNumber } from "antd";
 import { Footer, Quotes } from "../components";
+import { Redirect } from "react-router-dom";
 
 const { utils, BigNumber } = require("ethers");
 
@@ -52,7 +53,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
 
               <h3 className="text-2xl p-10">
                 Receive a digitally signed book plate (with your full digital copy upon release) and an optional to mint
-                "Soulbound" NFT 👀
+                book-plate. 👀
               </h3>
 
               <InputNumber
@@ -86,6 +87,8 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                         writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
                       );
                       await txCur.wait();
+                      // We need a redirect to /complete, this isnt working.
+                      //return <Redirect to="/complete" />;
                     } catch {
                       console.log("button pledge failed");
                     }

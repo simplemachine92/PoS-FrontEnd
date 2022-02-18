@@ -118,7 +118,6 @@ export default function Signator({
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-    console.log("Success:", values);
   };
 
   const onFinishFailed = errorInfo => {
