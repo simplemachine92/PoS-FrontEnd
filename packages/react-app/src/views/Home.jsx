@@ -1,9 +1,17 @@
 import styled from "styled-components";
-import React, { useState } from "react";
-import { Button, InputNumber } from "antd";
+import React, { Suspense } from "react";
+import { Spin } from "antd";
 import { Footer, Quotes, AboutTheBook, GitcoinBar, IntroHeader } from "../components";
 
-const { utils, BigNumber } = require("ethers");
+const FooterLazy = React.lazy(() => import("../components/Footer"));
+
+const AboutLazy = React.lazy(() => import("../components/AboutTheBook"));
+
+const QuotesLazy = React.lazy(() => import("../components/Quotes"));
+
+const GitcoinBarLazy = React.lazy(() => import("../components/GitcoinBar"));
+
+const IntroHeaderLazy = React.lazy(() => import("../components/IntroHeader"));
 
 /**
  * web3 props can be passed from '../App.jsx' into your local view component for use
@@ -12,22 +20,55 @@ const { utils, BigNumber } = require("ethers");
  * @returns react component
  */
 function Home({ writeContracts, tx }) {
-  // you can also use hooks locally in your component of choice
-  // in this case, let's keep track of 'purpose' variable from our contract
-  const [uValue, setU] = useState("0.0001337");
-
   return (
-    <div>
-      <IntroHeader />
-      <GitcoinBar />
-      <AboutTheBook />
-      <Quotes />
-      <Footer />
-    </div>
+    <>
+      <Suspense
+        fallback={
+          <div>
+            <Spin />
+          </div>
+        }
+      >
+        <IntroHeaderLazy />
+      </Suspense>
+      <Suspense
+        fallback={
+          <div>
+            <Spin />
+          </div>
+        }
+      >
+        <GitcoinBarLazy />
+      </Suspense>
+      <Suspense
+        fallback={
+          <div>
+            <Spin />
+          </div>
+        }
+      >
+        <AboutLazy />
+      </Suspense>
+      <Suspense
+        fallback={
+          <div>
+            <Spin />
+          </div>
+        }
+      >
+        <QuotesLazy />
+      </Suspense>
+      <Suspense
+        fallback={
+          <div>
+            <Spin />
+          </div>
+        }
+      >
+        <FooterLazy />
+      </Suspense>
+    </>
   );
-
-  //<section className="coordination-hero background-bubble">
-  // return <div className="pledge"></div>;
 }
 
 export default Home;
