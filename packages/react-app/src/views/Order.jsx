@@ -78,19 +78,35 @@ function Order({ writeContracts, tx }) {
   return (
     <>
       <div>
-        {/* <h3 className="title">Take the Green Pill:</h3>
-          <h3 className="title">Regenerative CryptoEconomics</h3> */}
-
         <form action="https://www.boulderbookstore.net/product/proof">
-          <div className="hero-container">
-            <img src="assets/pre-order.svg" />
-            {/* Fix button redirect */}
-
-            <button className="btn text-5xl hover:text-yellow-poslight">Signed Copy: Boulder Book Store</button>
+          <div className="">
+            {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
+            <div className="flex flex-wrap bg-headerBackground bg-cover bg-no-repeat bg-right bg-auto">
+              <div className="flex flex-wrap w-1/3">
+                <img class="shadow" className="mb-8 object-fit" src="assets/OrderText.svg" />
+              </div>
+              <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
+                <div className="max-w-md py-10">
+                  <div className="py-0 backdrop-filter rounded-lg content-center">
+                    <img alt="Book" className="mb-4 ml-7" src="assets/book_and_shadow.svg" />
+                    <form action="/order">
+                      <button
+                        class="px-6 py-3 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                        type="btn btn-primary"
+                      >
+                        Signed Copy: Boulder Book Store
+                      </button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* <img src="assets/pre-order.svg" /> */}
           </div>
         </form>
 
-        <footer className="pledge-container">
+        <footer className="">
+          <br />
           <h5 className="text-2xl">Pre-Order Now</h5>
 
           <section className="text-gray-600 body-font">

@@ -1,4 +1,4 @@
-import { Alert, Button, Col, Menu, Row, Affix } from "antd";
+import { Menu, Affix } from "antd";
 import "antd/dist/antd.css";
 import {
   useBalance,
@@ -10,38 +10,17 @@ import {
 } from "eth-hooks";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import React, { useCallback, useEffect, useState } from "react";
-import {
-  HomeOutlined,
-  BugOutlined,
-  QuestionCircleOutlined,
-  ReadOutlined,
-  UserOutlined,
-  BookOutlined,
-  ShoppingCartOutlined,
-} from "@ant-design/icons";
+import { HomeOutlined, UserOutlined, BookOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
-import {
-  Account,
-  Contract,
-  Faucet,
-  Events,
-  GasGauge,
-  Header,
-  Ramp,
-  ThemeSwitch,
-  NetworkDisplay,
-  FaucetHint,
-  NetworkSwitch,
-  AfterPledge,
-} from "./components";
+import { Account, Contract, NetworkDisplay, FaucetHint, AfterPledge } from "./components";
 import { NETWORKS, ALCHEMY_KEY } from "./constants";
 import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, ExampleUI, Hints, Subgraph, Sign, Pledge, Order } from "./views";
+import { Home, Hints, Sign, Pledge, Order } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
@@ -81,7 +60,7 @@ const { ethers } = require("ethers");
 const initialNetwork = NETWORKS.mainnet; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
-const DEBUG = false;
+const DEBUG = true;
 const NETWORKCHECK = true;
 const USE_BURNER_WALLET = false; // toggle burner wallet feature
 const USE_NETWORK_SELECTOR = false;
@@ -323,31 +302,10 @@ function App(props) {
             Leaderboard
             <Link to="/signatures"></Link>
           </Menu.Item>
-
-          {/* <Menu.Item
-            icon={
-              <ReadOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
-                theme="outlined"
-              />
-            }
-            key="/exampleui"
-          >
-            <Link to="/exampleui"></Link>
-          </Menu.Item> */}
         </StyledMenu>
         <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
           <div style={{ display: "flex", flex: 1, alignItems: "center" }}>
-            {USE_NETWORK_SELECTOR && (
-              <div style={{ marginRight: 20 }}>
-                {/* <NetworkSwitch
-                networkOptions={networkOptions}
-                selectedNetwork={selectedNetwork}
-                setSelectedNetwork={setSelectedNetwork}
-              /> */}
-              </div>
-            )}
+            {USE_NETWORK_SELECTOR && <div style={{ marginRight: 20 }}></div>}
             <Account
               useBurner={USE_BURNER_WALLET}
               address={address}
@@ -472,43 +430,13 @@ function App(props) {
             events={events}
           />
         </Route>
-        <Route path="/mainnetdai">
-          <Contract
-            name="DAI"
-            customContract={mainnetContracts && mainnetContracts.contracts && mainnetContracts.contracts.DAI}
-            signer={userSigner}
-            provider={mainnetProvider}
-            address={address}
-            blockExplorer="https://etherscan.io/"
-            contractConfig={contractConfig}
-            chainId={1}
-          />
-          {/*
-            <Contract
-              name="UNI"
-              customContract={mainnetContracts && mainnetContracts.contracts && mainnetContracts.contracts.UNI}
-              signer={userSigner}
-              provider={mainnetProvider}
-              address={address}
-              blockExplorer="https://etherscan.io/"
-            />
-            */}
-        </Route>
-        <Route path="/subgraph">
-          <Subgraph
-            subgraphUri={props.subgraphUri}
-            tx={tx}
-            writeContracts={writeContracts}
-            mainnetProvider={mainnetProvider}
-          />
-        </Route>
       </Switch>
 
       {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
 
       {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
-      <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
-        {/* <Row align="middle" gutter={[4, 4]}>
+      {/* <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
+        <Row align="middle" gutter={[4, 4]}>
           <Col span={8}>
             <Ramp price={price} address={address} networks={NETWORKS} />
           </Col>
@@ -530,12 +458,11 @@ function App(props) {
               Support
             </Button>
           </Col>
-        </Row> */}
+        </Row>
 
         <Row align="middle" gutter={[4, 4]}>
           <Col span={24}>
             {
-              /*  if the local provider has a signer, let's show the faucet:  */
               faucetAvailable ? (
                 <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
               ) : (
@@ -544,7 +471,7 @@ function App(props) {
             }
           </Col>
         </Row>
-      </div>
+      </div> */}
     </div>
   );
 }

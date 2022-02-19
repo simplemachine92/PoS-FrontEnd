@@ -11,7 +11,7 @@ module.exports = {
   theme: {
     extend: {
       backgroundImage: {
-        headerBackground: "url('/src/assets/Header_only_bg.svg')",
+        headerBackground: "url('/src/assets/Bareheader.svg')",
         ringsBackground: "url('/src/assets/RotatingRings.svg')",
       },
       colors: {

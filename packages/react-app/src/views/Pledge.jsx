@@ -39,21 +39,33 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
         {/* <h3 class="title">Take the Green Pill:</h3>
           <h3 class="title">Regenerative CryptoEconomics</h3> */}
 
-        <div className="hero-container">
-          <img src="assets/Header_pledge.svg" />
-          {/* Fix button redirect */}
+        <form action="https://www.boulderbookstore.net/product/proof">
+          <div className="">
+            {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
+            <div className="flex flex-wrap bg-headerBackground bg-cover bg-no-repeat bg-right bg-auto">
+              <div className="flex flex-wrap w-1/3">
+                <img class="shadow" className=" object-fit" src="assets/PledgeText.svg" />
+              </div>
+              <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
+                <div className="max-w-md py-10">
+                  <div className="py-0 backdrop-filter rounded-lg content-center">
+                    <img alt="Book" className="mb-8 ml-7" src="assets/book_and_shadow.svg" />
+                    <form action="/order"></form>
+                  </div>
+                </div>
+              </div>
+            </div>
+            {/* <img src="assets/pre-order.svg" /> */}
+          </div>
+        </form>
 
-          <button class="btn">Pledge below 👇</button>
-        </div>
-
-        <footer className="footer-container">
+        <footer className="">
           <section className="green-pill-form-section">
             <div>
               <h5>Make a Pledge</h5>
 
               <h3 className="text-2xl p-10">
-                Receive a digitally signed book plate (with your full digital copy upon release) and an optional to mint
-                book-plate. 👀
+                Receive a digitally signed book plate (from Vitalik.eth) and mint it (on-chain 😘 👀).
               </h3>
 
               <InputNumber
