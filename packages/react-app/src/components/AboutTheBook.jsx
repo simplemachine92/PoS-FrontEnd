@@ -12,7 +12,7 @@ export default function AboutTheBook() {
           from signed digital copies go 100% to funding public goods.
         </h3>
       </div>
-      <div className="container px-5 mx-auto mt-20 mb-20">
+      <div className="container px-5 mx-auto mt-20 mb-56 sm:mb-48 md:mb-24 lg:mb-16 xl:mb-20">
         <div className="flex flex-wrap -m-4">
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-3/4 text-center">
@@ -26,7 +26,7 @@ export default function AboutTheBook() {
               <a href="/pledge" target="_blank" rel="noreferrer">
                 <img className="h-3/4 w-50 ml-2 -mt-2 object-center inline-block" src="assets/Pledge1.svg" />
                 <br />
-                <p className="text-center auto-mx text-white italic text-xs">
+                <p className="text-center mx-auto text-white italic text-xs">
                   For pledges made here, 90% of funds go to the Gitcoin Grants matching pool and 10% to our publishing
                   partner, Seven Stories Press.
                 </p>
