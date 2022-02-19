@@ -88,15 +88,14 @@ function Order({ writeContracts, tx }) {
               <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
                 <div className="max-w-md py-10">
                   <div className="py-0 backdrop-filter rounded-lg content-center">
-                    <img alt="Book" className="mb-4 ml-7" src="assets/book_and_shadow.svg" />
-                    <form action="/order">
-                      <button
-                        class="px-6 py-3 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                        type="btn btn-primary"
-                      >
-                        Signed Copy: Boulder Book Store
-                      </button>
-                    </form>
+                    <img alt="Book" className="mb-8 ml-7" src="assets/book_and_shadow.svg" />
+
+                    <button
+                      class="px-6 py-3 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                      type="btn btn-primary"
+                    >
+                      Signed Copy: Boulder Book Store
+                    </button>
                   </div>
                 </div>
               </div>

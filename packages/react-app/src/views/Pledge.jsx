@@ -31,7 +31,7 @@ export const StyledButton = styled(Button)`
 function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
-  const [uValue, setU] = useState("0.1337002");
+  const [uValue, setU] = useState("0.1337");
 
   return (
     <>
@@ -39,25 +39,28 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
         {/* <h3 class="title">Take the Green Pill:</h3>
           <h3 class="title">Regenerative CryptoEconomics</h3> */}
 
-        <form action="https://www.boulderbookstore.net/product/proof">
-          <div className="">
-            {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
-            <div className="flex flex-wrap bg-headerBackground bg-cover bg-no-repeat bg-right bg-auto">
-              <div className="flex flex-wrap w-1/3">
-                <img class="shadow" className=" object-fit" src="assets/PledgeText.svg" />
-              </div>
-              <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
-                <div className="max-w-md py-10">
-                  <div className="py-0 backdrop-filter rounded-lg content-center">
-                    <img alt="Book" className="mb-8 ml-7" src="assets/book_and_shadow.svg" />
-                    <form action="/order"></form>
-                  </div>
+        <div className="">
+          {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
+          <div className="flex flex-wrap bg-headerBackground bg-cover bg-no-repeat bg-right bg-auto">
+            <div className="flex flex-wrap w-1/3">
+              <img class="shadow" className=" object-fit" src="assets/PledgeText.svg" />
+            </div>
+            <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
+              <div className="max-w-md py-10">
+                <div className="py-0 backdrop-filter rounded-lg content-center">
+                  <img alt="Book" className="mb-8 ml-7" src="assets/book_and_shadow.svg" />
+                  <button
+                    class="px-6 py-3 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                    type="btn btn-primary"
+                  >
+                    Pledge Below 👇
+                  </button>
                 </div>
               </div>
             </div>
-            {/* <img src="assets/pre-order.svg" /> */}
           </div>
-        </form>
+          {/* <img src="assets/pre-order.svg" /> */}
+        </div>
 
         <footer className="">
           <section className="green-pill-form-section">
@@ -78,7 +81,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                   setU(currValue);
                 }}
                 step={0.1}
-                defaultValue={0.1337002}
+                defaultValue={0.1337}
                 onPressEnter={async () => {
                   try {
                     const txCur = await tx(
