@@ -4,7 +4,7 @@ import "./Quotes.css";
 export default function Quotes() {
   return (
     <div className="container gap-4 px-5 py-6 mx-auto flex flex-col md:flex-row items-center justify-center max-w-11/12">
-      <div className='w-full md:w-4/12'>
+      <div className="w-full md:w-4/12">
         <img className="w-full" src="assets/eth_circle_3.svg" alt="Eth Circle" />
       </div>
       <div className="w-full flex items-center md:w-6/12 gap-4">

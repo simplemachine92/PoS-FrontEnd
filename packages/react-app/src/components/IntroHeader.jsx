@@ -5,7 +5,10 @@ import React from "react";
 export default function IntroHeader() {
   return (
     // We need proper resizing on book image, button, and fix the "Coming Soon" styling
-    <div className="flex flex-wrap bg-ringsBackground bg-no-repeat bg-right bg-auto">
+
+    /* This bg isn't responsive yet*/
+    <div className="svg-container flex flex-wrap bg-no-repeat bg-ringsBackground bg-right bg-auto">
+      {/*  */}
       <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
         <div className="max-w-md py-10">
           <div className="py-0 backdrop-filter rounded-lg content-center">
