@@ -24,7 +24,7 @@ export default function AboutTheBook() {
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-full text-center">
               <a href="/pledge" target="_blank" rel="noreferrer">
-                <img className="h-3/4 w-50 ml-2 -mt-2 object-center inline-block" src="assets/Pledge1.svg" />
+                <img className="h-3/4 w-50 -mt-2 object-center inline-block" src="assets/Pledge1.svg" />
                 <br />
                 <p className="text-center mx-auto text-white italic text-xs">
                   For pledges made here, 90% of funds go to the Gitcoin Grants matching pool and 10% to our publishing
@@ -36,7 +36,7 @@ export default function AboutTheBook() {
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-3/4 text-center">
               <a href="/signatures" target="_blank" rel="noreferrer">
-                <img className="h-3/4 w-50 ml-4 object-center inline-block" src="assets/Download.svg" />
+                <img className="h-3/4 object-center inline-block" src="assets/Download.svg" />
               </a>
             </div>
             <br />
