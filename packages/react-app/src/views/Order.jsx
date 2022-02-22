@@ -91,10 +91,10 @@ function Order({ writeContracts, tx }) {
                     <img alt="Book" className="mb-8 ml-7" src="assets/book_and_shadow.svg" />
 
                     <button
-                      class="px-6 py-3 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                      class="px-4 ml-5 py-3 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                       type="btn btn-primary"
                     >
-                      Signed Copy: Boulder Book Store
+                      Signed Copy
                     </button>
                   </div>
                 </div>
@@ -106,7 +106,7 @@ function Order({ writeContracts, tx }) {
 
         <footer className="">
           <br />
-          <h5 className="text-2xl">Pre-Order Now</h5>
+          <h5 className="text-2xl font-bold">Pre-Order Now!</h5>
 
           <section className="text-gray-600 body-font">
             <div className="container px-5 py-6 mx-auto">
@@ -136,7 +136,8 @@ function Order({ writeContracts, tx }) {
               </div>
             </div>
           </section>
-          <Quotes />
+          {/* Removing this component until its sizing is fixed */}
+          {/* <Quotes /> */}
           <Footer />
         </footer>
       </div>

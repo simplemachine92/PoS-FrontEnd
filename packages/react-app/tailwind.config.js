@@ -13,6 +13,7 @@ module.exports = {
       backgroundImage: {
         headerBackground: "url('/src/assets/Bareheader.svg')",
         ringsBackground: "url('/src/assets/RotatingRings.svg')",
+        smallBackground: "url('/src/assets/Rings_small.svg')",
       },
       colors: {
         orange: colors.orange,

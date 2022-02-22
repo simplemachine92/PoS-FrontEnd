@@ -9,7 +9,7 @@ export default function IntroHeader() {
     /* This bg isn't responsive yet*/
     <div
       class="svg-container"
-      className="flex flex-wrap bg-ringsBackground bg-contain bg-left bg-no-repeat sm:bg-auto sm:bg-right"
+      className="flex flex-wrap bg-smallBackground bg-auto bg-right bg-no-repeat sm:bg-ringsBackground"
     >
       {/*  */}
       <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">

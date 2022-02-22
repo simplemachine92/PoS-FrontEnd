@@ -56,7 +56,8 @@ function Home({ writeContracts, tx }) {
           </div>
         }
       >
-        <QuotesLazy />
+        {/* Removing until components sizing is fixed */}
+        {/* <QuotesLazy /> */}
       </Suspense>
       <Suspense
         fallback={

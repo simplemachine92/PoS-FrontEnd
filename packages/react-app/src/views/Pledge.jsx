@@ -49,12 +49,6 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               <div className="max-w-md py-10">
                 <div className="py-0 backdrop-filter rounded-lg content-center">
                   <img alt="Book" className="mb-8 ml-7" src="assets/book_and_shadow.svg" />
-                  <button
-                    class="px-6 py-3 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                    type="btn btn-primary"
-                  >
-                    Pledge Below 👇
-                  </button>
                 </div>
               </div>
             </div>
@@ -65,11 +59,9 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
         <footer className="">
           <section className="green-pill-form-section">
             <div>
-              <h5>Make a Pledge</h5>
+              <h5 className="font-bold">Make a Pledge</h5>
 
-              <h3 className="text-2xl p-10">
-                Receive a digitally signed book plate (from Vitalik.eth) and mint it (on-chain 😘 👀).
-              </h3>
+              <h3 className="text-sm p-10">Receive a digitally signed book plate from Vitalik.eth</h3>
 
               <InputNumber
                 className="form"
@@ -120,13 +112,15 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
           </section>
 
           <div>
-            <h3 className="p-10 auto-mx text-white italic text-xs">
+            <br />
+            <h3 className="p-1 auto-mx text-white italic text-xs">
               For pledges made here, 90% of funds go to the Gitcoin Grants matching pool and 10% to our publishing
               partner, Seven Stories Press, for supporting public goods in independent publishing. For book copies
               purchased here or anywhere, Vitalik has committed all of his proceeds to Gitcoin Grants.
             </h3>
           </div>
-          <Quotes />
+          {/* Removing this component until sizing is fixed */}
+          {/* <Quotes /> */}
           <Footer />
         </footer>
       </div>
