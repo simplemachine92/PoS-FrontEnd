@@ -7,7 +7,10 @@ export default function IntroHeader() {
     // We need proper resizing on book image, button, and fix the "Coming Soon" styling
 
     /* This bg isn't responsive yet*/
-    <div className="svg-container flex flex-wrap bg-no-repeat bg-ringsBackground bg-right bg-auto">
+    <div
+      class="svg-container"
+      className="flex flex-wrap bg-ringsBackground bg-contain bg-left bg-no-repeat sm:bg-auto sm:bg-right"
+    >
       {/*  */}
       <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
         <div className="max-w-md py-10">
