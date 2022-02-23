@@ -16,6 +16,7 @@ module.exports = {
       },
       colors: {
         orange: colors.orange,
+        primary: "#7ee6cd",
         green: {
           "050": "#6dc5a0",
           "dark-green": "#337062",

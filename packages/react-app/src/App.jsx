@@ -292,19 +292,35 @@ function App(props) {
           mode="horizontal"
           collapsedWidth="0"
         >
-          <Menu.Item key="Home" icon={<HomeOutlined />}>
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="Home"
+            icon={<HomeOutlined />}
+          >
             Home
             <Link to="/"></Link>
           </Menu.Item>
-          <Menu.Item key="mail" icon={<BookOutlined />}>
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="mail"
+            icon={<BookOutlined />}
+          >
             Pledge
             <Link to="/pledge"></Link>
           </Menu.Item>
-          <Menu.Item key="order" icon={<ShoppingCartOutlined />}>
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="order"
+            icon={<ShoppingCartOutlined />}
+          >
             Pre-Order
             <Link to="/order"></Link>
           </Menu.Item>
-          <Menu.Item key="signatures" icon={<UserOutlined />}>
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="signatures"
+            icon={<UserOutlined />}
+          >
             Leaderboard
             <Link to="/signatures"></Link>
           </Menu.Item>
@@ -341,21 +357,46 @@ function App(props) {
             <div className="h-1 w-5 bg-black rounded-md" />
             <div className="h-1 w-5 bg-black rounded-md" />
           </Button>
-          <Drawer placement="left" visible={visible} onClose={() => setVisible(false)}>
-            <Menu>
-              <Menu.Item onClick={() => setVisible(false)} key="Home" icon={<HomeOutlined />}>
+          <Drawer
+            bodyStyle={{ background: "#7ee6cd", paddingTop: "3rem" }}
+            placement="left"
+            visible={visible}
+            onClose={() => setVisible(false)}
+          >
+            <Menu className="bg-primary border-none font-bold">
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="Home"
+                icon={<HomeOutlined />}
+              >
                 Home
                 <Link to="/"></Link>
               </Menu.Item>
-              <Menu.Item onClick={() => setVisible(false)} key="mail" icon={<BookOutlined />}>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="mail"
+                icon={<BookOutlined />}
+              >
                 Pledge
                 <Link to="/pledge"></Link>
               </Menu.Item>
-              <Menu.Item onClick={() => setVisible(false)} key="order" icon={<ShoppingCartOutlined />}>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="order"
+                icon={<ShoppingCartOutlined />}
+              >
                 Pre-Order
                 <Link to="/order"></Link>
               </Menu.Item>
-              <Menu.Item onClick={() => setVisible(false)} key="signatures" icon={<UserOutlined />}>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="signatures"
+                icon={<UserOutlined />}
+              >
                 Leaderboard
                 <Link to="/signatures"></Link>
               </Menu.Item>
