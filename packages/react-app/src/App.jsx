@@ -1,4 +1,4 @@
-import { Menu, Affix } from "antd";
+import { Menu, Affix, Button, Drawer } from "antd";
 import "antd/dist/antd.css";
 import {
   useBalance,
@@ -81,6 +81,7 @@ function App(props) {
 
   const [injectedProvider, setInjectedProvider] = useState();
   const [address, setAddress] = useState();
+  const [visible, setVisible] = useState(false);
   const [selectedNetwork, setSelectedNetwork] = useState(networkOptions[0]);
   const location = useLocation();
 
@@ -285,43 +286,142 @@ function App(props) {
           logoutOfWeb3Modal={logoutOfWeb3Modal}
           USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
         />
-        <StyledMenu style={{ textAlign: "left" }} selectedKeys={[location.pathname]} mode="horizontal">
-          <Menu.Item key="Home" icon={<HomeOutlined />}>
+        <StyledMenu
+          className="hidden justify-start items-center sm:flex"
+          selectedKeys={[location.pathname]}
+          mode="horizontal"
+          collapsedWidth="0"
+        >
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="Home"
+            icon={<HomeOutlined />}
+          >
             Home
             <Link to="/"></Link>
           </Menu.Item>
-          <Menu.Item key="mail" icon={<BookOutlined />}>
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="mail"
+            icon={<BookOutlined />}
+          >
             Pledge
             <Link to="/pledge"></Link>
           </Menu.Item>
-          <Menu.Item key="order" icon={<ShoppingCartOutlined />}>
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="order"
+            icon={<ShoppingCartOutlined />}
+          >
             Pre-Order
             <Link to="/order"></Link>
           </Menu.Item>
-          <Menu.Item key="signatures" icon={<UserOutlined />}>
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="signatures"
+            icon={<UserOutlined />}
+          >
             Leaderboard
             <Link to="/signatures"></Link>
           </Menu.Item>
+
+          <Menu.Item style={{ marginLeft: "auto" }}>
+            <div>
+              {USE_NETWORK_SELECTOR && <div style={{ marginRight: 20 }}></div>}
+              <Account
+                useBurner={USE_BURNER_WALLET}
+                address={address}
+                localProvider={localProvider}
+                userSigner={userSigner}
+                mainnetProvider={mainnetProvider}
+                price={price}
+                web3Modal={web3Modal}
+                loadWeb3Modal={loadWeb3Modal}
+                logoutOfWeb3Modal={logoutOfWeb3Modal}
+                blockExplorer={blockExplorer}
+              />
+            </div>
+            {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
+              <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
+            )}
+          </Menu.Item>
         </StyledMenu>
-        <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
-          <div style={{ display: "flex", flex: 1, alignItems: "center" }}>
-            {USE_NETWORK_SELECTOR && <div style={{ marginRight: 20 }}></div>}
-            <Account
-              useBurner={USE_BURNER_WALLET}
-              address={address}
-              localProvider={localProvider}
-              userSigner={userSigner}
-              mainnetProvider={mainnetProvider}
-              price={price}
-              web3Modal={web3Modal}
-              loadWeb3Modal={loadWeb3Modal}
-              logoutOfWeb3Modal={logoutOfWeb3Modal}
-              blockExplorer={blockExplorer}
-            />
+
+        <div className="flex sm:hidden justify-between p-2" style={{ background: "#7ee6cd" }}>
+          <Button
+            type="primary"
+            onClick={() => setVisible(true)}
+            className="flex flex-col justify-center items-center gap-1"
+          >
+            <div className="h-1 w-5 bg-black rounded-md" />
+            <div className="h-1 w-5 bg-black rounded-md" />
+            <div className="h-1 w-5 bg-black rounded-md" />
+          </Button>
+          <Drawer
+            bodyStyle={{ background: "#7ee6cd", paddingTop: "3rem" }}
+            placement="left"
+            visible={visible}
+            onClose={() => setVisible(false)}
+          >
+            <Menu className="bg-primary border-none font-bold">
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="Home"
+                icon={<HomeOutlined />}
+              >
+                Home
+                <Link to="/"></Link>
+              </Menu.Item>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="mail"
+                icon={<BookOutlined />}
+              >
+                Pledge
+                <Link to="/pledge"></Link>
+              </Menu.Item>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="order"
+                icon={<ShoppingCartOutlined />}
+              >
+                Pre-Order
+                <Link to="/order"></Link>
+              </Menu.Item>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="signatures"
+                icon={<UserOutlined />}
+              >
+                Leaderboard
+                <Link to="/signatures"></Link>
+              </Menu.Item>
+            </Menu>
+          </Drawer>
+          <div>
+            <div>
+              {USE_NETWORK_SELECTOR && <div style={{ marginRight: 20 }}></div>}
+              <Account
+                useBurner={USE_BURNER_WALLET}
+                address={address}
+                localProvider={localProvider}
+                userSigner={userSigner}
+                mainnetProvider={mainnetProvider}
+                price={price}
+                web3Modal={web3Modal}
+                loadWeb3Modal={loadWeb3Modal}
+                logoutOfWeb3Modal={logoutOfWeb3Modal}
+                blockExplorer={blockExplorer}
+              />
+            </div>
+            {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
+              <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
+            )}
           </div>
-          {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
-            <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
-          )}
         </div>
       </Affix>
       <Switch>
