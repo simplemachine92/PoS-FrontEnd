@@ -87,7 +87,7 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
 
   return (
     <div>
-      <h3>🚧 Waitlist is being upgraded. Made a pledge? We will be signing soon! 🚧</h3>
+      <h3 className="text-xl">🚧 Waitlist is being upgraded. Made a pledge? We will be signing soon! 🚧</h3>
     </div>
   );
 }

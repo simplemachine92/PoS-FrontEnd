@@ -75,7 +75,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
 
   const FilterByNameInput = (
     <Input
-      placeholder="Search by Address (Case Sensitive)"
+      placeholder="Search Address (Case Sensitive)"
       value={value}
       onChange={e => {
         const currValue = e.target.value;
@@ -92,13 +92,6 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
       dataIndex: "recipient",
       render: record => (record != undefined ? <Address value={record} ensProvider={mainnetProvider} /> : <Spin />),
       key: "1",
-    },
-    {
-      title: "Pledge",
-      dataIndex: "pledge",
-
-      sorter: (a, b) => a.pledge - b.pledge,
-      sortDirections: ["ascend"],
     },
     {
       title: "Signature",
@@ -123,11 +116,11 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
     <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
       <div className="">
         {ready ? (
-          <div className="container mx-auto">
+          <div className="mx-auto mr-1 ml-1">
             <h6 className="text-yellow-pos font-bold text-3xl">Signed Pledges</h6>
             <br />
 
-            <Table pagination={{ pageSize: 5 }} columns={columns} dataSource={dataSource} />
+            <Table className="mx-auto" pagination={{ pageSize: 5 }} columns={columns} dataSource={dataSource} />
             <Waitlist events={events} firebaseConfig={firebaseConfig} mainnetProvider={mainnetProvider} />
           </div>
         ) : (
