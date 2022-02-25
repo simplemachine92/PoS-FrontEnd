@@ -25,11 +25,6 @@ export default function AboutTheBook() {
             <div className="h-full text-center">
               <a href="/pledge" target="_blank" rel="noreferrer">
                 <img className="h-3/4 ml-1 -mt-2 object-center inline-block" src="assets/Pledge1.svg" />
-                <br />
-                {/* <p className="text-center mx-auto text-white italic text-xs">
-                  For pledges made here, 90% of funds go to the Gitcoin Grants matching pool and 10% to our publishing
-                  partner, Seven Stories Press.
-                </p> */}
               </a>
             </div>
           </div>
@@ -45,6 +40,11 @@ export default function AboutTheBook() {
       </div>
       <div className="container px-5 mx-auto font-spacemono">
         <h6 className="text-yellow-pos font-bold text-2xl">About the book</h6>
+        <br />
+        <p className="text-center mx-auto text-white italic text-xs">
+          For pledges made here, 90% of funds go to the Gitcoin Grants matching pool and 10% to our publishing partner,
+          Seven Stories Press.
+        </p>
         <br />
         <h3 className="text-left text-lg">
           These writings, collected from his essays before and during the rise of Ethereum, reveal Buterin to be a vivid
