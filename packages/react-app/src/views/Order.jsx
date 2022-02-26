@@ -115,7 +115,7 @@ function Order({ writeContracts, tx }) {
                   <div className="p-2 sm:w-1/2 w-full">
                     <a
                       href={item.link}
-                      className="border-4 border-yellow-poslight rounded flex p-4 h-full items-center hover:bg-yellow-poslight"
+                      className="border-4 mr-0 md:mr-4 bg-yellow-poslight border-yellow-poslight rounded flex p-4 h-full items-center hover:bg-yellow-300"
                     >
                       <svg
                         fill="none"
