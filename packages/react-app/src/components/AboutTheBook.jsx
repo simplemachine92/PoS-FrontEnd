@@ -12,26 +12,41 @@ export default function AboutTheBook() {
           from signed digital copies go 100% to funding public goods.
         </h3>
       </div>
-      <div className="container px-5 mx-auto mt-20 sm:mb-48 md:mb-24 lg:mb-16 xl:mb-20">
+      <div className="container mb-12 px-5 mx-auto mt-20 sm:mb-48 md:mb-24 lg:mb-16 xl:mb-20">
         <div className="flex flex-wrap -m-4">
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-3/4 text-center">
               <a href="/order" target="_blank" rel="noreferrer">
-                <img className="h-3/4 mb-8 mr-1 object-center inline-block" src="assets/Physical_copy1.svg" />
+                <button
+                  className="px-2 py-2 w-4/5 md:w-3/4 md:py-4 md:px-4 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  type="btn btn-primary"
+                >
+                  <img className="h-3/4 mr-1 object-center inline-block" src="assets/Physical_copy1.svg" />
+                </button>
               </a>
             </div>
           </div>
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-full text-center">
               <a href="/pledge" target="_blank" rel="noreferrer">
-                <img className="h-3/4 ml-1 -mt-2 object-center inline-block" src="assets/Pledge1.svg" />
+                <button
+                  className="px-2 py-2 w-4/5 md:w-3/4 md:py-4 md:px-4 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  type="btn btn-primary"
+                >
+                  <img className="h-3/4 object-center inline-block" src="assets/Pledge1.svg" />
+                </button>
               </a>
             </div>
           </div>
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-3/4 text-center">
               <a href="/signatures" target="_blank" rel="noreferrer">
-                <img className="h-3/4 ml-1 object-center inline-block" src="assets/Download.svg" />
+                <button
+                  className="px-2 py-2 w-4/5 md:w-3/4 md:py-4 md:px-4 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  type="btn btn-primary"
+                >
+                  <img className="h-3/4 object-center inline-block" src="assets/Download.svg" />
+                </button>
               </a>
             </div>
             <br />
