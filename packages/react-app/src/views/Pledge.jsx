@@ -42,13 +42,13 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
         <div className="">
           {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
           <div className="flex flex-wrap bg-headerBackground bg-cover bg-no-repeat bg-right bg-auto">
-            <div className="flex flex-wrap w-1/3">
-              <img class="shadow" className=" object-fit" src="assets/PledgeText.svg" />
+            <div className="flex flex-wrap w-1/3 mx-auto">
+              <img class="shadow" className=" object-fit" src="assets/RasText.png" />
             </div>
             <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
               <div className="max-w-md py-10">
                 <div className="py-0 backdrop-filter rounded-lg content-center">
-                  <img alt="Book" className="mb-8 ml-7" src="assets/book_and_shadow.svg" />
+                  <img alt="Book" className="w-1/2 mb-8 ml-7" src="assets/RasCover.png" />
                 </div>
               </div>
             </div>
@@ -59,9 +59,11 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
         <footer className="">
           <section className="green-pill-form-section">
             <div>
-              <h5 className="font-bold">Make a Pledge</h5>
+              <h5 className="font-bold mt-6">Make a Pledge</h5>
 
-              <h3 className="text-sm p-10">Receive a digitally signed book plate from Vitalik.eth</h3>
+              <h3 className="text-sm p-10">
+                Receive a digitally signed book plate from Vitalik.eth (at his discretion)
+              </h3>
 
               <InputNumber
                 className="form"

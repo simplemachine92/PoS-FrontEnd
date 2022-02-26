@@ -82,20 +82,13 @@ function Order({ writeContracts, tx }) {
           <div className="">
             {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
             <div className="flex flex-wrap bg-headerBackground bg-cover bg-no-repeat bg-right bg-auto">
-              <div className="flex flex-wrap w-1/3">
-                <img class="shadow" className="mb-8 object-fit" src="assets/OrderText.svg" />
+              <div className="flex flex-wrap w-1/3 mx-auto">
+                <img class="shadow" className=" object-fit" src="assets/RasText.png" />
               </div>
               <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
                 <div className="max-w-md py-10">
                   <div className="py-0 backdrop-filter rounded-lg content-center">
-                    <img alt="Book" className="mb-8 ml-7" src="assets/book_and_shadow.svg" />
-
-                    <button
-                      class="px-4 ml-5 py-3 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                      type="btn btn-primary"
-                    >
-                      Signed Copy
-                    </button>
+                    <img alt="Book" className="w-1/2 mb-8 ml-7" src="assets/RasCover.png" />
                   </div>
                 </div>
               </div>
@@ -106,7 +99,7 @@ function Order({ writeContracts, tx }) {
 
         <footer className="">
           <br />
-          <h5 className="text-2xl font-bold">Pre-Order Now!</h5>
+          <h5 className="font-bold">Pre-Order Now</h5>
 
           <section className="text-gray-600 body-font">
             <div className="container px-5 py-6 mx-auto">
@@ -115,7 +108,7 @@ function Order({ writeContracts, tx }) {
                   <div className="p-2 sm:w-1/2 w-full">
                     <a
                       href={item.link}
-                      className="border-4 mr-0 md:mr-4 bg-yellow-poslight border-yellow-poslight rounded flex p-4 h-full items-center hover:bg-yellow-300"
+                      className="border-4 bg-yellow-poslight border-yellow-poslight rounded flex p-4 h-full items-center hover:bg-yellow-300"
                     >
                       <svg
                         fill="none"
