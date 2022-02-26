@@ -15,7 +15,7 @@ export default function IntroHeader() {
       <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
         <div className="max-w-md py-10">
           <div className="">
-            <img alt="Book" className="object-scale-down" src="assets/book_and_shadow.svg" />
+            <img alt="Book" className="object-scale-down md:h-480 w-960" src="assets/book_and_shadow.svg" />
             <form action="/order">
               <button
                 className="w-3/4 mr-8 mt-2 py-2 md:mr-12 md:py-4 text-base md:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
