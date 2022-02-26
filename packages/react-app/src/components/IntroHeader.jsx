@@ -14,7 +14,7 @@ export default function IntroHeader() {
       {/*  */}
       <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
         <div className="max-w-md py-10">
-          <div className="py-0 backdrop-filter rounded-lg content-center">
+          <div className="py-0 content-center">
             <img alt="Book" className="mb-2 md:mb-8 ml-7" src="assets/book_and_shadow.svg" />
             <form action="/order">
               <button
