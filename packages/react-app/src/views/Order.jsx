@@ -78,39 +78,38 @@ function Order({ writeContracts, tx }) {
   return (
     <>
       <div>
-        <form action="https://www.boulderbookstore.net/product/proof">
-          <div className="">
-            {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
-            <div className="flex flex-wrap bg-headerBackground bg-cover bg-no-repeat bg-right bg-auto">
-              <div className="flex flex-wrap w-1/3 mx-auto">
-                <img class="shadow" className=" object-fit" src="assets/RasText.png" />
-              </div>
-              <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
-                <div className="max-w-md py-10">
-                  <div className="py-0 backdrop-filter rounded-lg content-center">
-                    <img alt="Book" className="w-1/2 mb-8 ml-7" src="assets/RasCover.png" />
-                  </div>
+        <div className="">
+          {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
+          {/* prettier-ignore */}
+          <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
+            <div className="flex flex-wrap w-1/2 mx-auto">
+              <img class="shadow" className="object-scale-down ml-10" src="assets/RasText.png" />
+            </div>
+            <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
+              <div className="max-w-md py-10 mx-auto">
+                <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
+                  <img alt="Book" className="w-1/2 mb-4 mx-auto" src="assets/RasCover.png" />
+                  <a href="https://www.boulderbookstore.net/product/proof" target="_blank" rel="noreferrer">
+                    <button
+                      className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-sm md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                      type="btn btn-primary"
+                    >
+                      Pre-Order: Signed
+                    </button>
+                  </a>
                 </div>
               </div>
             </div>
-            {/* <img src="assets/pre-order.svg" /> */}
-          </div>
-        </form>
-
-        <footer className="">
-          <br />
-          <h5 className="font-bold">Pre-Order Now</h5>
-
-          <section className="text-gray-600 body-font">
-            <div className="container px-5 py-6 mx-auto">
-              <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
-                {buyLinks.map(item => (
-                  <div className="p-2 sm:w-1/2 w-full">
-                    <a
-                      href={item.link}
-                      className="border-4 bg-yellow-poslight border-yellow-poslight rounded flex p-4 h-full items-center hover:bg-yellow-300"
-                    >
-                      <svg
+          
+          {/* <img src="assets/pre-order.svg" /> */}
+              <div className="container px-5 py-6 mx-auto">
+              <h5 className="font-bold">Retailers</h5>
+              <br />
+                <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+                  {buyLinks.map(item => (
+                    <div className="p-2 sm:w-1/2 w-full">
+                      <a href={item.link} className="">
+                        {/* <svg
                         fill="none"
                         stroke="currentColor"
                         stroke-linecap="round"
@@ -121,18 +120,26 @@ function Order({ writeContracts, tx }) {
                       >
                         <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
                         <path d="M22 4L12 14.01l-3-3"></path>
-                      </svg>
-                      <h1 className="font-bold font-spacemono text-xl">{item.name}</h1>
-                    </a>
-                  </div>
-                ))}
+                      </svg> */}
+                        <button
+                          className="w-3/4 mt-3 py-2 px-1 mx-auto sm:py-4 text-sm md:text-sm bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                          type="btn btn-primary"
+                        >
+                          {item.name}
+                        </button>
+                        {/* <h1 className="font-bold font-spacemono text-xl">{item.name}</h1> */}
+                      </a>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
-          </section>
-          {/* Removing this component until its sizing is fixed */}
-          {/* <Quotes /> */}
-          <Footer />
-        </footer>
+            
+            {/* Removing this component until its sizing is fixed */}
+            {/* <Quotes /> */}
+            <Footer />
+          
+        </div>
+        </div>
       </div>
     </>
   );

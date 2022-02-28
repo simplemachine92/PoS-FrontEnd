@@ -65,29 +65,25 @@ export default function Account({
   if (web3Modal) {
     if (web3Modal.cachedProvider) {
       modalButtons.push(
-        <Button
+        <button
+          className="py-1 px-2 mb-1 mt-1 mx-auto sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
           type="primary"
-          key="logoutbutton"
-          style={{ verticalAlign: "top", marginLeft: 8, marginTop: -1 }}
-          shape="square"
-          size="medium"
           onClick={logoutOfWeb3Modal}
+          key="logoutbutton"
         >
           logout
-        </Button>,
+        </button>,
       );
     } else {
       modalButtons.push(
-        <Button
-          key="loginbutton"
+        <button
+          className="py-1 px-2 mb-1 mt-1 mx-auto sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
           type="primary"
-          shape="square"
-          size="medium"
-          /* type={minimized ? "default" : "primary"}     too many people just defaulting to MM and having a bad time */
           onClick={loadWeb3Modal}
+          key="loginbutton"
         >
           connect
-        </Button>,
+        </button>,
       );
     }
   }

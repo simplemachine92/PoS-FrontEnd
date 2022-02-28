@@ -348,15 +348,15 @@ function App(props) {
         </StyledMenu>
 
         <div className="flex sm:hidden justify-between p-2" style={{ background: "#7ee6cd" }}>
-          <Button
+          <button
+            className="flex flex-col justify-center items-center gap-1 py-2 px-2 sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
             type="primary"
             onClick={() => setVisible(true)}
-            className="flex flex-col justify-center items-center gap-1"
           >
-            <div className="h-1 w-5 bg-black rounded-md" />
-            <div className="h-1 w-5 bg-black rounded-md" />
-            <div className="h-1 w-5 bg-black rounded-md" />
-          </Button>
+            <div className="h-0.5 w-5 bg-black rounded-md" />
+            <div className="h-0.5 w-5 bg-black rounded-md" />
+            <div className="h-0.5 w-5 bg-black rounded-md" />
+          </button>
           <Drawer
             bodyStyle={{ background: "#7ee6cd", paddingTop: "3rem" }}
             placement="left"

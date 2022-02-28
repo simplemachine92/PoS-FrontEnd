@@ -36,25 +36,28 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
   return (
     <>
       <div>
-        {/* <h3 class="title">Take the Green Pill:</h3>
-          <h3 class="title">Regenerative CryptoEconomics</h3> */}
-
         <div className="">
           {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
-          <div className="flex flex-wrap bg-headerBackground bg-cover bg-no-repeat bg-right bg-auto">
-            <div className="flex flex-wrap w-1/3 mx-auto">
-              <img class="shadow" className=" object-fit" src="assets/RasText.png" />
+          {/* prettier-ignore */}
+          <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
+            <div className="flex flex-wrap w-1/2 mx-auto">
+              <img class="shadow" className="object-scale-down ml-10" src="assets/RasText.png" />
             </div>
-            <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat items-center">
-              <div className="max-w-md py-10">
-                <div className="py-0 backdrop-filter rounded-lg content-center">
-                  <img alt="Book" className="w-1/2 mb-8 ml-7" src="assets/RasCover.png" />
+            <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
+              <div className="max-w-md py-10 mx-auto">
+                <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
+                  <img alt="Book" className="w-1/2 mb-4 mx-auto" src="assets/RasCover.png" />
+                  
+                    <button
+                      className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-sm md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                      type="btn btn-primary"
+                    >
+                      Pledge Below 👇
+                    </button>
+                  
                 </div>
               </div>
             </div>
-          </div>
-          {/* <img src="assets/pre-order.svg" /> */}
-        </div>
 
         <footer className="">
           <section className="green-pill-form-section">
@@ -86,9 +89,9 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 }}
               />
               {address ? (
-                <StyledButton
-                  type="buttons-green-pill"
-                  className=""
+                <button
+                type="btn btn-primary"
+                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-sm md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   style={{ marginTop: 40, width: "30%" }}
                   onClick={async () => {
                     try {
@@ -104,7 +107,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                   }}
                 >
                   Submit
-                </StyledButton>
+                </button>
               ) : (
                 <StyledButton style={{ marginTop: 40, width: "30%" }} onClick={loadWeb3Modal}>
                   Connect
@@ -125,6 +128,8 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
           {/* <Quotes /> */}
           <Footer />
         </footer>
+      </div>
+        </div>
       </div>
     </>
   );
