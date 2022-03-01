@@ -5,7 +5,6 @@ import {
   Checkbox,
   Input,
   notification,
-  Radio,
   Space,
   Typography,
   Collapse,
@@ -15,7 +14,6 @@ import {
   Spin,
   Form,
   List,
-  Pagination,
 } from "antd";
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
@@ -60,8 +58,8 @@ export default function Signator({
   domain: {
     name: "GreenPill_Pages",
     version: "0",
-    chainId: 4,
-    verifyingContract: "0x0f40dee08808fbb178EE43824988148b33A0d7b8",
+    chainId: 1,
+    verifyingContract: "0xFcC8EBbbB9783a18ED4CecebfC8A2bC1dd57deC2",
   },
   message: {
     sender: "0xb010ca9Be09C382A9f31b79493bb232bCC319f01",
@@ -156,10 +154,10 @@ export default function Signator({
         name: "GreenPill_Pages",
         version: "0",
         chainId: 1,
-        verifyingContract: contracts.GreenPill_Pages.address,
+        verifyingContract: "0xFcC8EBbbB9783a18ED4CecebfC8A2bC1dd57deC2",
       },
       message: {
-        sender: "0xb010ca9Be09C382A9f31b79493bb232bCC319f01",
+        sender: `${address}`,
         recipient: `${list[0].args[0]}`,
         pledge: `${pledgeValue}`,
         timestamp: `${Date.now()}`,

@@ -21,10 +21,10 @@ export const StyledButton = styled(Button)`
  * @param {*} readContracts contracts from current chain already pre-loaded using ethers contract module. More here https://docs.ethers.io/v5/api/contract/contract/
  * @returns react component
  */
-function Home({ writeContracts, tx }) {
+function Home({ writeContracts, tx, address, loadWeb3Modal }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
-  const [uValue, setU] = useState("0.1337002");
+  const [uValue, setU] = useState("0.1337");
 
   return (
     <div>
@@ -61,7 +61,7 @@ function Home({ writeContracts, tx }) {
                 console.log("changin", uValue);
               }}
               step={0.1}
-              defaultValue={0.1337002}
+              defaultValue={0.1337}
               onPressEnter={async () => {
                 try {
                   const txCur = await tx(writeContracts.GreenPill_Pages.pledge({ value: utils.parseEther(uValue) }));
@@ -71,22 +71,36 @@ function Home({ writeContracts, tx }) {
                 }
               }}
             />
+
             <div className="form2">
-              <StyledButton
-                type="primary"
-                className=""
-                style={{ marginTop: 40, width: "30%" }}
-                onClick={async () => {
-                  try {
-                    const txCur = await tx(writeContracts.GreenPill_Pages.pledge({ value: utils.parseEther(uValue) }));
-                    await txCur.wait();
-                  } catch {
-                    console.log("button pledge failed");
-                  }
-                }}
-              >
-                Submit
-              </StyledButton>
+              {address ? (
+                <StyledButton
+                  type="primary"
+                  className=""
+                  style={{ marginTop: 40, width: "30%" }}
+                  onClick={async () => {
+                    try {
+                      const txCur = await tx(
+                        writeContracts.GreenPill_Pages.pledge({ value: utils.parseEther(uValue) }),
+                      );
+                      await txCur.wait();
+                    } catch {
+                      console.log("button pledge failed");
+                    }
+                  }}
+                >
+                  Submit
+                </StyledButton>
+              ) : (
+                <Button
+                  style={{ marginTop: 40, width: "30%" }}
+                  key="loginbutton"
+                  type="primary"
+                  onClick={loadWeb3Modal}
+                >
+                  Connect Wallet
+                </Button>
+              )}
             </div>
           </div>
         </section>

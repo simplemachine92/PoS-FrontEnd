@@ -358,6 +358,8 @@ function App(props) {
             writeContracts={writeContracts}
             readContracts={readContracts}
             tx={tx}
+            address={address}
+            loadWeb3Modal={loadWeb3Modal}
             localProvider={localProvider}
             address={address}
           />

@@ -185,7 +185,7 @@ export default function Tweets({ yourLocalBalance, mainnetProvider, price, addre
         record != undefined ? (
           <Space size="middle">
             <Share
-              url={`https://greenpill.party/view?typedData=${
+              url={`https://app.greenpill.party/view?typedData=${
                 record.typedData + "&addresses=" + record.sender + "&signatures=" + record.signature
               }`}
               options={{
