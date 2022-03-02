@@ -20,7 +20,7 @@ import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, Hints, Sign, Pledge, Order } from "./views";
+import { Home, Hints, Sign, Pledge, Order, Leaderboard } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
@@ -318,10 +318,18 @@ function App(props) {
           </Menu.Item>
           <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-            key="signatures"
+            key="leaderboard"
             icon={<UserOutlined />}
           >
             Leaderboard
+            <Link to="/leaderboard"></Link>
+          </Menu.Item>
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="signatures"
+            icon={<UserOutlined />}
+          >
+            Signatures
             <Link to="/signatures"></Link>
           </Menu.Item>
 
@@ -394,10 +402,19 @@ function App(props) {
               <Menu.Item
                 className="flex justify-start items-center"
                 onClick={() => setVisible(false)}
-                key="signatures"
+                key="leaderboard"
                 icon={<UserOutlined />}
               >
                 Leaderboard
+                <Link to="/leaderboard"></Link>
+              </Menu.Item>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="signatures"
+                icon={<UserOutlined />}
+              >
+                Signatures
                 <Link to="/signatures"></Link>
               </Menu.Item>
             </Menu>
@@ -445,6 +462,19 @@ function App(props) {
             localProvider={localProvider}
             loadWeb3Modal={loadWeb3Modal}
             address={address}
+          />
+        </Route>
+        <Route path="/leaderboard">
+          <Leaderboard
+            yourLocalBalance={yourLocalBalance}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            firebaseConfig={firebaseConfig}
+            tx={tx}
+            localProvider={localProvider}
+            loadWeb3Modal={loadWeb3Modal}
+            address={address}
+            events={events}
           />
         </Route>
         <Route path="/complete">

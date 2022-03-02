@@ -6,3 +6,4 @@ export { default as Sign } from "./Sign";
 export { default as Tweets } from "./Tweets";
 export { default as Pledge } from "./Pledge";
 export { default as Order } from "./Order";
+export { default as Leaderboard } from "./Leaderboard";

@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const { Option } = Select;
 
-export default function Hints({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
+export default function Leaderboard({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
   const [ready, setReady] = useState(false);
   const [sData, setData] = useState();
@@ -114,22 +114,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
 
   return (
     <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
-      <div className="">
-        {ready ? (
-          <div className="mx-auto mr-1 ml-1">
-            <h6 className="text-yellow-pos font-bold text-3xl">Signed Pledges</h6>
-            <br />
-            <Table className="mx-auto" pagination={{ pageSize: 5 }} columns={columns} dataSource={dataSource} />
-          </div>
-        ) : (
-          <div>
-            <Spin />
-          </div>
-        )}
-      </div>
-
-      {/* <Quotes /> */}
-      <Footer />
+      <Waitlist events={events} firebaseConfig={firebaseConfig} mainnetProvider={mainnetProvider} />
     </div>
   );
 }
