@@ -1,17 +1,25 @@
+import styled from "styled-components";
 import { Select, Spin, Space, Table, Input, List } from "antd";
 import React, { useState, useEffect } from "react";
-import { Address, BottomLinks } from "../components";
+import { Address, BottomLinks, Address2 } from "../components";
+import { ethers } from "ethers";
 
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, get, child } from "firebase/database";
+import { Footer, Quotes, AboutTheBook, GitcoinBar } from "../components";
+
+import { Link } from "react-router-dom";
 
 export default function Waitlist({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
 
-  const [ready2, setReady2] = useState(false);
+  const [ready, setReady] = useState(false);
   const [list, setList] = useState();
+  const [value2, setValue2] = useState("");
 
-  // Initialize Firebase
+  const [dataSource2, setDataSource2] = useState(events);
+
+  /* // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
   let dbList = [];
@@ -20,48 +28,12 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
 
   let eventList = [];
 
-  let toSign = [];
+  let toSign = []; */
 
   useEffect(async () => {
-    const dbRef = ref(getDatabase(app));
-    get(child(dbRef, `PoS/`)).then(snapshot => {
-      if (snapshot.exists()) {
-        snapshot.forEach(sig => {
-          let message = sig.val().message;
-          dbList.push(message.recipient);
-        });
-        console.log("dblist", dbList);
-        if (dbList.length) {
-          events.forEach(pledge => {
-            eventList.push(pledge.args.pledgee);
-            console.log("event list", eventList);
-            objectList.push(pledge);
-            console.log("object list", objectList);
-            for (let x = 0; x < eventList.length; x++) {
-              if (!dbList.includes(eventList[x])) {
-                // do nothing
-              } else {
-                // push to to-do
-
-                let toPush = JSON.parse(JSON.stringify(objectList[x]));
-                console.log("to push", toPush);
-                toPush.address = objectList[x].args[0];
-                toSign.push(toPush);
-                setList(toSign);
-
-                console.log("list", toSign);
-                setReady2(true);
-              }
-            }
-          });
-        }
-      }
-    });
+    setDataSource2(events);
+    setReady(true);
   }, [events]);
-
-  const [value2, setValue2] = useState("");
-
-  const [dataSource2, setDataSource2] = useState(toSign);
 
   const FilterByNameInput2 = (
     <Input
@@ -70,7 +42,7 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
       onChange={e => {
         const currValue = e.target.value;
         setValue2(currValue);
-        const filteredData = toSign.filter(entry => entry.address.includes(currValue));
+        const filteredData = events.filter(entry => entry.args[0].includes(currValue));
         setDataSource2(filteredData);
       }}
     />
@@ -79,15 +51,40 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
   const columns2 = [
     {
       title: FilterByNameInput2,
-      dataIndex: "address",
-      render: record => (record != undefined ? <Address value={record} ensProvider={mainnetProvider} /> : <Spin />),
+      dataIndex: "args",
+      render: record =>
+        record != undefined ? <Address2 value={record[0]} fontSize={14} ensProvider={mainnetProvider} /> : <Spin />,
       key: "1",
+    },
+
+    {
+      title: "Donation",
+      dataIndex: "args",
+      key: "donation",
+      render: value => {
+        return ethers.utils.formatEther(ethers.BigNumber.from(value[1]));
+      },
+      sorter: (a, b) => a.args[1] - b.args[1],
+      sortDirections: ["descend", "ascend"],
+      /* render: record => (record != undefined ? ethers.utils.formatEther(ethers.BigNumber.from(record[1])) : <Spin />),
+      key: "2", */
     },
   ];
 
   return (
-    <div>
-      <h3 className="text-xl">🚧 Waitlist is being upgraded. Made a pledge? We will be signing soon! 🚧</h3>
+    <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
+      {ready ? (
+        <div className="mx-auto mr-1 ml-1">
+          <h6 className="text-yellow-pos font-bold text-3xl mt-5">Top Donors</h6>
+          <br />
+          <Table pagination={{ pageSize: 5 }} columns={columns2} dataSource={dataSource2} />
+          <Footer />
+        </div>
+      ) : (
+        <div>
+          <Spin className="mt-5" />
+        </div>
+      )}
     </div>
   );
 }

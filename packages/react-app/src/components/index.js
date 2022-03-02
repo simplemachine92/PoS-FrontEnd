@@ -30,3 +30,4 @@ export { default as IntroHeader } from "./IntroHeader";
 export { default as BottomLinks } from "./BottomLinks";
 export { default as Waitlist } from "./Waitlist";
 export { default as AfterPledge } from "./AfterPledge";
+export { default as Address2 } from "./Address2";

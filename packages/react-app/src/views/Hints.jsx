@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Select, Spin, Space, Table, Input, List } from "antd";
 import React, { useState, useEffect } from "react";
-import { Address, BottomLinks, Waitlist } from "../components";
+import { Address, Address2, BottomLinks, Waitlist } from "../components";
 
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, get, child } from "firebase/database";
@@ -90,7 +90,8 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
     {
       title: FilterByNameInput,
       dataIndex: "recipient",
-      render: record => (record != undefined ? <Address value={record} ensProvider={mainnetProvider} /> : <Spin />),
+      render: record =>
+        record != undefined ? <Address2 value={record} fontSize={14} ensProvider={mainnetProvider} /> : <Spin />,
       key: "1",
     },
     {
@@ -117,7 +118,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
       <div className="">
         {ready ? (
           <div className="mx-auto mr-1 ml-1">
-            <h6 className="text-yellow-pos font-bold text-3xl">Signed Pledges</h6>
+            <h6 className="text-yellow-pos font-bold text-3xl">Signatures</h6>
             <br />
             <Table className="mx-auto" pagination={{ pageSize: 5 }} columns={columns} dataSource={dataSource} />
           </div>

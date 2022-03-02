@@ -52,7 +52,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                       className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs sm:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                       type="btn btn-primary"
                     >
-                      Pledge Below 👇
+                      Donate 👇
                     </button>
                   
                 </div>
@@ -62,10 +62,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
         <footer className="">
           <section className="green-pill-form-section">
             <div>
-              <h5 className="font-bold mt-6">Make a Pledge</h5>
+              <h5 className="font-bold mt-6">Make a Donation</h5>
 
               <h3 className="text-sm p-10">
-                Receive a digitally signed book plate from Vitalik.eth (at his discretion)
+                You could receive a digitally signed book plate from Vitalik.eth (his discretion)
               </h3>
 
               <InputNumber

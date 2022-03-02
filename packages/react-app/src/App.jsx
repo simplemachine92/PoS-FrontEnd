@@ -14,13 +14,13 @@ import { HomeOutlined, UserOutlined, BookOutlined, ShoppingCartOutlined } from "
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
-import { Account, Contract, NetworkDisplay, FaucetHint, AfterPledge } from "./components";
+import { Account, Contract, NetworkDisplay, FaucetHint, AfterPledge, Waitlist } from "./components";
 import { NETWORKS, ALCHEMY_KEY } from "./constants";
 import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, Hints, Sign, Pledge, Order, Leaderboard } from "./views";
+import { Home, Hints, Sign, Pledge, Order } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
@@ -305,7 +305,7 @@ function App(props) {
             key="mail"
             icon={<BookOutlined />}
           >
-            Pledge
+            Donate
             <Link to="/pledge"></Link>
           </Menu.Item>
           <Menu.Item
@@ -318,11 +318,11 @@ function App(props) {
           </Menu.Item>
           <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-            key="leaderboard"
+            key="donations"
             icon={<UserOutlined />}
           >
-            Leaderboard
-            <Link to="/leaderboard"></Link>
+            Top Donors
+            <Link to="/donations"></Link>
           </Menu.Item>
           <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
@@ -387,7 +387,7 @@ function App(props) {
                 key="mail"
                 icon={<BookOutlined />}
               >
-                Pledge
+                Donate
                 <Link to="/pledge"></Link>
               </Menu.Item>
               <Menu.Item
@@ -402,11 +402,11 @@ function App(props) {
               <Menu.Item
                 className="flex justify-start items-center"
                 onClick={() => setVisible(false)}
-                key="leaderboard"
+                key="donations"
                 icon={<UserOutlined />}
               >
-                Leaderboard
-                <Link to="/leaderboard"></Link>
+                Top Donors
+                <Link to="/donations"></Link>
               </Menu.Item>
               <Menu.Item
                 className="flex justify-start items-center"
@@ -464,8 +464,8 @@ function App(props) {
             address={address}
           />
         </Route>
-        <Route path="/leaderboard">
-          <Leaderboard
+        <Route path="/donations">
+          <Waitlist
             yourLocalBalance={yourLocalBalance}
             writeContracts={writeContracts}
             readContracts={readContracts}
