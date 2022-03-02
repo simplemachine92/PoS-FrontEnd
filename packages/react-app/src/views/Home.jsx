@@ -98,7 +98,7 @@ function Home({ writeContracts, tx, address, loadWeb3Modal }) {
                   type="primary"
                   onClick={loadWeb3Modal}
                 >
-                  Connect Wallet
+                  Connect
                 </Button>
               )}
             </div>

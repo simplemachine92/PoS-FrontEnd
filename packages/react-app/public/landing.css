@@ -159,7 +159,8 @@ a:hover {
 
   padding-top: 70px;
   padding-bottom: 154px;
-  padding-right: 35px;
+  padding-right: 30px;
+  padding-left: 30px;
   justify-content: center;
   align-items: center;
 }
