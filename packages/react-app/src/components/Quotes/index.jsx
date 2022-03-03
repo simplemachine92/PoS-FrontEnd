@@ -10,7 +10,7 @@ export default function Quotes() {
       <div className="w-full flex items-center md:w-6/12 gap-4">
         <img className="w-1/2" src="assets/ChatText.svg" alt="Chat Message" />
         <div className="w-1/2">
-          <p class="font-spacemono font-bold text-yellow-pos text-md sm:text-4xl mb-4">
+          <p class="font-spacemono font-bold text-red-pho text-md sm:text-4xl mb-4">
             "Thank you for supporting public goods!"
           </p>
         </div>

@@ -39,6 +39,7 @@ module.exports = {
         red: {
           bloodred: "#ea1e5047",
           soldout: "#EB1E50",
+          pho: "#fb5c37",
         },
         yellow: {
           pos: "#FFE171",

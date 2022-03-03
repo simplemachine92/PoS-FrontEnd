@@ -118,7 +118,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
       <div className="">
         {ready ? (
           <div className="mx-auto mr-1 ml-1">
-            <h6 className="text-yellow-pos font-bold text-3xl">Signatures</h6>
+            <h6 className="text-red-pho font-bold text-3xl">Signatures</h6>
             <br />
             <Table className="mx-auto" pagination={{ pageSize: 5 }} columns={columns} dataSource={dataSource} />
           </div>

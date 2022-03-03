@@ -10,28 +10,28 @@ import {
 } from "eth-hooks";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import React, { useCallback, useEffect, useState } from "react";
-import { HomeOutlined, UserOutlined, BookOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import { HomeOutlined, BookOutlined } from "@ant-design/icons";
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
-import { Account, Contract, NetworkDisplay, FaucetHint, AfterPledge, Waitlist } from "./components";
+import { Account, Contract, NetworkDisplay, FaucetHint, AfterPledge } from "./components";
 import { NETWORKS, ALCHEMY_KEY } from "./constants";
 import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, Hints, Sign, Pledge, Order } from "./views";
+import { Home, Hints, Claim } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
 
 export const StyledMenu = styled(Menu)`
   height: 100%;
-  background: #7ee6cd;
+  background: #f7995b;
   border-width: 0px;
   &:hover {
     color: #454545;
-    background: #7ee6cd;
+    background: #f7995b;
     border-color: red;
   }
 `;
@@ -305,32 +305,8 @@ function App(props) {
             key="mail"
             icon={<BookOutlined />}
           >
-            Donate
-            <Link to="/pledge"></Link>
-          </Menu.Item>
-          <Menu.Item
-            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-            key="order"
-            icon={<ShoppingCartOutlined />}
-          >
-            Pre-Order
-            <Link to="/order"></Link>
-          </Menu.Item>
-          <Menu.Item
-            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-            key="donations"
-            icon={<UserOutlined />}
-          >
-            Top Donors
-            <Link to="/donations"></Link>
-          </Menu.Item>
-          <Menu.Item
-            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-            key="signatures"
-            icon={<UserOutlined />}
-          >
-            Signatures
-            <Link to="/signatures"></Link>
+            Claim
+            <Link to="/claim"></Link>
           </Menu.Item>
 
           <Menu.Item style={{ marginLeft: "auto" }}>
@@ -355,9 +331,9 @@ function App(props) {
           </Menu.Item>
         </StyledMenu>
 
-        <div className="flex sm:hidden justify-between p-2" style={{ background: "#7ee6cd" }}>
+        <div className="flex sm:hidden justify-between p-2" style={{ background: "#f7995b" }}>
           <button
-            className="flex flex-col justify-center items-center gap-1 py-2 px-2 sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+            className="flex flex-col justify-center items-center gap-1 py-2 px-2 sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-red-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
             type="primary"
             onClick={() => setVisible(true)}
           >
@@ -366,7 +342,7 @@ function App(props) {
             <div className="h-0.5 w-5 bg-black rounded-md" />
           </button>
           <Drawer
-            bodyStyle={{ background: "#7ee6cd", paddingTop: "3rem" }}
+            bodyStyle={{ background: "#f16824", paddingTop: "3rem" }}
             placement="left"
             visible={visible}
             onClose={() => setVisible(false)}
@@ -387,35 +363,8 @@ function App(props) {
                 key="mail"
                 icon={<BookOutlined />}
               >
-                Donate
-                <Link to="/pledge"></Link>
-              </Menu.Item>
-              <Menu.Item
-                className="flex justify-start items-center"
-                onClick={() => setVisible(false)}
-                key="order"
-                icon={<ShoppingCartOutlined />}
-              >
-                Pre-Order
-                <Link to="/order"></Link>
-              </Menu.Item>
-              <Menu.Item
-                className="flex justify-start items-center"
-                onClick={() => setVisible(false)}
-                key="donations"
-                icon={<UserOutlined />}
-              >
-                Top Donors
-                <Link to="/donations"></Link>
-              </Menu.Item>
-              <Menu.Item
-                className="flex justify-start items-center"
-                onClick={() => setVisible(false)}
-                key="signatures"
-                icon={<UserOutlined />}
-              >
-                Signatures
-                <Link to="/signatures"></Link>
+                Claim
+                <Link to="/claim"></Link>
               </Menu.Item>
             </Menu>
           </Drawer>
@@ -453,8 +402,8 @@ function App(props) {
             address={address}
           />
         </Route>
-        <Route path="/pledge">
-          <Pledge
+        <Route path="/claim">
+          <Claim
             yourLocalBalance={yourLocalBalance}
             writeContracts={writeContracts}
             readContracts={readContracts}
@@ -462,19 +411,6 @@ function App(props) {
             localProvider={localProvider}
             loadWeb3Modal={loadWeb3Modal}
             address={address}
-          />
-        </Route>
-        <Route path="/donations">
-          <Waitlist
-            yourLocalBalance={yourLocalBalance}
-            writeContracts={writeContracts}
-            readContracts={readContracts}
-            firebaseConfig={firebaseConfig}
-            tx={tx}
-            localProvider={localProvider}
-            loadWeb3Modal={loadWeb3Modal}
-            address={address}
-            events={events}
           />
         </Route>
         <Route path="/complete">
@@ -500,18 +436,8 @@ function App(props) {
             firebaseConfig={firebaseConfig}
           />
         </Route>
-        <Route path="/pledge">
-          <Pledge
-            yourLocalBalance={yourLocalBalance}
-            writeContracts={writeContracts}
-            readContracts={readContracts}
-            tx={tx}
-            localProvider={localProvider}
-            address={address}
-          />
-        </Route>
-        <Route path="/order">
-          <Order
+        <Route path="/claim">
+          <Claim
             yourLocalBalance={yourLocalBalance}
             writeContracts={writeContracts}
             readContracts={readContracts}
@@ -543,19 +469,6 @@ function App(props) {
             yourLocalBalance={yourLocalBalance}
             mainnetProvider={mainnetProvider}
             price={price}
-            firebaseConfig={firebaseConfig}
-            events={events}
-          />
-        </Route>
-        <Route path="/sign">
-          <Sign
-            mainnetProvider={mainnetProvider}
-            injectedProvider={injectedProvider}
-            address={address}
-            loadWeb3Modal={loadWeb3Modal}
-            chainList={chainList}
-            contracts={readContracts}
-            localProvider={localProvider}
             firebaseConfig={firebaseConfig}
             events={events}
           />

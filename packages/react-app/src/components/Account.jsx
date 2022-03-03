@@ -66,7 +66,7 @@ export default function Account({
     if (web3Modal.cachedProvider) {
       modalButtons.push(
         <button
-          className="py-1 px-2 mb-1 mt-1 mx-auto sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+          className="py-1 px-2 mb-1 mt-1 mx-auto sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-red-400 to-yellow-pos hover:from-red-400 hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
           type="primary"
           onClick={logoutOfWeb3Modal}
           key="logoutbutton"
@@ -77,7 +77,7 @@ export default function Account({
     } else {
       modalButtons.push(
         <button
-          className="py-1 px-2 mb-1 mt-1 mx-auto sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+          className="py-1 px-2 mb-1 mt-1 mx-auto sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-red-400 to-yellow-pos hover:from-red-400 hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
           type="primary"
           onClick={loadWeb3Modal}
           key="loginbutton"

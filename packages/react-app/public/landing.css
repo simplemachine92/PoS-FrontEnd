@@ -28,11 +28,16 @@ html {
   /* Similar syntax to box-shadow */
 }
 
+.bg-primary {
+  --tw-bg-opacity: 1;
+  background-color: #f16824;
+}
+
 body {
   font-family: Space Mono;
   max-width: 1600px;
   margin: auto;
-  background-color: #2bcfd9;
+  background-color: #eecebf;
   color: #207191;
 }
 
@@ -268,8 +273,8 @@ a:hover {
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open,
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected,
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover {
-  color: #d4b302;
-  border-bottom: 2px solid #d4b302;
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
 }
 
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item-active,
@@ -280,8 +285,8 @@ a:hover {
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu-open,
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu-selected,
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu:hover {
-  color: #d4b302;
-  border-bottom: 2px solid #d4b302;
+  color: #ffffff;
+  border-bottom: 2px solid #ffffff;
 }
 
 .ant-menu-item:hover,
@@ -289,15 +294,15 @@ a:hover {
 .ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
 .ant-menu-submenu-active,
 .ant-menu-submenu-title:hover {
-  color: #000000;
+  color: #ffffff;
 }
 
 .ant-menu-horizontal > .ant-menu-item {
-  color: #000000;
+  color: #ffffff;
 }
 
 .ant-menu-vertical > .ant-menu-item {
-  color: #000000;
+  color: #ffffff;
 }
 
 .ant-menu-item a {
@@ -484,7 +489,7 @@ hover {
 .background-bubble {
   max-width: 1400px auto;
   background-image: url(../image/reee.svg);
-  background-color: #2bcfd9;
+  background-color: #eecebf;
 }
 
 .background-greenpill {
