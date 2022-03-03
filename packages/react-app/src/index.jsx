@@ -7,7 +7,6 @@ import App from "./App";
 import "./index.css";
 
 const themes = {
-  dark: `${process.env.PUBLIC_URL}/dark-theme.css`,
   light: `${process.env.PUBLIC_URL}/landing.css`,
 };
 
