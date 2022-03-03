@@ -253,6 +253,57 @@ a:hover {
   color: #fde047;
 }
 
+/* .ant-menu-horizontal > .ant-menu-item a:hover,
+.ant-menu-vertical .ant-menu-submenu-selected,
+.ant-menu-vertical-left .ant-menu-submenu-selected,
+.ant-menu-vertical-right .ant-menu-submenu-selected {
+  color: #6f3ff5;
+} */
+
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover {
+  color: #d4b302;
+  border-bottom: 2px solid #d4b302;
+}
+
+.ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item-active,
+.ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item-open,
+.ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item-selected,
+.ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item:hover,
+.ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu-active,
+.ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu-open,
+.ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu-selected,
+.ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu:hover {
+  color: #d4b302;
+  border-bottom: 2px solid #d4b302;
+}
+
+.ant-menu-item:hover,
+.ant-menu-item-active,
+.ant-menu:not(.ant-menu-inline) .ant-menu-submenu-open,
+.ant-menu-submenu-active,
+.ant-menu-submenu-title:hover {
+  color: #000000;
+}
+
+.ant-menu-horizontal > .ant-menu-item {
+  color: #000000;
+}
+
+.ant-menu-vertical > .ant-menu-item {
+  color: #000000;
+}
+
+.ant-menu-item a {
+  color: rgba(230, 204, 204, 0.85);
+}
+
 .footer-container {
   position: relative;
   top: -25vw;

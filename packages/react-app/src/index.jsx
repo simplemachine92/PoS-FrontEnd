@@ -10,8 +10,6 @@ const themes = {
   light: `${process.env.PUBLIC_URL}/landing.css`,
 };
 
-const prevTheme = window.localStorage.getItem("theme");
-
 const subgraphUri = "http://localhost:8000/subgraphs/name/scaffold-eth/your-contract";
 
 const client = new ApolloClient({
@@ -21,7 +19,7 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <ThemeSwitcherProvider themeMap={themes} defaultTheme={prevTheme || "light"}>
+    <ThemeSwitcherProvider themeMap={themes} defaultTheme={"light"}>
       <BrowserRouter>
         <App subgraphUri={subgraphUri} />
       </BrowserRouter>
