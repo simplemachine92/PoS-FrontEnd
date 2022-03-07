@@ -53,6 +53,10 @@ const buyLinks = [
     name: "Powells",
     link: "https://www.powells.com/book/-9781644212486",
   },
+  {
+    name: "Seven Stories",
+    link: "https://www.sevenstories.com/books/4443-proof-of-stake",
+  },
 ];
 
 /**
@@ -94,7 +98,7 @@ function Order({ writeContracts, tx }) {
                       className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                       type="btn btn-primary"
                     >
-                      Pre-Order: Signed
+                      Signed Pre-order: Boulder Book Store
                     </button>
                   </a>
                 </div>

@@ -246,11 +246,11 @@ h6 {
 }
 
 a {
-  color: #000000;
+  color: #fde047;
 }
 
 a:hover {
-  color: #fde047;
+  color: #5bf1cd;
 }
 
 /* .ant-menu-horizontal > .ant-menu-item a:hover,
@@ -268,8 +268,8 @@ a:hover {
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open,
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected,
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover {
-  color: #d4b302;
-  border-bottom: 2px solid #d4b302;
+  color: #ffd900;
+  border-bottom: 2px solid #ffd900;
 }
 
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item-active,
@@ -280,8 +280,8 @@ a:hover {
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu-open,
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu-selected,
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu:hover {
-  color: #d4b302;
-  border-bottom: 2px solid #d4b302;
+  color: #ffd900;
+  border-bottom: 2px solid #ffd900;
 }
 
 .ant-menu-item:hover,

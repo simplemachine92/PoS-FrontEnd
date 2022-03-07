@@ -28,7 +28,7 @@ export const StyledButton = styled(Button)`
  * @param {*} readContracts contracts from current chain already pre-loaded using ethers contract module. More here https://docs.ethers.io/v5/api/contract/contract/
  * @returns react component
  */
-function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
+function Pledge({ firebaseConfig, writeContracts, tx, address, loadWeb3Modal }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
   const [uValue, setU] = useState("0.1337");
@@ -48,12 +48,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
                   <img alt="Book" className="w-1/2 mb-4 mx-auto" src="assets/RasCover.png" />
                   
-                    <button
-                      className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs sm:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                      type="btn btn-primary"
+                    <p
                     >
-                      Donate 👇
-                    </button>
+                      
+                    </p>
                   
                 </div>
               </div>
@@ -118,11 +116,12 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
 
           <div>
             <br />
-            <h3 className="p-1 auto-mx text-white italic text-xs">
-              For pledges made here, 90% of funds go to the Gitcoin Grants matching pool and 10% to our publishing
-              partner, Seven Stories Press, for supporting public goods in independent publishing. For book copies
-              purchased here or anywhere, Vitalik has committed all of his proceeds to Gitcoin Grants.
-            </h3>
+            <p className="text-center mx-5 text-white italic text-xs">
+          For pledges made here, funds will go 90% to the Gitcoin Grants matching pool and 10% to our publishing
+          partner, <a href="https://www.sevenstories.com/books/4443-proof-of-stake">Seven Stories Press</a>, for
+          supporting public goods in independent publishing. For book copies purchased here or anywhere, Vitalik has
+          committed all of his proceeds to Gitcoin Grants.
+        </p>
           </div>
           {/* Removing this component until sizing is fixed */}
           {/* <Quotes /> */}
