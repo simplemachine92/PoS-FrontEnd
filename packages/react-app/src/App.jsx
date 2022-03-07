@@ -1,4 +1,4 @@
-import { Menu, Affix, Button, Drawer } from "antd";
+import { Menu, Affix, Button, Drawer, Row, Col } from "antd";
 import "antd/dist/antd.css";
 import {
   useBalance,
@@ -14,7 +14,17 @@ import { HomeOutlined, UserOutlined, BookOutlined, ShoppingCartOutlined } from "
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
-import { Account, Contract, NetworkDisplay, FaucetHint, AfterPledge, Waitlist } from "./components";
+import {
+  Account,
+  Contract,
+  NetworkDisplay,
+  FaucetHint,
+  AfterPledge,
+  Waitlist,
+  Faucet,
+  Ramp,
+  GasGauge,
+} from "./components";
 import { NETWORKS, ALCHEMY_KEY } from "./constants";
 import externalContracts from "./contracts/external_contracts";
 // contracts
@@ -57,7 +67,7 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.mainnet; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = true;
@@ -592,13 +602,11 @@ function App(props) {
 
         <Row align="middle" gutter={[4, 4]}>
           <Col span={24}>
-            {
-              faucetAvailable ? (
-                <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
-              ) : (
-                ""
-              )
-            }
+            {faucetAvailable ? (
+              <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
+            ) : (
+              ""
+            )}
           </Col>
         </Row>
       </div> */}

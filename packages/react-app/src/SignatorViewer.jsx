@@ -470,7 +470,7 @@ function SignatorViewer({
   //prettier-ignore
   return (
     <>
-      <div className="background-greenpill" style={{ paddingTop: 20, background: "#2bcfd9" }}>
+      <div className="bg-headerBackground bg-auto bg-center bg-no-repeat">
         
         <Space direction="horizontal" style={{ width: "auto" }}>
           {/* signed by
@@ -505,34 +505,35 @@ function SignatorViewer({
         </Space>
         <br />
         {dataImage != undefined ? (
-          <div>
+          <div >
             <Image preview={false} width={200} src={dataImage} />
             <br />
 
             {address ? (
-              <Button
-                style={{ padding: "4px 15px", marginBottom: 20 }}
-                type="primary"
-                onClick={async () => {
-                  try {
-                    console.log("pledge", typedData);
-                    console.log("link", sigLink);
-                    const txCur = await tx(
-                      writeContracts.ProofOfStake_Pages.mintIfSigned(
-                        signatures[0],
-                        typedData.message.pledge,
-                        typedData.message.timestamp,
-                        typedData.message.msg,
-                      ),
-                    );
-                    await txCur.wait();
-                  } catch (e) {
-                    console.log("mint failed", e);
-                  }
-                }}
-              >
-                Mint (If Owner)
-              </Button>
+              <button
+              className="w-1/4 mt-4 mb-4 py-2 sm:py-4 text-sm sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+              type="btn btn-primary"
+              onClick={async () => {
+                try {
+                  console.log("pledge", typedData);
+                  console.log("link", sigLink);
+                  const txCur = await tx(
+                    writeContracts.ProofOfStake_Pages.updateIfSigned(
+                      signatures[0],
+                      typedData.message.pledge,
+                      typedData.message.timestamp,
+                      typedData.message.msg,
+                    ),
+                  );
+                  await txCur.wait();
+                } catch (e) {
+                  console.log("mint failed", e);
+                }
+              }}
+            >
+              Update Token
+            </button>
+              
             ) : (
               <Button type="primary" style={{ marginBottom: 20, padding: "4px 15px" }} onClick={loadWeb3Modal}>
                 Connect to Mint

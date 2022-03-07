@@ -31,7 +31,7 @@ export const StyledButton = styled(Button)`
 function Pledge({ firebaseConfig, writeContracts, tx, address, loadWeb3Modal }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
-  const [uValue, setU] = useState("0.1337");
+  const [uValue, setU] = useState("0.01337");
 
   return (
     <>
@@ -40,7 +40,7 @@ function Pledge({ firebaseConfig, writeContracts, tx, address, loadWeb3Modal }) 
           {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
           {/* prettier-ignore */}
           <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
-            <div className="flex flex-wrap w-1/2 mx-auto">
+            <div className="flex flex-wrap w-2/5 mx-auto">
               <img class="shadow" className="object-scale-down" src="assets/RasText.png" />
             </div>
             <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
@@ -76,7 +76,7 @@ function Pledge({ firebaseConfig, writeContracts, tx, address, loadWeb3Modal }) 
                   setU(currValue);
                 }}
                 step={0.1}
-                defaultValue={0.1337}
+                defaultValue={0.01337}
                 onPressEnter={async () => {
                   try {
                     const txCur = await tx(
