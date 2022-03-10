@@ -115,6 +115,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               Pledge any amount of ETH below to request a digitally signed book plate from Vitalik. Enter your email to be notified when the digital book is available.
               </h3>
 
+<label>Enter ETH Amount</label>
               <InputNumber
                 className="form w-3/4 mx-auto my-auto"
                 bordered={false}
@@ -133,6 +134,8 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                   } catch {}
                 }}
               />
+              <br/>
+              <label>Please Enter an Email</label><br/>
                 <StyledInput
                 className=" w-3/4 mx-auto mt-5"
                 maxLength={320}

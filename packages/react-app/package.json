@@ -57,6 +57,7 @@
     "react-qr-reader": "^2.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-share": "^4.4.0",
     "react-twitter-widgets": "^1.10.0",
     "styled-components": "^5.3.3",
     "walletlink": "^2.1.5",
