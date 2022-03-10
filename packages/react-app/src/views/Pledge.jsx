@@ -137,7 +137,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               <br/>
               <label>Please Enter an Email</label><br/>
                 <StyledInput
-                className="w-3/4 mx-auto mt-5"
+                className="w-3/4 mx-auto mt-5 mr-5 ml-5"
                 maxLength={320}
                 placeholder="email"
                 onChange={f => {
