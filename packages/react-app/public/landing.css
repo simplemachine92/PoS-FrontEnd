@@ -358,10 +358,13 @@ a:hover {
 .form {
   display: flex;
   max-width: 478px;
-  margin: 0 auto;
   flex-direction: column;
   place-items: center;
   font-family: Space Mono, sans-serif;
+}
+
+label {
+  color: #ffffff;
 }
 
 .form2 {
@@ -373,27 +376,33 @@ a:hover {
   font-family: Space Mono, sans-serif;
 }
 
-.form label {
-  width: 552px;
-  height: 44px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 30px;
-  font-size: 4vw;
-  line-height: 46px;
+input {
+  width: 100%;
+  height: 80px;
+  margin-top: 5px;
+  background: #31dbe5;
+  border: 1px solid #207191;
+  border-radius: 8px;
+  outline: none;
   text-align: center;
-  color: #0e0333;
+  font-size: 30px;
+  font-size: 2.5vw;
+  font-family: Space Mono, sans-serif;
+  color: #ffffff;
+  background: #31dbe5;
 }
 
-.form label.top {
-  margin-top: 52px;
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
 }
 
 .form input {
   width: 100%;
   height: 80px;
+  margin-top: 10px;
   background: #31dbe5;
-
   border: 1px solid #207191;
   border-radius: 8px;
   outline: none;
@@ -402,6 +411,7 @@ a:hover {
   font-size: 4vw;
   font-family: Space Mono, sans-serif;
   color: #ffffff;
+  background: #31dbe5;
 }
 
 hover {
@@ -415,7 +425,16 @@ hover {
   font-family: Space Mono, sans-serif;
   font-style: normal;
   font-weight: bold;
-  font-size: 30px;
+  font-size: 2.5vw;
+  text-align: center;
+}
+
+input::placeholder {
+  margin-top: 100px;
+  color: #ffffff;
+  font-family: Space Mono, sans-serif;
+  font-style: normal;
+  font-size: 20px;
   text-align: center;
 }
 
