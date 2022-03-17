@@ -1,61 +1,23 @@
 import React from "react";
+import { Footer, Quotes, AboutTheBook, GitcoinBar, IntroHeader } from "../components";
 
 export default function AfterPledge() {
   return (
     <>
       <div className="container px-5 mx-auto mt-10 font-spacemono">
         <br />
-        <h6 className="text-yellow-pos font-bold text-3xl">❤️✍️ Get it signed, support public goods 🤖❤️</h6>
+        <h6 className="text-yellow-pos font-bold text-3xl">❤️✍️ Thanks for donating! What now?! 🤖❤️</h6>
         <br />
         <h3 className="text-2xl">
-          Digital and print books will be available in Fall 2022—but before then, you can order a signed copy. Proceeds
-          from signed digital copies go 100% to funding public goods.
+          You've been minted an NFT which can be updated if Vitalik signs a message to you! Check your{" "}
+          <a href="/profile" target="_blank" rel="noreferrer">
+            Profile
+          </a>{" "}
+          page for updates{" "}
         </h3>
       </div>
-      <div className="container px-5 mx-auto mt-20 mb-20">
-        <div className="flex flex-wrap -m-4">
-          <div className="w-1/3 lg:mb-0 ">
-            <div className="h-3/4 text-center">
-              <a href="/order" target="_blank" rel="noreferrer">
-                <img className="h-3/4 w-50 mb-8 object-center inline-block" src="assets/Physical_copy1.svg" />
-              </a>
-            </div>
-          </div>
-          <div className="w-1/3 lg:mb-0 ">
-            <div className="h-full text-center">
-              <a href="/pledge" target="_blank" rel="noreferrer">
-                <img className="h-3/4 w-50 ml-2 -mt-2 object-center inline-block" src="assets/Pledge1.svg" />
-                <br />
-                <p className="text-center auto-mx text-white italic text-xs">
-                  For pledges made here, 90% of funds go to the Gitcoin Grants matching pool and 10% to our publishing
-                  partner, Seven Stories Press.
-                </p>
-              </a>
-            </div>
-          </div>
-          <div className="w-1/3 lg:mb-0 ">
-            <div className="h-3/4 text-center">
-              <a href="/signatures" target="_blank" rel="noreferrer">
-                <img className="h-3/4 w-50 ml-4 object-center inline-block" src="assets/Download.svg" />
-              </a>
-            </div>
-            <br />
-          </div>
-        </div>
-      </div>
-      <div className="container px-5 mx-auto font-spacemono">
-        <h6 className="text-yellow-pos font-bold text-3xl">About the book</h6>
-        <br />
-        <h3 className="text-left text-2xl">
-          These writings, collected from his essays before and during the rise of Ethereum, reveal Buterin to be a vivid
-          and imaginative writer, with context from media studies scholar Nathan Schneider.
-        </h3>
-        <br />
-        <h3 className="text-left text-2xl">
-          While many around him were focused on seeing the value of their tokens rise, he was working through the
-          problems and possibilities of crafting an Internet-native world.
-        </h3>
-      </div>
+
+      <Footer />
     </>
   );
 }
