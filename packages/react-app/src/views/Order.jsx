@@ -87,7 +87,7 @@ function Order({ writeContracts, tx }) {
           {/* prettier-ignore */}
           <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
             <div className="flex flex-wrap w-2/5 mx-auto">
-              <img class="shadow" className="object-scale-down" src="assets/PreOrderText.png" />
+              <img class="shadow" className="object-scale-down mb-12" src="assets/PreOrderText.png" />
             </div>
             <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
               <div className="max-w-md py-10 mx-auto">
@@ -95,10 +95,10 @@ function Order({ writeContracts, tx }) {
                   <img alt="Book" className="w-1/2 mb-4 mx-auto" src="assets/RasCover.png" />
                   <a href="https://www.boulderbookstore.net/product/proof" target="_blank" rel="noreferrer">
                     <button
-                      className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                      className="w-3/4 py-2 px-2 mt-2 mx-auto sm:py-4 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                       type="btn btn-primary"
                     >
-                      Signed Pre-order: Boulder Book Store
+                      Signed Pre-Order: Boulder Book Store
                     </button>
                   </a>
                 </div>
