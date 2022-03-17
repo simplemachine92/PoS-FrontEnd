@@ -87,7 +87,7 @@ function Order({ writeContracts, tx }) {
           {/* prettier-ignore */}
           <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
             <div className="flex flex-wrap w-2/5 mx-auto">
-              <img class="shadow" className="object-scale-down" src="assets/RasText.png" />
+              <img class="shadow" className="object-scale-down" src="assets/PreOrderText.png" />
             </div>
             <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
               <div className="max-w-md py-10 mx-auto">

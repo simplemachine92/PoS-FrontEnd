@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, { useState } from "react";
-import { Button, InputNumber, Input } from "antd";
+import { useHistory } from "react-router";
+import { Button, InputNumber, Input, notification } from "antd";
 import { Footer, Quotes } from "../components";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, get, child } from "firebase/database";
@@ -72,10 +73,13 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
     appId: process.env.REACT_APP_FIREBASE_APP_ID,
   };
 
-  const app = initializeApp(firebaseConfig);
+  const app = initializeApp(firebaseConfig, "email");
+  //firebase.initializeApp({}, "your app name here");
 
   // Get a reference to the database service
   const database = getDatabase(app);
+
+  const history = useHistory();
 
   /* function getString() {
     console.log("kms", );
@@ -90,7 +94,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
           {/* prettier-ignore */}
           <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
             <div className="flex flex-wrap w-2/5 mx-auto">
-              <img class="shadow" className="object-scale-down" src="assets/RasText.png" />
+              <img class="shadow" className="object-scale-down" src="assets/DonationText.png" />
             </div>
             <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
               <div className="max-w-md py-10 mx-auto">
@@ -112,7 +116,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               <h5 className="font-bold mt-6">Make a Donation</h5>
 
               <h3 className="text-sm p-10">
-              Pledge any amount of ETH below to request a digitally signed book plate from Vitalik. Enter your email to be notified when the digital book is available.
+              Pledge any amount of ETH below to request a digitally signed book plate from Vitalik. 
               </h3>
 
 <label>Enter ETH Amount</label>
@@ -125,30 +129,20 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 }}
                 step={0.1}
                 defaultValue={0.01337}
-                onPressEnter={async () => {
-                  try {
-                    const txCur = await tx(
-                      writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
-                    );
-                    await txCur.wait();
-                  } catch {}
-                }}
+                
               />
               <br/>
-              <label>Please Enter an Email</label><br/>
+              {/* "Pledge any amount of ETH to request a digitally signed book plate from Vitalik. Watch the profile page to see your token and your digital book when it is available." */}
+              <label>Optionally, Enter your email to be notified when the digital book is available.</label><br/>
                 <StyledInput
-                className="w-3/4 mx-auto mt-5 mr-5 ml-5"
+                className="w-4/5 mt-5"
                 maxLength={320}
                 placeholder="email"
                 onChange={f => {
                   const currValue2 = f;
                   setE(currValue2);
                 }}
-                onPressEnter={() => {const db = database;
-                  set(ref(db, `PoS/` + address), {
-                   email: eValue.target.value
-                  });
-                  }}
+
               />
               
               {address ? (
@@ -164,15 +158,46 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                        email: eValue.target.value
                       });
 
-                      const txCur = await tx(
+                      const result = tx(
+                        writeContracts &&
                         writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
+                        async (update) => {
+                          console.log("📡 Transaction Update:", update);
+                          if (update && (update.status === "confirmed" || update.status === 1)) {
+                            console.log(" 🍾 Transaction " + update.hash + " finished!");
+                            console.log(
+                              " ⛽️ " +
+                                update.gasUsed +
+                                "/" +
+                                (update.gasLimit || update.gas) +
+                                " @ " +
+                                parseFloat(update.gasPrice) / 1000000000 +
+                                " gwei"
+                            );
+                  
+                            // send notification of stream creation
+                            notification.success({
+                              message: "Donation Successful",
+                              description: `Donation from ${address} successful`,
+                              placement: "topRight",
+                            }); history.push('/complete')
+                          }
+                        }
                       );
-                      await txCur.wait();
+
+                      /* const txCur = await tx(
+                        writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
+                      ); */
+                      /* await txCur.wait(); */
                       // We need a redirect to /complete, this isnt working.
 
                       //return <Redirect to="/complete" />;
                     } catch {
-                      console.log("button pledge failed");
+                      notification.error({
+                        message: "Donation Not Processed",
+                        description: `An error has occured, or you may have already donated.`,
+                        placement: "topRight",
+                      })
                     }
                   }}
                 >

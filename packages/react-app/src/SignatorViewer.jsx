@@ -472,7 +472,7 @@ function SignatorViewer({
     <>
       <div className="bg-headerBackground bg-auto bg-center bg-no-repeat">
         
-        <Space direction="horizontal" style={{ width: "auto" }}>
+        
           {/* signed by
           <List
             locale={{ emptyText: "No signatures" }}
@@ -502,16 +502,16 @@ function SignatorViewer({
               );
             }}
           /> */}
-        </Space>
+        
         <br />
         {dataImage != undefined ? (
-          <div >
-            <Image preview={false} width={200} src={dataImage} />
-            <br />
+          <div class="flex items-center justify-center h-screen">
+            <img className="px-2 py-2 mb-2 ml-4 w-2/3 sm:w-1/3 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" src={dataImage} />
+            
 
             {address ? (
               <button
-              className="w-1/4 mt-4 mb-4 py-2 sm:py-4 text-sm sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+              className="w-1/4 ml-8 mr-4 mb-4 py-2 px-2 sm:py-4 text-sm sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
               type="btn btn-primary"
               onClick={async () => {
                 try {

@@ -12,8 +12,12 @@ export default function Footer() {
       {/* Removing socials unless we have proper links */}
       {/* <Socials /> */}
       <Divider style={{ backgroundColor: "black" }} />
+      
       <div className="object-left">
       <BottomLinks daoLogo="assets/socialmedia/built_by_gitcoin_community.svg" />
+      </div>
+      <div className="object-left">
+      <h3 className="text-sm mx-auto mb-2">Share to spread the word of public goods!</h3>
       <TwitterShareButton
         title={"Preorder Vitalik Buterin’s PROOF OF STAKE, published by @7storiespress. You'll support @gitcoin's matching pool for public goods."}
         url={"https://proofofstake.gitcoin.co/"}
@@ -21,15 +25,17 @@ export default function Footer() {
       >
         <TwitterIcon size={48} round />
         
+        
       </TwitterShareButton>
+      
       <FacebookShareButton
         url={"https://proofofstake.gitcoin.co/"}
         quote={"Preorder a copy of Vitalik Buterin’s PROOF OF STAKE, published by Seven Stories Press. You'll support Gitcoin's matching pool for public goods."}
         hashtag={"#hashtag"}
         description={"aiueo"}
-        className="Demo__some-network__share-button"
+        className="Demo__some-network__share-button ml-2"
       >
-        <FacebookIcon size={40} round /> <h3 className="text-sm text-green-100">Share</h3>
+        <FacebookIcon size={48} round /> 
       </FacebookShareButton>
       </div>
     </div>
