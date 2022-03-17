@@ -65,8 +65,8 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
         return ethers.utils.formatEther(ethers.BigNumber.from(value[1]));
       },
       sorter: (a, b) => a.args[1] - b.args[1],
-      sortDirections: ["descend", "ascend"],
-      sortOrder: "descend",
+      sortDirections: ["ascend", "descend"],
+
       /* render: record => (record != undefined ? ethers.utils.formatEther(ethers.BigNumber.from(record[1])) : <Spin />),
       key: "2", */
     },
