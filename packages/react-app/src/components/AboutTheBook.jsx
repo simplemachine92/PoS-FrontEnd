@@ -54,14 +54,14 @@ export default function AboutTheBook() {
         </div>
       </div>
       <div className="container px-5 mx-auto font-spacemono">
-        <h6 className="text-yellow-pos font-bold text-2xl">About the book</h6>
-        <br />
-        <h3 className="text-center mx-auto text-white italic text-xs">
+        <h3 className="text-left text-lg">
           For pledges made here, funds will go 90% to the Gitcoin Grants matching pool and 10% to our publishing
           partner, <a href="https://www.sevenstories.com/books/4443-proof-of-stake">Seven Stories Press</a>, for
           supporting public goods in independent publishing. For book copies purchased here or anywhere, Vitalik has
           committed all of his proceeds to Gitcoin Grants.
         </h3>
+        <br />
+        <h6 className="text-yellow-pos font-bold text-2xl">About the book</h6>
         <br />
         <h3 className="text-left text-lg">
           These writings, collected from his essays before and during the rise of Ethereum, reveal Buterin to be a vivid

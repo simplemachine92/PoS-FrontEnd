@@ -135,8 +135,8 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               {/* "Pledge any amount of ETH to request a digitally signed book plate from Vitalik. Watch the profile page to see your token and your digital book when it is available." */}
               <label>Optionally, Enter your email to be notified when the digital book is available.</label><br/>
                 <StyledInput
-                className="w-4/5 mt-5"
-                maxLength={320}
+                className="w-3/4 mt-5 mx-auto"
+                maxLength={160}
                 placeholder="email"
                 onChange={f => {
                   const currValue2 = f;
@@ -219,12 +219,12 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
 
           <div>
             <br />
-            <p className="text-center mx-5 text-white italic text-xs">
+            <h3 className="text-left text-lg mx-8">
           For pledges made here, funds will go 90% to the Gitcoin Grants matching pool and 10% to our publishing
           partner, <a href="https://www.sevenstories.com/books/4443-proof-of-stake">Seven Stories Press</a>, for
           supporting public goods in independent publishing. For book copies purchased here or anywhere, Vitalik has
           committed all of his proceeds to Gitcoin Grants.
-        </p>
+        </h3>
           </div>
           {/* Removing this component until sizing is fixed */}
           {/* <Quotes /> */}
