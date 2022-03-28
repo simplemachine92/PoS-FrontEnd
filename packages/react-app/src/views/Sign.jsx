@@ -16,12 +16,13 @@ import {
   Form,
   List,
   Pagination,
+  Table
 } from "antd";
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useLocalStorage } from "../hooks";
-import { AddressInput, Address, Footer, Quotes } from "../components";
+import { AddressInput, Address, Footer, Quotes, SignOptions, Address2 } from "../components";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, set, get, child } from "firebase/database";
@@ -45,6 +46,50 @@ export default function Signator({
   events,
 }) {
   const [list, setList] = useState();
+  const [ready, setReady] = useState(false);
+  const [value2, setValue2] = useState("");
+  /* const [selectedRowKeys, setSelectedRowKeys] = useState() */
+
+  const [dataSource2, setDataSource2] = useState(events);
+
+  const FilterByNameInput2 = (
+    <Input
+      placeholder="Search by Address (Case Sensitive)"
+      value={value2}
+      onChange={e => {
+        const currValue = e.target.value;
+        setValue2(currValue);
+        const filteredData = events.filter(entry => entry.args[0].includes(currValue));
+        setDataSource2(filteredData);
+      }}
+    />
+  );
+
+  const columns2 = [
+    {
+      title: FilterByNameInput2,
+      dataIndex: "args",
+      render: record =>
+        record != undefined ? <Address2 value={record[0]} fontSize={14} ensProvider={mainnetProvider} /> : <Spin />,
+      key: "1",
+    },
+
+    {
+      title: "Donation",
+      dataIndex: "args",
+      key: "donation",
+      render: value => {
+        return ethers.utils.formatEther(ethers.BigNumber.from(value[1]));
+      },
+      sorter: (a, b) => a.args[1] - b.args[1],
+      sortDirections: ["ascend", "descend"],
+
+      /* render: record => (record != undefined ? ethers.utils.formatEther(ethers.BigNumber.from(record[1])) : <Spin />),
+      key: "2", */
+    },
+  ];
+
+
   //prettier-ignore
   const eip712Example = {
   types: {
@@ -212,13 +257,14 @@ export default function Signator({
                 // push to to-do
                 toSign.push(objectList[x]);
                 setList(toSign);
+                console.log("aalist", toSign)
               }
             }
           });
         }
       }
     });
-  }, [events]);
+  }, [events, address]);
 
   useEffect(() => {
     if (typedData) {
@@ -236,6 +282,13 @@ export default function Signator({
       setTypedDataChecks(_checks);
     }
   }, [typedData]);
+
+   function updateList(record) {
+    let updatedList = record;
+    console.log("xyz", record)
+    
+     /* list.unshift(record)  */
+  }
 
   const signMessage = async () => {
     try {
@@ -304,6 +357,45 @@ export default function Signator({
       }
     }
   };
+  const Expander = props => <span>Test expander</span>;
+
+  const [select, setSelect] = useState({
+    selectedRowKeys: [],
+    loading: false
+  });
+
+  const { selectedRowKeys, loading } = select;
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: (selectedRowKeys) => {
+      console.log("sel", selectedRowKeys)
+      setSelect({
+        ...select,
+        selectedRowKeys: selectedRowKeys
+      });
+      console.log("eventc", events)
+      const filtered = Object.keys(events).filter(key => selectedRowKeys.includes(key))
+       .reduce((obj, key) => {
+        obj = events[key];
+        return obj;
+      }, {});
+      console.log("flt", filtered)
+       setList([filtered])
+    },
+    type: 'radio',
+  };
+
+useEffect(async () => {
+  Object.keys(events).forEach(key => {
+    events[key].key = key;
+    console.log("wat3", key, events[key]);
+  });
+  setDataSource2(events);
+  setReady(true);
+  console.log("eventsS", events )
+  console.log("tosign", toSign)
+}, [list]);
 
   return (
     <div
@@ -316,6 +408,7 @@ export default function Signator({
       }}
     >
       {userReady ? (
+        <>
         <Row>
           <Col span={12}>
             <Card>
@@ -330,7 +423,7 @@ export default function Signator({
                   }}
                 />
               )}
-              <h1>Signing to:</h1>
+              <h1>Currently Signing:</h1>
               <Space direction="vertical" style={{ width: "auto" }}>
                 <div
                   style={{
@@ -427,6 +520,24 @@ export default function Signator({
             />
           </Col>
         </Row>
+        
+        <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
+        {ready ? (
+          <div className="mx-auto mr-1 ml-1">
+            <h6 className="text-yellow-pos font-bold text-3xl mt-5">Select a User to Sign</h6>
+            <br />
+            <Table pagination={{ pageSize: 5 }} columns={columns2} dataSource={dataSource2}
+            rowSelection={rowSelection}
+            />
+            <Footer />
+          </div>
+        ) : (
+          <div>
+            <Spin className="mt-5" />
+          </div>
+        )}
+      </div>
+      </>
       ) : (
         <div style={{ margintop: 50 }}>
           <Form
