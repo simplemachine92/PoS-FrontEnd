@@ -25,8 +25,8 @@ export default function IntroHeader() {
           </a>
         </div>
       </div>
-      <div className="flex flex-wrap w-1/2 lg:w-1/3">
-        <img className="book and shadow" className="mb-8 object-fit" src="assets/rastextneu.png" />
+      <div className="flex flex-wrap w-1/2 2xl:w-1/3">
+        <img className="mb-8 object-fit" src="assets/rastextneu.png" />
       </div>
     </div>
   );
