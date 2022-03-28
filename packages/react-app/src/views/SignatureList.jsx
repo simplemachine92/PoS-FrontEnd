@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 const { Option } = Select;
 
-export default function Hints({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
+export default function Signatures({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
   const [ready, setReady] = useState(false);
   const [sData, setData] = useState();
