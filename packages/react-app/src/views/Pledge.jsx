@@ -94,7 +94,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
           {/* prettier-ignore */}
           <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
             <div className="flex flex-wrap w-2/5 mx-auto">
-              <img class="shadow" className="" src="assets/DonationText.png" />
+              <img class="shadow" className="object-scale-down mb-12" src="assets/DonationText.png" />
             </div>
             <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
               <div className="max-w-md py-10 mx-auto">
