@@ -512,7 +512,33 @@ function SignatorViewer({
             <img className="px-2 py-2 mb-10 ml-4 w-2/3 sm:w-1/2 lg:w-5/12 xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" src={dataImage} />
             
 
-            {address ? (
+            
+            {/* Enable when book releases and we have full pdf */}
+            {/* <Button style={{ padding: "4px 15px" }} type="primary" onClick={getBook} loading={loading.loading}>
+              {loading.buttonText}
+            </Button> */}
+          </div>
+        ) : (
+          <div>
+            <Spin />
+          </div>
+        )}
+        <Space direction="vertical" style={{ width: "auto" }}></Space>
+        <Collapse ghost></Collapse>
+      </div>
+      <Modal title="Scan Signatorio" visible={qrModalVisible} onOk={closeModal} onCancel={closeModal}>
+        <QR
+          value={window.location.href}
+          size="400"
+          level="H"
+          includeMargin
+          renderAs="svg"
+          imageSettings={{ excavate: false }}
+        />
+      </Modal>
+      <div>
+        <Card className="" style={{ paddingTop: 10, background: "#2bcfd9" }}>
+        {address ? (
               <button
               className="w-1/4 ml-8 mr-4 mb-4 py-2 px-2 sm:py-4 text-sm sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
               type="btn btn-primary"
@@ -542,31 +568,6 @@ function SignatorViewer({
                 Connect to Mint
               </Button>
             )}
-            {/* Enable when book releases and we have full pdf */}
-            {/* <Button style={{ padding: "4px 15px" }} type="primary" onClick={getBook} loading={loading.loading}>
-              {loading.buttonText}
-            </Button> */}
-          </div>
-        ) : (
-          <div>
-            <Spin />
-          </div>
-        )}
-        <Space direction="vertical" style={{ width: "auto" }}></Space>
-        <Collapse ghost></Collapse>
-      </div>
-      <Modal title="Scan Signatorio" visible={qrModalVisible} onOk={closeModal} onCancel={closeModal}>
-        <QR
-          value={window.location.href}
-          size="400"
-          level="H"
-          includeMargin
-          renderAs="svg"
-          imageSettings={{ excavate: false }}
-        />
-      </Modal>
-      <div>
-        <Card className="" style={{ paddingTop: 10, background: "#2bcfd9" }}>
           {message ? (
             <Text style={{ fontSize: 18, marginBottom: "0px" }}>{`${message}`}</Text>
           ) : (
