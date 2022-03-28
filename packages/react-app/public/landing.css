@@ -30,7 +30,7 @@ html {
 
 body {
   font-family: Space Mono;
-  max-width: 1600px;
+  max-width: device-width;
   margin: auto;
   background-color: #2bcfd9;
   color: #207191;
