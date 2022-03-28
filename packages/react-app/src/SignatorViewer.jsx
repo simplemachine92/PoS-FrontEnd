@@ -470,7 +470,7 @@ function SignatorViewer({
   //prettier-ignore
   return (
     <>
-      <div className="bg-headerBackground bg-auto bg-center bg-no-repeat">
+      <div className="bg-headerBackground bg-cover bg-center bg-no-repeat">
         
         
           {/* signed by
@@ -505,8 +505,8 @@ function SignatorViewer({
         
         <br />
         {dataImage != undefined ? (
-          <div class="flex items-center justify-center h-screen">
-            <img className="px-2 py-2 mb-2 ml-4 w-2/3 sm:w-1/3 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" src={dataImage} />
+          <div class="flex items-center justify-center">
+            <img className="px-2 py-2 mb-10 ml-4 w-2/3 sm:w-1/2 lg:w-5/12 xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" src={dataImage} />
             
 
             {address ? (
@@ -563,7 +563,7 @@ function SignatorViewer({
         />
       </Modal>
       <div>
-        <Card className="" style={{ paddingTop: 20, background: "#2bcfd9" }}>
+        <Card className="" style={{ paddingTop: 10, background: "#2bcfd9" }}>
           {message ? (
             <Text style={{ fontSize: 18, marginBottom: "0px" }}>{`${message}`}</Text>
           ) : (
@@ -573,33 +573,10 @@ function SignatorViewer({
                 size="large"
                 autoSize={{ minRows: 2 }}
                 value={typedData && JSON.stringify(showAll === true ? typedData : typedData.message, null, "\t")}
-                style={{ marginBottom: 10 }}
+                style={{ marginBottom: 10, background: "#96f9ff" }}
               />
               <Space>
-                <Popover
-                  style={{ paddingTop: 20, background: "#2bcfd9" }}
-                  content={
-                    <Space direction="vertical">
-                      <Typography>Domain:</Typography>
-                      <Input.TextArea
-                        size="xsmall"
-                        autoSize={{ minRows: 2 }}
-                        value={typedData && JSON.stringify(typedData.domain, null, "\t")}
-                      />
-                      {typedData &&
-                        typedData.domain &&
-                        typedData.domain.chainId &&
-                        chainList &&
-                        chainList.length > 0 && (
-                          <Text code>
-                            {chainList.find(element => element.chainId === typedData.domain.chainId).name}
-                          </Text>
-                        )}
-                    </Space>
-                  }
-                >
-                  <Button size="small" shape="circle" icon={<InfoOutlined />} />
-                </Popover>
+                
                 <Switch
                   checkedChildren="all"
                   unCheckedChildren="msg"
