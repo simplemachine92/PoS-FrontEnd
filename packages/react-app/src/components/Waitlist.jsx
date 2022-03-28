@@ -92,12 +92,12 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
   ];
 
   return (
-    <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
+    <div className="bg-headerBackground bg-contain bg-top-right bg-no-repeat mt-10">
       {ready ? (
         <div className="mx-auto mr-1 ml-1">
           <h6 className="text-yellow-pos font-bold text-3xl mt-5">Top Donors</h6>
           <br />
-          <Table pagination={{ pageSize: 5 }} columns={columns2} dataSource={dataSource2} />
+          <Table className="mx-10" pagination={{ pageSize: 5 }} columns={columns2} dataSource={dataSource2} />
           <Footer />
         </div>
       ) : (

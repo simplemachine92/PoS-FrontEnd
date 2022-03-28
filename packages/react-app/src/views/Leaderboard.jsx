@@ -113,7 +113,7 @@ export default function Leaderboard({ yourLocalBalance, mainnetProvider, price, 
   ];
 
   return (
-    <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
+    <div className="bg-headerBackground bg-contain bg-top-right bg-no-repeat mt-10" style={{ height: "auto", width: "auto", marginTop: 20 }}>
       <Waitlist events={events} firebaseConfig={firebaseConfig} mainnetProvider={mainnetProvider} />
     </div>
   );
