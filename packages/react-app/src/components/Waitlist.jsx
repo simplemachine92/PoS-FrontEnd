@@ -37,13 +37,32 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
 
   const FilterByNameInput2 = (
     <Input
-      placeholder="Search by Address (Case Sensitive)"
+    className="w-2/3"
+      placeholder="Sort by ENS or 0x.."
       value={value2}
       onChange={e => {
+        console.log("curr", e.target.value)
+        
         const currValue = e.target.value;
         setValue2(currValue);
         const filteredData = events.filter(entry => entry.args[0].includes(currValue));
         setDataSource2(filteredData);
+      
+        // Check if an input ENS resolves
+        if (e.target.value.startsWith("0")) {} else {
+        mainnetProvider.resolveName(e.target.value).then(function(address2) {
+          console.log("Address: " + address2);
+          if (address2 == null) {
+            console.log("No record for this ENS")
+            setDataSource2(events);
+            } else {
+              const filteredData2 = events.filter(entry => entry.args[0].includes(address2))
+              setDataSource2(filteredData2);
+            };
+          });
+        /* console.log("ensName", ensName) */
+
+        }
       }}
     />
   );
