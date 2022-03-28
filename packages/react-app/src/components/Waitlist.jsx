@@ -38,7 +38,7 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
   const FilterByNameInput2 = (
     <Input
     className="w-2/3"
-      placeholder="Sort by ENS or 0x.."
+      placeholder="Filter ENS or 0x.."
       value={value2}
       onChange={e => {
         console.log("curr", e.target.value)
