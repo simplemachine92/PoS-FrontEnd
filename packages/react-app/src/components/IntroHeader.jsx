@@ -13,7 +13,7 @@ export default function IntroHeader() {
     >
       {/*  */}
       <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat">
-        <div className="max-w-md py-10">
+        <div className="max-w-lg py-10">
           <img alt="Book" className="w-3/5 mx-auto" src="assets/RasCover.png" />
           <a href="/order" target="_blank" rel="noreferrer">
             <button
@@ -25,8 +25,8 @@ export default function IntroHeader() {
           </a>
         </div>
       </div>
-      <div className="flex flex-wrap w-1/2 md:w-1/3 pr-4 md:pr-2">
-        <img className="book and shadow" className="mb-8 object-fit" src="assets/RasText.png" />
+      <div className="flex flex-wrap w-1/2 lg:w-1/3">
+        <img className="book and shadow" className="mb-8 object-fit" src="assets/rastextneu.png" />
       </div>
     </div>
   );
