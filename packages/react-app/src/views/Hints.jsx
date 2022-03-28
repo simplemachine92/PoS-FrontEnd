@@ -73,7 +73,7 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
 
   const [dataSource, setDataSource] = useState(myData);
 
-  const FilterByNameInput = (
+  /* const FilterByNameInput = (
     <Input
       placeholder="Search Address (Case Sensitive)"
       value={value}
@@ -84,11 +84,43 @@ export default function Hints({ yourLocalBalance, mainnetProvider, price, addres
         setDataSource(filteredData);
       }}
     />
+  ); */
+
+  const FilterByNameInput2 = (
+    <Input
+    className="w-2/3"
+      placeholder="Filter ENS or 0x.."
+      value={value}
+      onChange={e => {
+        console.log("curr", e.target.value)
+        
+        const currValue = e.target.value;
+        setValue(currValue);
+        const filteredData = sData.filter(entry => entry.recipient.includes(currValue));
+        setDataSource(filteredData);
+      
+        // Check if an input ENS resolves
+        if (e.target.value.startsWith("0")) {} else {
+        mainnetProvider.resolveName(e.target.value).then(function(address2) {
+          console.log("Address: " + address2);
+          if (address2 == null) {
+            console.log("No record for this ENS")
+            setDataSource(sData);
+            } else {
+              const filteredData2 = sData.filter(entry => entry.recipient.includes(address2))
+              setDataSource(filteredData2);
+            };
+          });
+        /* console.log("ensName", ensName) */
+
+        }
+      }}
+    />
   );
 
   const columns = [
     {
-      title: FilterByNameInput,
+      title: FilterByNameInput2,
       dataIndex: "recipient",
       render: record =>
         record != undefined ? <Address2 value={record} fontSize={14} ensProvider={mainnetProvider} /> : <Spin />,
