@@ -48,19 +48,37 @@ export default function Signator({
   const [list, setList] = useState();
   const [ready, setReady] = useState(false);
   const [value2, setValue2] = useState("");
-  /* const [selectedRowKeys, setSelectedRowKeys] = useState() */
 
   const [dataSource2, setDataSource2] = useState(events);
 
   const FilterByNameInput2 = (
     <Input
-      placeholder="Search by Address (Case Sensitive)"
+    className="w-2/3"
+      placeholder="Sort by ENS or Address"
       value={value2}
       onChange={e => {
+        console.log("curr", e.target.value)
+        
         const currValue = e.target.value;
         setValue2(currValue);
         const filteredData = events.filter(entry => entry.args[0].includes(currValue));
         setDataSource2(filteredData);
+      
+        // Check if an input ENS resolves
+        if (e.target.value.startsWith("0")) {} else {
+        mainnetProvider.resolveName(e.target.value).then(function(address2) {
+          console.log("Address: " + address2);
+          if (address2 == null) {
+            console.log("No record for this ENS")
+            setDataSource2(events);
+            } else {
+              const filteredData2 = events.filter(entry => entry.args[0].includes(address2))
+              setDataSource2(filteredData2);
+            };
+          });
+        /* console.log("ensName", ensName) */
+
+        }
       }}
     />
   );
@@ -83,9 +101,6 @@ export default function Signator({
       },
       sorter: (a, b) => a.args[1] - b.args[1],
       sortDirections: ["ascend", "descend"],
-
-      /* render: record => (record != undefined ? ethers.utils.formatEther(ethers.BigNumber.from(record[1])) : <Spin />),
-      key: "2", */
     },
   ];
 
@@ -219,16 +234,6 @@ export default function Signator({
   const getMessage = () => {
     const _message = messageText;
 
-    /*
-    if (metaData === "time") {
-      _message = `${messageDate.toLocaleString()}: ${messageText}`;
-    } else if (metaData == "block") {
-      _message = `${latestBlock}: ${messageText}`;
-    } else {
-      _message = messageText;
-    }
-    */
-
     if (hashMessage) {
       return ethers.utils.keccak256(ethers.utils.toUtf8Bytes(_message)); // _message//ethers.utils.hashMessage(_message)
     }
@@ -245,7 +250,7 @@ export default function Signator({
         });
         console.log("dblist", dbList);
         if (dbList.length) {
-          events.forEach(pledge => {
+          events.forEach(pledge => {  
             eventList.push(pledge.args.pledgee);
             console.log("event list", eventList);
             objectList.push(pledge);
@@ -282,13 +287,6 @@ export default function Signator({
       setTypedDataChecks(_checks);
     }
   }, [typedData]);
-
-   function updateList(record) {
-    let updatedList = record;
-    console.log("xyz", record)
-    
-     /* list.unshift(record)  */
-  }
 
   const signMessage = async () => {
     try {
