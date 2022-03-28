@@ -92,7 +92,7 @@ function Order({ writeContracts, tx }) {
             <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
               <div className="max-w-md py-10 mx-auto">
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
-                  <img alt="Book" className="w-1/2 mb-4 mx-auto" src="assets/RasCover.png" />
+                  <img alt="Book" className="w-3/5 mb-4 md:w-3/4 mx-auto" src="assets/RasCover.png" />
                   <a href="https://www.boulderbookstore.net/product/proof" target="_blank" rel="noreferrer">
                     <button
                       className="w-3/4 py-2 px-2 mt-2 mx-auto sm:py-4 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
@@ -106,12 +106,12 @@ function Order({ writeContracts, tx }) {
             </div>
           
           {/* <img src="assets/pre-order.svg" /> */}
-              <div className="container px-5 py-6 mx-auto">
+              <div className="w-screen bg-circle bg-contain bg-no-repeat px-5 py-6 mx-auto">
               <h5 className="font-bold">Retailers</h5>
               <br />
-                <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+                <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 ">
                   {buyLinks.map(item => (
-                    <div className="p-2 sm:w-1/2 w-full">
+                    <div className="p-2 sm:w-1/2 w-1/2">
                       <a href={item.link} className="">
                         {/* <svg
                         fill="none"

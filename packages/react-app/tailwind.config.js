@@ -14,6 +14,7 @@ module.exports = {
         headerBackground: "url('/src/assets/Bareheader.svg')",
         ringsBackground: "url('/src/assets/RotatingRings.svg')",
         smallBackground: "url('/src/assets/Rings_small.svg')",
+        circle: "url('/src/assets/eth_circle_3.svg')",
       },
       colors: {
         orange: colors.orange,

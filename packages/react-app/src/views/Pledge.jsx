@@ -94,12 +94,12 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
           {/* prettier-ignore */}
           <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
             <div className="flex flex-wrap w-2/5 mx-auto">
-              <img class="shadow" className="object-scale-down" src="assets/DonationText.png" />
+              <img class="shadow" className="" src="assets/DonationText.png" />
             </div>
             <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
               <div className="max-w-md py-10 mx-auto">
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
-                  <img alt="Book" className="w-1/2 mb-4 mx-auto" src="assets/RasCover.png" />
+                  <img alt="Book" className="w-3/5 mb-4 md:w-3/4 mx-auto" src="assets/RasCover.png" />
                   
                     <p
                     >
@@ -112,10 +112,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
 
         <footer className="">
           
-            <div>
-              <h5 className="font-bold mt-6">Make a Donation</h5>
+            <div className="bg-circle bg-left-bottom bg-fit bg-no-repeat">
+              <h5 className="font-bold mt-12 md:mb-20">Make a Donation</h5>
 
-              <h3 className="text-sm p-10">
+              <h3 className="text-sm p-10 md:text-2xl">
               Pledge any amount of ETH below to request a digitally signed book plate from Vitalik. 
               </h3>
 
@@ -133,7 +133,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               />
               <br/>
               {/* "Pledge any amount of ETH to request a digitally signed book plate from Vitalik. Watch the profile page to see your token and your digital book when it is available." */}
-              <label>Optionally, Enter your email to be notified when the digital book is available.</label><br/>
+              <h3 className="text-sm mt-10 md:text-2xl mx-2" >Optionally, Enter your email to be notified when the digital book is available.</h3>
                 <StyledInput
                 className="w-3/4 mt-5 mx-auto"
                 maxLength={160}
@@ -207,7 +207,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 
                 <button
                 type="btn btn-primary"
-                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-sm md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-sm md:text-2xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   style={{ marginTop: 40, width: "30%" }}
                   onClick={loadWeb3Modal}
                 >
@@ -217,9 +217,9 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
             </div>
           
 
-          <div>
+          <div className="">
             <br />
-            <h3 className="text-left text-lg mx-8">
+            <h3 className="text-left text-sm md:text-xl mx-8">
           For pledges made here, funds will go 90% to the Gitcoin Grants matching pool and 10% to our publishing
           partner, <a href="https://www.sevenstories.com/books/4443-proof-of-stake">Seven Stories Press</a>, for
           supporting public goods in independent publishing. For book copies purchased here or anywhere, Vitalik has
