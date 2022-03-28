@@ -134,8 +134,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               <br/>
               {/* "Pledge any amount of ETH to request a digitally signed book plate from Vitalik. Watch the profile page to see your token and your digital book when it is available." */}
               <h3 className="text-sm mt-10 md:text-2xl mx-2" >Optionally, Enter your email to be notified when the digital book is available.</h3>
-                <StyledInput
-                className="w-3/4 mt-5 mx-auto"
+                <Input
+                
+                className="form w-3/4 mt-5"
+                class="form w-3/4 mt-5 mx-auto"
                 maxLength={160}
                 placeholder="email"
                 onChange={f => {
