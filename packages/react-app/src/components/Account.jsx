@@ -65,59 +65,39 @@ export default function Account({
   if (web3Modal) {
     if (web3Modal.cachedProvider) {
       modalButtons.push(
-        <Button
-          key="logoutbutton"
-          style={{ verticalAlign: "top", marginLeft: 8, marginTop: 8 }}
-          shape="square"
-          size="medium"
+        <button
+          className="py-1 px-2 mb-1 mt-1 mx-auto sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+          type="primary"
           onClick={logoutOfWeb3Modal}
+          key="logoutbutton"
         >
           logout
-        </Button>,
+        </button>,
       );
     } else {
       modalButtons.push(
-        <Button
-          key="loginbutton"
-          style={{ verticalAlign: "top", marginLeft: 8, marginTop: 8 }}
-          shape="square"
-          size="medium"
-          /* type={minimized ? "default" : "primary"}     too many people just defaulting to MM and having a bad time */
+        <button
+          className="py-1 px-2 mb-1 mt-1 mx-auto sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+          type="primary"
           onClick={loadWeb3Modal}
+          key="loginbutton"
         >
           connect
-        </Button>,
+        </button>,
       );
     }
   }
   const display = minimized ? (
     ""
   ) : (
-    <span>
-      {web3Modal && web3Modal.cachedProvider ? (
-        <>{address && <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />}</>
-      ) : useBurner ? (
-        ""
-      ) : isContract ? (
-        <>
-          {address && <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />}
-          <Balance address={address} provider={localProvider} price={price} />
-        </>
-      ) : (
-        ""
-      )}
-      {useBurner && web3Modal && !web3Modal.cachedProvider ? (
-        <>
-          <Address address={address} ensProvider={mainnetProvider} blockExplorer={blockExplorer} />
-        </>
-      ) : (
-        <></>
-      )}
+    <span className="mt-0">
+      {web3Modal && web3Modal.cachedProvider ? <></> : useBurner ? "" : isContract ? <></> : ""}
+      {useBurner && web3Modal && !web3Modal.cachedProvider ? <></> : <></>}
     </span>
   );
 
   return (
-    <div>
+    <div className="flex flex-row">
       {display}
       {modalButtons}
     </div>

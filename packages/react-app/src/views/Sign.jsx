@@ -16,12 +16,13 @@ import {
   Form,
   List,
   Pagination,
+  Table
 } from "antd";
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { useLocalStorage } from "../hooks";
-import { AddressInput, Address } from "../components";
+import { AddressInput, Address, Footer, Quotes, SignOptions, Address2 } from "../components";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, set, get, child } from "firebase/database";
@@ -45,6 +46,65 @@ export default function Signator({
   events,
 }) {
   const [list, setList] = useState();
+  const [ready, setReady] = useState(false);
+  const [value2, setValue2] = useState("");
+
+  const [dataSource2, setDataSource2] = useState(events);
+
+  const FilterByNameInput2 = (
+    <Input
+    className="w-2/3"
+      placeholder="Sort by ENS or 0x.."
+      value={value2}
+      onChange={e => {
+        console.log("curr", e.target.value)
+        
+        const currValue = e.target.value;
+        setValue2(currValue);
+        const filteredData = events.filter(entry => entry.args[0].includes(currValue));
+        setDataSource2(filteredData);
+      
+        // Check if an input ENS resolves
+        if (e.target.value.startsWith("0")) {} else {
+        mainnetProvider.resolveName(e.target.value).then(function(address2) {
+          console.log("Address: " + address2);
+          if (address2 == null) {
+            console.log("No record for this ENS")
+            setDataSource2(events);
+            } else {
+              const filteredData2 = events.filter(entry => entry.args[0].includes(address2))
+              setDataSource2(filteredData2);
+            };
+          });
+        /* console.log("ensName", ensName) */
+
+        }
+      }}
+    />
+  );
+
+  const columns2 = [
+    {
+      title: FilterByNameInput2,
+      dataIndex: "args",
+      render: record =>
+        record != undefined ? <Address2 value={record[0]} fontSize={14} ensProvider={mainnetProvider} /> : <Spin />,
+      key: "1",
+    },
+
+    {
+      title: "Donation",
+      dataIndex: "args",
+      key: "donation",
+      render: value => {
+        return ethers.utils.formatEther(ethers.BigNumber.from(value[1]));
+      },
+      sorter: (a, b) => a.args[1] - b.args[1],
+      sortDirections: ["ascend", "descend"],
+    },
+  ];
+
+
   //prettier-ignore
   const eip712Example = {
   types: {
@@ -58,7 +118,7 @@ export default function Signator({
   },
   primaryType: "signature",
   domain: {
-    name: "GreenPill_Pages",
+    name: "ProofOfStake_Pages",
     version: "0",
     chainId: 4,
     verifyingContract: "0x0f40dee08808fbb178EE43824988148b33A0d7b8",
@@ -118,7 +178,6 @@ export default function Signator({
         const errorCode = error.code;
         const errorMessage = error.message;
       });
-    console.log("Success:", values);
   };
 
   const onFinishFailed = errorInfo => {
@@ -153,16 +212,16 @@ export default function Signator({
       },
       primaryType: "signature",
       domain: {
-        name: "GreenPill_Pages",
+        name: "ProofOfStake_Pages",
         version: "0",
-        chainId: 4,
-        verifyingContract: contracts.GreenPill_Pages.address,
+        chainId: 31337,
+        verifyingContract: contracts.ProofOfStake_Pages.address,
       },
       message: {
-        sender: "0xb010ca9Be09C382A9f31b79493bb232bCC319f01",
+        sender: `${address}`,
         recipient: `${list[0].args[0]}`,
         pledge: `${pledgeValue}`,
-        timestamp: `${Date.now()}`,
+        timestamp: String(Date.now()),
         msg: messageText,
       },
     };
@@ -175,16 +234,6 @@ export default function Signator({
   const getMessage = () => {
     const _message = messageText;
 
-    /*
-    if (metaData === "time") {
-      _message = `${messageDate.toLocaleString()}: ${messageText}`;
-    } else if (metaData == "block") {
-      _message = `${latestBlock}: ${messageText}`;
-    } else {
-      _message = messageText;
-    }
-    */
-
     if (hashMessage) {
       return ethers.utils.keccak256(ethers.utils.toUtf8Bytes(_message)); // _message//ethers.utils.hashMessage(_message)
     }
@@ -193,7 +242,7 @@ export default function Signator({
 
   useEffect(async () => {
     const dbRef = ref(getDatabase(app));
-    get(child(dbRef, `gp/`)).then(snapshot => {
+    get(child(dbRef, `PoS/`)).then(snapshot => {
       if (snapshot.exists()) {
         snapshot.forEach(sig => {
           let message = sig.val().message;
@@ -201,7 +250,7 @@ export default function Signator({
         });
         console.log("dblist", dbList);
         if (dbList.length) {
-          events.forEach(pledge => {
+          events.forEach(pledge => {  
             eventList.push(pledge.args.pledgee);
             console.log("event list", eventList);
             objectList.push(pledge);
@@ -213,13 +262,14 @@ export default function Signator({
                 // push to to-do
                 toSign.push(objectList[x]);
                 setList(toSign);
+                console.log("aalist", toSign)
               }
             }
           });
         }
       }
     });
-  }, [events]);
+  }, [events, address]);
 
   useEffect(() => {
     if (typedData) {
@@ -243,6 +293,7 @@ export default function Signator({
       setSigning(true);
 
       const injectedSigner = action === "sign" && injectedProvider.getSigner();
+      console.log("signer", injectedProvider.getSigner);
 
       let _signature;
       if (type === "typedData") {
@@ -257,7 +308,7 @@ export default function Signator({
         const _compressedData = await codec.compress(_typedData);
 
         const db = database;
-        set(ref(db, "gp/" + _typedData.message.recipient), {
+        set(ref(db, `PoS/` + _typedData.message.recipient), {
           signature: _signature,
           message: _typedData.message,
           typedData: _compressedData,
@@ -304,6 +355,45 @@ export default function Signator({
       }
     }
   };
+  const Expander = props => <span>Test expander</span>;
+
+  const [select, setSelect] = useState({
+    selectedRowKeys: [],
+    loading: false
+  });
+
+  const { selectedRowKeys, loading } = select;
+
+  const rowSelection = {
+    selectedRowKeys,
+    onChange: (selectedRowKeys) => {
+      console.log("sel", selectedRowKeys)
+      setSelect({
+        ...select,
+        selectedRowKeys: selectedRowKeys
+      });
+      console.log("eventc", events)
+      const filtered = Object.keys(events).filter(key => selectedRowKeys.includes(key))
+       .reduce((obj, key) => {
+        obj = events[key];
+        return obj;
+      }, {});
+      console.log("flt", filtered)
+       setList([filtered])
+    },
+    type: 'radio',
+  };
+
+useEffect(async () => {
+  Object.keys(events).forEach(key => {
+    events[key].key = key;
+    console.log("wat3", key, events[key]);
+  });
+  setDataSource2(events);
+  setReady(true);
+  console.log("eventsS", events )
+  console.log("tosign", toSign)
+}, [list]);
 
   return (
     <div
@@ -316,6 +406,7 @@ export default function Signator({
       }}
     >
       {userReady ? (
+        <>
         <Row>
           <Col span={12}>
             <Card>
@@ -330,7 +421,7 @@ export default function Signator({
                   }}
                 />
               )}
-              <h1>Signing to:</h1>
+              <h1>Queued / Selected:</h1>
               <Space direction="vertical" style={{ width: "auto" }}>
                 <div
                   style={{
@@ -369,6 +460,8 @@ export default function Signator({
                   <Space direction="vertical" style={{ width: "50%" }}>
                     <Input.TextArea
                       style={{ fontSize: 18 }}
+                      maxLength={60}
+                      showCount={true}
                       size="large"
                       autoSize={{ minRows: 1 }}
                       value={messageText}
@@ -425,6 +518,24 @@ export default function Signator({
             />
           </Col>
         </Row>
+        
+        <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
+        {ready ? (
+          <div className="mx-auto mr-1 ml-1">
+            <h6 className="text-yellow-pos font-bold text-3xl mt-5">Select a User to Sign</h6>
+            <br />
+            <Table pagination={{ pageSize: 5 }} columns={columns2} dataSource={dataSource2}
+            rowSelection={rowSelection}
+            />
+            <Footer />
+          </div>
+        ) : (
+          <div>
+            <Spin className="mt-5" />
+          </div>
+        )}
+      </div>
+      </>
       ) : (
         <div style={{ margintop: 50 }}>
           <Form

@@ -1,4 +1,4 @@
-import { Alert, Button, Col, Menu, Row, Affix } from "antd";
+import { Menu, Affix, Button, Drawer, Row, Col } from "antd";
 import "antd/dist/antd.css";
 import {
   useBalance,
@@ -10,29 +10,27 @@ import {
 } from "eth-hooks";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import React, { useCallback, useEffect, useState } from "react";
-import { HomeOutlined, BugOutlined, QuestionCircleOutlined, ReadOutlined, UserOutlined } from "@ant-design/icons";
+import { HomeOutlined, UserOutlined, BookOutlined, ShoppingCartOutlined } from "@ant-design/icons";
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
 import {
   Account,
   Contract,
-  Faucet,
-  Events,
-  GasGauge,
-  Header,
-  Ramp,
-  ThemeSwitch,
   NetworkDisplay,
   FaucetHint,
-  NetworkSwitch,
+  AfterPledge,
+  Waitlist,
+  Faucet,
+  Ramp,
+  GasGauge,
 } from "./components";
 import { NETWORKS, ALCHEMY_KEY } from "./constants";
 import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, ExampleUI, Hints, Subgraph, Sign, Pledge } from "./views";
+import { Home, Hints, Sign, Pledge, Order } from "./views";
 import { useStaticJsonRPC } from "./hooks";
 import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
@@ -69,10 +67,10 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.rinkeby; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.mainnet; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
-const DEBUG = true;
+const DEBUG = false;
 const NETWORKCHECK = true;
 const USE_BURNER_WALLET = false; // toggle burner wallet feature
 const USE_NETWORK_SELECTOR = false;
@@ -93,6 +91,7 @@ function App(props) {
 
   const [injectedProvider, setInjectedProvider] = useState();
   const [address, setAddress] = useState();
+  const [visible, setVisible] = useState(false);
   const [selectedNetwork, setSelectedNetwork] = useState(networkOptions[0]);
   const location = useLocation();
 
@@ -174,7 +173,7 @@ function App(props) {
   // Load in your local 📝 contract and read a value from it:
   const readContracts = useContractLoader(localProvider, contractConfig);
 
-  const events = useEventListener(readContracts, "GreenPill_Pages", "Pledge", localProvider, "10100000");
+  const events = useEventListener(readContracts, "ProofOfStake_Pages", "Pledge", localProvider, "10100000");
 
   // If you want to make 🔐 write transactions to your contracts, use the userSigner:
   const writeContracts = useContractLoader(userSigner, contractConfig, localChainId);
@@ -279,89 +278,177 @@ function App(props) {
     }
   }, [loadWeb3Modal]);
 
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
   const faucetAvailable = localProvider && localProvider.connection && targetNetwork.name.indexOf("local") !== -1;
 
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
       <Affix>
-        <StyledMenu style={{ textAlign: "left" }} selectedKeys={[location.pathname]} mode="horizontal">
+        <NetworkDisplay
+          NETWORKCHECK={NETWORKCHECK}
+          localChainId={localChainId}
+          selectedChainId={selectedChainId}
+          targetNetwork={targetNetwork}
+          logoutOfWeb3Modal={logoutOfWeb3Modal}
+          USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
+        />
+        <StyledMenu
+          className="hidden justify-start items-center sm:flex"
+          selectedKeys={[location.pathname]}
+          mode="horizontal"
+          collapsedWidth="0"
+        >
           <Menu.Item
-            icon={
-              <HomeOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
-                theme="outlined"
-              />
-            }
-            key="/"
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="Home"
+            icon={<HomeOutlined />}
           >
+            Home
             <Link to="/"></Link>
           </Menu.Item>
           <Menu.Item
-            icon={
-              <UserOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
-                theme="outlined"
-              />
-            }
-            key="/signatures"
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="mail"
+            icon={<BookOutlined />}
           >
-            <Link to="/signatures"></Link>
+            Donate
+            <Link to="/pledge"></Link>
           </Menu.Item>
           <Menu.Item
-            icon={
-              <BugOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
-                theme="outlined"
-              />
-            }
-            key="/debug"
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="order"
+            icon={<ShoppingCartOutlined />}
           >
-            <Link to="/debug"></Link>
+            Pre-Order
+            <Link to="/order"></Link>
           </Menu.Item>
-          {/* <Menu.Item
-            icon={
-              <ReadOutlined
-                type="message"
-                style={{ paddingTop: 20, paddingLeft: 11, fontSize: "30px", color: "#207191" }}
-                theme="outlined"
-              />
-            }
-            key="/exampleui"
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="donations"
+            icon={<UserOutlined />}
           >
-            <Link to="/exampleui"></Link>
-          </Menu.Item> */}
-        </StyledMenu>
-        <div style={{ position: "fixed", textAlign: "right", right: 0, top: 0, padding: 10 }}>
-          <div style={{ display: "flex", flex: 1, alignItems: "center" }}>
-            {USE_NETWORK_SELECTOR && (
-              <div style={{ marginRight: 20 }}>
-                {/* <NetworkSwitch
-                networkOptions={networkOptions}
-                selectedNetwork={selectedNetwork}
-                setSelectedNetwork={setSelectedNetwork}
-              /> */}
-              </div>
+            Top Donors
+            <Link to="/donations"></Link>
+          </Menu.Item>
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="signatures"
+            icon={<UserOutlined />}
+          >
+            Signatures
+            <Link to="/signatures"></Link>
+          </Menu.Item>
+
+          <Menu.Item style={{ marginLeft: "auto" }}>
+            <div>
+              {USE_NETWORK_SELECTOR && <div style={{ marginRight: 20 }}></div>}
+              <Account
+                useBurner={USE_BURNER_WALLET}
+                address={address}
+                localProvider={localProvider}
+                userSigner={userSigner}
+                mainnetProvider={mainnetProvider}
+                price={price}
+                web3Modal={web3Modal}
+                loadWeb3Modal={loadWeb3Modal}
+                logoutOfWeb3Modal={logoutOfWeb3Modal}
+                blockExplorer={blockExplorer}
+              />
+            </div>
+            {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
+              <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
             )}
-            <Account
-              useBurner={USE_BURNER_WALLET}
-              address={address}
-              localProvider={localProvider}
-              userSigner={userSigner}
-              mainnetProvider={mainnetProvider}
-              price={price}
-              web3Modal={web3Modal}
-              loadWeb3Modal={loadWeb3Modal}
-              logoutOfWeb3Modal={logoutOfWeb3Modal}
-              blockExplorer={blockExplorer}
-            />
+          </Menu.Item>
+        </StyledMenu>
+
+        <div className="flex sm:hidden justify-between p-2" style={{ background: "#7ee6cd" }}>
+          <button
+            className="flex flex-col justify-center items-center gap-1 py-2 px-2 sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+            type="primary"
+            onClick={() => setVisible(true)}
+          >
+            <div className="h-0.5 w-5 bg-black rounded-md" />
+            <div className="h-0.5 w-5 bg-black rounded-md" />
+            <div className="h-0.5 w-5 bg-black rounded-md" />
+          </button>
+          <Drawer
+            bodyStyle={{ background: "#7ee6cd", paddingTop: "3rem" }}
+            placement="left"
+            visible={visible}
+            onClose={() => setVisible(false)}
+          >
+            <Menu className="bg-primary border-none font-bold">
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="Home"
+                icon={<HomeOutlined />}
+              >
+                Home
+                <Link to="/"></Link>
+              </Menu.Item>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="mail"
+                icon={<BookOutlined />}
+              >
+                Donate
+                <Link to="/pledge"></Link>
+              </Menu.Item>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="order"
+                icon={<ShoppingCartOutlined />}
+              >
+                Pre-Order
+                <Link to="/order"></Link>
+              </Menu.Item>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="donations"
+                icon={<UserOutlined />}
+              >
+                Top Donors
+                <Link to="/donations"></Link>
+              </Menu.Item>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="signatures"
+                icon={<UserOutlined />}
+              >
+                Signatures
+                <Link to="/signatures"></Link>
+              </Menu.Item>
+            </Menu>
+          </Drawer>
+          <div>
+            <div>
+              {USE_NETWORK_SELECTOR && <div style={{ marginRight: 20 }}></div>}
+              <Account
+                useBurner={USE_BURNER_WALLET}
+                address={address}
+                localProvider={localProvider}
+                userSigner={userSigner}
+                mainnetProvider={mainnetProvider}
+                price={price}
+                web3Modal={web3Modal}
+                loadWeb3Modal={loadWeb3Modal}
+                logoutOfWeb3Modal={logoutOfWeb3Modal}
+                blockExplorer={blockExplorer}
+              />
+            </div>
+            {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
+              <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
+            )}
           </div>
-          {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
-            <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
-          )}
         </div>
       </Affix>
       <Switch>
@@ -383,6 +470,31 @@ function App(props) {
             readContracts={readContracts}
             tx={tx}
             localProvider={localProvider}
+            loadWeb3Modal={loadWeb3Modal}
+            address={address}
+          />
+        </Route>
+        <Route path="/donations">
+          <Waitlist
+            yourLocalBalance={yourLocalBalance}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            firebaseConfig={firebaseConfig}
+            tx={tx}
+            localProvider={localProvider}
+            loadWeb3Modal={loadWeb3Modal}
+            address={address}
+            events={events}
+          />
+        </Route>
+        <Route path="/complete">
+          <AfterPledge
+            yourLocalBalance={yourLocalBalance}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            tx={tx}
+            localProvider={localProvider}
+            loadWeb3Modal={loadWeb3Modal}
             address={address}
           />
         </Route>
@@ -398,6 +510,26 @@ function App(props) {
             firebaseConfig={firebaseConfig}
           />
         </Route>
+        <Route path="/pledge">
+          <Pledge
+            yourLocalBalance={yourLocalBalance}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            tx={tx}
+            localProvider={localProvider}
+            address={address}
+          />
+        </Route>
+        <Route path="/order">
+          <Order
+            yourLocalBalance={yourLocalBalance}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            tx={tx}
+            localProvider={localProvider}
+            address={address}
+          />
+        </Route>
         <Route exact path="/debug">
           {/*
                 🎛 this scaffolding is full of commonly used components
@@ -406,7 +538,7 @@ function App(props) {
             */}
 
           <Contract
-            name="GreenPill_Pages"
+            name="ProofOfStake_Pages"
             price={price}
             signer={userSigner}
             provider={localProvider}
@@ -438,43 +570,13 @@ function App(props) {
             events={events}
           />
         </Route>
-        <Route path="/mainnetdai">
-          <Contract
-            name="DAI"
-            customContract={mainnetContracts && mainnetContracts.contracts && mainnetContracts.contracts.DAI}
-            signer={userSigner}
-            provider={mainnetProvider}
-            address={address}
-            blockExplorer="https://etherscan.io/"
-            contractConfig={contractConfig}
-            chainId={1}
-          />
-          {/*
-            <Contract
-              name="UNI"
-              customContract={mainnetContracts && mainnetContracts.contracts && mainnetContracts.contracts.UNI}
-              signer={userSigner}
-              provider={mainnetProvider}
-              address={address}
-              blockExplorer="https://etherscan.io/"
-            />
-            */}
-        </Route>
-        <Route path="/subgraph">
-          <Subgraph
-            subgraphUri={props.subgraphUri}
-            tx={tx}
-            writeContracts={writeContracts}
-            mainnetProvider={mainnetProvider}
-          />
-        </Route>
       </Switch>
 
       {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
 
       {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
-      <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
-        {/* <Row align="middle" gutter={[4, 4]}>
+      {/* <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
+        <Row align="middle" gutter={[4, 4]}>
           <Col span={8}>
             <Ramp price={price} address={address} networks={NETWORKS} />
           </Col>
@@ -496,21 +598,18 @@ function App(props) {
               Support
             </Button>
           </Col>
-        </Row> */}
+        </Row>
 
         <Row align="middle" gutter={[4, 4]}>
           <Col span={24}>
-            {
-              /*  if the local provider has a signer, let's show the faucet:  */
-              faucetAvailable ? (
-                <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
-              ) : (
-                ""
-              )
-            }
+            {faucetAvailable ? (
+              <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
+            ) : (
+              ""
+            )}
           </Col>
         </Row>
-      </div>
+      </div> */}
     </div>
   );
 }

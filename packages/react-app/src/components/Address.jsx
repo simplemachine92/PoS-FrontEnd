@@ -1,12 +1,14 @@
 import { Skeleton, Typography } from "antd";
 import React from "react";
-import Blockies from "react-blockies";
 import { useThemeSwitcher } from "react-css-theme-switcher";
+import Blockies from "react-blockies";
 import { useLookupAddress } from "eth-hooks/dapps/ens";
 
 // changed value={address} to address={address}
 
-/*
+const { Text } = Typography;
+
+/** 
   ~ What it does? ~
 
   Displays an address with a blockie image and option to copy address
@@ -27,9 +29,7 @@ import { useLookupAddress } from "eth-hooks/dapps/ens";
   - Provide blockExplorer={blockExplorer}, click on address and get the link
               (ex. by default "https://etherscan.io/" or for xdai "https://blockscout.com/poa/xdai/")
   - Provide fontSize={fontSize} to change the size of address text
-*/
-
-const { Text } = Typography;
+**/
 
 const blockExplorerLink = (address, blockExplorer) => `${blockExplorer || "https://etherscan.io/"}address/${address}`;
 
@@ -40,10 +40,10 @@ export default function Address(props) {
   const ensSplit = ens && ens.split(".");
   const validEnsCheck = ensSplit && ensSplit[ensSplit.length - 1] === "eth";
   const etherscanLink = blockExplorerLink(address, props.blockExplorer);
-  let displayAddress = address?.substr(0, 5) + "...";
+  let displayAddress = address?.substr(0, 5) + "..." + address?.substr(-4);
 
   if (validEnsCheck) {
-    displayAddress = ens.substr(0, 5);
+    displayAddress = ens;
   } else if (props.size === "short") {
     displayAddress += "..." + address.substr(-4);
   } else if (props.size === "long") {
@@ -79,26 +79,14 @@ export default function Address(props) {
       <span style={{ verticalAlign: "middle", paddingLeft: 5, fontSize: props.fontSize ? props.fontSize : 18 }}>
         {props.onChange ? (
           <Text editable={{ onChange: props.onChange }} copyable={{ text: address }}>
-            <a
-              style={{ color: currentTheme === "light" ? "#207191" : "#207191" }}
-              target="_blank"
-              href={etherscanLink}
-              rel="noopener noreferrer"
-            >
+            <a target="_blank" href={etherscanLink} rel="noopener noreferrer">
               {displayAddress}
             </a>
           </Text>
         ) : (
-          <Text>
-            <a
-              style={{ color: currentTheme === "light" ? "#207191" : "#207191" }}
-              target="_blank"
-              href={etherscanLink}
-              rel="noopener noreferrer"
-            >
-              {displayAddress}
-            </a>
-          </Text>
+          <a target="_blank" href={etherscanLink} rel="noopener noreferrer">
+            {displayAddress}
+          </a>
         )}
       </span>
     </span>

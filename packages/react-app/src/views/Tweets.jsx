@@ -94,7 +94,7 @@ export default function Tweets({ yourLocalBalance, mainnetProvider, price, addre
 
   useEffect(async () => {
     const dbRef = ref(getDatabase(app));
-    get(child(dbRef, `gp/`))
+    get(child(dbRef, `PoS/`))
       .then(snapshot => {
         if (snapshot.exists()) {
           snapshot.forEach(sig => {
@@ -185,12 +185,12 @@ export default function Tweets({ yourLocalBalance, mainnetProvider, price, addre
         record != undefined ? (
           <Space size="middle">
             <Share
-              url={`https://greenpill.party/view?typedData=${
+              url={`https://gitcoin.co/proofofstake/view?typedData=${
                 record.typedData + "&addresses=" + record.sender + "&signatures=" + record.signature
               }`}
               options={{
                 dnt: true,
-                text: `I just signed a copy of Green_Pill for ${record.recipient}, View it @`,
+                text: `I just signed a copy of Proof of Stake for ${record.recipient}, View it @`,
               }}
             />
           </Space>
