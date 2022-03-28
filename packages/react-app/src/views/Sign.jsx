@@ -54,7 +54,7 @@ export default function Signator({
   const FilterByNameInput2 = (
     <Input
     className="w-2/3"
-      placeholder="Sort by ENS or Address"
+      placeholder="Sort by ENS or 0x.."
       value={value2}
       onChange={e => {
         console.log("curr", e.target.value)
@@ -421,7 +421,7 @@ useEffect(async () => {
                   }}
                 />
               )}
-              <h1>Currently Signing:</h1>
+              <h1>Queued / Selected:</h1>
               <Space direction="vertical" style={{ width: "auto" }}>
                 <div
                   style={{
