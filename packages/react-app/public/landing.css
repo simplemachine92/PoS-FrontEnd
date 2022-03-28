@@ -405,8 +405,7 @@ select:focus {
   border-radius: 8px;
   outline: none;
   text-align: center;
-  font-size: 30px;
-  font-size: 4vw;
+  font-size: 2.5vw;
   font-family: Space Mono, sans-serif;
   color: #ffffff;
   background: #31dbe5;
