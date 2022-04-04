@@ -13,6 +13,7 @@ export default function Footer() {
       {/* Removing socials unless we have proper links */}
       {/* <Socials /> */}
       <TwitterShareButton
+      className="mr-10"
         title={"Preorder Vitalik Buterin’s PROOF OF STAKE, published by @7storiespress. You'll support @gitcoin's matching pool for public goods."}
         url={"https://proofofstake.gitcoin.co/"}
         hashtags={["ProofOfStake", "Gitcoin"]}
@@ -27,17 +28,14 @@ export default function Footer() {
         quote={"Preorder a copy of Vitalik Buterin’s PROOF OF STAKE, published by Seven Stories Press. You'll support Gitcoin's matching pool for public goods."}
         hashtag={"#hashtag"}
         description={"aiueo"}
-        className="Demo__some-network__share-button ml-2"
+        className=""
       >
         <img alt="facebook" src="assets/facebook_icon.svg" />
       </FacebookShareButton>
-      <h3 className="text-sm mx-auto mb-2">Share to help spread the word!</h3>
       <Divider style={{ backgroundColor: "black" }} />
       
-      <div className="object-left">
+      <div className="container object-left">
       <BottomLinks daoLogo="assets/socialmedia/built_by_gitcoin_community.svg" />
-      </div>
-      <div className="object-left">
       </div>
     </div>
   );

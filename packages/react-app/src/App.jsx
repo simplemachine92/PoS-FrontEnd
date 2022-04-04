@@ -30,8 +30,9 @@ import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, Hints, Sign, Pledge, Order } from "./views";
+import { Home, SignatureList, Sign, Pledge, Order } from "./views";
 import { useStaticJsonRPC } from "./hooks";
+import { useLookupAddress } from "eth-hooks/dapps/ens";
 import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
 
@@ -173,8 +174,7 @@ function App(props) {
   // Load in your local 📝 contract and read a value from it:
   const readContracts = useContractLoader(localProvider, contractConfig);
 
-  const events = useEventListener(readContracts, "ProofOfStake_Pages", "Pledge", localProvider, "10100000");
-
+  const events = useEventListener(readContracts, "ProofOfStake_Pages", "Pledge", localProvider, "1");
   // If you want to make 🔐 write transactions to your contracts, use the userSigner:
   const writeContracts = useContractLoader(userSigner, contractConfig, localChainId);
 
@@ -315,7 +315,7 @@ function App(props) {
             key="mail"
             icon={<BookOutlined />}
           >
-            Donate
+            Mint
             <Link to="/pledge"></Link>
           </Menu.Item>
           <Menu.Item
@@ -397,7 +397,7 @@ function App(props) {
                 key="mail"
                 icon={<BookOutlined />}
               >
-                Donate
+                Mint
                 <Link to="/pledge"></Link>
               </Menu.Item>
               <Menu.Item
@@ -477,6 +477,7 @@ function App(props) {
         <Route path="/donations">
           <Waitlist
             yourLocalBalance={yourLocalBalance}
+            mainnetProvider={mainnetProvider}
             writeContracts={writeContracts}
             readContracts={readContracts}
             firebaseConfig={firebaseConfig}
@@ -548,7 +549,7 @@ function App(props) {
           />
         </Route>
         <Route path="/signatures">
-          <Hints
+          <SignatureList
             address={address}
             yourLocalBalance={yourLocalBalance}
             mainnetProvider={mainnetProvider}

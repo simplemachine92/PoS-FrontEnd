@@ -59,7 +59,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
   const [uValue, setU] = useState("0.01337");
-  const [eValue, setE] = useState();
+  const [eValue, setE] = useState("placeholder");
 
   // Initialize Firebase
 
@@ -100,10 +100,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               <div className="max-w-md py-10 mx-auto">
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
                   <img alt="Book" className="w-3/5 mb-4 md:w-3/4 mx-auto" src="assets/RasCover.png" />
-                  
-                    <p
-                    >
-                      
+                    <p>
                     </p>
                   
                 </div>
@@ -113,10 +110,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
         <footer className="">
           
             <div className="bg-circle bg-left-bottom bg-fit bg-no-repeat">
-              <h5 className="font-bold mt-12 md:mb-20">Make a Donation</h5>
+            <h5 className="font-bold">Donate & Mint</h5>
 
-              <h3 className="text-sm p-10 md:text-2xl">
-              Pledge any amount of ETH below to request a digitally signed book plate from Vitalik. 
+              <h3 className="text-yellow-pos mb-4 mt-4 text-sm p-10 md:text-3xl">
+              Pledge any amount of ETH below to request a digitally signed book plate from Vitalik. <br/> <br/> You'll mint a non-transferable NFT and, when the book is available, you'll gain access to your signed digital copy.
               </h3>
 
 <label>Enter ETH Amount</label>
@@ -133,7 +130,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               />
               <br/>
               {/* "Pledge any amount of ETH to request a digitally signed book plate from Vitalik. Watch the profile page to see your token and your digital book when it is available." */}
-              <h3 className="text-sm mt-10 md:text-2xl mx-2" >Optionally, Enter your email to be notified when the digital book is available.</h3>
+              <h3 className="text-sm mt-10 md:text-2xl mx-2" >Optionally, enter your email to be notified when the digital book is available.</h3>
                 <Input
                 
                 className="form w-3/4 mt-5"
@@ -154,11 +151,6 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                   style={{ marginTop: 40, width: "30%" }}
                   onClick={async () => {
                     try {
-
-                      const db = database;
-                      set(ref(db, `PoS/` + address), {
-                       email: eValue.target.value
-                      });
 
                       const result = tx(
                         writeContracts &&
@@ -186,14 +178,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                           }
                         }
                       );
-
-                      /* const txCur = await tx(
-                        writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
-                      ); */
-                      /* await txCur.wait(); */
-                      // We need a redirect to /complete, this isnt working.
-
-                      //return <Redirect to="/complete" />;
+                      const db = database;
+                      set(ref(db, `PoS/` + address), {
+                       email: eValue
+                      });
                     } catch {
                       notification.error({
                         message: "Donation Not Processed",
