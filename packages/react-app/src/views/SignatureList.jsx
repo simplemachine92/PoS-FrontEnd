@@ -88,31 +88,30 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
 
   const FilterByNameInput2 = (
     <Input
-    className="w-2/3"
       placeholder="Filter ENS or 0x.."
       value={value}
       onChange={e => {
-        console.log("curr", e.target.value)
-        
+        console.log("curr", e.target.value);
+
         const currValue = e.target.value;
         setValue(currValue);
         const filteredData = sData.filter(entry => entry.recipient.includes(currValue));
         setDataSource(filteredData);
-      
-        // Check if an input ENS resolves
-        if (e.target.value.startsWith("0")) {} else {
-        mainnetProvider.resolveName(e.target.value).then(function(address2) {
-          console.log("Address: " + address2);
-          if (address2 == null) {
-            console.log("No record for this ENS")
-            setDataSource(sData);
-            } else {
-              const filteredData2 = sData.filter(entry => entry.recipient.includes(address2))
-              setDataSource(filteredData2);
-            };
-          });
-        /* console.log("ensName", ensName) */
 
+        // Check if an input ENS resolves
+        if (e.target.value.startsWith("0")) {
+        } else {
+          mainnetProvider.resolveName(e.target.value).then(function (address2) {
+            console.log("Address: " + address2);
+            if (address2 == null) {
+              console.log("No record for this ENS");
+              setDataSource(sData);
+            } else {
+              const filteredData2 = sData.filter(entry => entry.recipient.includes(address2));
+              setDataSource(filteredData2);
+            }
+          });
+          /* console.log("ensName", ensName) */
         }
       }}
     />
@@ -146,13 +145,13 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
   ];
 
   return (
-    <div className="bg-headerBackground bg-contain bg-top-right bg-no-repeat mt-10">
+    <div className="bg-headerBackground bg-contain bg-top-right bg-no-repeat">
       <div className="">
         {ready ? (
           <div className="mx-auto mr-1 ml-1">
-            <h6 className="text-yellow-pos font-bold text-3xl">Signatures</h6>
+            {/* <h6 className="text-yellow-pos font-bold text-3xl">Signatures</h6> */}
             <br />
-            <Table className="mx-10" pagination={{ pageSize: 5 }} columns={columns} dataSource={dataSource} />
+            <Table pagination={{ pageSize: 10 }} columns={columns} dataSource={dataSource} />
           </div>
         ) : (
           <div>

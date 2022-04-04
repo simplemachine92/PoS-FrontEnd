@@ -10,7 +10,14 @@ import {
 } from "eth-hooks";
 import { useExchangeEthPrice } from "eth-hooks/dapps/dex";
 import React, { useCallback, useEffect, useState } from "react";
-import { HomeOutlined, UserOutlined, BookOutlined, ShoppingCartOutlined } from "@ant-design/icons";
+import {
+  HomeOutlined,
+  HighlightOutlined,
+  UserOutlined,
+  BookOutlined,
+  ShoppingCartOutlined,
+  DollarCircleOutlined,
+} from "@ant-design/icons";
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
@@ -329,7 +336,7 @@ function App(props) {
           <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             key="donations"
-            icon={<UserOutlined />}
+            icon={<DollarCircleOutlined />}
           >
             Top Donors
             <Link to="/donations"></Link>
@@ -337,10 +344,18 @@ function App(props) {
           <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             key="signatures"
-            icon={<UserOutlined />}
+            icon={<HighlightOutlined />}
           >
             Signatures
             <Link to="/signatures"></Link>
+          </Menu.Item>
+          <Menu.Item
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            key="profile"
+            icon={<UserOutlined />}
+          >
+            Your Profile
+            <Link to="/profile"></Link>
           </Menu.Item>
 
           <Menu.Item style={{ marginLeft: "auto" }}>
@@ -413,7 +428,7 @@ function App(props) {
                 className="flex justify-start items-center"
                 onClick={() => setVisible(false)}
                 key="donations"
-                icon={<UserOutlined />}
+                icon={<DollarCircleOutlined />}
               >
                 Top Donors
                 <Link to="/donations"></Link>
@@ -422,10 +437,19 @@ function App(props) {
                 className="flex justify-start items-center"
                 onClick={() => setVisible(false)}
                 key="signatures"
-                icon={<UserOutlined />}
+                icon={<HighlightOutlined />}
               >
                 Signatures
                 <Link to="/signatures"></Link>
+              </Menu.Item>
+              <Menu.Item
+                className="flex justify-start items-center"
+                onClick={() => setVisible(false)}
+                key="profile"
+                icon={<UserOutlined />}
+              >
+                Your Profile
+                <Link to="/profile"></Link>
               </Menu.Item>
             </Menu>
           </Drawer>

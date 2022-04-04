@@ -37,31 +37,30 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
 
   const FilterByNameInput2 = (
     <Input
-    className="w-2/3"
       placeholder="Filter ENS or 0x.."
       value={value2}
       onChange={e => {
-        console.log("curr", e.target.value)
-        
+        console.log("curr", e.target.value);
+
         const currValue = e.target.value;
         setValue2(currValue);
         const filteredData = events.filter(entry => entry.args[0].includes(currValue));
         setDataSource2(filteredData);
-      
-        // Check if an input ENS resolves
-        if (e.target.value.startsWith("0")) {} else {
-        mainnetProvider.resolveName(e.target.value).then(function(address2) {
-          console.log("Address: " + address2);
-          if (address2 == null) {
-            console.log("No record for this ENS")
-            setDataSource2(events);
-            } else {
-              const filteredData2 = events.filter(entry => entry.args[0].includes(address2))
-              setDataSource2(filteredData2);
-            };
-          });
-        /* console.log("ensName", ensName) */
 
+        // Check if an input ENS resolves
+        if (e.target.value.startsWith("0")) {
+        } else {
+          mainnetProvider.resolveName(e.target.value).then(function (address2) {
+            console.log("Address: " + address2);
+            if (address2 == null) {
+              console.log("No record for this ENS");
+              setDataSource2(events);
+            } else {
+              const filteredData2 = events.filter(entry => entry.args[0].includes(address2));
+              setDataSource2(filteredData2);
+            }
+          });
+          /* console.log("ensName", ensName) */
         }
       }}
     />
@@ -92,12 +91,12 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
   ];
 
   return (
-    <div className="bg-headerBackground bg-contain bg-top-right bg-no-repeat mt-10">
+    <div className="bg-headerBackground bg-contain bg-top-right bg-no-repeat">
       {ready ? (
         <div className="mx-auto mr-1 ml-1">
-          <h6 className="text-yellow-pos font-bold text-3xl mt-5">Top Donors</h6>
+          {/* <h6 className="text-yellow-pos font-bold text-3xl mt-5">Top Donors</h6> */}
           <br />
-          <Table className="mx-10" pagination={{ pageSize: 5 }} columns={columns2} dataSource={dataSource2} />
+          <Table pagination={{ pageSize: 10 }} columns={columns2} dataSource={dataSource2} />
           <Footer />
         </div>
       ) : (
