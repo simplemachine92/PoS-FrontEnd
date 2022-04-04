@@ -71,11 +71,33 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
                               STRUCTOR
     //////////////////////////////////////////////////////////////*/
 
-    constructor() ERC721("Proof Of Stake Pages", "PoSp") {
+    constructor(address[] memory _donors, uint256[] memory _amounts)
+        ERC721("Proof Of Stake Pages", "PoSp")
+    {
         transferOwnership(0xb010ca9Be09C382A9f31b79493bb232bCC319f01);
 
         INITIAL_CHAIN_ID = block.chainid;
         INITIAL_DOMAIN_SEPARATOR = computeDomainSeparator();
+
+        for (uint256 i = 0; i < _donors.length; ++i) {
+            pledgeLimit[_donors[i]] = pledgeLimit[_donors[i]] + 1;
+
+            _tokenIds.increment();
+            uint256 id = _tokenIds.current();
+
+            _mint(_donors[i], id);
+
+            tokens.push(
+                Token({
+                    recipient: toAsciiString(_donors[i]),
+                    sigValue: _amounts[i].toString(),
+                    timestamp: block.timestamp.toString(),
+                    writtenMsg: ""
+                })
+            );
+
+            emit Pledge(_donors[i], _amounts[i]);
+        }
     }
 
     /*///////////////////////////////////////////////////////////////
@@ -127,7 +149,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
     }
 
     /**
-     * @notice Allows a single mint if msg.sender has a valid signed msg
+     * @notice Updates the user token if we have a valid msg from Vitalik
      */
     //prettier-ignore
     function updateIfSigned(
@@ -232,7 +254,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
                     '<tspan text-anchor="middle" x="37.5%" y="120">',
                     tokens[id].writtenMsg,
                     "</tspan>",
-                    '<tspan text-anchor="middle" x="37.5%" y="220">signature timestamp</tspan>',
+                    '<tspan text-anchor="middle" x="37.5%" y="220">mint timestamp</tspan>',
                     '<tspan text-anchor="middle" x="37.5%" y="340">contract</tspan>',
                     '<tspan text-anchor="middle" x="37.5%" y="280">value (wei)</tspan>',
                     '<tspan text-anchor="middle" x="37.5%" y="140">message</tspan></text>',

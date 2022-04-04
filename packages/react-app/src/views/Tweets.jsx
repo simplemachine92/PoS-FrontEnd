@@ -185,7 +185,7 @@ export default function Tweets({ yourLocalBalance, mainnetProvider, price, addre
         record != undefined ? (
           <Space size="middle">
             <Share
-              url={`https://gitcoin.co/proofofstake/view?typedData=${
+              url={`https://proofofstake.gitcoin.co/view?typedData=${
                 record.typedData + "&addresses=" + record.sender + "&signatures=" + record.signature
               }`}
               options={{
