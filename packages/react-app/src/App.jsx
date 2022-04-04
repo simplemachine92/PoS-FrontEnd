@@ -42,6 +42,7 @@ import { useStaticJsonRPC } from "./hooks";
 import { useLookupAddress } from "eth-hooks/dapps/ens";
 import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
+import Profile from "./views/Profile";
 
 export const StyledMenu = styled(Menu)`
   height: 100%;
@@ -75,7 +76,7 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.mainnet; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = false;
@@ -201,8 +202,8 @@ function App(props) {
   ]);
 
   // keep track of a variable from the contract in the local React state:
-  const purpose = useContractReader(readContracts, "na", "balanceOf", [address]);
-  //console.log(purpose);
+  const tokenId = useContractReader(readContracts, "ProofOfStake_Pages", "tokenOfOwnerByIndex", [address, "0"]);
+  /* console.log("purpose", purpose); */
 
   //
   // 🧫 DEBUG 👨🏻‍🔬
@@ -593,6 +594,17 @@ function App(props) {
             localProvider={localProvider}
             firebaseConfig={firebaseConfig}
             events={events}
+          />
+        </Route>
+        <Route path="/profile">
+          <Profile
+            yourLocalBalance={yourLocalBalance}
+            writeContracts={writeContracts}
+            readContracts={readContracts}
+            tx={tx}
+            localProvider={localProvider}
+            address={address}
+            tokenId={tokenId}
           />
         </Route>
       </Switch>
