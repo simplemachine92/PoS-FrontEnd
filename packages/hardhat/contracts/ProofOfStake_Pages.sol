@@ -56,7 +56,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
     //////////////////////////////////////////////////////////////*/
 
     //prettier-ignore
-    address internal immutable vitalik = 0xb010ca9Be09C382A9f31b79493bb232bCC319f01;
+    address internal immutable vitalik = 0x55A178b6AfB3879F4a16c239A9F528663e7d76b3;
 
     uint256 internal immutable INITIAL_CHAIN_ID;
 

@@ -16,7 +16,7 @@ export default function AboutTheBook() {
         <div className="flex flex-wrap -m-4">
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-3/4 text-center">
-              <a href="/order" target="_blank" rel="noreferrer">
+              <a href="/order" rel="noreferrer">
                 <button
                   className="px-2 py-2 w-4/5 md:w-3/4 md:py-4 md:px-4 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   type="btn btn-primary"
@@ -28,7 +28,7 @@ export default function AboutTheBook() {
           </div>
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-full text-center">
-              <a href="/pledge" target="_blank" rel="noreferrer">
+              <a href="/pledge" rel="noreferrer">
                 <button
                   className="px-2 py-2 w-4/5 md:w-3/4 md:py-4 md:px-4 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   type="btn btn-primary"
@@ -40,7 +40,7 @@ export default function AboutTheBook() {
           </div>
           <div className="w-1/3 lg:mb-0 ">
             <div className="h-3/4 text-center">
-              <a href="/signatures" target="_blank" rel="noreferrer">
+              <a href="/signatures" rel="noreferrer">
                 <button
                   className="px-2 py-2 w-4/5 md:w-3/4 md:py-4 md:px-4 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   type="btn btn-primary"
