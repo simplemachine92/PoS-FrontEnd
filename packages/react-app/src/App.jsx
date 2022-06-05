@@ -25,6 +25,7 @@ import {
   Account,
   Contract,
   NetworkDisplay,
+  SignatureDisplay,
   FaucetHint,
   AfterPledge,
   Waitlist,
@@ -304,6 +305,16 @@ function App(props) {
           logoutOfWeb3Modal={logoutOfWeb3Modal}
           USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
         />
+        <SignatureDisplay
+          NETWORKCHECK={NETWORKCHECK}
+          address={address}
+          localChainId={localChainId}
+          selectedChainId={selectedChainId}
+          firebaseConfig={firebaseConfig}
+          targetNetwork={targetNetwork}
+          logoutOfWeb3Modal={logoutOfWeb3Modal}
+          USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
+        />
         <StyledMenu
           className="hidden justify-start items-center sm:flex"
           selectedKeys={[location.pathname]}
@@ -350,14 +361,14 @@ function App(props) {
             Signatures
             <Link to="/signatures"></Link>
           </Menu.Item>
-          <Menu.Item
+          {/* <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             key="profile"
             icon={<UserOutlined />}
           >
             Your Profile
             <Link to="/profile"></Link>
-          </Menu.Item>
+          </Menu.Item> */}
 
           <Menu.Item style={{ marginLeft: "auto" }}>
             <div>
