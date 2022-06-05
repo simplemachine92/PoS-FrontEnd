@@ -369,7 +369,7 @@ label {
 
 .form2 {
   display: flex;
-  max-width: 478px;
+  max-width: 200px;
   margin: 0 auto;
   flex-direction: column;
   place-items: center;

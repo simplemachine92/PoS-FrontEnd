@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
-import { Button, InputNumber, Input, notification } from "antd";
+import { Button, InputNumber, Input, notification, Spin } from "antd";
 import { Footer, Quotes } from "../components";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, get, child } from "firebase/database";
@@ -76,14 +76,19 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
   return (
     /* Need conditional rendering here, but token getter works */
     <>
-      <div>
-        <div className="bg-headerBackground bg-cover bg-center bg-no-repeat">
-          {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
-          {/* prettier-ignore */}
-          <div class="flex items-center justify-center mt-10">
+      {address ? (
+        <div>
+          <div className="bg-headerBackground bg-cover bg-center bg-no-repeat">
+            {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
+            {/* prettier-ignore */}
+            <div class="flex items-center justify-center mt-10">
           {/* <h5 className="text-xl font-bold">Your Token</h5> */}
+
+          {image ? (
             <img className="px-2 py-2 mb-10 ml-4 w-2/3 sm:w-1/2 lg:w-5/12 xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" src={image} />
-            
+          ) : (
+            <Spin/>
+          )}
             <div className="">
             <br />
             <h3 className="text-left text-sm md:text-3xl mx-8">
@@ -97,16 +102,25 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
             </Button> */}
           </div>
 
-          {/* <h3 className="text-yellow-pos mb-4 mt-4 text-sm p-10 md:text-3xl">
+            {/* <h3 className="text-yellow-pos mb-4 mt-4 text-sm p-10 md:text-3xl">
             Pledge any amount of ETH below to request a digitally signed book plate from Vitalik. <br /> <br /> You'll
             mint a non-transferable NFT and, when the book is available, you'll gain access to your signed digital copy.
           </h3> */}
 
-          {/* Removing this component until sizing is fixed */}
-          {/* <Quotes /> */}
-          <Footer />
+            {/* Removing this component until sizing is fixed */}
+            {/* <Quotes /> */}
+            <Footer />
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="bg-headerBackground h-screen w-full bg-fill bg-center overflow-hidden">
+          <div className="">
+            <div class="flex items-center justify-center mt-10">
+              <h3 className="text-left text-sm md:text-3xl mx-8">Please Connect Your Wallet</h3>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }

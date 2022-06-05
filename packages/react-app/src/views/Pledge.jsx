@@ -81,11 +81,6 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
 
   const history = useHistory();
 
-  /* function getString() {
-    console.log("kms", );
-    return String(eValue);
-  } */
-
   return (
     <>
       <div>
@@ -99,7 +94,66 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
             <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
               <div className="max-w-md py-10 mx-auto">
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
-                  <img alt="Book" className="w-3/5 mb-4 md:w-3/4 mx-auto" src="assets/RasCover.png" />
+                  <img alt="Book" className="w-3/5 mb-4 md:w-2/4 mx-auto" src="assets/RasCover.png" />
+                  {address ? (
+                <button
+                type="btn btn-primary"
+                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-sm md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  onClick={async () => {
+                    try {
+
+                      const result = tx(
+                        writeContracts &&
+                        writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
+                        async (update) => {
+                          console.log("📡 Transaction Update:", update);
+                          if (update && (update.status === "confirmed" || update.status === 1)) {
+                            console.log(" 🍾 Transaction " + update.hash + " finished!");
+                            console.log(
+                              " ⛽️ " +
+                                update.gasUsed +
+                                "/" +
+                                (update.gasLimit || update.gas) +
+                                " @ " +
+                                parseFloat(update.gasPrice) / 1000000000 +
+                                " gwei"
+                            );
+                  
+                            // send notification of stream creation
+                            notification.success({
+                              message: "Donation Successful",
+                              description: `Donation from ${address} successful`,
+                              placement: "topRight",
+                            }); history.push('/complete')
+                          }
+                        }
+                      );
+                      const db = database;
+                      set(ref(db, `PoS/` + address), {
+                       email: eValue
+                      });
+                    } catch {
+                      notification.error({
+                        message: "Donation Not Processed",
+                        description: `An error has occured, or you may have already donated.`,
+                        placement: "topRight",
+                      })
+                    }
+                  }}
+                >
+                  Mint: 0.01337 ETH <br/> Or Donate More Below 👇
+                </button>
+              ) : (
+                
+                <button
+                type="btn btn-primary"
+                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-sm md:text-2xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  style={{ marginTop: 40, width: "30%" }}
+                  onClick={loadWeb3Modal}
+                >
+                  Connect
+                </button>
+              )}
                     <p>
                     </p>
                   
