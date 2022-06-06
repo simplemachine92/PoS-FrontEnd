@@ -132,10 +132,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                       set(ref(db, `PoS/` + address), {
                        email: eValue
                       });
-                    } catch {
+                    } catch(err) {
                       notification.error({
                         message: "Donation Not Processed",
-                        description: `An error has occured, or you may have already donated.`,
+                        description: err,
                         placement: "topRight",
                       })
                     }
@@ -236,10 +236,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                       set(ref(db, `PoS/` + address), {
                        email: eValue
                       });
-                    } catch {
+                    } catch(err) {
                       notification.error({
                         message: "Donation Not Processed",
-                        description: `An error has occured, or you may have already donated.`,
+                        description: err,
                         placement: "topRight",
                       })
                     }

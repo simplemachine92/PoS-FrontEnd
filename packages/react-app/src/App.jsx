@@ -1,4 +1,4 @@
-import { Menu, Affix, Button, Drawer, Row, Col } from "antd";
+import { Menu, Affix, Button, Drawer, Row, Col, Spin } from "antd";
 import "antd/dist/antd.css";
 import {
   useBalance,
@@ -21,29 +21,28 @@ import {
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
-import {
-  Account,
-  Contract,
-  NetworkDisplay,
-  SignatureDisplay,
-  FaucetHint,
-  AfterPledge,
-  Waitlist,
-  Faucet,
-  Ramp,
-  GasGauge,
-} from "./components";
+import { Account, NetworkDisplay, FaucetHint, Faucet, Ramp, GasGauge, SignatureDisplay } from "./components";
 import { NETWORKS, ALCHEMY_KEY } from "./constants";
 import externalContracts from "./contracts/external_contracts";
 // contracts
 import deployedContracts from "./contracts/hardhat_contracts.json";
 import { Transactor, Web3ModalSetup } from "./helpers";
-import { Home, SignatureList, Sign, Pledge, Order } from "./views";
+/* import { Home, SignatureList, Sign, Pledge, Order } from "./views"; */
 import { useStaticJsonRPC } from "./hooks";
 import { useLookupAddress } from "eth-hooks/dapps/ens";
 import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
 import Profile from "./views/Profile";
+import { Suspense } from "react";
+
+const Home = React.lazy(() => import("./views/Home"));
+const SignatureList = React.lazy(() => import("./views/SignatureList"));
+const Sign = React.lazy(() => import("./views/Sign"));
+const Pledge = React.lazy(() => import("./views/Pledge"));
+const Order = React.lazy(() => import("./views/Order"));
+const Waitlist = React.lazy(() => import("./components/Waitlist"));
+const Contract = React.lazy(() => import("./components/Contract/index.jsx"));
+const AfterPledge = React.lazy(() => import("./components/AfterPledge"));
 
 export const StyledMenu = styled(Menu)`
   height: 100%;
@@ -500,123 +499,138 @@ function App(props) {
           />
         </Route>
         <Route path="/pledge">
-          <Pledge
-            yourLocalBalance={yourLocalBalance}
-            writeContracts={writeContracts}
-            readContracts={readContracts}
-            tx={tx}
-            localProvider={localProvider}
-            loadWeb3Modal={loadWeb3Modal}
-            address={address}
-          />
+          <Suspense fallback={<Spin />}>
+            <Pledge
+              yourLocalBalance={yourLocalBalance}
+              writeContracts={writeContracts}
+              readContracts={readContracts}
+              tx={tx}
+              localProvider={localProvider}
+              loadWeb3Modal={loadWeb3Modal}
+              address={address}
+            />
+          </Suspense>
         </Route>
         <Route path="/donations">
-          <Waitlist
-            yourLocalBalance={yourLocalBalance}
-            mainnetProvider={mainnetProvider}
-            writeContracts={writeContracts}
-            readContracts={readContracts}
-            firebaseConfig={firebaseConfig}
-            tx={tx}
-            localProvider={localProvider}
-            loadWeb3Modal={loadWeb3Modal}
-            address={address}
-            events={events}
-          />
+          <Suspense fallback={<Spin />}>
+            <Waitlist
+              yourLocalBalance={yourLocalBalance}
+              mainnetProvider={mainnetProvider}
+              writeContracts={writeContracts}
+              readContracts={readContracts}
+              firebaseConfig={firebaseConfig}
+              tx={tx}
+              localProvider={localProvider}
+              loadWeb3Modal={loadWeb3Modal}
+              address={address}
+              events={events}
+            />
+          </Suspense>
         </Route>
         <Route path="/complete">
-          <AfterPledge
-            yourLocalBalance={yourLocalBalance}
-            writeContracts={writeContracts}
-            readContracts={readContracts}
-            tx={tx}
-            localProvider={localProvider}
-            loadWeb3Modal={loadWeb3Modal}
-            address={address}
-          />
+          <Suspense fallback={<Spin />}>
+            <AfterPledge
+              yourLocalBalance={yourLocalBalance}
+              writeContracts={writeContracts}
+              readContracts={readContracts}
+              tx={tx}
+              localProvider={localProvider}
+              loadWeb3Modal={loadWeb3Modal}
+              address={address}
+            />
+          </Suspense>
         </Route>
         <Route path="/view">
-          <SignatorViewer
-            mainnetProvider={mainnetProvider}
-            injectedProvider={injectedProvider}
-            address={address}
-            loadWeb3Modal={loadWeb3Modal}
-            chainList={chainList}
-            writeContracts={writeContracts}
-            tx={tx}
-            firebaseConfig={firebaseConfig}
-          />
+          <Suspense fallback={<Spin />}>
+            <SignatorViewer
+              mainnetProvider={mainnetProvider}
+              injectedProvider={injectedProvider}
+              address={address}
+              loadWeb3Modal={loadWeb3Modal}
+              chainList={chainList}
+              writeContracts={writeContracts}
+              tx={tx}
+              firebaseConfig={firebaseConfig}
+            />
+          </Suspense>
         </Route>
         <Route path="/pledge">
-          <Pledge
-            yourLocalBalance={yourLocalBalance}
-            writeContracts={writeContracts}
-            readContracts={readContracts}
-            tx={tx}
-            localProvider={localProvider}
-            address={address}
-          />
+          <Suspense fallback={<Spin />}>
+            <Pledge
+              yourLocalBalance={yourLocalBalance}
+              writeContracts={writeContracts}
+              readContracts={readContracts}
+              tx={tx}
+              localProvider={localProvider}
+              address={address}
+            />
+          </Suspense>
         </Route>
         <Route path="/order">
-          <Order
-            yourLocalBalance={yourLocalBalance}
-            writeContracts={writeContracts}
-            readContracts={readContracts}
-            tx={tx}
-            localProvider={localProvider}
-            address={address}
-          />
+          <Suspense fallback={<Spin />}>
+            <Order
+              yourLocalBalance={yourLocalBalance}
+              writeContracts={writeContracts}
+              readContracts={readContracts}
+              tx={tx}
+              localProvider={localProvider}
+              address={address}
+            />
+          </Suspense>
         </Route>
         <Route exact path="/debug">
-          {/*
-                🎛 this scaffolding is full of commonly used components
-                this <Contract/> component will automatically parse your ABI
-                and give you a form to interact with it locally
-            */}
-
-          <Contract
-            name="ProofOfStake_Pages"
-            price={price}
-            signer={userSigner}
-            provider={localProvider}
-            address={address}
-            blockExplorer={blockExplorer}
-            contractConfig={contractConfig}
-          />
+          <Suspense fallback={<Spin />}>
+            <Contract
+              name="ProofOfStake_Pages"
+              price={price}
+              signer={userSigner}
+              provider={localProvider}
+              address={address}
+              blockExplorer={blockExplorer}
+              contractConfig={contractConfig}
+            />
+          </Suspense>
         </Route>
         <Route path="/signatures">
-          <SignatureList
-            address={address}
-            yourLocalBalance={yourLocalBalance}
-            mainnetProvider={mainnetProvider}
-            price={price}
-            firebaseConfig={firebaseConfig}
-            events={events}
-          />
+          <Suspense fallback={<Spin />}>
+            <SignatureList
+              address={address}
+              yourLocalBalance={yourLocalBalance}
+              mainnetProvider={mainnetProvider}
+              price={price}
+              firebaseConfig={firebaseConfig}
+              events={events}
+            />
+          </Suspense>
         </Route>
         <Route path="/sign">
-          <Sign
-            mainnetProvider={mainnetProvider}
-            injectedProvider={injectedProvider}
-            address={address}
-            loadWeb3Modal={loadWeb3Modal}
-            chainList={chainList}
-            contracts={readContracts}
-            localProvider={localProvider}
-            firebaseConfig={firebaseConfig}
-            events={events}
-          />
+          <Suspense fallback={<Spin />}>
+            <Sign
+              mainnetProvider={mainnetProvider}
+              injectedProvider={injectedProvider}
+              address={address}
+              loadWeb3Modal={loadWeb3Modal}
+              chainList={chainList}
+              contracts={readContracts}
+              localProvider={localProvider}
+              firebaseConfig={firebaseConfig}
+              events={events}
+            />
+          </Suspense>
         </Route>
         <Route path="/profile">
-          <Profile
-            yourLocalBalance={yourLocalBalance}
-            writeContracts={writeContracts}
-            readContracts={readContracts}
-            tx={tx}
-            localProvider={localProvider}
-            address={address}
-            tokenId={tokenId}
-          />
+          <Suspense fallback={<Spin />}>
+            <Profile
+              firebaseConfig={firebaseConfig}
+              yourLocalBalance={yourLocalBalance}
+              writeContracts={writeContracts}
+              readContracts={readContracts}
+              tx={tx}
+              localProvider={localProvider}
+              address={address}
+              tokenId={tokenId}
+            />
+          </Suspense>
         </Route>
       </Switch>
 

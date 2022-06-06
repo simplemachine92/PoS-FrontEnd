@@ -2,6 +2,8 @@ import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
 import React from "react";
 import { ThemeSwitcherProvider } from "react-css-theme-switcher";
 import { BrowserRouter } from "react-router-dom";
+import { Suspense } from "react";
+import { Spin } from "antd";
 import ReactDOM from "react-dom";
 import App from "./App";
 import "./index.css";
@@ -18,12 +20,12 @@ const client = new ApolloClient({
 });
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <ThemeSwitcherProvider themeMap={themes} defaultTheme={"light"}>
-      <BrowserRouter>
+  <ThemeSwitcherProvider themeMap={themes} defaultTheme={"light"}>
+    <BrowserRouter>
+      <Suspense fallback={<Spin />}>
         <App subgraphUri={subgraphUri} />
-      </BrowserRouter>
-    </ThemeSwitcherProvider>
-  </ApolloProvider>,
+      </Suspense>
+    </BrowserRouter>
+  </ThemeSwitcherProvider>,
   document.getElementById("root"),
 );
