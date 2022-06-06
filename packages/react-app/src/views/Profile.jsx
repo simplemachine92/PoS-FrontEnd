@@ -203,7 +203,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
         <div className="bg-headerBackground h-screen w-full bg-fill bg-center overflow-hidden">
           <div className="">
             <div class="flex items-center justify-center mt-10">
-              <h3 className="text-left text-sm md:text-3xl mx-8">Please Connect Your Wallet</h3>
+              <Spin />
             </div>
           </div>
         </div>
