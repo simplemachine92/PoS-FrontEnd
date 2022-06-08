@@ -3,12 +3,13 @@ pragma solidity >=0.8.0 <0.9.0;
 //SPDX-License-Identifier: MIT
 
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import {Base64} from "base64-sol/base64.sol";
 
-contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
+contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
     using Counters for Counters.Counter;
     using Strings for uint256;
 
@@ -22,7 +23,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
 
     uint256 internal constant price = 0.01337 ether;
 
-    uint256 internal constant pledgeLimitPerUser = 1;
+    uint256 internal constant tokenlimitperuser = 1;
 
     uint256 internal constant publisherSplit = 10;
 
@@ -115,15 +116,25 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
      * @notice Pledges ETH to GTC & "whitelists" pledger
      */
     //prettier-ignore
-    function pledge() public payable {
-        require(
-            pledgeLimit[msg.sender] < pledgeLimitPerUser,
-            "One pledge per address"
-        );
+    function pledge() public payable nonReentrant{
         require(pledgeOpen == true, "Pledging is currently closed");
         require(msg.value >= price, "Min Pledge is 0.01337 ETH");
 
         uint sShare = (msg.value * publisherSplit) / 100;
+
+        if (pledgeLimit[msg.sender] >= tokenlimitperuser) {
+        (bool success3, ) = gitcoin.call{value: msg.value - sShare}("");
+        require(success3, "could not send");
+
+        (bool success4, ) = sevenStories.call{value: sShare}("");
+        require(success4, "could not send");
+
+        pledgeLimit[msg.sender] = pledgeLimit[msg.sender] + 1;
+
+        emit Pledge(msg.sender, msg.value);
+
+        return;
+        }
 
         (bool success, ) = gitcoin.call{value: msg.value - sShare}("");
         require(success, "could not send");
@@ -157,7 +168,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
         string calldata _sigValue,
         string calldata _timestamp,
         string calldata _message
-    ) external {
+    ) external nonReentrant {
         //require(balanceOf(msg.sender) < 1, "UNIQUE: One per Address");
 
         (uint8 v, bytes32 r, bytes32 s) = splitSignature(_signature);
@@ -251,9 +262,9 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable {
                     '<tspan text-anchor="middle" x="37.5%" y="320">0x',
                     contractAddressString,
                     "</tspan>",
-                    '<tspan text-anchor="middle" x="37.5%" y="120">',
+                    '<tspan text-anchor="middle" x="37.5%" y="120">"',
                     tokens[id].writtenMsg,
-                    "</tspan>",
+                    '"</tspan>',
                     '<tspan text-anchor="middle" x="37.5%" y="220">mint timestamp</tspan>',
                     '<tspan text-anchor="middle" x="37.5%" y="340">contract</tspan>',
                     '<tspan text-anchor="middle" x="37.5%" y="280">value (wei)</tspan></text>',

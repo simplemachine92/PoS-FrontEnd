@@ -141,7 +141,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                     }
                   }}
                 >
-                  Mint: 0.01337 ETH <br/> Or Donate More Below 👇
+                  Mint: 0.01337 ETH <br/> Or Customize Below 👇
                 </button>
               ) : (
                 
