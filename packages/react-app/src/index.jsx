@@ -22,7 +22,17 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ThemeSwitcherProvider themeMap={themes} defaultTheme={"light"}>
     <BrowserRouter>
-      <Suspense fallback={<Spin />}>
+      <Suspense
+        fallback={
+          <div className="bg-headerBackground h-screen w-full bg-fill bg-center overflow-hidden">
+            <div className="">
+              <div class="flex items-center justify-center mt-10">
+                <Spin />
+              </div>
+            </div>
+          </div>
+        }
+      >
         <App subgraphUri={subgraphUri} />
       </Suspense>
     </BrowserRouter>

@@ -5,7 +5,7 @@
       "chainId": "42",
       "contracts": {
         "ProofOfStake_Pages": {
-          "address": "0xFFc57FF604949376f423C389E22175e075704971",
+          "address": "0x660c0676dF821Ae92CD330bB68b875c28Ac79bF7",
           "abi": [
             {
               "inputs": [
