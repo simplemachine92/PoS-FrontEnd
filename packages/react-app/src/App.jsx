@@ -333,7 +333,7 @@ function App(props) {
             key="mail"
             icon={<BookOutlined />}
           >
-            Mint
+            Donate & Mint
             <Link to="/pledge"></Link>
           </Menu.Item>
           <Menu.Item
@@ -349,7 +349,7 @@ function App(props) {
             key="donations"
             icon={<DollarCircleOutlined />}
           >
-            Top Donors
+            Donos
             <Link to="/donations"></Link>
           </Menu.Item>
           <Menu.Item
@@ -423,7 +423,7 @@ function App(props) {
                 key="mail"
                 icon={<BookOutlined />}
               >
-                Mint
+                Donate & Mint
                 <Link to="/pledge"></Link>
               </Menu.Item>
               <Menu.Item
@@ -441,7 +441,7 @@ function App(props) {
                 key="donations"
                 icon={<DollarCircleOutlined />}
               >
-                Top Donors
+                Donos
                 <Link to="/donations"></Link>
               </Menu.Item>
               <Menu.Item
@@ -453,7 +453,7 @@ function App(props) {
                 Signatures
                 <Link to="/signatures"></Link>
               </Menu.Item>
-              <Menu.Item
+              {/* <Menu.Item
                 className="flex justify-start items-center"
                 onClick={() => setVisible(false)}
                 key="profile"
@@ -461,7 +461,7 @@ function App(props) {
               >
                 Your Profile
                 <Link to="/profile"></Link>
-              </Menu.Item>
+              </Menu.Item> */}
             </Menu>
           </Drawer>
           <div>

@@ -98,7 +98,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                   {address ? (
                 <button
                 type="btn btn-primary"
-                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-sm md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs sm:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   onClick={async () => {
                     try {
 
@@ -141,7 +141,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                     }
                   }}
                 >
-                  Mint: 0.01337 ETH <br/> Or Customize Below 👇
+                  Donate: 0.01337 ETH <br/> Or Customize Below 👇
                 </button>
               ) : (
                 
@@ -184,7 +184,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               />
               <br/>
               {/* "Pledge any amount of ETH to request a digitally signed book plate from Vitalik. Watch the profile page to see your token and your digital book when it is available." */}
-              <h3 className="text-sm mt-10 md:text-2xl mx-2" >Optionally, enter your email to be notified when the digital book is available.</h3>
+              <h3 className="text-sm mt-10 md:text-2xl mx-2" >Enter your email to be notified when the digital book is available.</h3>
                 <Input
                 
                 className="form w-3/4 mt-5"
