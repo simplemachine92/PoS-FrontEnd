@@ -13,8 +13,8 @@
 Install,
 
 ```bash
-cd greenpill
-git checkout steak-style-updates
+git clone https://github.com/simplemachine92/PoS-FrontEnd.git
+cd pos-frontend
 yarn install
 ```
 
