@@ -12,10 +12,14 @@ function SignatureDisplay({
   targetNetwork,
   USE_NETWORK_SELECTOR,
   firebaseConfig,
+  readContracts,
+  tokenId,
   logoutOfWeb3Modal,
 }) {
   const [ready, setReady] = useState(false);
+  const [ready2, setReady2] = useState(false);
   const [sData, setData] = useState();
+  const [uMessage, setMessage] = useState();
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
@@ -48,7 +52,7 @@ function SignatureDisplay({
 
             console.log(dataURI);
             myData.push(message);
-            console.log(myData);
+            console.log("muh2", myData);
           });
           setData(myData);
           setReady(true);
@@ -59,12 +63,24 @@ function SignatureDisplay({
       .catch(error => {
         console.error(error);
       });
-  }, []);
+  }, [tokenId, address, readContracts]);
+
+  useEffect(async () => {
+    if (readContracts.ProofOfStake_Pages && address) {
+      let nId = await readContracts.ProofOfStake_Pages.tokenOfOwnerByIndex(address, "0");
+      let token = await readContracts.ProofOfStake_Pages.tokenURI(nId);
+      const json = atob(token.substring(29));
+      const result = JSON.parse(json);
+      console.log("waty", result);
+      setMessage(result.message);
+    }
+    setReady2(true);
+  }, [tokenId, address, readContracts]);
 
   let signatureDisplay = "";
   if (ready && address && sData) {
     const filteredData = sData.filter(entry => entry.recipient.includes(address));
-    if (filteredData[0] && filteredData[0].recipient.includes(address) == true) {
+    if (filteredData[0] && filteredData[0].recipient.includes(address) == true && filteredData[0].msg != uMessage) {
       signatureDisplay = (
         <div style={{ zIndex: 2, position: "absolute", right: 115, top: 10, padding: 8 }}>
           <div>

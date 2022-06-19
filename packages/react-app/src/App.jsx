@@ -313,6 +313,8 @@ function App(props) {
           targetNetwork={targetNetwork}
           logoutOfWeb3Modal={logoutOfWeb3Modal}
           USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
+          tokenId={tokenId}
+          readContracts={readContracts}
         />
         <StyledMenu
           className="hidden justify-start items-center sm:flex"
