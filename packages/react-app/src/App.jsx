@@ -349,7 +349,7 @@ function App(props) {
             key="donations"
             icon={<DollarCircleOutlined />}
           >
-            Donos
+            Top Donors
             <Link to="/donations"></Link>
           </Menu.Item>
           <Menu.Item
@@ -441,7 +441,7 @@ function App(props) {
                 key="donations"
                 icon={<DollarCircleOutlined />}
               >
-                Donos
+                Top Donors
                 <Link to="/donations"></Link>
               </Menu.Item>
               <Menu.Item

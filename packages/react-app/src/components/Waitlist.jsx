@@ -80,7 +80,11 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
       dataIndex: "args",
       key: "donation",
       render: value => {
-        return ethers.utils.formatEther(ethers.BigNumber.from(value[1]));
+        return (
+          <div class="mx-auto text-black text-sm">
+            {ethers.utils.formatEther(ethers.BigNumber.from(value[1])).substring(0, 6)}
+          </div>
+        );
       },
       sorter: (a, b) => a.args[1] - b.args[1],
       sortDirections: ["ascend", "descend"],
@@ -93,18 +97,22 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
 
   return (
     <div className="bg-headerBackground bg-contain bg-top-right bg-no-repeat">
-      {ready ? (
-        <div className="mx-auto mr-1 ml-1">
-          {/* <h6 className="text-yellow-pos font-bold text-3xl mt-5">Top Donors</h6> */}
-          <br />
-          <Table pagination={{ pageSize: 10 }} columns={columns2} dataSource={dataSource2} />
-          <Footer />
-        </div>
-      ) : (
-        <div>
-          <Spin className="mt-5" />
-        </div>
-      )}
+      <div className="">
+        {ready ? (
+          <div className="mx-auto mr-1 ml-1 p-10">
+            {/* <h6 className="text-yellow-pos font-bold text-3xl">Signatures</h6> */}
+            <br />
+            <Table className="mx-auto" pagination={{ pageSize: 10 }} columns={columns2} dataSource={dataSource2} />
+          </div>
+        ) : (
+          <div>
+            <Spin />
+          </div>
+        )}
+      </div>
+
+      {/* <Quotes /> */}
+      <Footer />
     </div>
   );
 }
