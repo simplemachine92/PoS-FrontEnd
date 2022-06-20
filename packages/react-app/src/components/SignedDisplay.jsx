@@ -66,7 +66,7 @@ function SignatureDisplay({
   }, [tokenId, address, readContracts]);
 
   useEffect(async () => {
-    if (readContracts.ProofOfStake_Pages && address) {
+    if (tokenId && readContracts.ProofOfStake_Pages && address) {
       let nId = await readContracts.ProofOfStake_Pages.tokenOfOwnerByIndex(address, "0");
       let token = await readContracts.ProofOfStake_Pages.tokenURI(nId);
       const json = atob(token.substring(29));
@@ -75,7 +75,7 @@ function SignatureDisplay({
       setMessage(result.message);
     }
     setReady2(true);
-  }, [tokenId, address, readContracts]);
+  }, [tokenId, address, readContracts, sData]);
 
   let signatureDisplay = "";
   if (ready && address && sData) {

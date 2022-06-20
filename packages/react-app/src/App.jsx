@@ -290,8 +290,6 @@ function App(props) {
     window.scrollTo(0, 0);
   }, [location]);
 
-  const faucetAvailable = localProvider && localProvider.connection && targetNetwork.name.indexOf("local") !== -1;
-
   return (
     <div className="App">
       {/* ✏️ Edit the header and change the title to your project name */}
