@@ -315,7 +315,7 @@ function App(props) {
           readContracts={readContracts}
         />
         <StyledMenu
-          className="hidden justify-start items-center sm:flex"
+          className="hidden justify-start items-center md:flex"
           selectedKeys={[location.pathname]}
           mode="horizontal"
           collapsedWidth="0"
@@ -349,7 +349,7 @@ function App(props) {
             key="donations"
             icon={<DollarCircleOutlined />}
           >
-            Top Donors
+            Donors
             <Link to="/donations"></Link>
           </Menu.Item>
           <Menu.Item
@@ -360,14 +360,15 @@ function App(props) {
             Signatures
             <Link to="/signatures"></Link>
           </Menu.Item>
-          {/* <Menu.Item
+
+          <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             key="profile"
             icon={<UserOutlined />}
           >
-            Your Profile
+            Profile
             <Link to="/profile"></Link>
-          </Menu.Item> */}
+          </Menu.Item>
 
           <Menu.Item style={{ marginLeft: "auto" }}>
             <div>
@@ -391,7 +392,7 @@ function App(props) {
           </Menu.Item>
         </StyledMenu>
 
-        <div className="flex sm:hidden justify-between p-2" style={{ background: "#7ee6cd" }}>
+        <div className="flex md:hidden justify-between p-2" style={{ background: "#7ee6cd" }}>
           <button
             className="flex flex-col justify-center items-center gap-1 py-2 px-2 sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
             type="primary"
@@ -441,7 +442,7 @@ function App(props) {
                 key="donations"
                 icon={<DollarCircleOutlined />}
               >
-                Top Donors
+                Donors
                 <Link to="/donations"></Link>
               </Menu.Item>
               <Menu.Item
@@ -453,7 +454,7 @@ function App(props) {
                 Signatures
                 <Link to="/signatures"></Link>
               </Menu.Item>
-              {/* <Menu.Item
+              <Menu.Item
                 className="flex justify-start items-center"
                 onClick={() => setVisible(false)}
                 key="profile"
@@ -461,7 +462,7 @@ function App(props) {
               >
                 Your Profile
                 <Link to="/profile"></Link>
-              </Menu.Item> */}
+              </Menu.Item>
             </Menu>
           </Drawer>
           <div>

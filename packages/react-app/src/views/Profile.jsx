@@ -112,7 +112,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
   }, [address]);
 
   useEffect(async () => {
-    if (readContracts.ProofOfStake_Pages && address) {
+    if (readContracts.ProofOfStake_Pages && address && tokenId) {
       let nId = await readContracts.ProofOfStake_Pages.tokenOfOwnerByIndex(address, "0");
       let token = await readContracts.ProofOfStake_Pages.tokenURI(nId);
       setURL(`https://opensea.io/assets/${readContracts.ProofOfStake_Pages.address}/${nId}`);
@@ -127,34 +127,39 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
   return (
     /* Need conditional rendering here, but token getter works */
     <>
-      {address ? (
+      {address && tokenId ? (
         <div>
           <div className="bg-headerBackground bg-cover bg-center bg-no-repeat">
             {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
             {/* prettier-ignore */}
-            <div class="flex items-center justify-center mt-10">
+            <div class="flex items-center justify-center pt-10">
               {/* <h5 className="text-xl font-bold">Your Token</h5> */}
 
               {image ? (
                 <img
-                  className="px-2 py-2 mb-10 ml-4 w-2/3 sm:w-1/2 lg:w-5/12 xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  className="px-2 py-2 mb-10 ml-4 w-2/3 sm:w-1/2 lg:w-1/3 xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   src={image}
+                  
+                  
                 />
               ) : (
                 <Spin />
               )}
 
               {typedData && uMessage != typedData.message.msg ? (
-              <div className="">
+              <div className="mx-8 p-5 rounded overflow-hidden shadow-xl">
                 <br />
-                <h3 className="text-left text-lg md:text-3xl mx-16">
+                <h3 className="text-center text-lg md:text-3xl">
                   View on <a href={url}>OpenSea</a>
                 </h3>
                 <br />
-                <h3 className="text-left mx-16">You have received a message!</h3>
+                <h3 className="text-center text-md md:text-3xl">You have received the message:</h3>
+                <br/>
+                <h3 className="text-center text-md md:text-3xl">"{typedData.message.msg}"</h3>
+                
                 <br />
                 <button
-                  className="w-1/2 mb-4 py-2 px-2 sm:py-4 text-sm sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  className="w-2/3 mb-4 py-2 px-2 sm:py-4 text-sm sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   type="btn btn-primary"
                   onClick={async () => {
                     try {
@@ -173,19 +178,21 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                     }
                   }}
                 >
-                  Update Token
+                  Update
                 </button>
+                <br/>
+                {/* <p class="text-sky-400">Click "Update" to display your personalized message on your bookplate</p> */}
                 
               </div>
 
               ) : (
-                <div className="">
-                <br />
-                <h3 className="text-left text-lg md:text-3xl mx-16">
-                  View on <a href={url}>OpenSea</a>
+                <div className="mx-8 p-5 rounded overflow-hidden shadow-xl">
+                
+                <h3 className="text-center text-md md:text-3xl">
+                  View your token on <a href={url}>OpenSea</a>
                 </h3>
                 <br/>
-                <h3 className="text-left mx-16">Your message is Current!</h3>
+                <h3 className="text-center text-md md:text-xl">View your personalized copy here upon release.</h3>
                 <br />
               </div>
               )}
@@ -208,6 +215,9 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
         <div className="bg-headerBackground h-screen w-full bg-fill bg-center overflow-hidden">
           <div className="">
             <div class="flex items-center justify-center mt-10">
+              <Spin />
+              <br />
+              <h3 className="text-center text-md md:text-3xl">Please connect your wallet, or mint a token..</h3>
               <Spin />
             </div>
           </div>

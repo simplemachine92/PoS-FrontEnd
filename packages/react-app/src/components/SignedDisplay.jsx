@@ -78,7 +78,7 @@ function SignatureDisplay({
   }, [tokenId, address, readContracts, sData]);
 
   let signatureDisplay = "";
-  if (ready && address && sData) {
+  if (ready && address && sData && uMessage) {
     const filteredData = sData.filter(entry => entry.recipient.includes(address));
     if (filteredData[0] && filteredData[0].recipient.includes(address) == true && filteredData[0].msg != uMessage) {
       signatureDisplay = (
