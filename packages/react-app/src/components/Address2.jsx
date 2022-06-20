@@ -60,7 +60,7 @@ export default function Address2(props) {
 
   if (props.minimized) {
     return (
-      <span style={{ verticalAlign: "middle" }}>
+      <span>
         <a
           style={{ color: currentTheme === "light" ? "#222222" : "#ddd" }}
           target="_blank"
@@ -75,12 +75,12 @@ export default function Address2(props) {
 
   return (
     <span>
-      <span style={{ verticalAlign: "middle" }}>
+      <span>
         <Blockies seed={address.toLowerCase()} size={8} scale={props.fontSize ? props.fontSize / 7 : 4} />
       </span>
-      <span style={{ verticalAlign: "middle", paddingLeft: 5, fontSize: props.fontSize ? props.fontSize : 28 }}>
+      <span>
         {props.onChange ? (
-          <Text editable={{ onChange: props.onChange }} copyable={{ text: address }}>
+          <Text editable={{ onChange: props.onChange }}>
             <a
               style={{ color: currentTheme === "light" ? "#222222" : "#ddd" }}
               target="_blank"
@@ -91,15 +91,27 @@ export default function Address2(props) {
             </a>
           </Text>
         ) : (
-          <Text copyable={{ text: address }}>
-            <a
-              style={{ color: currentTheme === "light" ? "#222222" : "#ddd" }}
-              target="_blank"
-              href={etherscanLink}
-              rel="noopener noreferrer"
-            >
-              {displayAddress}
-            </a>
+          <Text>
+            <div className="hidden sm:flex">
+              <a
+                style={{ color: currentTheme === "light" ? "#222222" : "#ddd" }}
+                target="_blank"
+                href={etherscanLink}
+                rel="noopener noreferrer"
+              >
+                {displayAddress}
+              </a>
+            </div>
+            <div className="flex-auto sm:hidden">
+              <a
+                style={{ color: currentTheme === "light" ? "#222222" : "#ddd" }}
+                target="_blank"
+                href={etherscanLink}
+                rel="noopener noreferrer"
+              >
+                {displayAddress.substring(0, 5)}
+              </a>
+            </div>
           </Text>
         )}
       </span>

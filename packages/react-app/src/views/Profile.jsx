@@ -192,7 +192,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                   View your token on <a href={url}>OpenSea</a>
                 </h3>
                 <br/>
-                <h3 className="text-center text-md md:text-xl">View your personalized copy here upon release.</h3>
+                <h3 className="text-center text-md md:text-xl">Download your personalized copy starting on September 13, 2022</h3>
                 <br />
               </div>
               )}

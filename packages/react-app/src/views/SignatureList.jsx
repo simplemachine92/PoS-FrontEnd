@@ -88,7 +88,7 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
 
   const FilterByNameInput2 = (
     <Input
-      placeholder="Filter ENS or 0x.."
+      placeholder="Search"
       value={value}
       onChange={e => {
         console.log("curr", e.target.value);

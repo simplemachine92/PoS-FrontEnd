@@ -525,6 +525,7 @@ function App(props) {
               loadWeb3Modal={loadWeb3Modal}
               address={address}
               events={events}
+              visible={visible}
             />
           </Suspense>
         </Route>
@@ -601,6 +602,7 @@ function App(props) {
               price={price}
               firebaseConfig={firebaseConfig}
               events={events}
+              visible={visible}
             />
           </Suspense>
         </Route>
