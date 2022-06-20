@@ -147,7 +147,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 
                 <button
                 type="btn btn-primary"
-                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-sm md:text-2xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs sm:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   style={{ marginTop: 40, width: "30%" }}
                   onClick={loadWeb3Modal}
                 >
