@@ -509,7 +509,7 @@ function SignatorViewer({
         <br />
         {dataImage != undefined ? (
           <div class="flex items-center justify-center">
-            <img className="px-2 py-2 mb-10 ml-4 w-2/3 sm:w-1/2 lg:w-5/12 xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" src={dataImage} />
+            <img className="px-2 py-2 mb-10 w-1/3 sm:w-1/3 lg:w-1/4 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" src={dataImage} />
             
 
             
@@ -538,41 +538,6 @@ function SignatorViewer({
       </Modal>
       <div>
         <Card className="" style={{ paddingTop: 10, background: "#2bcfd9" }}>
-        {address ? (
-              <button
-              className="w-1/4 ml-8 mr-4 mb-4 py-2 px-2 sm:py-4 text-sm sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-              type="btn btn-primary"
-              onClick={async () => {
-                try {
-                  console.log("pledge", typedData);
-                  console.log("link", sigLink);
-                  /* const result = tx(
-                    writeContracts &&
-                    writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
-                    async (update) => { */
-                  const txCur = tx(
-                    writeContracts &&
-                    writeContracts.ProofOfStake_Pages.updateIfSigned(
-                      signatures[0],
-                      typedData.message.pledge,
-                      typedData.message.timestamp,
-                      typedData.message.msg,
-                    ),
-                  );
-                  await txCur.wait();
-                } catch (e) {
-                  console.log("mint failed", e);
-                }
-              }}
-            >
-              Update Token
-            </button>
-              
-            ) : (
-              <Button type="primary" style={{ marginBottom: 20, padding: "4px 15px" }} onClick={loadWeb3Modal}>
-                Connect to Mint
-              </Button>
-            )}
           {message ? (
             <Text style={{ fontSize: 18, marginBottom: "0px" }}>{`${message}`}</Text>
           ) : (
