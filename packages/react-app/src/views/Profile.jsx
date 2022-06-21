@@ -9,46 +9,7 @@ const codec = require("json-url")("lzw");
 
 const { utils, BigNumber } = require("ethers");
 
-export const StyledButton = styled(Button)`
-  height: 100%;
-  background: #ffe171;
-  border-width: 0px;
-  &:hover {
-    color: #454545;
-    background: #7ee6cd;
-    border-color: red;
-  }
-  ,
-  &:focus {
-    color: #000000;
-    background-color: #ffe171;
-  }
-`;
-
-export const StyledInput = styled(Input)`
-  width: 100%;
-  height: 80px;
-  margin-top: 5px;
-  background: #31dbe5;
-  border: 1px solid #207191;
-  border-radius: 8px;
-  outline: none;
-  text-align: center;
-  font-size: 30px;
-  font-size: 2.5vw;
-  font-family: Space Mono, sans-serif;
-  color: #ffffff;
-  background: #31dbe5;
-
-  &::placeholder {
-    margin-top: 100px;
-    color: #ffffff;
-    font-family: Space Mono, sans-serif;
-    font-style: normal;
-    font-size: 20px;
-    text-align: center;
-  },
-`;
+var validator = require("email-validator");
 
 /**
  * web3 props can be passed from '../App.jsx' into your local view component for use
@@ -63,9 +24,25 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
   const [sData, setData] = useState();
   const [uMessage, setMessage] = useState();
   const [typedData, setTypedData] = useState();
+  const [eValue2, setE2] = useState("placeholder");
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
+
+  const firebaseConfig2 = {
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+    databaseURL: "https://proofofstake-91004.firebaseio.com/",
+    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  };
+
+  const app2 = initializeApp(firebaseConfig2, "email");
+
+  // Get a reference to the database service
+  const database2 = getDatabase(app2);
 
   const decompressTypedData = async data => {
     const _typedData = await codec.decompress(data);
@@ -137,7 +114,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
 
               {image ? (
                 <img
-                  className="px-2 py-2 mb-10 ml-4 w-2/3 sm:w-1/2 lg:w-1/3 xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  className="px-2 py-2 ml-4 w-4/5 sm:w-1/2 lg:w-1/4 xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   src={image}
                   
                   
@@ -147,7 +124,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
               )}
 
               {typedData && uMessage != typedData.message.msg ? (
-              <div className="mx-8 p-5 rounded overflow-hidden shadow-xl">
+              <div className="mx-4 p-5 rounded overflow-hidden shadow-xl">
                 <br />
                 <h3 className="text-center text-lg md:text-3xl">
                   View on <a href={url}>OpenSea</a>
@@ -186,14 +163,44 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
               </div>
 
               ) : (
-                <div className="mx-8 p-5 rounded overflow-hidden shadow-xl">
+                <div className="mx-4 p-5 rounded overflow-hidden shadow-xl">
                 
-                <h3 className="text-center text-md md:text-3xl">
+                <h3 className="text-center text-lg md:text-3xl">
                   View your token on <a href={url}>OpenSea</a>
                 </h3>
                 <br/>
-                <h3 className="text-center text-md md:text-xl">Download your personalized copy starting on September 13, 2022</h3>
-                <br />
+                <h3 className="text-center text-md md:text-lg">Download your personalized copy starting on September 13, 2022.</h3>
+                <br/>
+                <h3 className="text-center text-md md:text-lg">Want to be Notified? Enter your E-mail below!</h3>
+                <input
+                className="text-center h-1/2 w-full sm:w-2/3 mt-4 p-2 text-md md:text-lg"
+                placeholder="Your @.com"
+                onChange={f => {
+                  const currValue2 = f;
+                  setE2(currValue2);
+                }}
+
+              />
+                <button
+                type="btn btn-primary"
+                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs sm:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  onClick={async () => {
+
+                    console.log("evalue", eValue2)
+
+                    if (eValue2 == "placeholder" || eValue2.target.value == "" || validator.validate(eValue2.target.value) == false ) {
+                      notification.error({
+                        message: "Please Enter a Valid Email Address",
+                        placement: "topRight",
+                      })
+                    } else {
+                      const db2 = database2;
+                      set(ref(db2, `PoS/` + address), {
+                       email: eValue2.target.value
+                      });
+                  }
+                  }}
+                >Subscribe</button>
               </div>
               )}
 

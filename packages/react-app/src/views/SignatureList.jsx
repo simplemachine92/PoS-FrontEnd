@@ -148,7 +148,7 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
     <div className="bg-headerBackground bg-contain bg-top-right bg-no-repeat">
       <div className="">
         {ready ? (
-          <div className="mx-auto mr-1 ml-1 p-10">
+          <div className="mx-auto mr-1 ml-1 p-5">
             {/* <h6 className="text-yellow-pos font-bold text-3xl">Signatures</h6> */}
             <br />
             <Table pagination={{ pageSize: 10 }} columns={columns} dataSource={dataSource} />
