@@ -5,6 +5,13 @@ import { Button, InputNumber, Input, notification, Spin } from "antd";
 import { Footer, Quotes } from "../components";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, get, child } from "firebase/database";
+import {
+  getAuth,
+  isSignInWithEmailLink,
+  signInWithEmailLink,
+  sendSignInLinkToEmail,
+  onAuthStateChanged,
+} from "firebase/auth";
 const codec = require("json-url")("lzw");
 
 const { utils, BigNumber } = require("ethers");
@@ -25,29 +32,71 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
   const [uMessage, setMessage] = useState();
   const [typedData, setTypedData] = useState();
   const [eValue2, setE2] = useState("placeholder");
+  const [uEmails, setEmails] = useState();
+  const [userReady, setUser] = useState();
+  const [userAlert, setAlert] = useState(false);
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
-  const firebaseConfig2 = {
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
-    databaseURL: "https://proofofstake-91004.firebaseio.com/",
-    projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
-    storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
-    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
-    appId: process.env.REACT_APP_FIREBASE_APP_ID,
-  };
+  const auth = getAuth(app);
+  if (isSignInWithEmailLink(auth, window.location.href)) {
+    // Additional state parameters can also be passed via URL.
+    // This can be used to continue the user's intended action before triggering
+    // the sign-in operation.
+    // Get the email if available. This should be available if the user completes
+    // the flow on the same device where they started it.
+    let email = window.localStorage.getItem("emailForSignIn");
+    console.log("email", email);
+    /* if (!email) {
+      // User opened the link on a different device. To prevent session fixation
+      // attacks, ask the user to provide the associated email again. For example:
+      email = window.prompt("Please provide your email for confirmation");
+    } */
+    // The client SDK will parse the code from the link for you.
+    signInWithEmailLink(auth, email, window.location.href)
+      .then(result => {
+        // Clear email from storage.
+        /* window.localStorage.removeItem("emailForSignIn"); */
+        /* console.log("email cleared, user:", result.user); */
+        setAlert(false);
+        // You can access the new user via result.user
+        // Additional user info profile not available via:
+        // result.additionalUserInfo.profile == null
+        // You can check if the user is new or existing:
+        // result.additionalUserInfo.isNewUser
+      })
+      .catch(error => {
+        // Some error occurred, you can inspect the code: error.code
+        // Common errors could be invalid email and invalid or expired OTPs.
+      });
+  }
 
-  const app2 = initializeApp(firebaseConfig2, "email");
-
-  // Get a reference to the database service
-  const database2 = getDatabase(app2);
+  onAuthStateChanged(auth, user => {
+    if (user) {
+      // User is signed in, see docs for a list of available properties
+      // https://firebase.google.com/docs/reference/js/firebase.User
+      const uid = user.uid;
+      setUser(uid);
+      // ...
+    } else {
+      // User is signed out
+      // ...
+    }
+  });
 
   const decompressTypedData = async data => {
     const _typedData = await codec.decompress(data);
     setTypedData(_typedData);
     console.log("set data", _typedData);
+  };
+
+  const actionCodeSettings = {
+    // URL you want to redirect back to. The domain (www.example.com) for this
+    // URL must be in the authorized domains list in the Firebase Console.
+    url: "http://invincible-purpose.surge.sh/profile",
+    // This must be true.
+    handleCodeInApp: true,
   };
 
   let myData = [];
@@ -100,6 +149,8 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
       setMessage(result.message);
     }
   }, [tokenId, address, readContracts]);
+
+  let eData = [];
 
   return (
     /* Need conditional rendering here, but token getter works */
@@ -171,36 +222,6 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                 <br/>
                 <h3 className="text-center text-md md:text-lg">Download your personalized copy starting on September 13, 2022.</h3>
                 <br/>
-                <h3 className="text-center text-md md:text-lg">Want to be Notified? Enter your E-mail below!</h3>
-                <input
-                className="text-center h-1/2 w-full sm:w-2/3 mt-4 p-2 text-md md:text-lg"
-                placeholder="Your @.com"
-                onChange={f => {
-                  const currValue2 = f;
-                  setE2(currValue2);
-                }}
-
-              />
-                <button
-                type="btn btn-primary"
-                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs sm:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                  onClick={async () => {
-
-                    console.log("evalue", eValue2)
-
-                    if (eValue2 == "placeholder" || eValue2.target.value == "" || validator.validate(eValue2.target.value) == false ) {
-                      notification.error({
-                        message: "Please Enter a Valid Email Address",
-                        placement: "topRight",
-                      })
-                    } else {
-                      const db2 = database2;
-                      set(ref(db2, `PoS/` + address), {
-                       email: eValue2.target.value
-                      });
-                  }
-                  }}
-                >Subscribe</button>
               </div>
               )}
 
@@ -215,6 +236,67 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
           </h3> */}
             {/* Removing this component until sizing is fixed */}
             {/* <Quotes /> */}
+            {!userReady ? (
+              <div className="mx-4 p-5 rounded overflow-hidden shadow-xl">
+                <h3 className="text-gray-500 text-center text-md md:text-lg">
+                  Want notifications? Enter your E-mail below!
+                </h3>
+                <input
+                  className="text-center h-1/2 w-full sm:w-2/3 mt-4 p-2 text-md md:text-lg"
+                  placeholder="Your @.com"
+                  onChange={f => {
+                    const currValue2 = f;
+                    setE2(currValue2);
+                  }}
+                />
+                <button
+                  type="btn btn-primary"
+                  className="w-1/2 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs sm:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  onClick={async () => {
+                    console.log("evalue", eValue2);
+
+                    if (
+                      eValue2 == "placeholder" ||
+                      eValue2.target.value == "" ||
+                      validator.validate(eValue2.target.value) == false
+                    ) {
+                      notification.error({
+                        message: "Please Enter a Valid Email Address",
+                        placement: "topRight",
+                      });
+                    } else {
+                      sendSignInLinkToEmail(auth, eValue2.target.value, actionCodeSettings)
+                        .then(() => {
+                          // The link was successfully sent. Inform the user.
+                          // Save the email locally so you don't need to ask the user for it again
+                          // if they open the link on the same device.
+                          window.localStorage.setItem("emailForSignIn", eValue2.target.value);
+                          setAlert(true);
+                          // ...
+                        })
+                        .catch(error => {
+                          const errorCode = error.code;
+                          const errorMessage = error.message;
+                          // ...
+                        });
+                    }
+                  }}
+                >
+                  Subscribe
+                </button>
+                {userAlert == true ? (
+                  <h3 className="text-red-400 text-center text-md md:text-lg">
+                    <br /> We have sent a confirmation link to your email address. <br />
+                    Please follow the link to continue.
+                  </h3>
+                ) : null}
+              </div>
+            ) : (
+              <div className="mx-4 p-5 rounded overflow-hidden shadow-xl">
+                <h3 className="text-gray-500 text-center text-md md:text-lg">Thank you for Registering!</h3>
+              </div>
+            )}
+
             <Footer />
           </div>
         </div>
