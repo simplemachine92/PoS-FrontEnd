@@ -68,3 +68,5 @@ yarn-error.log*
 
 # doc directory
 /doc
+packages/hardhat/contracts/args_address.txt
+packages/hardhat/contracts/args_amounts.txt
