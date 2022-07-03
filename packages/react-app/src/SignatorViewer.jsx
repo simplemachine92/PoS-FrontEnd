@@ -101,6 +101,7 @@ function SignatorViewer({
   writeContracts,
   tx,
   firebaseConfig,
+  readContracts,
 }) {
   function useSearchParams() {
     const _params = new URLSearchParams(useLocation().search);
@@ -321,9 +322,15 @@ function SignatorViewer({
                 console.log("my data", data);
 
                 //for (let x = 0; x < myData.length; x++)
-                if (data.recipient == newData.message.recipient) {
+                if (data.recipient == newData.message.recipient && readContracts) {
+                  let nId = await readContracts.ProofOfStake_Pages.tokenOfOwnerByIndex(data.recipient, "0");
+                  let token = await readContracts.ProofOfStake_Pages.tokenURI(nId);
+                  const json = atob(token.substring(29));
+                  const result = JSON.parse(json);
+                  console.log("waty", result);
+                  setImage(result.image);
                   //`url("data:image/svg+xml,${svgString}")`;
-                  setImage(data.imageData);
+                  /* setImage(data.imageData); */
                   setData(data);
                 }
               });
@@ -338,7 +345,7 @@ function SignatorViewer({
       .catch(error => {
         console.error(error);
       });
-  }, [compressedTypedData]);
+  }, [compressedTypedData, readContracts]);
 
   /*  useEffect(() => {
     decompressTypedData();

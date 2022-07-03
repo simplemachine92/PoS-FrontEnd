@@ -147,24 +147,22 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
     //prettier-ignore
     function pledge() public payable nonReentrant{
         if (pledgeOpen == false) revert PledgingDisabled();
-        /* require(pledgeOpen == true, PledgingDisabled()); */
+        
         if (msg.value < price) revert NotMinimumPledge();
-        /* require(msg.value >= price, "Min Pledge is 0.01337 ETH"); */
 
         string memory resolved = resolveENS(msg.sender);
 
         uint sShare = (msg.value * publisherSplit) / 100;
 
-        udonationTotal[msg.sender] +=  msg.value;
-
         if (pledgeLimit[msg.sender] >= tokenlimitperuser) {
         (bool success3, ) = gitcoin.call{value: msg.value - sShare}("");
         if (!success3) revert SendFailed();
-        /* require(success3, "could not send"); */
+        
 
         (bool success4, ) = sevenStories.call{value: sShare}("");
         if (!success4) revert SendFailed();
-        /* require(success4, "could not send"); */
+        
+        udonationTotal[msg.sender] +=  msg.value;
 
         pledgeLimit[msg.sender] = pledgeLimit[msg.sender] + 1;
 
@@ -173,11 +171,11 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
 
         (bool success, ) = gitcoin.call{value: msg.value - sShare}("");
         if (!success) revert SendFailed();
-        /* require(success, "could not send"); */
 
         (bool success2, ) = sevenStories.call{value: sShare}("");
         if (!success2) revert SendFailed();
-        /* require(success2, "could not send"); */
+
+        udonationTotal[msg.sender] +=  msg.value;
 
         pledgeLimit[msg.sender] = pledgeLimit[msg.sender] + 1;
 
@@ -232,8 +230,6 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         address signer = ecrecover(hash, v, r, s);
 
         if (signer != vitalik) revert InvalidSignature();
-        /* require(signer == vitalik, "MyFunction: invalid signature"); */
-        /* require(signer != address(0), "ECDSA: invalid signature"); */
         if (signer == address(0)) revert ZeroSignature();
 
         uint256 tokenid = tokenOfOwnerByIndex(msg.sender, 0) - 1;
@@ -261,7 +257,6 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
             from == address(0) || to == address(0),
             "SOULBOUND: Non-Transferable"
         );
-        /* if (from != address(0) || to != address(0)) revert Soulbound(); */
         super._beforeTokenTransfer(from, to, tokenId);
     }
 
@@ -407,8 +402,6 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         override
         returns (string memory)
     {
-        //require(id <= limit, "non-existant");
-        /* require(_exists(id), "not exist"); */
         if (!_exists(id)) revert DoesNotExist();
         return constructTokenURI(id);
     }

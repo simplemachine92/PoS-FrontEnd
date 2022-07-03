@@ -10,7 +10,17 @@ import { Footer, Quotes, AboutTheBook, GitcoinBar } from "../components";
 
 import { Link } from "react-router-dom";
 
-export default function Waitlist({ yourLocalBalance, mainnetProvider, price, address, firebaseConfig, events }) {
+const { utils } = require("ethers");
+
+export default function Waitlist({
+  yourLocalBalance,
+  mainnetProvider,
+  price,
+  address,
+  firebaseConfig,
+  events,
+  readContracts,
+}) {
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
 
   const [ready, setReady] = useState(false);
@@ -19,21 +29,16 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
 
   const [dataSource2, setDataSource2] = useState(events);
 
-  /* // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-
-  let dbList = [];
-
-  let objectList = [];
-
-  let eventList = [];
-
-  let toSign = []; */
-
   useEffect(async () => {
-    setDataSource2(events);
+    let copy = events;
+    for (const v of copy) {
+      let total = await readContracts.ProofOfStake_Pages.udonationTotal(v.args[0]);
+      v.donototal = utils.formatEther(total._hex);
+    }
+    setDataSource2(copy);
     setReady(true);
-  }, [events]);
+    console.log("events", copy);
+  }, [events, readContracts]);
 
   const FilterByNameInput2 = (
     <Input
@@ -77,14 +82,9 @@ export default function Waitlist({ yourLocalBalance, mainnetProvider, price, add
 
     {
       title: "Donation",
-      dataIndex: "args",
-      key: "donation",
+      dataIndex: "donototal",
       render: value => {
-        return (
-          <div class="mx-auto text-black text-sm">
-            {ethers.utils.formatEther(ethers.BigNumber.from(value[1])).substring(0, 6)}
-          </div>
-        );
+        return <div class="mx-auto text-black text-sm">{value.substring(0, 6)}</div>;
       },
       sorter: (a, b) => a.args[1] - b.args[1],
       sortDirections: ["ascend", "descend"],

@@ -551,6 +551,7 @@ function App(props) {
               loadWeb3Modal={loadWeb3Modal}
               chainList={chainList}
               writeContracts={writeContracts}
+              readContracts={readContracts}
               tx={tx}
               firebaseConfig={firebaseConfig}
             />
