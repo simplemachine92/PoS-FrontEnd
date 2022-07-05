@@ -145,7 +145,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
      * @notice Pledges ETH to GTC & "whitelists" pledger
      */
     //prettier-ignore
-    function pledge() public payable nonReentrant{
+    function pledge() public payable nonReentrant {
         if (pledgeOpen == false) revert PledgingDisabled();
         
         if (msg.value < price) revert NotMinimumPledge();
