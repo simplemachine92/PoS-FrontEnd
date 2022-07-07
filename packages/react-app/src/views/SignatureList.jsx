@@ -136,7 +136,7 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
               record.typedData + "&addresses=" + record.sender + "&signatures=" + record.signature
             }`}
           >
-            Click to View
+            View
           </Link>
         ) : (
           <Spin />

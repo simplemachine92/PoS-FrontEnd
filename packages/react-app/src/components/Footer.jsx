@@ -9,7 +9,7 @@ export default function Footer() {
   return (
     //prettier-ignore
 
-    <div className="container mx-auto mt-20 mb-3">
+    <div className="container mx-auto mt-10 mb-3">
       {/* Removing socials unless we have proper links */}
       {/* <Socials /> */}
       <TwitterShareButton

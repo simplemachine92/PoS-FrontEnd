@@ -8,47 +8,6 @@ import { getDatabase, ref, set, get, child } from "firebase/database";
 
 const { utils, BigNumber } = require("ethers");
 
-export const StyledButton = styled(Button)`
-  height: 100%;
-  background: #ffe171;
-  border-width: 0px;
-  &:hover {
-    color: #454545;
-    background: #7ee6cd;
-    border-color: red;
-  }
-  ,
-  &:focus {
-    color: #000000;
-    background-color: #ffe171;
-  }
-`;
-
-export const StyledInput = styled(Input)`
-  width: 100%;
-  height: 80px;
-  margin-top: 5px;
-  background: #31dbe5;
-  border: 1px solid #207191;
-  border-radius: 8px;
-  outline: none;
-  text-align: center;
-  font-size: 30px;
-  font-size: 2.5vw;
-  font-family: Space Mono, sans-serif;
-  color: #ffffff;
-  background: #31dbe5;
-
-  &::placeholder {
-    margin-top: 100px;
-    color: #ffffff;
-    font-family: Space Mono, sans-serif;
-    font-style: normal;
-    font-size: 20px;
-    text-align: center;
-  },
-`;
-
 /**
  * web3 props can be passed from '../App.jsx' into your local view component for use
  * @param {*} yourLocalBalance balance on current network
@@ -88,91 +47,23 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
           {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
           {/* prettier-ignore */}
           <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
-            <div className="flex flex-wrap w-2/5 mx-auto">
+            {/* <div className="flex flex-wrap w-2/5 mx-auto">
               <img class="shadow" className="object-scale-down mb-12" src="assets/DonationText.png" />
-            </div>
-            <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
+            </div> */}
+            <div className="flex flex-wrap w-2/5 mx-auto">
               <div className="max-w-md py-10 mx-auto">
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
                   <img alt="Book" className="w-3/5 mb-4 md:w-2/4 mx-auto" src="assets/RasCover.png" />
-                  {address ? (
-                <button
-                type="btn btn-primary"
-                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs sm:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                  onClick={async () => {
-                    try {
-
-                      const result = tx(
-                        writeContracts &&
-                        writeContracts.ProofOfStake_Pages.pledge({ value: utils.parseEther(uValue) }),
-                        async (update) => {
-                          console.log("📡 Transaction Update:", update);
-                          if (update && (update.status === "confirmed" || update.status === 1)) {
-                            console.log(" 🍾 Transaction " + update.hash + " finished!");
-                            console.log(
-                              " ⛽️ " +
-                                update.gasUsed +
-                                "/" +
-                                (update.gasLimit || update.gas) +
-                                " @ " +
-                                parseFloat(update.gasPrice) / 1000000000 +
-                                " gwei"
-                            );
-                  
-                            // send notification of stream creation
-                            notification.success({
-                              message: "Donation Successful",
-                              description: `Donation from ${address} successful`,
-                              placement: "topRight",
-                            }); history.push('/complete')
-                          }
-                        }
-                      );
-                      const db = database;
-                      set(ref(db, `PoS/` + address), {
-                       email: eValue
-                      });
-                    } catch(err) {
-                      notification.error({
-                        message: "Donation Not Processed",
-                        description: err,
-                        placement: "topRight",
-                      })
-                    }
-                  }}
-                >
-                  Donate: 0.01337 ETH <br/> Or Customize Below 👇
-                </button>
-              ) : (
-                
-                <button
-                type="btn btn-primary"
-                className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs sm:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                  style={{ marginTop: 40, width: "30%" }}
-                  onClick={loadWeb3Modal}
-                >
-                  Connect
-                </button>
-              )}
-                    <p>
-                    </p>
-                  
                 </div>
               </div>
             </div>
-
-        <footer className="">
           
-            <div className="bg-circle bg-left-bottom bg-fit bg-no-repeat">
-            <h5 className="font-bold">Donate & Mint</h5>
+            <div className="flex-wrap w-1/2 mx-5 mt-5 mx-auto rounded overflow-hidden shadow-2xl ">
+            <h5 className="font-bold pt-10 pb-2 text-base sm:text-lg md:text-2xl lg:text-3xl">Donate & Mint</h5>
 
-              <h3 className="text-yellow-pos mb-4 mt-4 text-sm p-10 md:text-3xl">
-              Pledge any amount of ETH below to request a digitally signed book plate from Vitalik. <br/> <br/> You'll mint a non-transferable NFT and, when the book is available, you'll gain access to your signed digital copy.
-              </h3>
-
-<label>Enter ETH Amount</label>
+              <label className="text-xs sm:text-base md:text-lg lg:text-xl mt-2">Enter ETH Amount</label>
               <InputNumber
-                className="form w-3/4 mx-auto my-auto"
+                className="form mx-auto w-full"
                 bordered={false}
                 onChange={e => {
                   const currValue = String(e);
@@ -180,29 +71,24 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 }}
                 step={0.1}
                 defaultValue={0.01337}
-                
               />
-              <br/>
               {/* "Pledge any amount of ETH to request a digitally signed book plate from Vitalik. Watch the profile page to see your token and your digital book when it is available." */}
-              <h3 className="text-sm mt-10 md:text-2xl mx-2" >Enter your email to be notified when the digital book is available.</h3>
-                <Input
-                
-                className="form w-3/4 mt-5"
-                class="form w-3/4 mt-5 mx-auto"
-                maxLength={160}
-                placeholder="email"
-                onChange={f => {
-                  const currValue2 = f;
-                  setE(currValue2);
-                }}
-
-              />
-              
+              <h3 className="text-2xs sm:text-base md:text-lg mt-5 mx-2">Optional: Provide an email for notifications.</h3>
+              <input
+              type="form"
+                  maxlength="160"
+                  className="mx-auto w-4/5"
+                  placeholder="your@.com"
+                  onChange={f => {
+                    const currValue2 = f;
+                    setE(currValue2);
+                  }}
+                />
+                <h3 className="text-2xs sm:text-xs mt-1 md:mt-5 mx-2">Note: We will never share your email address.</h3>
               {address ? (
                 <button
                 type="btn btn-primary"
-                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-sm md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                  style={{ marginTop: 40, width: "30%" }}
+                  className="w-1/2 my-4 py-1 px-1 mx-auto sm:py-2 sm:px-2 text-sm md:text-lg sm:mt-5 lg:mt-8 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   onClick={async () => {
                     try {
 
@@ -245,14 +131,12 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                     }
                   }}
                 >
-                  Submit
+                  Mint
                 </button>
               ) : (
-                
                 <button
                 type="btn btn-primary"
-                  className="w-3/4 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-sm md:text-2xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                  style={{ marginTop: 40, width: "30%" }}
+                  className="w-1/2 my-4 py-1 px-1 mx-auto sm:py-2 sm:px-2 text-sm md:text-2xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   onClick={loadWeb3Modal}
                 >
                   Connect
@@ -261,8 +145,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
             </div>
           
 
-          <div className="">
-            <br />
+            <div className="pt-8 mx-auto font-spacemono bg-circle bg-left bg-6 sm:bg-fit bg-no-repeat">
+          <h3 className="text-center text-sm md:text-xl mx-8 my-8">
+              Pledge any amount of ETH above to request a digitally signed book plate from Vitalik.   You'll mint a non-transferable NFT and, when the book is available, you'll gain access to your signed digital copy.
+              </h3>
             <h3 className="text-left text-sm md:text-xl mx-8">
           For pledges made here, funds will go 90% to the Gitcoin Grants matching pool and 10% to our publishing
           partner, <a href="https://www.sevenstories.com/books/4443-proof-of-stake">Seven Stories Press</a>, for
@@ -270,11 +156,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
           committed all of his proceeds to Gitcoin Grants.
         </h3>
           </div>
+          </div>
           {/* Removing this component until sizing is fixed */}
           {/* <Quotes /> */}
           <Footer />
-        </footer>
-      </div>
         </div>
       </div>
     </>

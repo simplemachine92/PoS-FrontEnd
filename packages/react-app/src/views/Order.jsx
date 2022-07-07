@@ -86,47 +86,32 @@ function Order({ writeContracts, tx }) {
           {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
           {/* prettier-ignore */}
           <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
-            <div className="flex flex-wrap w-2/5 mx-auto">
-              <img class="shadow" className="object-scale-down mb-12" src="assets/PreOrderText.png" />
-            </div>
-            <div className="flex flex-wrap w-1/2 justify-center items-center mx-auto">
+            {/* <div className="flex flex-wrap w-2/5 mx-auto">
+              <img class="shadow" className=" mb-12" src="assets/PreOrderText.png" />
+            </div> */}
+            <div className="flex flex-wrap w-1/3 justify-center items-left mx-auto">
               <div className="max-w-md py-10 mx-auto">
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
                   <img alt="Book" className="w-3/5 mb-4 md:w-2/4 mx-auto" src="assets/RasCover.png" />
                   <a href="https://www.boulderbookstore.net/product/proof" rel="noreferrer">
                     <button
-                      className="w-3/4 py-2 px-2 mt-2 mx-auto sm:py-4 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                      className="w-3/4 py-2 px-2 mt-2 mx-auto sm:py-4 sm:px-3 text-2xs sm:text-xs lg:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                       type="btn btn-primary"
                     >
-                      Signed Pre-Order: Boulder Book Store
+                      Signed Pre-Order:<br/> Boulder Book Store
                     </button>
                   </a>
                 </div>
               </div>
             </div>
-          
-          {/* <img src="assets/pre-order.svg" /> */}
-              <div className="w-screen bg-circle bg-contain bg-no-repeat px-5 py-6 mx-auto">
-              <h5 className="font-bold">Retailers</h5>
-              <br />
-                <div className="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 ">
+            <div className="w-1/2 mx-auto mt-4">
+              {/* <h5 className="font-bold text-3xl">Retailers</h5> */}
+                <div className="flex flex-wrap">
                   {buyLinks.map(item => (
-                    <div className="p-2 sm:w-1/2 w-1/2">
+                    <div className="py-2 px-2 w-1/2">
                       <a href={item.link} className="">
-                        {/* <svg
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="3"
-                        className="text-yellow-pos w-6 h-6 flex-shrink-0 mr-4"
-                        viewBox="0 0 24 24"
-                      >
-                        <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
-                        <path d="M22 4L12 14.01l-3-3"></path>
-                      </svg> */}
                         <button
-                          className="w-3/4 mt-3 py-2 px-1 mx-auto sm:py-4 text-sm md:text-sm bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                          className="w-full mt-3 mx-auto py-2 px-1 sm:py-4 text-2xs sm:text-tiny lg:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                           type="btn btn-primary"
                         >
                           {item.name}
@@ -137,6 +122,9 @@ function Order({ writeContracts, tx }) {
                   ))}
                 </div>
               </div>
+          
+          {/* <img src="assets/pre-order.svg" /> */}
+              
             
             {/* Removing this component until its sizing is fixed */}
             {/* <Quotes /> */}

@@ -9,12 +9,39 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    backgroundSize: {
+      auto: "auto",
+      cover: "cover",
+      contain: "contain",
+      fit: "fit",
+      "50%": "50%",
+      "25%": "25%",
+      6: "6rem",
+    },
+    fontSize: {
+      xs: ".75rem",
+      sm: ".875rem",
+      tiny: ".875rem",
+      base: "1rem",
+      lg: "1.125rem",
+      xl: "1.25rem",
+      "3xs": ".25rem",
+      "2xs": ".5rem",
+      "2xls": "1.25rem",
+      "2xl": "1.5rem",
+      "3xl": "1.875rem",
+      "4xl": "2.25rem",
+      "5xl": "3rem",
+      "6xl": "4.5rem",
+      "7xl": "5rem",
+    },
     extend: {
       backgroundImage: {
         headerBackground: "url('/src/assets/Bareheader.svg')",
         ringsBackground: "url('/src/assets/RotatingRings.svg')",
         smallBackground: "url('/src/assets/Rings_small.svg')",
         circle: "url('/src/assets/eth_circle_3.svg')",
+        midpage: "url('/src/assets/variant3.svg')",
       },
       colors: {
         orange: colors.orange,

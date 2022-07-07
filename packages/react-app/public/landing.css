@@ -341,7 +341,6 @@ a:hover {
 
 .gitcoin-brand {
   display: flex;
-
   padding-top: 70px;
   padding-bottom: 154px;
   padding-right: 35px;
@@ -377,7 +376,6 @@ label {
 }
 
 input {
-  height: 80px;
   margin-top: 5px;
   background: #31dbe5;
   border: 1px solid #207191;
@@ -398,14 +396,13 @@ select:focus {
 }
 
 .form input {
-  height: 80px;
-  margin-top: 10px;
+  height: 100%;
   background: #31dbe5;
   border: 1px solid #207191;
   border-radius: 8px;
   outline: none;
   text-align: center;
-  font-size: 3vw;
+  font-size: 2.5vw;
   font-family: Space Mono, sans-serif;
   color: #ffffff;
   background: #31dbe5;
@@ -417,28 +414,24 @@ hover {
 }
 
 .form input::placeholder {
-  margin-top: 100px;
   color: #02e2ac;
   font-family: Space Mono, sans-serif;
-  font-style: normal;
   font-weight: bold;
   font-size: 2.5vw;
   text-align: center;
 }
 
 input::placeholder {
-  margin-top: 100px;
   color: #ffffff;
   font-family: Space Mono, sans-serif;
   font-style: normal;
-  font-size: 15px;
+  font-size: 2vw;
   text-align: center;
 }
 
 .buttons-green-pill {
   width: 100%;
   display: flex;
-  justify-content: space-between;
   margin-top: 48px;
 }
 
@@ -544,17 +537,6 @@ input::placeholder {
     width: 500px;
     font-size: 36px;
   }
-
-  .form {
-    padding: 0 2%;
-  }
-
-  .gitcoin-brand {
-  }
-
-  .form label {
-    width: 100%;
-  }
 }
 
 @media (max-width: 390px) {
@@ -565,7 +547,7 @@ input::placeholder {
   .form label,
   .form input,
   .form input::placeholder {
-    font-size: 18px;
+    font-size: 2.5vw;
   }
 
   .buttons-green-pill {
