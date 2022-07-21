@@ -89,29 +89,30 @@ function Order({ writeContracts, tx }) {
             {/* <div className="flex flex-wrap w-2/5 mx-auto">
               <img class="shadow" className=" mb-12" src="assets/PreOrderText.png" />
             </div> */}
-            <div className="flex flex-wrap w-1/3 justify-center items-left mx-auto">
-              <div className="max-w-md py-10 mx-auto">
+            <div className="flex flex-wrap w-1/3 content-center items-left mx-auto">
+              <div className="max-w-md py-5 mx-auto justify-center">
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
-                  <img alt="Book" className="w-3/5 mb-4 md:w-2/4 mx-auto" src="assets/RasCover.png" />
-                  <a href="https://www.boulderbookstore.net/product/proof" rel="noreferrer">
-                    <button
-                      className="w-3/4 py-2 px-2 mt-2 mx-auto sm:py-4 sm:px-3 text-2xs sm:text-xs lg:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                      type="btn btn-primary"
-                    >
-                      Signed Pre-Order:<br/> Boulder Book Store
-                    </button>
-                  </a>
+                  <img alt="Book" className="w-7/8 sm:w-4/5 md:w-4/5 lg:w-2/3 mx-auto" src="assets/RasCover.png" />
                 </div>
               </div>
             </div>
-            <div className="w-1/2 mx-auto mt-4">
-              {/* <h5 className="font-bold text-3xl">Retailers</h5> */}
+            <div className="w-1/2 mx-auto mt-2 rounded overflow-hidden content-center shadow-2xl px-5 py-3">
+            <h5 className="font-bold text-xs sm:text-tiny md:text-lg lg:text-xl">psst.. Want a signed copy? ✍️</h5>
+                  <a href="https://www.boulderbookstore.net/product/proof" rel="noreferrer">
+                    <button
+                      className="w-full py-2 px-1 mt-2 mb-2 lg:mb-4 mx-auto md:w-3/4 sm:py-3 sm:px-3 text-xs sm:text-xs lg:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                      type="btn btn-primary"
+                    >
+                    Boulder Book Store
+                    </button>
+                  </a>
+                  <h5 className="font-bold mb-2 text-xs sm:text-tiny md:text-lg lg:text-xl">Other Retailers</h5>
                 <div className="flex flex-wrap">
                   {buyLinks.map(item => (
-                    <div className="py-2 px-2 w-1/2">
+                    <div className="py-1 px-2 w-1/2 justify-center">
                       <a href={item.link} className="">
                         <button
-                          className="w-full mt-3 mx-auto py-2 px-1 sm:py-4 text-2xs sm:text-tiny lg:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                          className="w-full sm:mt-2 mx-auto py-2 px-1 sm:py-2 md:py-2 text-2xs sm:text-tiny lg:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                           type="btn btn-primary"
                         >
                           {item.name}

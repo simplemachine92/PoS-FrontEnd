@@ -18,7 +18,7 @@ export default function Footer() {
         url={"https://proofofstake.gitcoin.co/"}
         hashtags={["ProofOfStake", "Gitcoin"]}
       >
-        <img alt="twitter" src="assets/twittericon.png" />
+        <img className="w-1/2 sm:w-3/4 md:w-full" alt="twitter" src="assets/twittericon.png" />
         
         
       </TwitterShareButton>
@@ -30,9 +30,9 @@ export default function Footer() {
         description={"aiueo"}
         className=""
       >
-        <img alt="facebook" src="assets/facebook_icon.svg" />
+        <img className="w-1/2 sm:w-3/4 md:w-full" alt="facebook" src="assets/facebook_icon.svg" />
       </FacebookShareButton>
-      <Divider style={{ backgroundColor: "black" }} />
+      <Divider style={{ backgroundColor: "white", opacity: 0.5, width: "50%" }} />
       
       <div className="container object-left">
       <BottomLinks daoLogo="assets/socialmedia/built_by_gitcoin_community.svg" />
