@@ -43,27 +43,29 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
   return (
     <>
       <div>
-        <div className="">
-          {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
-          {/* prettier-ignore */}
-          <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
+        {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
+        {/* prettier-ignore */}
+        <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
             {/* <div className="flex flex-wrap w-2/5 mx-auto">
               <img class="shadow" className="object-scale-down mb-12" src="assets/DonationText.png" />
             </div> */}
-            <div className="flex flex-wrap w-2/5 mx-auto">
-              <div className="max-w-md py-10 mx-auto">
+            <div className="py-2 flex w-3/4 sm:w-1/2 mx-auto justify-center">
+              <div className="mx-auto">
+              <h5 className="mb-4 font-bold text-xs sm:text-tiny md:text-lg lg:text-2xl">✨ Your Personal Digital Copy & NFT ✨</h5>
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
-                  <img alt="Book" className="w-3/5 mb-4 md:w-2/4 mx-auto" src="assets/RasCover.png" />
+                <img alt="Book_Spread" className="w-full" src="assets/bind_fix.png" />
+                  {/* <img alt="Book" className="w-3/4 mb-4 sm:w-1/3 mx-auto" src="assets/RasCover.png" /> */}
                 </div>
+                
               </div>
             </div>
+            {/* <div className="mt-2 flex-wrap w-1/2 content-center mx-auto"><img alt="Book_Spread" className="w-3/4" src="assets/bind_fix.png" /></div> */}
           
-            <div className="flex-wrap w-1/2 mx-5 mt-5 mx-auto rounded overflow-hidden shadow-2xl ">
-            <h5 className="font-bold pt-10 pb-2 text-base sm:text-lg md:text-2xl lg:text-3xl">Donate & Mint</h5>
-
-              <label className="text-xs sm:text-base md:text-lg lg:text-xl mt-2">Enter ETH Amount</label>
+            <div className="flex-wrap mt-2 px-1 py-1 sm:px-4 sm:py-4 w-3/4 sm:w-1/3 mx-auto rounded overflow-hidden shadow-2xl">
+            <h5 className="font-bold pt-4 sm:pt-4 md:py-6 text-xs sm:text-lg md:text-2xl lg:text-3xl">Donate & Mint</h5>
+              <label className="text-2xs sm:text-sm md:text-md lg:text-xl">Enter ETH Amount</label>
               <InputNumber
-                className="form mx-auto w-full"
+                className="form mx-auto w-full sm:w-1/2 md:w-3/4"
                 bordered={false}
                 onChange={e => {
                   const currValue = String(e);
@@ -72,8 +74,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 step={0.1}
                 defaultValue={0.01337}
               />
-              {/* "Pledge any amount of ETH to request a digitally signed book plate from Vitalik. Watch the profile page to see your token and your digital book when it is available." */}
-              <h3 className="text-2xs sm:text-base md:text-lg mt-5 mx-2">Optional: Provide an email for notifications.</h3>
+              <h3 className="text-2xs sm:text-2xs md:text-xs mt-3 md:mt-5 mx-2">Optional: Provide an email for notifications.</h3>
               <input
               type="form"
                   maxlength="160"
@@ -84,11 +85,11 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                     setE(currValue2);
                   }}
                 />
-                <h3 className="text-2xs sm:text-xs mt-1 md:mt-5 mx-2">Note: We will never share your email address.</h3>
+                <h3 className="text-2xs sm:text-2xs md:text-xs md:mt-5 mx-2">Note: We will never share your email address.</h3>
               {address ? (
                 <button
                 type="btn btn-primary"
-                  className="w-1/2 my-4 py-1 px-1 mx-auto sm:py-2 sm:px-2 text-sm md:text-lg sm:mt-5 lg:mt-8 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  className="w-1/3 sm:w-1/2 mb-2 mt-2 sm:mt-4 md:mt-6 lg:mt-10 mx-auto sm:py-2 sm:px-2 text-xs md:text-lg sm:mt-5 lg:mt-8 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   onClick={async () => {
                     try {
 
@@ -136,14 +137,13 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               ) : (
                 <button
                 type="btn btn-primary"
-                  className="w-1/2 my-4 py-1 px-1 mx-auto sm:py-2 sm:px-2 text-sm md:text-2xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                className="w-1/3 sm:w-1/2 mb-2 mt-2 sm:mt-4 md:mt-6 lg:mt-10 mx-auto sm:py-2 sm:px-2 text-xs md:text-lg sm:mt-5 lg:mt-8 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   onClick={loadWeb3Modal}
                 >
                   Connect
                 </button>
               )}
             </div>
-          
 
             <div className="pt-8 mx-auto font-spacemono bg-circle bg-left bg-6 sm:bg-fit bg-no-repeat">
           <h3 className="text-center text-sm md:text-xl mx-8 my-8">
@@ -157,10 +157,9 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
         </h3>
           </div>
           </div>
-          {/* Removing this component until sizing is fixed */}
-          {/* <Quotes /> */}
-          <Footer />
-        </div>
+        {/* Removing this component until sizing is fixed */}
+        {/* <Quotes /> */}
+        <Footer />
       </div>
     </>
   );
