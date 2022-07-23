@@ -75,8 +75,8 @@ export default function Address2(props) {
 
   return (
     <span>
-      <span>
-        <Blockies seed={address.toLowerCase()} size={8} scale={props.fontSize ? props.fontSize / 7 : 4} />
+      <span className="hidden justify-start items-center sm:flex">
+        <Blockies seed={address.toLowerCase()} size={8} scale={2} />
       </span>
       <span>
         {props.onChange ? (
@@ -103,13 +103,14 @@ export default function Address2(props) {
               </a>
             </div>
             <div className="flex-auto sm:hidden">
+              <Blockies seed={address.toLowerCase()} size={8} scale={1} />
               <a
                 style={{ color: currentTheme === "light" ? "#222222" : "#ddd" }}
                 target="_blank"
                 href={etherscanLink}
                 rel="noopener noreferrer"
               >
-                {displayAddress.substring(0, 5)}
+                {displayAddress}
               </a>
             </div>
           </Text>

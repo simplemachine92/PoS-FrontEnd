@@ -313,6 +313,10 @@ a:hover {
   background: #7ee6cd;
 }
 
+.ant-table table {
+  font-size: 1.8vw;
+}
+
 /* //Modify list text and background color   */
 .ant-table-tbody > tr > th {
   color: white;

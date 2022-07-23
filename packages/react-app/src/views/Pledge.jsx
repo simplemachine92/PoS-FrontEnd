@@ -52,9 +52,10 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
             <div className="py-2 flex w-3/4 sm:w-1/2 mx-auto justify-center">
               <div className="mx-auto">
               <h5 className="mb-4 font-bold text-xs sm:text-tiny md:text-lg lg:text-2xl">✨ Your Personal Digital Copy & NFT ✨</h5>
-                <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
-                <img alt="Book_Spread" className="w-full" src="assets/bind_fix.png" />
-                  {/* <img alt="Book" className="w-3/4 mb-4 sm:w-1/3 mx-auto" src="assets/RasCover.png" /> */}
+                <div className="flex py-0 backdrop-filter content-center mx-auto">
+                {/* <img alt="Book_Spread" className="w-full" src="assets/bind_fix.png" /> */}
+                  <img alt="Book" className="w-1/2 sm:w-1/2 md:w-1/2 mx-auto" src="assets/RasCover.png" />
+                  <img alt="Bookplate" className="mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl" src="assets/plate.png" />
                 </div>
                 
               </div>

@@ -81,10 +81,10 @@ export default function Waitlist({
     },
 
     {
-      title: "Donation",
+      title: "ETH",
       dataIndex: "donototal",
       render: value => {
-        return <div class="mx-auto text-black text-sm">{value.substring(0, 6)}</div>;
+        return <div class="mx-auto text-black">{value.substring(0, 6)}</div>;
       },
       sorter: (a, b) => a.args[1] - b.args[1],
       sortDirections: ["ascend", "descend"],
@@ -99,7 +99,7 @@ export default function Waitlist({
     <div className="bg-headerBackground bg-contain bg-top-right bg-no-repeat">
       <div className="">
         {ready ? (
-          <div className="mx-auto mr-1 ml-1 p-5">
+          <div className="mx-auto mr-1 ml-1 px-5">
             {/* <h6 className="text-yellow-pos font-bold text-3xl">Signatures</h6> */}
             <br />
             <Table className="mx-auto" pagination={{ pageSize: 10 }} columns={columns2} dataSource={dataSource2} />
