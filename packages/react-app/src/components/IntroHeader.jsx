@@ -14,10 +14,10 @@ export default function IntroHeader() {
       {/*  */}
       <div className="flex flex-wrap w-1/2 justify-center bg-no-repeat">
         <div className="max-w-lg py-5">
-          <img alt="Book" className="w-1/2 mx-auto" src="assets/RasCover.png" />
+          <img alt="Book" className="w-1/2 md:w-5/12 mx-auto" src="assets/RasCover.png" />
           <a href="/order" rel="noreferrer">
             <button
-              className="w-3/5 mt-4 py-2 sm:py-4 text-sm sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+              className="w-3/5 md:w-7/12 mt-4 py-2 sm:py-4 text-sm sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
               type="btn btn-primary"
             >
               Get Started!
