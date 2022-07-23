@@ -392,9 +392,9 @@ function App(props) {
                 blockExplorer={blockExplorer}
               />
             </div>
-            {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
+            {/* {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
               <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
-            )}
+            )} */}
           </Menu.Item>
         </StyledMenu>
 
@@ -487,9 +487,9 @@ function App(props) {
                 blockExplorer={blockExplorer}
               />
             </div>
-            {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
+            {/* {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
               <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
-            )}
+            )} */}
           </div>
         </div>
       </Affix>
