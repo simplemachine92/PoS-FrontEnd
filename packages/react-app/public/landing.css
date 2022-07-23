@@ -258,7 +258,7 @@ a:hover {
   color: inherit !important;
 }
 
-/* .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active,
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open,
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover,
@@ -266,11 +266,11 @@ a:hover {
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open,
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected,
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover {
-  color: #ffd900;
-  border-bottom: 2px solid #ffd900;
+  color: #fff871;
+  border-bottom: 2px solid transparent !important;
 }
 
-.ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item-active,
+/* .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item-active,
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item-open,
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item-selected,
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-item:hover,
@@ -278,8 +278,8 @@ a:hover {
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu-open,
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu-selected,
 .ant-menu-vertical:not(.ant-menu-dark) > .ant-menu-submenu:hover {
-  color: #ffd900;
-  border-bottom: 2px solid #ffd900;
+  color: #fff871;
+  border-bottom: 2px solid transparent !important;
 } */
 
 .ant-menu-item:hover,

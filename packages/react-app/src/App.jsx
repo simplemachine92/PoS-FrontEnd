@@ -18,6 +18,7 @@ import {
   ShoppingCartOutlined,
   DollarCircleOutlined,
 } from "@ant-design/icons";
+import { ReactComponent as LegoSVG } from "./assets/lego.svg";
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
@@ -320,8 +321,12 @@ function App(props) {
           mode="horizontal"
           collapsedWidth="0"
         >
-          <Menu.Item key="Home" className="modified-item">
-            <img alt="Ethereum Hand" className="w-8" src="assets/EthereumHand.gif" />
+          <Menu.Item
+            key="Home"
+            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+            className="modified-item transform transition hover:scale-110 duration-300 ease-in-out"
+            icon={<LegoSVG />}
+          >
             <Link to="/"></Link>
           </Menu.Item>
           <Menu.Item
