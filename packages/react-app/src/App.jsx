@@ -321,6 +321,7 @@ function App(props) {
           collapsedWidth="0"
         >
           <Menu.Item
+            className="text-sm items-center"
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             key="Home"
             icon={<HomeOutlined />}

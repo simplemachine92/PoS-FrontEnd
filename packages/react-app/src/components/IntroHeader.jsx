@@ -20,7 +20,7 @@ export default function IntroHeader() {
               className="w-3/5 mt-4 py-2 sm:py-4 text-sm sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
               type="btn btn-primary"
             >
-              Pre-Order
+              Get Started!
             </button>
           </a>
         </div>
