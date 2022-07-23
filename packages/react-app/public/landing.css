@@ -260,6 +260,11 @@ a:hover {
   color: #6f3ff5;
 } */
 
+.modified-item:hover {
+  border-bottom: 2px solid transparent !important;
+  color: inherit !important;
+}
+
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active,
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open,
 .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected,

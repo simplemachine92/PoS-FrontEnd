@@ -49,7 +49,7 @@ export const StyledMenu = styled(Menu)`
   background: #7ee6cd;
   border-width: 0px;
   &:hover {
-    color: #454545;
+    color: #fff871;
     background: #7ee6cd;
     border-color: red;
   }
@@ -320,18 +320,14 @@ function App(props) {
           mode="horizontal"
           collapsedWidth="0"
         >
-          <Menu.Item
-            className="text-sm items-center"
-            style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-            key="Home"
-            icon={<HomeOutlined />}
-          >
-            Home
+          <Menu.Item key="Home" className="modified-item">
+            <img alt="Ethereum Hand" className="w-8" src="assets/EthereumHand.gif" />
             <Link to="/"></Link>
           </Menu.Item>
           <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             key="mail"
+            className="modified-item"
             icon={<BookOutlined />}
           >
             Donate & Mint
@@ -340,6 +336,7 @@ function App(props) {
           <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             key="order"
+            className="modified-item"
             icon={<ShoppingCartOutlined />}
           >
             Pre-Order
@@ -348,6 +345,7 @@ function App(props) {
           <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             key="donations"
+            className="modified-item"
             icon={<DollarCircleOutlined />}
           >
             Donors
@@ -356,6 +354,7 @@ function App(props) {
           <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             key="signatures"
+            className="modified-item"
             icon={<HighlightOutlined />}
           >
             Signatures
@@ -365,13 +364,14 @@ function App(props) {
           <Menu.Item
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             key="profile"
+            className="modified-item"
             icon={<UserOutlined />}
           >
             Profile
             <Link to="/profile"></Link>
           </Menu.Item>
 
-          <Menu.Item style={{ marginLeft: "auto" }}>
+          <Menu.Item style={{ marginLeft: "auto" }} className="modified-item">
             <div>
               {USE_NETWORK_SELECTOR && <div style={{ marginRight: 20 }}></div>}
               <Account
