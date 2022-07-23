@@ -2,8 +2,8 @@
   "env": {
     "browser": true
   },
-  "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
-  "plugins": ["babel","import"],
+  "extends": ["airbnb", "plugin:prettier/recommended"],
+  "plugins": ["babel", "import"],
   "rules": {
     "prettier/prettier": "warn",
     "import/extensions": [

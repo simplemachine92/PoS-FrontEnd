@@ -29,7 +29,7 @@ const { Text } = Typography;
   - Provide blockExplorer={blockExplorer}, click on address and get the link
               (ex. by default "https://etherscan.io/" or for xdai "https://blockscout.com/poa/xdai/")
   - Provide fontSize={fontSize} to change the size of address text
-**/
+* */
 
 const blockExplorerLink = (address, blockExplorer) => `${blockExplorer || "https://etherscan.io/"}address/${address}`;
 
@@ -75,7 +75,7 @@ export default function Address(props) {
 
   return (
     <span>
-      <span style={{ verticalAlign: "middle" }}></span>
+      <span style={{ verticalAlign: "middle" }} />
       <span style={{ verticalAlign: "middle", paddingLeft: 5, fontSize: props.fontSize ? props.fontSize : 18 }}>
         {props.onChange ? (
           <Text editable={{ onChange: props.onChange }} copyable={{ text: address }}>

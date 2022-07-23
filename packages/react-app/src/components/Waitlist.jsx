@@ -1,14 +1,12 @@
 import styled from "styled-components";
 import { Select, Spin, Space, Table, Input, List } from "antd";
 import React, { useState, useEffect } from "react";
-import { Address, BottomLinks, Address2 } from "../components";
 import { ethers } from "ethers";
 
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, onValue, get, child } from "firebase/database";
-import { Footer, Quotes, AboutTheBook, GitcoinBar } from "../components";
-
 import { Link } from "react-router-dom";
+import { Footer, Quotes, AboutTheBook, GitcoinBar, Address, BottomLinks, Address2 } from ".";
 
 const { utils } = require("ethers");
 
@@ -30,9 +28,9 @@ export default function Waitlist({
   const [dataSource2, setDataSource2] = useState(events);
 
   useEffect(async () => {
-    let copy = events;
+    const copy = events;
     for (const v of copy) {
-      let total = await readContracts.ProofOfStake_Pages.udonationTotal(v.args[0]);
+      const total = await readContracts.ProofOfStake_Pages.udonationTotal(v.args[0]);
       v.donototal = utils.formatEther(total._hex);
     }
     setDataSource2(copy);
@@ -84,7 +82,7 @@ export default function Waitlist({
       title: "ETH",
       dataIndex: "donototal",
       render: value => {
-        return <div class="mx-auto text-black">{value.substring(0, 6)}</div>;
+        return <div className="mx-auto text-black">{value.substring(0, 6)}</div>;
       },
       sorter: (a, b) => a.args[1] - b.args[1],
       sortDirections: ["ascend", "descend"],

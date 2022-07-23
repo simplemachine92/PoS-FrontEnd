@@ -2,7 +2,6 @@ import styled from "styled-components";
 import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router";
 import { Button, InputNumber, Input, notification, Spin } from "antd";
-import { Footer, Quotes } from "../components";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, get, child } from "firebase/database";
 import {
@@ -12,11 +11,13 @@ import {
   sendSignInLinkToEmail,
   onAuthStateChanged,
 } from "firebase/auth";
+import { Footer, Quotes } from "../components";
+
 const codec = require("json-url")("lzw");
 
 const { utils, BigNumber } = require("ethers");
 
-var validator = require("email-validator");
+const validator = require("email-validator");
 
 /**
  * web3 props can be passed from '../App.jsx' into your local view component for use
@@ -47,7 +48,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
     // the sign-in operation.
     // Get the email if available. This should be available if the user completes
     // the flow on the same device where they started it.
-    let email = window.localStorage.getItem("emailForSignIn");
+    const email = window.localStorage.getItem("emailForSignIn");
     console.log("email", email);
     /* if (!email) {
       // User opened the link on a different device. To prevent session fixation
@@ -101,7 +102,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
     handleCodeInApp: true,
   };
 
-  let myData = [];
+  const myData = [];
 
   useEffect(async () => {
     const dbRef = ref(getDatabase(app));
@@ -109,13 +110,13 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
       .then(snapshot => {
         if (snapshot.exists()) {
           snapshot.forEach(sig => {
-            let message = sig.val().message;
+            const message = sig.val().message;
             console.log("message", message);
 
-            let sigMsg = message.msg;
-            let sigRecipient = message.recipient;
-            let pledgeValue = message.pledge;
-            let sigTime = message.timestamp;
+            const sigMsg = message.msg;
+            const sigRecipient = message.recipient;
+            const pledgeValue = message.pledge;
+            const sigTime = message.timestamp;
             message.signature = sig.val().signature;
             message.typedData = sig.val().typedData;
             message.msg = sig.val().message.msg;
@@ -141,8 +142,8 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
 
   useEffect(async () => {
     if (readContracts.ProofOfStake_Pages && address && tokenId) {
-      let nId = await readContracts.ProofOfStake_Pages.tokenOfOwnerByIndex(address, "0");
-      let token = await readContracts.ProofOfStake_Pages.tokenURI(nId);
+      const nId = await readContracts.ProofOfStake_Pages.tokenOfOwnerByIndex(address, "0");
+      const token = await readContracts.ProofOfStake_Pages.tokenURI(nId);
       setURL(`https://opensea.io/assets/${readContracts.ProofOfStake_Pages.address}/${nId}`);
       const json = atob(token.substring(29));
       const result = JSON.parse(json);
@@ -152,7 +153,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
     }
   }, [tokenId, address, readContracts]);
 
-  let eData = [];
+  const eData = [];
 
   return (
     /* Need conditional rendering here, but token getter works */
@@ -162,7 +163,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
           <div className="bg-headerBackground bg-cover bg-center bg-no-repeat">
             {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
             {/* prettier-ignore */}
-            <div class="flex items-center justify-center pt-5">
+            <div className="flex items-center justify-center pt-5">
               {/* <h5 className="text-xl font-bold">Your Token</h5> */}
 
               {image ? (
@@ -346,7 +347,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
       ) : (
         <div className="bg-headerBackground h-screen w-full bg-fill bg-center overflow-hidden">
           <div className="">
-            <div class="flex items-center justify-center mt-10">
+            <div className="flex items-center justify-center mt-10">
               <Spin />
               <br />
               <h3 className="text-center text-md md:text-3xl">Please connect your wallet, or mint a token..</h3>

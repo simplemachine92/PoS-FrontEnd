@@ -29,8 +29,8 @@ export default function Transactor(providerOrSigner, gasPrice, etherscan) {
       }
 
       console.log("network", network);
-      var options = null;
-      var notify = null;
+      let options = null;
+      let notify = null;
       options = {
         dappId: BLOCKNATIVE_DAPPID, // GET YOUR OWN KEY AT https://account.blocknative.com
         system: "ethereum",
@@ -130,15 +130,15 @@ export default function Transactor(providerOrSigner, gasPrice, etherscan) {
 
         console.log("Attempt to clean up:", message);
         try {
-          let obj = JSON.parse(message);
+          const obj = JSON.parse(message);
           if (obj && obj.body) {
-            let errorObj = JSON.parse(obj.body);
+            const errorObj = JSON.parse(obj.body);
             if (errorObj && errorObj.error && errorObj.error.message) {
               message = errorObj.error.message;
             }
           }
         } catch (e) {
-          //ignore
+          // ignore
         }
 
         notification.error({

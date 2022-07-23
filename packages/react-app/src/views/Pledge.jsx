@@ -2,9 +2,9 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import { useHistory } from "react-router";
 import { Button, InputNumber, Input, notification } from "antd";
-import { Footer, Quotes } from "../components";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, get, child } from "firebase/database";
+import { Footer, Quotes } from "../components";
 
 const { utils, BigNumber } = require("ethers");
 
@@ -33,7 +33,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
   };
 
   const app = initializeApp(firebaseConfig, "email");
-  //firebase.initializeApp({}, "your app name here");
+  // firebase.initializeApp({}, "your app name here");
 
   // Get a reference to the database service
   const database = getDatabase(app);
@@ -78,7 +78,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               <h3 className="text-2xs sm:text-2xs md:text-xs mt-3 md:mt-5 mx-2">Optional: Provide an email for notifications.</h3>
               <input
               type="form"
-                  maxlength="160"
+                  maxLength="160"
                   className="mx-auto w-4/5"
                   placeholder="your@.com"
                   onChange={f => {

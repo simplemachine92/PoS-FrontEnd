@@ -1,5 +1,5 @@
 import React from "react";
-import { Footer, Quotes, AboutTheBook, GitcoinBar, IntroHeader } from "../components";
+import { Footer, Quotes, AboutTheBook, GitcoinBar, IntroHeader } from ".";
 
 export default function AfterPledge() {
   return (

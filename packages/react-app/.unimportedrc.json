@@ -1,0 +1,33 @@
+{
+  "ignoreUnresolved": [],
+  "ignoreUnused": [
+    "@apollo/react-hooks",
+    "@craco/craco",
+    "@testing-library/jest-dom",
+    "@testing-library/react",
+    "@testing-library/user-event",
+    "apollo-boost",
+    "apollo-client",
+    "apollo-utilities",
+    "arb-ts",
+    "axios",
+    "dotenv",
+    "eslint-plugin-prettier",
+    "graphiql",
+    "graphql",
+    "isomorphic-fetch",
+    "node-watch",
+    "postcss",
+    "react-scripts"
+  ],
+  "ignoreUnimported": [
+    "src/backup.jsx",
+    "src/hooks/GasPrice.js",
+    "src/hooks/TokenList.js",
+    "src/setupTests.js",
+    "src/views/ExampleUI.jsx",
+    "src/views/Leaderboard.jsx",
+    "src/views/Subgraph.jsx",
+    "src/views/index.js"
+  ]
+}

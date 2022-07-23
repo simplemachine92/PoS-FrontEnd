@@ -1,13 +1,13 @@
 import React from "react";
 import { Divider } from "antd";
-import { Socials, BottomLinks } from ".";
 import { Share } from "react-twitter-widgets";
 import { TwitterIcon, TwitterShareButton, FacebookIcon, FacebookShareButton } from "react-share";
+import { Socials, BottomLinks } from ".";
 import Quotes from "./Quotes";
 
 export default function Footer() {
   return (
-    //prettier-ignore
+    // prettier-ignore
 
     <div className="container mx-auto mt-10 mb-3">
       {/* Removing socials unless we have proper links */}
@@ -15,7 +15,7 @@ export default function Footer() {
       <TwitterShareButton
       className="mr-10"
         title={"Preorder Vitalik Buterin’s PROOF OF STAKE, published by @7storiespress. You'll support @gitcoin's matching pool for public goods."}
-        url={"https://proofofstake.gitcoin.co/"}
+        url="https://proofofstake.gitcoin.co/"
         hashtags={["ProofOfStake", "Gitcoin"]}
       >
         <img className="w-1/2 sm:w-3/4 md:w-full" alt="twitter" src="assets/twittericon.png" />
@@ -24,10 +24,10 @@ export default function Footer() {
       </TwitterShareButton>
       
       <FacebookShareButton
-        url={"https://proofofstake.gitcoin.co/"}
+        url="https://proofofstake.gitcoin.co/"
         quote={"Preorder a copy of Vitalik Buterin’s PROOF OF STAKE, published by Seven Stories Press. You'll support Gitcoin's matching pool for public goods."}
-        hashtag={"#hashtag"}
-        description={"aiueo"}
+        hashtag="#hashtag"
+        description="aiueo"
         className=""
       >
         <img className="w-1/2 sm:w-3/4 md:w-full" alt="facebook" src="assets/facebook_icon.svg" />

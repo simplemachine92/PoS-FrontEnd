@@ -21,12 +21,12 @@ import {
 import { ethers } from "ethers";
 import React, { useEffect, useState } from "react";
 import { useHistory, useLocation } from "react-router-dom";
-import { useLocalStorage } from "../hooks";
-import { AddressInput, Address, Footer, Quotes, SignOptions, Address2 } from "../components";
 import { initializeApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword, onAuthStateChanged } from "firebase/auth";
 import { getDatabase, ref, set, get, child } from "firebase/database";
 import { Share } from "react-twitter-widgets";
+import { AddressInput, Address, Footer, Quotes, SignOptions, Address2 } from "../components";
+import { useLocalStorage } from "../hooks";
 import Tweets from "./Tweets";
 
 const { Text } = Typography;
@@ -104,7 +104,7 @@ export default function Signator({
     },
   ];
 
-  //prettier-ignore
+  // prettier-ignore
   const eip712Example = {
   types: {
     signature: [
@@ -183,13 +183,13 @@ export default function Signator({
     console.log("Failed:", errorInfo);
   };
 
-  let dbList = [];
+  const dbList = [];
 
-  let objectList = [];
+  const objectList = [];
 
-  let eventList = [];
+  const eventList = [];
 
-  let toSign = [];
+  const toSign = [];
 
   function useSearchParams() {
     const _params = new URLSearchParams(useLocation().search);
@@ -244,7 +244,7 @@ export default function Signator({
     get(child(dbRef, `PoS/`)).then(snapshot => {
       if (snapshot.exists()) {
         snapshot.forEach(sig => {
-          let message = sig.val().message;
+          const message = sig.val().message;
           dbList.push(message.recipient);
         });
         console.log("dblist", dbList);
@@ -338,7 +338,7 @@ export default function Signator({
       }
 
       window.location.reload(false);
-      //history.push(`/view?${searchParams.toString()}`);
+      // history.push(`/view?${searchParams.toString()}`);
 
       setSigning(false);
     } catch (e) {
@@ -369,7 +369,7 @@ export default function Signator({
       console.log("sel", selectedRowKeys);
       setSelect({
         ...select,
-        selectedRowKeys: selectedRowKeys,
+        selectedRowKeys,
       });
       console.log("eventc", events);
       const filtered = Object.keys(events)
@@ -461,7 +461,7 @@ export default function Signator({
                       <Input.TextArea
                         style={{ fontSize: 18 }}
                         maxLength={60}
-                        showCount={true}
+                        showCount
                         size="large"
                         autoSize={{ minRows: 1 }}
                         value={messageText}
@@ -479,7 +479,7 @@ export default function Signator({
                     </Space>
                   </>
                 )}
-                <Collapse ghost></Collapse>
+                <Collapse ghost />
                 <Space>
                   <Button
                     size="large"
