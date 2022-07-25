@@ -18,7 +18,8 @@ import {
   ShoppingCartOutlined,
   DollarCircleOutlined,
 } from "@ant-design/icons";
-import { ReactComponent as LegoSVG } from "./assets/lego.svg";
+import { ReactComponent as LogoSVG } from "./assets/lego.svg";
+import { ReactComponent as SmolSVG } from "./assets/smol-lego.svg";
 import { useEventListener } from "eth-hooks/events/useEventListener";
 import { Link, Route, Switch, useLocation } from "react-router-dom";
 import "./App.css";
@@ -325,7 +326,7 @@ function App(props) {
             key="Home"
             style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
             className="modified-item transform transition hover:scale-110 duration-300 ease-in-out"
-            icon={<LegoSVG />}
+            icon={<LogoSVG />}
           >
             <Link to="/"></Link>
           </Menu.Item>
@@ -400,13 +401,11 @@ function App(props) {
 
         <div className="flex md:hidden justify-between p-2" style={{ background: "#7ee6cd" }}>
           <button
-            className="flex flex-col justify-center items-center gap-1 py-2 px-2 sm:py-2 sm:px-3 text-xs md:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+            className="modified-item transform transition hover:scale-105 duration-300 ease-in-out"
             type="primary"
             onClick={() => setVisible(true)}
           >
-            <div className="h-0.5 w-5 bg-black rounded-md" />
-            <div className="h-0.5 w-5 bg-black rounded-md" />
-            <div className="h-0.5 w-5 bg-black rounded-md" />
+            <SmolSVG />
           </button>
           <Drawer
             bodyStyle={{ background: "#7ee6cd", paddingTop: "3rem" }}
