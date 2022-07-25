@@ -1,4 +1,4 @@
-import { Menu, Affix, Button, Drawer, Row, Col, Spin } from "antd";
+import { Menu, Affix, Button, Drawer, Row, Col, Spin, Modal } from "antd";
 import "antd/dist/antd.css";
 import {
   useBalance,

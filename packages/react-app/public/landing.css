@@ -377,6 +377,11 @@ label {
   font-family: Space Mono, sans-serif;
 }
 
+input[type="radio"]:focus {
+  outline: none;
+  box-shadow: none;
+}
+
 input {
   margin-top: 5px;
   background: #31dbe5;
@@ -395,6 +400,15 @@ input:focus,
 textarea:focus,
 select:focus {
   outline: none;
+  box-shadow: none;
+}
+
+.ant-modal-footer {
+  background-color: #7ee6cd;
+}
+
+.ant-modal-header {
+  background-color: #75d5be;
 }
 
 .form input {

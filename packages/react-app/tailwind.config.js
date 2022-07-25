@@ -92,5 +92,5 @@ module.exports = {
     width: ["responsive", "hover", "focus"],
     extend: {},
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/forms")],
 };
