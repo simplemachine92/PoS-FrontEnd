@@ -89,11 +89,11 @@ function Order({ writeContracts, tx }) {
             {/* <div className="flex flex-wrap w-2/5 mx-auto">
               <img class="shadow" className=" mb-12" src="assets/PreOrderText.png" />
             </div> */}
-            <div className="flex flex-wrap w-1/3 content-center items-left mx-auto">
+            <div className="flex flex-wrap w-1/2 content-center items-left mx-auto">
               <div className="max-w-md py-3 mx-auto justify-center">
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
-                <h5 className="mb-3 font-bold text-xs sm:text-base md:text-lg lg:text-xl">✨ Pre-Order Today!</h5>
-                  <img alt="Book" className="w-7/8 sm:w-4/5 md:w-3/5 lg:w-3/5 mx-auto" src="assets/RasCover.png" />
+                <h5 className="mb-4 font-bold text-sm sm:text-base md:text-lg lg:text-xl">✨ Pre-Order Today! ✨</h5>
+                  <img alt="Book" className="w-3/4 sm:w-1/2 mx-auto" src="assets/RasCover.png" />
                 </div>
               </div>
             </div>
