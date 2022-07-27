@@ -1,4 +1,4 @@
-import { Menu, Affix, Drawer, Spin } from "antd";
+import { Menu, Affix, Drawer, Button, Spin } from "antd";
 import "antd/dist/antd.css";
 import {
   useBalance,
@@ -388,11 +388,12 @@ function App(props) {
 
           <div className="flex md:hidden justify-between p-2" style={{ background: "#7ee6cd" }}>
             <button
-              className="modified-item transform transition hover:scale-105 duration-300 ease-in-out"
-              type="primary"
               onClick={() => setVisible(true)}
+              className="flex flex-col w-10 justify-center items-center bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
             >
-              <SmolSVG />
+              <div className="h-1 w-5 bg-black rounded-md mt-1 mb-1" />
+              <div className="h-1 w-5 bg-black rounded-md mb-1" />
+              <div className="h-1 w-5 bg-black rounded-md mb-1" />
             </button>
             <Drawer
               bodyStyle={{ background: "#7ee6cd", paddingTop: "3rem" }}
