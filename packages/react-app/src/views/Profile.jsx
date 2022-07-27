@@ -163,31 +163,38 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
           <div className="bg-headerBackground bg-cover bg-center bg-no-repeat">
             {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
             {/* prettier-ignore */}
-            <div className="flex items-center justify-center pt-5">
+            <div className="flex flex-wrap items-center justify-center pt-5 mx-auto">
               {/* <h5 className="text-xl font-bold">Your Token</h5> */}
-
               {image ? (
+                <>
                 <img
-                  className="px-2 py-2 ml-4 w-1/2 sm:w-1/3 lg:w-1/4 xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  className="px-2 py-2 w-1/2 sm:w-1/3 md:w-1/4 md:mx-auto xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   src={image}
                 />
+                </>
               ) : (
-                <Spin />
+                <>
+                <svg
+                  class="px-2 py-2 ml-4 w-1/2 sm:w-1/3 lg:w-1/4 xl:w-3/12 md:py-2 md:px-2 animate-pulse"
+                  viewBox="0 0 600 830"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
+                </svg>
+              </>
               )}
 
               {typedData && uMessage != typedData.message.msg ? (
-              <div className="mx-4 p-5 rounded overflow-hidden shadow-xl">
-                <br />
-                <h3 className="text-center text-md md:text-3xl">
-                  View on <a href={url}>OpenSea</a>
-                </h3>
-                <br />
-                <h3 className="text-center text-md md:text-2xl">You have received the message:</h3>
-                <h3 className="text-center text-md md:text-xl">"{typedData.message.msg}"</h3>
-                
+              <div className="w-full md:w-1/2 mx-4 py-4 sm:p-3 md:p-4 lg:p-5 rounded overflow-hidden shadow-xl">
+                <h3 className="w-full text-sm text-center text-md md:text-3xl mt-4 mb-4">
+              View it on <a href={url}>OpenSea</a>
+            </h3>
+                <h3 className="text-xs text-center text-md md:text-2xl">You received a message!</h3>
+                <h3 className="text-2xs text-center text-md md:text-xl mt-4">"{typedData.message.msg}"</h3>
                 <br />
                 <button
-                  className="w-2/3 mb-4 py-2 px-2 sm:py-4 text-xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  className="w-1/2 mb-4 py-2 px-2 sm:py-4 text-xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   type="btn btn-primary"
                   onClick={async () => {
                     try {
@@ -206,7 +213,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                     }
                   }}
                 >
-                  Update
+                  Update Token
                 </button>
                 <br/>
                 {/* <p class="text-sky-400">Click "Update" to display your personalized message on your bookplate</p> */}
@@ -350,7 +357,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
             <div className="flex items-center justify-center mt-10">
               <Spin />
               <br />
-              <h3 className="text-center text-md md:text-3xl">Please connect your wallet, or mint a token..</h3>
+              <h3 className="text-center text-md md:text-3xl"> Please connect your wallet, or mint a token.. </h3>
               <Spin />
             </div>
           </div>

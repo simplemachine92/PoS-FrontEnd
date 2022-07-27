@@ -103,7 +103,7 @@ export default function Waitlist({
             <Table className="mx-auto" pagination={{ pageSize: 10 }} columns={columns2} dataSource={dataSource2} />
           </div>
         ) : (
-          <div>
+          <div className="mt-10">
             <Spin />
           </div>
         )}

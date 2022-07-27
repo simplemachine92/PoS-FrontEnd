@@ -2,6 +2,7 @@ import styled from "styled-components";
 import React, { useState } from "react";
 import { Button, InputNumber } from "antd";
 import { Footer, Quotes } from "../components";
+import { Suspense } from "react";
 
 const { utils, BigNumber } = require("ethers");
 
@@ -93,7 +94,20 @@ function Order({ writeContracts, tx }) {
               <div className="max-w-md py-3 mx-auto justify-center">
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
                 <h5 className="mb-4 font-bold text-xs sm:text-base md:text-lg lg:text-xl">✨ Pre-Order Now! ✨</h5>
-                  <img alt="Book" className="w-3/4 sm:w-1/2 mx-auto" src="assets/RasCover.png" />
+                <Suspense
+              fallback={
+                <svg
+                  class="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
+                  viewBox="0 0 600 830"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
+                </svg>
+              }
+            >
+              <img className="w-1/2 sm:mt-0 md:w-5/12 mx-auto" src="assets/Rascover.png" />
+            </Suspense>
                 </div>
               </div>
             </div>
