@@ -105,7 +105,7 @@ function Order({ writeContracts, tx }) {
                 </svg>
               }
             >
-              <img className="w-1/2 sm:mt-0 md:w-5/12 mx-auto" src="assets/Rascover.png" />
+              <img className="w-1/2 sm:mt-0 md:w-5/12 mx-auto" src="assets/RasCover.png" />
             </Suspense>
                 </div>
               </div>

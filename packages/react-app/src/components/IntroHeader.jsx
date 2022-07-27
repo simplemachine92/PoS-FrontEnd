@@ -134,15 +134,28 @@ export default function IntroHeader() {
                 </svg>
               }
             >
-              <img className="w-1/2 sm:mt-0 md:w-5/12 mx-auto" src="assets/Rascover.png" />
+              <img className="w-1/2 sm:mt-0 md:w-5/12 mx-auto" src="assets/RasCover.png" />
             </Suspense>
-            <button
-              className="w-4/5 sm:w-3/5 md:w-7/12 mt-4 py-1 sm:py-4 text-2xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-              type="btn btn-primary"
-              onClick={showModal}
+            <Suspense
+              fallback={
+                <svg
+                  className="w-2/3 mt-2 sm:w-3/5 md:w-7/12 mx-auto animate-pulse"
+                  viewBox="0 0 600 100"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect x="5" y="15" rx="5" ry="5" width="600" height="100" fill="gray" />
+                </svg>
+              }
             >
-              Get Started!
-            </button>
+              <button
+                className="w-4/5 sm:w-3/5 md:w-7/12 mt-4 py-1 sm:py-4 text-2xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                type="btn btn-primary"
+                onClick={showModal}
+              >
+                Get Started!
+              </button>
+            </Suspense>
           </div>
         </div>
         <div className="flex flex-wrap w-1/2 mx-auto 2xl:w-1/3 3xl:w-1/4 mb-4 md:mb-8">
