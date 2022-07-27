@@ -12,7 +12,7 @@ const CustomSwitch = ({ children }) => {
     setProgress(true);
     if (location.pathname === prevLoc) {
       setPrevLoc("");
-      //thanks to ankit sahu
+      // thanks to ankit sahu
     }
   }, [location]);
 

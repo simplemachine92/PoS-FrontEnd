@@ -1,8 +1,7 @@
 import styled from "styled-components";
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import { Button, InputNumber } from "antd";
 import { Footer, Quotes } from "../components";
-import { Suspense } from "react";
 
 const { utils, BigNumber } = require("ethers");
 
@@ -97,7 +96,7 @@ function Order({ writeContracts, tx }) {
                 <Suspense
               fallback={
                 <svg
-                  class="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
+                  className="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
                   viewBox="0 0 600 830"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"

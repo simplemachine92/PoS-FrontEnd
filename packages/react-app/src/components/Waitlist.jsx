@@ -63,7 +63,6 @@ export default function Waitlist({
               setDataSource2(filteredData2);
             }
           });
-          /* console.log("ensName", ensName) */
         }
       }}
     />

@@ -2,8 +2,8 @@ import React from "react";
 import { Divider } from "antd";
 import { Share } from "react-twitter-widgets";
 import { TwitterIcon, TwitterShareButton, FacebookIcon, FacebookShareButton } from "react-share";
-import { Socials, BottomLinks } from ".";
 import LazyLoad from "react-lazy-load";
+import { Socials, BottomLinks } from ".";
 import Quotes from "./Quotes";
 
 export default function Footer() {

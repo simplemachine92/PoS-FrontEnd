@@ -1,7 +1,6 @@
-import React from "react";
-import { useState } from "react";
+import React, { useState, Suspense } from "react";
+
 import { Modal } from "antd";
-import { Suspense } from "react";
 
 export default function IntroHeader() {
   const [isModal1Visible, setisModal1Visible] = useState(false);
@@ -63,11 +62,11 @@ export default function IntroHeader() {
           backgroundColor: "#e3e3e3",
         }}
       >
-        <div class="">
-          <h1 class="text-black text-2xs sm:text-xs ml-2 text-center">
+        <div className="">
+          <h1 className="text-black text-2xs sm:text-xs ml-2 text-center">
             Vitalik is committed to supporting open-source public goods, he's releasing a book on September 13.
           </h1>
-          <h1 class="text-black text-2xs sm:text-xs mt-4 ml-2 text-center">
+          <h1 className="text-black text-2xs sm:text-xs mt-4 ml-2 text-center">
             We're pre-gaming by raising funds for public goods with a truly unique NFT, where Vitalik signs a message
             directly on your token. This token is then inserted into your digital copy upon the books release! Cool,
             huh?
@@ -88,41 +87,41 @@ export default function IntroHeader() {
           backgroundColor: "#e3e3e3",
         }}
       >
-        <div class="block">
+        <div className="block">
           {/* <span class="text-gray-700">Radio Buttons</span> */}
-          <div class="mt-2">
+          <div className="mt-2">
             <p className="text-2xs mb-4">
               (We'll redirect you to the right page in a new window so you can come back.)
             </p>
             <div onChange={setPath.bind(this)}>
-              <label class="inline-flex items-center">
-                <input type="radio" class="form-radio text-pink-400" name="radio" value="pledge" />
-                <span class="text-black text-xs ml-2 mt-1">Donate & Mint an NFT</span>
+              <label className="inline-flex items-center">
+                <input type="radio" className="form-radio text-pink-400" name="radio" value="pledge" />
+                <span className="text-black text-xs ml-2 mt-1">Donate & Mint an NFT</span>
               </label>
             </div>
             <div onChange={setPath.bind(this)}>
-              <label class="inline-flex items-center">
-                <input type="radio" class="form-radio text-pink-400" name="radio" value="order" />
-                <span class="text-black text-xs ml-2 mt-1">Pre-Order a Physical Copy</span>
+              <label className="inline-flex items-center">
+                <input type="radio" className="form-radio text-pink-400" name="radio" value="order" />
+                <span className="text-black text-xs ml-2 mt-1">Pre-Order a Physical Copy</span>
               </label>
             </div>
             <div onChange={setPath.bind(this)}>
-              <label class="inline-flex items-center">
-                <input type="radio" class="form-radio text-pink-400" name="radio" value="donations" />
-                <span class="text-black text-xs ml-2 mt-1">View Donation Leaderboard</span>
+              <label className="inline-flex items-center">
+                <input type="radio" className="form-radio text-pink-400" name="radio" value="donations" />
+                <span className="text-black text-xs ml-2 mt-1">View Donation Leaderboard</span>
               </label>
             </div>
             <div onChange={setPath.bind(this)}>
-              <label class="inline-flex items-center">
-                <input type="radio" class="form-radio text-pink-400" name="radio" value="signatures" />
-                <span class="text-black text-xs ml-2 mt-1">View Signatures from Vitalik</span>
+              <label className="inline-flex items-center">
+                <input type="radio" className="form-radio text-pink-400" name="radio" value="signatures" />
+                <span className="text-black text-xs ml-2 mt-1">View Signatures from Vitalik</span>
               </label>
             </div>
           </div>
         </div>
       </Modal>
       <div
-        class="svg-container"
+        className="svg-container"
         className="flex flex-wrap items-center bg-smallBackground bg-auto bg-right bg-no-repeat sm:bg-ringsBackground"
       >
         <div className="flex flex-wrap w-1/2 sm:w-1/2 justify-center bg-no-repeat">
@@ -130,7 +129,7 @@ export default function IntroHeader() {
             <Suspense
               fallback={
                 <svg
-                  class="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
+                  className="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
                   viewBox="0 0 600 830"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -152,13 +151,13 @@ export default function IntroHeader() {
         </div>
         <div className="flex flex-wrap w-1/2 mx-auto 2xl:w-1/3 3xl:w-1/4 mb-4 md:mb-8">
           <div className="bg-gradient-to-b p-2 from-teal-400 rounded overflow-hidden mr-2 xs:mr-6 xs2:mr-6 lg:mr-20 shadow-xl">
-            <p class="text-3xs xs:text-2xs xs2:text-xs sm:text-sm md:text-lg lg:text-xl text-right title-font text-yellow-300">
+            <p className="text-3xs xs:text-2xs xs2:text-xs sm:text-sm md:text-lg lg:text-xl text-right title-font text-yellow-300">
               Coming September 13, 2022
             </p>
             <p className="font-display text-right text-white text-2xl xs:text-3xl xs1:text-4xl xs2:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-snug">
               Proof of Stake
             </p>
-            <h1 class="text-2xs xs2:text-xs sm:text-sm lg:text-lg text-right leading-relaxed text-base text-blue-900">
+            <h1 className="text-2xs xs2:text-xs sm:text-sm lg:text-lg text-right leading-relaxed text-base text-blue-900">
               By Vitalik Buterin
             </h1>
           </div>
