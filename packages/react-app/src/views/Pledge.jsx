@@ -5,6 +5,7 @@ import { Button, InputNumber, Input, notification } from "antd";
 import { initializeApp } from "firebase/app";
 import { getDatabase, ref, set, get, child } from "firebase/database";
 import { Footer, Quotes } from "../components";
+import { Suspense } from "react";
 
 const { utils, BigNumber } = require("ethers");
 
@@ -54,8 +55,35 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               <h5 className="mb-4 font-bold text-xs sm:text-tiny md:text-lg lg:text-2xl">✨ Your Personal Digital Copy & NFT ✨</h5>
                 <div className="flex py-0 backdrop-filter content-center mx-auto">
                 {/* <img alt="Book_Spread" className="w-full" src="assets/bind_fix.png" /> */}
-                  <img alt="Book" className="w-1/2 sm:w-1/2 md:w-1/2 mx-auto" src="assets/RasCover.png" />
-                  <img alt="Bookplate" className="mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl" src="assets/plate.png" />
+                <Suspense
+              fallback={
+                <svg
+                  class="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
+                  viewBox="0 0 600 830"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
+                </svg>
+              }
+            >
+              <img className="w-1/2 sm:mt-0 md:w-5/12 mx-auto" src="assets/Rascover.png" />
+            </Suspense>
+                  {/* <img alt="Book" className="w-1/2 sm:w-1/2 md:w-1/2 mx-auto" src="assets/RasCover.png" /> */}
+                  <Suspense
+              fallback={
+                <svg
+                  class="mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl"
+                  viewBox="0 0 600 830"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
+                </svg>
+              }
+            >
+              <img alt="Bookplate" className="mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl" src="assets/plate.png" />
+            </Suspense>
                 </div>
                 
               </div>
