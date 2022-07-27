@@ -36,6 +36,7 @@ import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
 import Profile from "./views/Profile";
 import { Suspense } from "react";
+import { CustomSwitch } from "./components";
 
 const Home = React.lazy(() => import("./views/Home"));
 const SignatureList = React.lazy(() => import("./views/SignatureList"));
@@ -78,7 +79,7 @@ const { ethers } = require("ethers");
 */
 
 /// 📡 What chain are your contracts deployed to?
-const initialNetwork = NETWORKS.localhost; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
+const initialNetwork = NETWORKS.rinkeby; // <------- select your target frontend network (localhost, rinkeby, xdai, mainnet)
 
 // 😬 Sorry for all the console logging
 const DEBUG = false;
@@ -492,7 +493,7 @@ function App(props) {
           </div>
         </div>
       </Affix>
-      <Switch>
+      <CustomSwitch>
         <Route exact path="/">
           {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
           <Home
@@ -641,7 +642,7 @@ function App(props) {
             />
           </Suspense>
         </Route>
-      </Switch>
+      </CustomSwitch>
 
       {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
 

@@ -1,4 +1,5 @@
 import React from "react";
+import LazyLoad from "react-lazy-load";
 
 export default function BottomLinks({ daoLogo }) {
   return (
@@ -7,7 +8,9 @@ export default function BottomLinks({ daoLogo }) {
         href="https://gitcoindao.com"
         className="flex title-font font-medium items-center justify-center text-gray-900"
       >
-        <img src={daoLogo || "/image/gitcoindao_sign.svg"} className="h-16" alt="gitcoinDAO" />
+        <LazyLoad offsetVertical={300}>
+          <img src={daoLogo || "/image/gitcoindao_sign.svg"} className="h-16" alt="gitcoinDAO" />
+        </LazyLoad>
         <span style={{ color: "#5bf1cd" }} className="text-white pl-5">
           &
         </span>{" "}
@@ -16,7 +19,9 @@ export default function BottomLinks({ daoLogo }) {
         href="https://moonshotcollective.space/"
         className="flex title-font font-medium items-center justify-center text-gray-900"
       >
-        <img src={"/image/logo-moon-stake.svg" || daoLogo} className="h-16 pl-5" alt="gitcoinDAO" />
+        <LazyLoad offsetVertical={300}>
+          <img src={"/image/logo-moon-stake.svg" || daoLogo} className="h-16 pl-5" alt="gitcoinDAO" />
+        </LazyLoad>
       </a>
       <p className="text-xl text-gray-500 sm:ml-6 sm:mt-4 mt-2 text-white font-spacemono">
         {/* <span className="text-white">|</span>{" "}

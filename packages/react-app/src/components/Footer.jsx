@@ -3,6 +3,7 @@ import { Divider } from "antd";
 import { Share } from "react-twitter-widgets";
 import { TwitterIcon, TwitterShareButton, FacebookIcon, FacebookShareButton } from "react-share";
 import { Socials, BottomLinks } from ".";
+import LazyLoad from "react-lazy-load";
 import Quotes from "./Quotes";
 
 export default function Footer() {
@@ -18,8 +19,9 @@ export default function Footer() {
         url="https://proofofstake.gitcoin.co/"
         hashtags={["ProofOfStake", "Gitcoin"]}
       >
+        <LazyLoad offsetVertical={300}>
         <img className="w-1/2 sm:w-3/4 md:w-full" alt="twitter" src="assets/twittericon.png" />
-        
+        </LazyLoad>
         
       </TwitterShareButton>
       
@@ -30,7 +32,9 @@ export default function Footer() {
         description="aiueo"
         className=""
       >
+        <LazyLoad offsetVertical={300}>
         <img className="w-1/2 sm:w-3/4 md:w-full" alt="facebook" src="assets/facebook_icon.svg" />
+        </LazyLoad>
       </FacebookShareButton>
       <Divider style={{ backgroundColor: "white", opacity: 0.5, width: "50%" }} />
       

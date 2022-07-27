@@ -1,4 +1,5 @@
 const colors = require("tailwindcss/colors");
+const defaultTheme = require("tailwindcss/defaultTheme");
 
 module.exports = {
   purge: {
@@ -9,6 +10,12 @@ module.exports = {
   },
   darkMode: false, // or 'media' or 'class'
   theme: {
+    screens: {
+      xs: "350px",
+      xs1: "415px",
+      xs2: "490px",
+      ...defaultTheme.screens,
+    },
     backgroundSize: {
       auto: "auto",
       cover: "cover",
@@ -34,6 +41,7 @@ module.exports = {
       "5xl": "3rem",
       "6xl": "4.5rem",
       "7xl": "5rem",
+      "8xl": "5.5rem",
     },
     extend: {
       backgroundImage: {
@@ -45,6 +53,7 @@ module.exports = {
       },
       colors: {
         orange: colors.orange,
+        teal: colors.teal,
         primary: "#7ee6cd",
         green: {
           "050": "#6dc5a0",
@@ -76,6 +85,7 @@ module.exports = {
     },
     fontFamily: {
       spacemono: ["Space Mono"],
+      display: ["Poppins"],
       librefranklin: ["Libre Franklin"],
     },
     minHeight: {

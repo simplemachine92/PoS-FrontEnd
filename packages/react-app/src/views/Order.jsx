@@ -98,7 +98,7 @@ function Order({ writeContracts, tx }) {
               </div>
             </div>
             <div className="w-full sm:w-1/2 mx-auto mt-2 rounded overflow-hidden content-center shadow-2xl px-5 py-3">
-            <h5 className="font-bold mb-0 sm:mb-1 md:mb-2 text-xs sm:text-tiny md:text-lg lg:text-xl">Want a signed copy? ✍️</h5>
+            {/* <h5 className="font-bold mb-0 sm:mb-1 md:mb-2 text-xs sm:text-tiny md:text-lg lg:text-xl">Want a signed copy? ✍️</h5>
                   <a href="https://www.boulderbookstore.net/product/proof" rel="noreferrer">
                     <button
                       className="w-3/4 py-2 px-1 mt-2 mb-2 lg:mb-4 mx-auto md:w-3/4 lg:w-2/3 sm:py-3 sm:px-3 text-xs sm:text-xs lg:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
@@ -106,8 +106,8 @@ function Order({ writeContracts, tx }) {
                     >
                     Boulder Book Store
                     </button>
-                  </a>
-                  <h5 className="font-bold mb-2 text-xs sm:text-tiny md:text-lg lg:text-xl">Our Other Trusted Retailers</h5>
+                  </a> */}
+                  <h5 className="font-bold mb-2 text-xs sm:text-tiny md:text-lg lg:text-xl">Preorder from your local bookstore or these retailers:</h5>
                 <div className="flex flex-wrap">
                   {buyLinks.map(item => (
                     <div className="py-1 px-2 w-1/2 justify-center">

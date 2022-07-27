@@ -32,3 +32,4 @@ export { default as Waitlist } from "./Waitlist";
 export { default as AfterPledge } from "./AfterPledge";
 export { default as Address2 } from "./Address2";
 export { default as SignatureDisplay } from "./SignedDisplay";
+export { default as CustomSwitch } from "./CustomSwitch";

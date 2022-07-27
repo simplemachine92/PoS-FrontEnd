@@ -1,11 +1,11 @@
 {
-  "31337": {
-    "localhost": {
-      "name": "localhost",
-      "chainId": "31337",
+  "4": {
+    "rinkeby": {
+      "name": "rinkeby",
+      "chainId": "4",
       "contracts": {
         "ProofOfStake_Pages": {
-          "address": "0x9Fcca440F19c62CDF7f973eB6DDF218B15d4C71D",
+          "address": "0x522149fd0A0c8E2A2ffdb4dBeDB333e533Fbe2Ae",
           "abi": [
             {
               "inputs": [
@@ -22,41 +22,6 @@
               ],
               "stateMutability": "nonpayable",
               "type": "constructor"
-            },
-            {
-              "inputs": [],
-              "name": "DoesNotExist",
-              "type": "error"
-            },
-            {
-              "inputs": [],
-              "name": "InvalidSignature",
-              "type": "error"
-            },
-            {
-              "inputs": [],
-              "name": "NotMinimumPledge",
-              "type": "error"
-            },
-            {
-              "inputs": [],
-              "name": "PledgingDisabled",
-              "type": "error"
-            },
-            {
-              "inputs": [],
-              "name": "SendFailed",
-              "type": "error"
-            },
-            {
-              "inputs": [],
-              "name": "Soulbound",
-              "type": "error"
-            },
-            {
-              "inputs": [],
-              "name": "ZeroSignature",
-              "type": "error"
             },
             {
               "anonymous": false,
@@ -441,7 +406,7 @@
                 },
                 {
                   "internalType": "bool",
-                  "name": "_approved",
+                  "name": "approved",
                   "type": "bool"
                 }
               ],
@@ -598,25 +563,6 @@
               "name": "transferOwnership",
               "outputs": [],
               "stateMutability": "nonpayable",
-              "type": "function"
-            },
-            {
-              "inputs": [
-                {
-                  "internalType": "address",
-                  "name": "",
-                  "type": "address"
-                }
-              ],
-              "name": "udonationTotal",
-              "outputs": [
-                {
-                  "internalType": "uint256",
-                  "name": "",
-                  "type": "uint256"
-                }
-              ],
-              "stateMutability": "view",
               "type": "function"
             },
             {
