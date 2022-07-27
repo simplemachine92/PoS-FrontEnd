@@ -24,7 +24,6 @@ export default function Provider(props) {
           setStatus("warning");
         }
       } catch (e) {
-        console.log(e);
         setStatus("processing");
       }
       try {

@@ -49,7 +49,6 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
     // Get the email if available. This should be available if the user completes
     // the flow on the same device where they started it.
     const email = window.localStorage.getItem("emailForSignIn");
-    console.log("email", email);
     /* if (!email) {
       // User opened the link on a different device. To prevent session fixation
       // attacks, ask the user to provide the associated email again. For example:
@@ -91,7 +90,6 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
   const decompressTypedData = async data => {
     const _typedData = await codec.decompress(data);
     setTypedData(_typedData);
-    console.log("set data", _typedData);
   };
 
   const actionCodeSettings = {
@@ -111,7 +109,6 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
         if (snapshot.exists()) {
           snapshot.forEach(sig => {
             const message = sig.val().message;
-            console.log("message", message);
 
             const sigMsg = message.msg;
             const sigRecipient = message.recipient;
@@ -122,16 +119,12 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
             message.msg = sig.val().message.msg;
 
             if (address && sigRecipient == address) {
-              console.log("found", message);
               decompressTypedData(message.typedData);
               myData.push(message);
             }
             setData(myData);
-
-            console.log("muh", myData);
           });
         } else {
-          console.log("No data available");
         }
       })
       .catch(error => {
@@ -147,7 +140,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
       setURL(`https://opensea.io/assets/${readContracts.ProofOfStake_Pages.address}/${nId}`);
       const json = atob(token.substring(29));
       const result = JSON.parse(json);
-      console.log("waty", result);
+
       setImage(result.image);
       setMessage(result.message);
     }
@@ -175,7 +168,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
               ) : (
                 <>
                 <svg
-                  className="px-2 py-2 ml-4 w-1/2 sm:w-1/3 lg:w-1/4 xl:w-3/12 md:py-2 md:px-2 animate-pulse"
+                  class="px-2 py-2 ml-4 w-1/2 sm:w-1/3 lg:w-1/4 xl:w-3/12 md:py-2 md:px-2 animate-pulse"
                   viewBox="0 0 600 830"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -194,7 +187,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                 <h3 className="text-2xs text-center text-md md:text-xl mt-4">"{typedData.message.msg}"</h3>
                 <br />
                 <button
-                  className="w-1/2 mb-4 py-2 px-2 sm:py-4 text-xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  className="w- mb-4 py-2 px-2 sm:py-4 text-xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   type="btn btn-primary"
                   onClick={async () => {
                     try {
@@ -209,7 +202,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                       );
                       await txCur.wait();
                     } catch (e) {
-                      console.log("mint failed", e);
+                      
                     }
                   }}
                 >
@@ -260,8 +253,6 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                   type="btn btn-primary"
                   className="w-1/2 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs sm:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   onClick={async () => {
-                    console.log("evalue", eValue2);
-
                     if (
                       eValue2 == "placeholder" ||
                       eValue2.target.value == "" ||
@@ -315,8 +306,6 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                   type="btn btn-primary"
                   className="w-1/2 py-2 px-2 mt-4 mx-auto sm:py-4 sm:px-3 text-xs sm:text-lg bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   onClick={async () => {
-                    console.log("evalue", eValue2);
-
                     if (
                       eValue2 == "placeholder" ||
                       eValue2.target.value == "" ||

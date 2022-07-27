@@ -27,7 +27,6 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
         if (snapshot.exists()) {
           snapshot.forEach(sig => {
             const message = sig.val().message;
-            console.log("message", message);
 
             const sigMsg = message.msg;
             const sigRecipient = message.recipient;
@@ -44,22 +43,19 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
 
             message.imageData = dataURI;
 
-            console.log(dataURI);
             myData.push(message);
-            console.log(myData);
           });
           /* myData.forEach(async data => {
-            console.log("my data", myData);
+            
             let b64png = await base64SvgToBase64Png(data.imageData, 762.233, 1016.63);
 
             data.link = await insertPage(b64png);
-            console.log(data);
+            
             setReady(true);
           }); */
           setData(myData);
           setReady(true);
         } else {
-          console.log("No data available");
         }
       })
       .catch(error => {
@@ -89,8 +85,6 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
       placeholder="Search"
       value={value}
       onChange={e => {
-        console.log("curr", e.target.value);
-
         const currValue = e.target.value;
         setValue(currValue);
         const filteredData = sData.filter(entry => entry.recipient.includes(currValue));
@@ -100,9 +94,7 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
         if (e.target.value.startsWith("0")) {
         } else {
           mainnetProvider.resolveName(e.target.value).then(function (address2) {
-            console.log("Address: " + address2);
             if (address2 == null) {
-              console.log("No record for this ENS");
               setDataSource(sData);
             } else {
               const filteredData2 = sData.filter(entry => entry.recipient.includes(address2));

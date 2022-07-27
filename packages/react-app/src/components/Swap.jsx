@@ -45,7 +45,6 @@ const makeCall = async (callName, contract, args, metadata = {}) => {
     return result;
   }
   return undefined;
-  console.log("no call of that name!");
 };
 
 const defaultToken = "ETH";
@@ -98,7 +97,6 @@ function Swap({ selectedProvider, tokenListURI }) {
 
   useEffect(() => {
     const getTokenList = async () => {
-      console.log(_tokenListUri);
       try {
         const tokenListResponse = await fetch(_tokenListUri);
         const tokenListJson = await tokenListResponse.json();
@@ -114,9 +112,7 @@ function Swap({ selectedProvider, tokenListURI }) {
         setTokenList(_tokenList);
         const _tokens = tokenListToObject(_tokenList);
         setTokens(_tokens);
-      } catch (e) {
-        console.log(e);
-      }
+      } catch (e) {}
     };
     getTokenList();
   }, [tokenListURI]);
@@ -173,8 +169,6 @@ function Swap({ selectedProvider, tokenListURI }) {
       }
 
       setTrades(bestTrade);
-
-      console.log(bestTrade);
     }
   };
 
@@ -244,7 +238,7 @@ function Swap({ selectedProvider, tokenListURI }) {
     try {
       const tempContract = new ethers.Contract(tokens[tokenIn].address, erc20Abi, signer);
       const result = await makeCall("approve", tempContract, [ROUTER_ADDRESS, newAllowance]);
-      console.log(result);
+
       setApproving(false);
       return true;
     } catch (e) {
@@ -260,7 +254,7 @@ function Swap({ selectedProvider, tokenListURI }) {
       exact === "in"
         ? ethers.utils.hexlify(ethers.utils.parseUnits(amountIn.toString(), tokens[tokenIn].decimals))
         : amountInMax.raw.toString();
-    console.log(approvalAmount);
+
     const approval = updateRouterAllowance(approvalAmount);
     if (approval) {
       notification.open({
@@ -272,7 +266,7 @@ function Swap({ selectedProvider, tokenListURI }) {
 
   const removeRouterAllowance = async () => {
     const approvalAmount = ethers.utils.hexlify(0);
-    console.log(approvalAmount);
+
     const removal = updateRouterAllowance(approvalAmount);
     if (removal) {
       notification.open({
@@ -293,7 +287,7 @@ function Swap({ selectedProvider, tokenListURI }) {
       const path = trades[0].route.path.map(function (item) {
         return item.address;
       });
-      console.log(path);
+
       const accountList = await selectedProvider.listAccounts();
       const address = accountList[0];
 
@@ -322,9 +316,9 @@ function Swap({ selectedProvider, tokenListURI }) {
           args = [_amountOut, _amountInMax, path, address, deadline];
         }
       }
-      console.log(call, args, metadata);
+
       const result = await makeCall(call, routerContract, args, metadata);
-      console.log(result);
+
       notification.open({
         message: "Swap complete 🦄",
         description: (
@@ -336,7 +330,6 @@ function Swap({ selectedProvider, tokenListURI }) {
       });
       setSwapping(false);
     } catch (e) {
-      console.log(e);
       setSwapping(false);
       notification.open({
         message: "Swap unsuccessful",
@@ -391,7 +384,6 @@ function Swap({ selectedProvider, tokenListURI }) {
     try {
       return uri.replace("ipfs://", "https://ipfs.io/ipfs/");
     } catch (e) {
-      console.log(e, uri);
       return uri;
     }
   };
@@ -520,9 +512,7 @@ function Swap({ selectedProvider, tokenListURI }) {
               bordered={false}
               defaultValue={defaultToken}
               onChange={value => {
-                console.log(value);
                 if (value === tokenOut) {
-                  console.log("switch!", tokenIn);
                   setTokenOut(tokenIn);
                   setAmountOut(amountIn);
                   setBalanceOut(balanceIn);
@@ -581,9 +571,7 @@ function Swap({ selectedProvider, tokenListURI }) {
               size="large"
               bordered={false}
               onChange={value => {
-                console.log(value, tokenIn, tokenOut);
                 if (value === tokenIn) {
-                  console.log("switch!", tokenOut);
                   setTokenIn(tokenOut);
                   setAmountIn(amountOut);
                   setBalanceIn(balanceOut);
@@ -662,8 +650,6 @@ function Swap({ selectedProvider, tokenListURI }) {
               formatter={value => `${value}%`}
               parser={value => value.replace("%", "")}
               onChange={value => {
-                console.log(value);
-
                 const slippagePercent = new Percent(Math.round(value * 100).toString(), "10000");
                 setSlippageTolerance(slippagePercent);
               }}
@@ -677,7 +663,6 @@ function Swap({ selectedProvider, tokenListURI }) {
               max={3600}
               defaultValue={defaultTimeLimit}
               onChange={value => {
-                console.log(value);
                 setTimeLimit(value);
               }}
             />

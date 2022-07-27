@@ -20,7 +20,6 @@ export default function useStaticJsonRPC(urlArray) {
       setProvider(_p);
     } catch (error) {
       // todo: show notification error about provider issues
-      console.log(error);
     }
   });
 

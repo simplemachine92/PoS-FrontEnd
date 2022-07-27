@@ -10,9 +10,7 @@ const DisplayVariable = ({ contractFunction, functionInfo, refreshRequired, trig
       const funcResponse = await contractFunction();
       setVariable(funcResponse);
       triggerRefresh(false);
-    } catch (e) {
-      console.log(e);
-    }
+    } catch (e) {}
   }, [setVariable, contractFunction, triggerRefresh]);
 
   useEffect(() => {

@@ -61,7 +61,6 @@ export default function L2ArbitrumBridge({ address, userSigner }) {
   const contracts = useContractLoader(userSigner, { externalContracts: L1BridgeMetadata, hardhatContracts: {} });
 
   useOnBlock(L1Provider, async () => {
-    console.log(`⛓ A new mainnet block is here: ${L1Provider._lastBlockNumber}`);
     const yourL1Balance = await L1Provider.getBalance(address);
     setL1EthBalance(yourL1Balance ? ethers.utils.formatEther(yourL1Balance) : "...");
     const yourL2Balance = await L2Provider.getBalance(address);
@@ -124,14 +123,9 @@ export default function L2ArbitrumBridge({ address, userSigner }) {
 
   const [form] = Form.useForm();
 
-  const onAssetChange = value => {
-    console.log(value);
-  };
+  const onAssetChange = value => {};
 
   async function onFinish(values) {
-    console.log(contracts);
-    console.log(values.amount.toString());
-    console.log(rollup);
     let newTx;
     try {
       if (rollup === "arbitrum") {
@@ -149,11 +143,7 @@ export default function L2ArbitrumBridge({ address, userSigner }) {
         );
       }
       await newTx.wait();
-      console.log("woop!");
-    } catch (e) {
-      console.log(e);
-      console.log("something went wrong!");
-    }
+    } catch (e) {}
   }
 
   const onReset = () => {

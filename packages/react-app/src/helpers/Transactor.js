@@ -28,7 +28,6 @@ export default function Transactor(providerOrSigner, gasPrice, etherscan) {
         network = await providerOrSigner.getNetwork();
       }
 
-      console.log("network", network);
       let options = null;
       let notify = null;
       options = {
@@ -73,7 +72,6 @@ export default function Transactor(providerOrSigner, gasPrice, etherscan) {
           result = await signer.sendTransaction(tx);
         }
         if (DEBUG) console.log("RESULT:", result);
-        // console.log("Notify", notify);
 
         if (callback) {
           callbacks[result.hash] = callback;

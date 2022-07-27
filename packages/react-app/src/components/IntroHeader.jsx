@@ -35,7 +35,6 @@ export default function IntroHeader() {
 
   const setPath = event => {
     sPath(event.target.value);
-    console.log("path", event.target.value);
   };
 
   /* const [selectRadio, setselectRadio] = useState("");
@@ -43,7 +42,7 @@ export default function IntroHeader() {
   const select = e => {
     // you can save the value in here
     setselectRadio(e.target.value);
-    console.log(e.target.value);
+    
   }; */
 
   return (
@@ -120,10 +119,7 @@ export default function IntroHeader() {
           </div>
         </div>
       </Modal>
-      <div
-        className="svg-container"
-        className="flex flex-wrap items-center bg-smallBackground bg-auto bg-right bg-no-repeat sm:bg-ringsBackground"
-      >
+      <div className="flex flex-wrap items-center bg-smallBackground bg-auto bg-right bg-no-repeat sm:bg-ringsBackground">
         <div className="flex flex-wrap w-1/2 sm:w-1/2 justify-center bg-no-repeat">
           <div className="max-w-lg py-5">
             <Suspense

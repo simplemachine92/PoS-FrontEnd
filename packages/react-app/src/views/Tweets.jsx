@@ -99,7 +99,6 @@ export default function Tweets({ yourLocalBalance, mainnetProvider, price, addre
         if (snapshot.exists()) {
           snapshot.forEach(sig => {
             const message = sig.val().message;
-            console.log("message", message);
 
             const sigMsg = message.msg;
             const sigRecipient = message.recipient;
@@ -116,20 +115,17 @@ export default function Tweets({ yourLocalBalance, mainnetProvider, price, addre
 
             message.imageData = dataURI;
 
-            console.log(dataURI);
             myData.push(message);
-            console.log(myData);
           });
           myData.forEach(async data => {
             const b64png = await base64SvgToBase64Png(data.imageData, 762.233, 1016.63);
 
             data.link = await insertPage(b64png);
-            console.log(data);
+
             setReady(true);
           });
           setData(myData);
         } else {
-          console.log("No data available");
         }
       })
       .catch(error => {

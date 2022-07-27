@@ -33,7 +33,6 @@ function SignatureDisplay({
         if (snapshot.exists()) {
           snapshot.forEach(sig => {
             const message = sig.val().message;
-            console.log("message", message);
 
             const sigMsg = message.msg;
             const sigRecipient = message.recipient;
@@ -50,14 +49,11 @@ function SignatureDisplay({
 
             message.imageData = dataURI;
 
-            console.log(dataURI);
             myData.push(message);
-            console.log("muh2", myData);
           });
           setData(myData);
           setReady(true);
         } else {
-          console.log("No data available");
         }
       })
       .catch(error => {
@@ -71,7 +67,7 @@ function SignatureDisplay({
       const token = await readContracts.ProofOfStake_Pages.tokenURI(nId);
       const json = atob(token.substring(29));
       const result = JSON.parse(json);
-      console.log("waty", result);
+
       setMessage(result.message);
     }
     setReady2(true);
@@ -109,8 +105,6 @@ function SignatureDisplay({
       <div style={{ zIndex: -1, position: "absolute", right: 154, top: 28, padding: 16, color: targetNetwork.color }} />
     );
   }
-
-  console.log({ signatureDisplay });
 
   return signatureDisplay;
 }

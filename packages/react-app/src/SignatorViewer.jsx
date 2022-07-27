@@ -87,7 +87,6 @@ const checkEip1271 = async (provider, address, message, signature) => {
     const returnValue = await contract.isValidSignature(message, signature);
     return returnValue === eip1271Spec.magicValue ? "MATCH" : "MISMATCH";
   } catch (e) {
-    console.log(e);
     return "MISMATCH";
   }
 };
@@ -145,12 +144,10 @@ function SignatorViewer({
   }
 
   if (!message && !compressedTypedData) {
-    console.log(searchParams.get("message"), searchParams.get("typedData"));
     history.push(`/`);
   }
 
   const getBook = async () => {
-    console.log(sData);
     setLoading({
       loading: true,
       buttonText: "Loading ( Large File )",
@@ -162,7 +159,6 @@ function SignatorViewer({
 
     let fetched = await insertPage(b64png);
 
-    console.log("fetched", fetched);
     window.open(fetched);
     setLoading({
       loading: false,
@@ -181,7 +177,6 @@ function SignatorViewer({
   };
 
   const clickUpload = async () => {
-    console.log("file data", sData);
     //upload here
 
     let ipfile = {
@@ -193,7 +188,6 @@ function SignatorViewer({
     //const ipfs = create({ url });
 
     const file = await ipfs.add(ipfile);
-    console.log("file", file);
   };
 
   const onClickBook = async url => {
@@ -280,13 +274,12 @@ function SignatorViewer({
   useEffect(async () => {
     const dbRef = ref(getDatabase(app));
     const typedData2 = await codec.decompress(compressedTypedData);
-    console.log("ftype", typedData2.domain.verifyingContract);
+
     get(child(dbRef, `PoS/`))
       .then(snapshot => {
         if (snapshot.exists()) {
           snapshot.forEach(sig => {
             let message = sig.val().message;
-            console.log("message", message);
 
             let sigMsg = message.msg;
             let sigRecipient = message.recipient;
@@ -305,29 +298,23 @@ function SignatorViewer({
 
             message.imageData = dataURI;
 
-            console.log(dataURI);
             myData.push(message);
-            console.log(myData);
           });
 
           const decompressTypedData = async () => {
             if (compressedTypedData) {
               const _typedData = await codec.decompress(compressedTypedData);
-              console.log("typed", _typedData);
-              console.log("sig", signatures[0]);
+
               let newData = _typedData;
               setTypedData(_typedData);
               myData.forEach(async data => {
-                console.log("my typed", newData);
-                console.log("my data", data);
-
                 //for (let x = 0; x < myData.length; x++)
                 if (data.recipient == newData.message.recipient && readContracts) {
                   let nId = await readContracts.ProofOfStake_Pages.tokenOfOwnerByIndex(data.recipient, "0");
                   let token = await readContracts.ProofOfStake_Pages.tokenURI(nId);
                   const json = atob(token.substring(29));
                   const result = JSON.parse(json);
-                  console.log("waty", result);
+
                   setImage(result.image);
                   //`url("data:image/svg+xml,${svgString}")`;
                   /* setImage(data.imageData); */
@@ -339,7 +326,6 @@ function SignatorViewer({
 
           decompressTypedData();
         } else {
-          console.log("No data available");
         }
       })
       .catch(error => {
@@ -391,11 +377,9 @@ function SignatorViewer({
             const _eip1271Check = checkEip1271(mainnetProvider, addresses[i], _message, sig);
             return _eip1271Check;
           } catch (e) {
-            console.log(e);
             return "MISMATCH";
           }
         } catch (e) {
-          console.log(`signature ${sig} failed: ${e}`);
           return "INVALID";
         }
       });
@@ -413,7 +397,7 @@ function SignatorViewer({
   const signMessage = async () => {
     try {
       setSigning(true);
-      console.log(`Signing: ${message}`);
+
       const injectedSigner = injectedProvider.getSigner();
 
       // const _messageToSign = ethers.utils.isBytesLike(message) ? ethers.utils.arrayify(message) : message;
@@ -431,16 +415,11 @@ function SignatorViewer({
         }
         */
       }
-      console.log(`Success! ${_signature}`);
 
       const _signatures = [...signatures];
-      _signatures.indexOf(_signature) === -1
-        ? _signatures.push(_signature)
-        : console.log("This signature already exists");
-      setSignatures(_signatures);
+      _signatures.indexOf(_signature) === -1 ? _signatures.push(_signature) : setSignatures(_signatures);
       const _addresses = [...addresses];
-      _addresses.indexOf(address) === -1 ? _addresses.push(address) : console.log("This address already signed");
-      setAddresses(_addresses);
+      _addresses.indexOf(address) === -1 ? _addresses.push(address) : setAddresses(_addresses);
 
       searchParams.set("signatures", _signatures.join());
       searchParams.set("addresses", _addresses.join());
@@ -448,7 +427,6 @@ function SignatorViewer({
       history.push(`${location.pathname}?${searchParams.toString()}`);
       setSigning(false);
     } catch (e) {
-      console.log(e);
       setSigning(false);
 
       if (e.message.indexOf("Provided chainId") !== -1) {

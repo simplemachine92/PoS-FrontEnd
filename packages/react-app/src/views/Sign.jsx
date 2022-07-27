@@ -57,8 +57,6 @@ export default function Signator({
       placeholder="Sort by ENS or 0x.."
       value={value2}
       onChange={e => {
-        console.log("curr", e.target.value);
-
         const currValue = e.target.value;
         setValue2(currValue);
         const filteredData = events.filter(entry => entry.args[0].includes(currValue));
@@ -68,9 +66,7 @@ export default function Signator({
         if (e.target.value.startsWith("0")) {
         } else {
           mainnetProvider.resolveName(e.target.value).then(function (address2) {
-            console.log("Address: " + address2);
             if (address2 == null) {
-              console.log("No record for this ENS");
               setDataSource2(events);
             } else {
               const filteredData2 = events.filter(entry => entry.args[0].includes(address2));
@@ -179,9 +175,7 @@ export default function Signator({
       });
   };
 
-  const onFinishFailed = errorInfo => {
-    console.log("Failed:", errorInfo);
-  };
+  const onFinishFailed = errorInfo => {};
 
   const dbList = [];
 
@@ -247,13 +241,13 @@ export default function Signator({
           const message = sig.val().message;
           dbList.push(message.recipient);
         });
-        console.log("dblist", dbList);
+
         if (dbList.length) {
           events.forEach(pledge => {
             eventList.push(pledge.args.pledgee);
-            console.log("event list", eventList);
+
             objectList.push(pledge);
-            console.log("object list", objectList);
+
             for (let x = 0; x < eventList.length; x++) {
               if (dbList.includes(eventList[x])) {
                 // do nothing
@@ -261,7 +255,6 @@ export default function Signator({
                 // push to to-do
                 toSign.push(objectList[x]);
                 setList(toSign);
-                console.log("aalist", toSign);
               }
             }
           });
@@ -280,9 +273,7 @@ export default function Signator({
       try {
         _hash = ethers.utils._TypedDataEncoder.hash(typedData.domain, typedData.types, typedData.message);
         _checks.hash = _hash;
-      } catch (e) {
-        console.log("failed to compute hash", e);
-      }
+      } catch (e) {}
       setTypedDataChecks(_checks);
     }
   }, [typedData]);
@@ -292,15 +283,12 @@ export default function Signator({
       setSigning(true);
 
       const injectedSigner = action === "sign" && injectedProvider.getSigner();
-      console.log("signer", injectedProvider.getSigner);
 
       let _signature;
       if (type === "typedData") {
         const _typedData = { ...updateValues() };
         if (!_typedData.domain && action !== "verify") _typedData.domain = {};
         if (!_typedData.domain.chainId && action !== "verify") _typedData.domain.chainId = chainId;
-        console.log(`${action}: ${_typedData}`);
-        console.log(_typedData);
 
         if (action === "sign")
           _signature = await injectedSigner._signTypedData(_typedData.domain, _typedData.types, _typedData.message);
@@ -313,36 +301,31 @@ export default function Signator({
           typedData: _compressedData,
         });
 
-        console.log(_signature);
-        console.log(_typedData);
-
         searchParams.set("typedData", _compressedData);
       } else if (type === "message") {
         // const _messageToSign = ethers.utils.isBytesLike(_message) ? ethers.utils.arrayify(_message) : _message;
         const _message = getMessage();
-        console.log(`${action}: ${_message}`);
+
         if (action === "sign") _signature = await injectedProvider.send("personal_sign", [_message, address]);
         // _signature = await injectedSigner.signMessage(_messageToSign);
 
         searchParams.set("message", _message);
       }
 
-      if (action === "sign") console.log(`Success! ${_signature},`);
-
-      if (action === "sign") {
-        searchParams.set("signatures", _signature);
-        searchParams.set("addresses", address);
-      } else if (action === "verify") {
-        searchParams.set("signatures", manualSignature);
-        searchParams.set("addresses", manualAddress);
-      }
+      if (action === "sign")
+        if (action === "sign") {
+          searchParams.set("signatures", _signature);
+          searchParams.set("addresses", address);
+        } else if (action === "verify") {
+          searchParams.set("signatures", manualSignature);
+          searchParams.set("addresses", manualAddress);
+        }
 
       window.location.reload(false);
       // history.push(`/view?${searchParams.toString()}`);
 
       setSigning(false);
     } catch (e) {
-      console.log(e);
       setSigning(false);
       if (e.message.indexOf("Provided chainId") !== -1) {
         notification.open({
@@ -366,19 +349,18 @@ export default function Signator({
   const rowSelection = {
     selectedRowKeys,
     onChange: selectedRowKeys => {
-      console.log("sel", selectedRowKeys);
       setSelect({
         ...select,
         selectedRowKeys,
       });
-      console.log("eventc", events);
+
       const filtered = Object.keys(events)
         .filter(key => selectedRowKeys.includes(key))
         .reduce((obj, key) => {
           obj = events[key];
           return obj;
         }, {});
-      console.log("flt", filtered);
+
       setList([filtered]);
     },
     type: "radio",
@@ -387,12 +369,9 @@ export default function Signator({
   useEffect(async () => {
     Object.keys(events).forEach(key => {
       events[key].key = key;
-      console.log("wat3", key, events[key]);
     });
     setDataSource2(events);
     setReady(true);
-    console.log("eventsS", events);
-    console.log("tosign", toSign);
   }, [list]);
 
   return (

@@ -52,7 +52,6 @@ function NetworkDisplay({
                         blockExplorerUrls: [targetNetwork.blockExplorer],
                       },
                     ];
-                    console.log("data", data);
 
                     let switchTx;
                     // https://docs.metamask.io/guide/rpc-api.html#other-rpc-methods
@@ -74,7 +73,6 @@ function NetworkDisplay({
                     }
 
                     if (switchTx) {
-                      console.log(switchTx);
                     }
                   }}
                 >
@@ -93,8 +91,6 @@ function NetworkDisplay({
       <div style={{ zIndex: -1, position: "absolute", right: 154, top: 28, padding: 16, color: targetNetwork.color }} />
     );
   }
-
-  console.log({ networkDisplay });
 
   return networkDisplay;
 }
