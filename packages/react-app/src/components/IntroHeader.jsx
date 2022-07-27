@@ -1,4 +1,3 @@
-import ContentLoader from "react-content-loader";
 import React from "react";
 import { useState } from "react";
 import { Modal } from "antd";

@@ -22,52 +22,10 @@ const IntroHeaderLazy = React.lazy(() => import("../components/IntroHeader"));
 function Home({ writeContracts, tx }) {
   return (
     <>
-      <Suspense
-        fallback={
-          <div>
-            <Spin />
-          </div>
-        }
-      >
-        <IntroHeaderLazy />
-      </Suspense>
-      <Suspense
-        fallback={
-          <div>
-            <Spin />
-          </div>
-        }
-      >
-        <GitcoinBarLazy />
-      </Suspense>
-      <Suspense
-        fallback={
-          <div>
-            <Spin />
-          </div>
-        }
-      >
-        <AboutLazy />
-      </Suspense>
-      <Suspense
-        fallback={
-          <div>
-            <Spin />
-          </div>
-        }
-      >
-        {/* Removing until components sizing is fixed */}
-        {/* <QuotesLazy /> */}
-      </Suspense>
-      <Suspense
-        fallback={
-          <div>
-            <Spin />
-          </div>
-        }
-      >
-        <FooterLazy />
-      </Suspense>
+      <IntroHeader />
+      <GitcoinBar />
+      <AboutTheBook />
+      <Footer />
     </>
   );
 }
