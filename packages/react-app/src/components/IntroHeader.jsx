@@ -19,9 +19,8 @@ export default function IntroHeader() {
   const handleOk = () => {
     if (path == "") {
     } else {
-      window.open(path);
+      window.open(path, "_self");
     }
-    /* setisModal1Visible(false); */
   };
 
   const handleCancel = () => {
@@ -36,14 +35,6 @@ export default function IntroHeader() {
   const setPath = event => {
     sPath(event.target.value);
   };
-
-  /* const [selectRadio, setselectRadio] = useState("");
-
-  const select = e => {
-    // you can save the value in here
-    setselectRadio(e.target.value);
-    
-  }; */
 
   return (
     // We need proper resizing on book image, button, and fix the "Coming Soon" styling

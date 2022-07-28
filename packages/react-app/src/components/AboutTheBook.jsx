@@ -52,7 +52,7 @@ export default function AboutTheBook() {
                     type="btn btn-primary"
                   >
                     <LazyLoad offsetVertical={400}>
-                      <img className="h-3/4 object-center inline-block" src="assets/Download.svg" />
+                      <img className="h-3/4 object-center inline-block" src="assets/view-signed-copies.svg" />
                     </LazyLoad>
                   </button>
                 </a>
