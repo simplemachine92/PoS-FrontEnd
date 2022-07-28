@@ -97,8 +97,15 @@ export default function Waitlist({
             <Table className="mx-auto" pagination={{ pageSize: 10 }} columns={columns2} dataSource={dataSource2} />
           </div>
         ) : (
-          <div className="mt-10">
-            <Spin />
+          <div className="">
+            <svg
+              className="w-full p-5 mx-auto animate-pulse"
+              viewBox="0 0 600 600"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="5" y="15" rx="5" ry="5" width="6000" height="1000" fill="gray" />
+            </svg>
           </div>
         )}
       </div>

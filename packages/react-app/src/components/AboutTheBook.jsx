@@ -23,7 +23,7 @@ export default function AboutTheBook() {
                     className="px-1 py-1 w-4/5 md:w-3/4 md:py-4 md:px-4 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                     type="btn btn-primary"
                   >
-                    <LazyLoad offsetVertical={300}>
+                    <LazyLoad offsetVertical={400}>
                       <img className="h-3/4 mr-1 object-center inline-block" src="assets/physical-copy-fix.svg" />
                     </LazyLoad>
                   </button>
@@ -37,7 +37,7 @@ export default function AboutTheBook() {
                     className="px-1 py-1 w-4/5 md:w-3/4 md:py-4 md:px-4 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                     type="btn btn-primary"
                   >
-                    <LazyLoad offsetVertical={300}>
+                    <LazyLoad offsetVertical={400}>
                       <img className="h-3/4 object-center inline-block" src="assets/Pledge1.svg" />
                     </LazyLoad>
                   </button>
@@ -51,7 +51,7 @@ export default function AboutTheBook() {
                     className="px-1 py-1 w-4/5 md:w-3/4 md:py-4 md:px-4 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                     type="btn btn-primary"
                   >
-                    <LazyLoad offsetVertical={300}>
+                    <LazyLoad offsetVertical={400}>
                       <img className="h-3/4 object-center inline-block" src="assets/Download.svg" />
                     </LazyLoad>
                   </button>

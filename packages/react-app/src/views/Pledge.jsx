@@ -66,7 +66,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 </svg>
               }
             >
-              <img className="w-1/2 sm:mt-0 md:w-5/12 mx-auto" src="assets/RasCover.png" />
+              <img className="w-1/2 p-2 sm:mt-0 md:w-5/12 mx-auto" src="assets/RasCover.png" />
             </Suspense>
                   {/* <img alt="Book" className="w-1/2 sm:w-1/2 md:w-1/2 mx-auto" src="assets/RasCover.png" /> */}
                   <Suspense
@@ -81,7 +81,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 </svg>
               }
             >
-              <img alt="Bookplate" className="mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl" src="assets/plate.png" />
+              <img alt="Bookplate" className="lg:mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl" src="assets/plate.png" />
             </Suspense>
                 </div>
                 

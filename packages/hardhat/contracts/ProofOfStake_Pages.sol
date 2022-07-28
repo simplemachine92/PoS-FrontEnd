@@ -1,6 +1,6 @@
 pragma solidity >=0.8.0 <0.9.0;
 
-//SPDX-License-Identifier: MIT
+//SPDX-License-Identifier: Apache-2.0
 
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
@@ -107,7 +107,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         for (uint256 i = 0; i < _donors.length; ++i) {
             pledgeLimit[_donors[i]] = pledgeLimit[_donors[i]] + 1;
 
-            string memory resolved = resolveENS(_donors[i]);
+            string memory resolved = "placeholder";
 
             udonationTotal[_donors[i]] += _amounts[i];
 
@@ -150,7 +150,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         
         if (msg.value < price) revert NotMinimumPledge();
 
-        string memory resolved = resolveENS(msg.sender);
+        string memory resolved = 'placeholder';
 
         uint sShare = (msg.value * publisherSplit) / 100;
 

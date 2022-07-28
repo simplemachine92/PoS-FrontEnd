@@ -5,7 +5,7 @@
       "chainId": "4",
       "contracts": {
         "ProofOfStake_Pages": {
-          "address": "0x522149fd0A0c8E2A2ffdb4dBeDB333e533Fbe2Ae",
+          "address": "0xFFc57FF604949376f423C389E22175e075704971",
           "abi": [
             {
               "inputs": [
@@ -22,6 +22,41 @@
               ],
               "stateMutability": "nonpayable",
               "type": "constructor"
+            },
+            {
+              "inputs": [],
+              "name": "DoesNotExist",
+              "type": "error"
+            },
+            {
+              "inputs": [],
+              "name": "InvalidSignature",
+              "type": "error"
+            },
+            {
+              "inputs": [],
+              "name": "NotMinimumPledge",
+              "type": "error"
+            },
+            {
+              "inputs": [],
+              "name": "PledgingDisabled",
+              "type": "error"
+            },
+            {
+              "inputs": [],
+              "name": "SendFailed",
+              "type": "error"
+            },
+            {
+              "inputs": [],
+              "name": "Soulbound",
+              "type": "error"
+            },
+            {
+              "inputs": [],
+              "name": "ZeroSignature",
+              "type": "error"
             },
             {
               "anonymous": false,
@@ -406,7 +441,7 @@
                 },
                 {
                   "internalType": "bool",
-                  "name": "approved",
+                  "name": "_approved",
                   "type": "bool"
                 }
               ],
@@ -563,6 +598,25 @@
               "name": "transferOwnership",
               "outputs": [],
               "stateMutability": "nonpayable",
+              "type": "function"
+            },
+            {
+              "inputs": [
+                {
+                  "internalType": "address",
+                  "name": "",
+                  "type": "address"
+                }
+              ],
+              "name": "udonationTotal",
+              "outputs": [
+                {
+                  "internalType": "uint256",
+                  "name": "",
+                  "type": "uint256"
+                }
+              ],
+              "stateMutability": "view",
               "type": "function"
             },
             {
