@@ -214,13 +214,13 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
               </div>
 
               ) : (
-                <div className="mx-4 p-5 rounded overflow-hidden shadow-xl">
+                <div className="w-full sm:w-1/2 mx-auto p-1 sm:p-2 rounded overflow-hidden shadow-xl">
                 
                 <h3 className="text-center text-lg md:text-3xl">
                   View on <a href={url}>OpenSea</a>
                 </h3>
                 <br/>
-                <h3 className="text-center text-md md:text-lg">Download your personalized copy starting on September 13, 2022.</h3>
+                <h3 className="text-center text-sm md:text-lg">Download your personalized copy starting on September 13, 2022.</h3>
                 <br/>
               </div>
               )}
@@ -291,9 +291,11 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
               </div>
             ) : (
               <div className="mx-4 p-5 rounded overflow-hidden shadow-xl">
-                <h3 className="text-gray-600 text-center text-lg md:text-lg">Thank you for Registering!</h3>
+                <h3 className="text-gray-600 text-center text-sm md:text-lg">Thank you for Registering!</h3>
                 {userEmail ? <h3 className="text-gray-500 mt-2 text-center text-sm md:text-md">{userEmail}</h3> : null}
-                <h3 className="text-gray-500 mt-6 text-center text-xs md:text-md">👇 Need to update your email? 👇</h3>
+                <h3 className="text-gray-500 mt-6 text-center text-2xs md:text-base">
+                  👇 Need to update your email? 👇
+                </h3>
                 <input
                   className="text-center h-1/2 w-full sm:w-2/3 mt-4 p-2 text-md md:text-lg"
                   placeholder="New @.com"
