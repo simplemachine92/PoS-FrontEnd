@@ -14,7 +14,7 @@ export default function Footer() {
       {/* Removing socials unless we have proper links */}
       {/* <Socials /> */}
       <TwitterShareButton
-      className="mr-10"
+      className="ml-4 sm:ml-0 sm:mr-10"
         title={"Preorder Vitalik Buterin’s PROOF OF STAKE, published by @7storiespress. You'll support @gitcoin's matching pool for public goods."}
         url="https://proofofstake.gitcoin.co/"
         hashtags={["ProofOfStake", "Gitcoin"]}

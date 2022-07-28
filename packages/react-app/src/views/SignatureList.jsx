@@ -116,12 +116,12 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
       key: "1",
     },
     {
-      title: "Signature",
+      title: "",
       dataIndex: "",
       render: record =>
         record != undefined ? (
           <Link
-            class="text-black mx-auto"
+            class="text-black mx-auto text-2xs sm:text-xs md:text-sm lg:text-lg"
             to={`/view?typedData=${
               record.typedData + "&addresses=" + record.sender + "&signatures=" + record.signature
             }`}
@@ -139,9 +139,8 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
       <div className="">
         {ready ? (
           <div className="mx-auto mr-1 ml-1 px-5">
-            {/* <h6 className="text-yellow-pos font-bold text-3xl">Signatures</h6> */}
             <br />
-            <Table pagination={{ pageSize: 10 }} columns={columns} dataSource={dataSource} />
+            <Table pagination={{ pageSize: 5 }} columns={columns} dataSource={dataSource} />
           </div>
         ) : (
           <div>
