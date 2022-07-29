@@ -69,7 +69,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
               {loaded2 ? null : (
               <svg
                 className="lg:mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl animate-pulse"
-                viewBox="0 0 600 830"
+                viewBox="0 0 700 930"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
               >
