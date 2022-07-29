@@ -83,13 +83,19 @@ const web3Modal = Web3ModalSetup();
 const providers = [
   "https://eth-mainnet.gateway.pokt.network/v1/lb/611156b4a585a20035148406",
   `https://eth-mainnet.alchemyapi.io/v2/${ALCHEMY_KEY}`,
-  "https://rpc.scaffoldeth.io:48544",
 ];
 
 function App(props) {
   // specify all the chains your app is available on. Eg: ['localhost', 'mainnet', ...otherNetworks ]
   // reference './constants.js' for other networks
   const networkOptions = [initialNetwork.name, "localhost"];
+  const [loading, setLoading] = useState(false);
+  useEffect(() => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  }, []);
 
   const [injectedProvider, setInjectedProvider] = useState();
   const [address, setAddress] = useState();
@@ -276,224 +282,224 @@ function App(props) {
   }, [location]);
 
   return (
-    <Suspense
-      fallback={
-        <svg class="w-full mx-auto animate-pulse" viewBox="0 0 600 830" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
-        </svg>
-      }
-    >
-      <div className="App">
-        {/* ✏️ Edit the header and change the title to your project name */}
-        <Affix>
-          <NetworkDisplay
-            NETWORKCHECK={NETWORKCHECK}
-            localChainId={localChainId}
-            selectedChainId={selectedChainId}
-            targetNetwork={targetNetwork}
-            logoutOfWeb3Modal={logoutOfWeb3Modal}
-            USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
-          />
-          <SignatureDisplay
-            NETWORKCHECK={NETWORKCHECK}
-            address={address}
-            localChainId={localChainId}
-            selectedChainId={selectedChainId}
-            firebaseConfig={firebaseConfig}
-            targetNetwork={targetNetwork}
-            logoutOfWeb3Modal={logoutOfWeb3Modal}
-            USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
-            tokenId={tokenId}
-            readContracts={readContracts}
-          />
-          <StyledMenu
-            className="hidden justify-start items-center md:flex"
-            selectedKeys={[location.pathname]}
-            mode="horizontal"
-            collapsedWidth="0"
-          >
-            <Menu.Item
-              key="Home"
-              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-              className="modified-item transform transition hover:scale-110 duration-300 ease-in-out"
-              icon={<LogoSVG />}
-            >
-              <Link to="/"></Link>
-            </Menu.Item>
-            <Menu.Item
-              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-              key="mail"
-              className="modified-item"
-              icon={<BookOutlined />}
-            >
-              Donate & Mint
-              <Link to="/pledge"></Link>
-            </Menu.Item>
-            <Menu.Item
-              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-              key="order"
-              className="modified-item"
-              icon={<ShoppingCartOutlined />}
-            >
-              Pre-Order
-              <Link to="/order"></Link>
-            </Menu.Item>
-            <Menu.Item
-              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-              key="donations"
-              className="modified-item"
-              icon={<DollarCircleOutlined />}
-            >
-              Donors
-              <Link to="/donations"></Link>
-            </Menu.Item>
-            <Menu.Item
-              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-              key="signatures"
-              className="modified-item"
-              icon={<HighlightOutlined />}
-            >
-              Signatures
-              <Link to="/signatures"></Link>
-            </Menu.Item>
-
-            <Menu.Item
-              style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-              key="profile"
-              className="modified-item"
-              icon={<UserOutlined />}
-            >
-              Profile
-              <Link to="/profile"></Link>
-            </Menu.Item>
-
-            <Menu.Item style={{ marginLeft: "auto" }} className="modified-item">
-              <div>
-                {USE_NETWORK_SELECTOR && <div style={{ marginRight: 20 }}></div>}
-                <Account
-                  useBurner={USE_BURNER_WALLET}
-                  address={address}
-                  localProvider={localProvider}
-                  userSigner={userSigner}
-                  mainnetProvider={mainnetProvider}
-                  price={price}
-                  web3Modal={web3Modal}
-                  loadWeb3Modal={loadWeb3Modal}
-                  logoutOfWeb3Modal={logoutOfWeb3Modal}
-                  blockExplorer={blockExplorer}
-                />
-              </div>
-            </Menu.Item>
-          </StyledMenu>
-
-          <div className="flex md:hidden justify-between p-2" style={{ background: "#7ee6cd" }}>
-            <button
-              onClick={() => setVisible(true)}
-              className="flex flex-col w-10 justify-center items-center bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-            >
-              <div className="h-1 w-5 bg-black rounded-md mt-1 mb-1" />
-              <div className="h-1 w-5 bg-black rounded-md mb-1" />
-              <div className="h-1 w-5 bg-black rounded-md mb-1" />
-            </button>
-            <Drawer
-              bodyStyle={{ background: "#7ee6cd", paddingTop: "3rem" }}
-              placement="left"
-              visible={visible}
-              onClose={() => setVisible(false)}
-            >
-              <Menu className="bg-primary border-none font-bold">
-                <Menu.Item
-                  className="flex justify-start items-center"
-                  onClick={() => setVisible(false)}
-                  key="Home"
-                  icon={<HomeOutlined />}
-                >
-                  Home
-                  <Link to="/"></Link>
-                </Menu.Item>
-                <Menu.Item
-                  className="flex justify-start items-center"
-                  onClick={() => setVisible(false)}
-                  key="mail"
-                  icon={<BookOutlined />}
-                >
-                  Donate & Mint
-                  <Link to="/pledge"></Link>
-                </Menu.Item>
-                <Menu.Item
-                  className="flex justify-start items-center"
-                  onClick={() => setVisible(false)}
-                  key="order"
-                  icon={<ShoppingCartOutlined />}
-                >
-                  Pre-Order
-                  <Link to="/order"></Link>
-                </Menu.Item>
-                <Menu.Item
-                  className="flex justify-start items-center"
-                  onClick={() => setVisible(false)}
-                  key="donations"
-                  icon={<DollarCircleOutlined />}
-                >
-                  Donors
-                  <Link to="/donations"></Link>
-                </Menu.Item>
-                <Menu.Item
-                  className="flex justify-start items-center"
-                  onClick={() => setVisible(false)}
-                  key="signatures"
-                  icon={<HighlightOutlined />}
-                >
-                  Signatures
-                  <Link to="/signatures"></Link>
-                </Menu.Item>
-                <Menu.Item
-                  className="flex justify-start items-center"
-                  onClick={() => setVisible(false)}
-                  key="profile"
-                  icon={<UserOutlined />}
-                >
-                  Your Profile
-                  <Link to="/profile"></Link>
-                </Menu.Item>
-              </Menu>
-            </Drawer>
-            <div>
-              <div>
-                {USE_NETWORK_SELECTOR && <div style={{ marginRight: 20 }}></div>}
-                <Account
-                  useBurner={USE_BURNER_WALLET}
-                  address={address}
-                  localProvider={localProvider}
-                  userSigner={userSigner}
-                  mainnetProvider={mainnetProvider}
-                  price={price}
-                  web3Modal={web3Modal}
-                  loadWeb3Modal={loadWeb3Modal}
-                  logoutOfWeb3Modal={logoutOfWeb3Modal}
-                  blockExplorer={blockExplorer}
-                />
-              </div>
-              {/* {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
-              <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
-            )} */}
-            </div>
+    <div className="App">
+      {loading ? (
+        <div className="w-full h-screen ">
+          <div className="w-1/2 sm:w-1/4 sm:mt-0 md:w-5/12 mx-auto flex justify-center items-center">
+            <SmolSVG />
+            <div className="text-2xs sm:text-xs md:text-base lg:text-lg animate-pulse">Patience, anon...</div>
           </div>
-        </Affix>
-        <CustomSwitch>
-          <Route exact path="/">
-            {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
-            <Home
-              yourLocalBalance={yourLocalBalance}
-              writeContracts={writeContracts}
-              readContracts={readContracts}
-              tx={tx}
-              localProvider={localProvider}
-              address={address}
+        </div>
+      ) : (
+        <div className="App">
+          <Affix>
+            <NetworkDisplay
+              NETWORKCHECK={NETWORKCHECK}
+              localChainId={localChainId}
+              selectedChainId={selectedChainId}
+              targetNetwork={targetNetwork}
+              logoutOfWeb3Modal={logoutOfWeb3Modal}
+              USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
             />
-          </Route>
-          <Route path="/pledge">
-            <Suspense fallback={<Spin />}>
+            <SignatureDisplay
+              NETWORKCHECK={NETWORKCHECK}
+              address={address}
+              localChainId={localChainId}
+              selectedChainId={selectedChainId}
+              firebaseConfig={firebaseConfig}
+              targetNetwork={targetNetwork}
+              logoutOfWeb3Modal={logoutOfWeb3Modal}
+              USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
+              tokenId={tokenId}
+              readContracts={readContracts}
+            />
+            <StyledMenu
+              className="hidden justify-start items-center md:flex"
+              selectedKeys={[location.pathname]}
+              mode="horizontal"
+              collapsedWidth="0"
+            >
+              <Menu.Item
+                key="Home"
+                style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                className="modified-item transform transition hover:scale-110 duration-300 ease-in-out"
+                icon={<LogoSVG />}
+              >
+                <Link to="/"></Link>
+              </Menu.Item>
+              <Menu.Item
+                style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                key="mail"
+                className="modified-item"
+                icon={<BookOutlined />}
+              >
+                Donate & Mint
+                <Link to="/pledge"></Link>
+              </Menu.Item>
+              <Menu.Item
+                style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                key="order"
+                className="modified-item"
+                icon={<ShoppingCartOutlined />}
+              >
+                Pre-Order
+                <Link to="/order"></Link>
+              </Menu.Item>
+              <Menu.Item
+                style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                key="donations"
+                className="modified-item"
+                icon={<DollarCircleOutlined />}
+              >
+                Donors
+                <Link to="/donations"></Link>
+              </Menu.Item>
+              <Menu.Item
+                style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                key="signatures"
+                className="modified-item"
+                icon={<HighlightOutlined />}
+              >
+                Signatures
+                <Link to="/signatures"></Link>
+              </Menu.Item>
+
+              <Menu.Item
+                style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                key="profile"
+                className="modified-item"
+                icon={<UserOutlined />}
+              >
+                Profile
+                <Link to="/profile"></Link>
+              </Menu.Item>
+
+              <Menu.Item style={{ marginLeft: "auto" }} className="modified-item">
+                <div>
+                  {USE_NETWORK_SELECTOR && <div style={{ marginRight: 20 }}></div>}
+                  <Account
+                    useBurner={USE_BURNER_WALLET}
+                    address={address}
+                    localProvider={localProvider}
+                    userSigner={userSigner}
+                    mainnetProvider={mainnetProvider}
+                    price={price}
+                    web3Modal={web3Modal}
+                    loadWeb3Modal={loadWeb3Modal}
+                    logoutOfWeb3Modal={logoutOfWeb3Modal}
+                    blockExplorer={blockExplorer}
+                  />
+                </div>
+              </Menu.Item>
+            </StyledMenu>
+
+            <div className="flex md:hidden justify-between p-2" style={{ background: "#7ee6cd" }}>
+              <button
+                onClick={() => setVisible(true)}
+                className="flex flex-col w-10 justify-center items-center bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+              >
+                <div className="h-1 w-5 bg-black rounded-md mt-1 mb-1" />
+                <div className="h-1 w-5 bg-black rounded-md mb-1" />
+                <div className="h-1 w-5 bg-black rounded-md mb-1" />
+              </button>
+              <Drawer
+                bodyStyle={{ background: "#7ee6cd", paddingTop: "3rem" }}
+                placement="left"
+                visible={visible}
+                onClose={() => setVisible(false)}
+              >
+                <Menu className="bg-primary border-none font-bold">
+                  <Menu.Item
+                    className="flex justify-start items-center"
+                    onClick={() => setVisible(false)}
+                    key="Home"
+                    icon={<HomeOutlined />}
+                  >
+                    Home
+                    <Link to="/"></Link>
+                  </Menu.Item>
+                  <Menu.Item
+                    className="flex justify-start items-center"
+                    onClick={() => setVisible(false)}
+                    key="mail"
+                    icon={<BookOutlined />}
+                  >
+                    Donate & Mint
+                    <Link to="/pledge"></Link>
+                  </Menu.Item>
+                  <Menu.Item
+                    className="flex justify-start items-center"
+                    onClick={() => setVisible(false)}
+                    key="order"
+                    icon={<ShoppingCartOutlined />}
+                  >
+                    Pre-Order
+                    <Link to="/order"></Link>
+                  </Menu.Item>
+                  <Menu.Item
+                    className="flex justify-start items-center"
+                    onClick={() => setVisible(false)}
+                    key="donations"
+                    icon={<DollarCircleOutlined />}
+                  >
+                    Donors
+                    <Link to="/donations"></Link>
+                  </Menu.Item>
+                  <Menu.Item
+                    className="flex justify-start items-center"
+                    onClick={() => setVisible(false)}
+                    key="signatures"
+                    icon={<HighlightOutlined />}
+                  >
+                    Signatures
+                    <Link to="/signatures"></Link>
+                  </Menu.Item>
+                  <Menu.Item
+                    className="flex justify-start items-center"
+                    onClick={() => setVisible(false)}
+                    key="profile"
+                    icon={<UserOutlined />}
+                  >
+                    Your Profile
+                    <Link to="/profile"></Link>
+                  </Menu.Item>
+                </Menu>
+              </Drawer>
+              <div>
+                <div>
+                  {USE_NETWORK_SELECTOR && <div style={{ marginRight: 20 }}></div>}
+                  <Account
+                    useBurner={USE_BURNER_WALLET}
+                    address={address}
+                    localProvider={localProvider}
+                    userSigner={userSigner}
+                    mainnetProvider={mainnetProvider}
+                    price={price}
+                    web3Modal={web3Modal}
+                    loadWeb3Modal={loadWeb3Modal}
+                    logoutOfWeb3Modal={logoutOfWeb3Modal}
+                    blockExplorer={blockExplorer}
+                  />
+                </div>
+                {/* {yourLocalBalance.lte(ethers.BigNumber.from("0")) && (
+      <FaucetHint localProvider={localProvider} targetNetwork={targetNetwork} address={address} />
+    )} */}
+              </div>
+            </div>
+          </Affix>
+          <CustomSwitch>
+            <Route exact path="/">
+              {/* pass in any web3 props to this Home component. For example, yourLocalBalance */}
+              <Home
+                yourLocalBalance={yourLocalBalance}
+                writeContracts={writeContracts}
+                readContracts={readContracts}
+                tx={tx}
+                localProvider={localProvider}
+                address={address}
+              />
+            </Route>
+            <Route path="/pledge">
               <Pledge
                 yourLocalBalance={yourLocalBalance}
                 writeContracts={writeContracts}
@@ -503,10 +509,8 @@ function App(props) {
                 loadWeb3Modal={loadWeb3Modal}
                 address={address}
               />
-            </Suspense>
-          </Route>
-          <Route path="/donations">
-            <Suspense fallback={<Spin />}>
+            </Route>
+            <Route path="/donations">
               <Waitlist
                 yourLocalBalance={yourLocalBalance}
                 mainnetProvider={mainnetProvider}
@@ -520,10 +524,8 @@ function App(props) {
                 events={events}
                 visible={visible}
               />
-            </Suspense>
-          </Route>
-          <Route path="/complete">
-            <Suspense fallback={<Spin />}>
+            </Route>
+            <Route path="/complete">
               <AfterPledge
                 yourLocalBalance={yourLocalBalance}
                 writeContracts={writeContracts}
@@ -533,10 +535,8 @@ function App(props) {
                 loadWeb3Modal={loadWeb3Modal}
                 address={address}
               />
-            </Suspense>
-          </Route>
-          <Route path="/view">
-            <Suspense fallback={<Spin />}>
+            </Route>
+            <Route path="/view">
               <SignatorViewer
                 mainnetProvider={mainnetProvider}
                 injectedProvider={injectedProvider}
@@ -548,10 +548,8 @@ function App(props) {
                 tx={tx}
                 firebaseConfig={firebaseConfig}
               />
-            </Suspense>
-          </Route>
-          <Route path="/pledge">
-            <Suspense fallback={<Spin />}>
+            </Route>
+            <Route path="/pledge">
               <Pledge
                 yourLocalBalance={yourLocalBalance}
                 writeContracts={writeContracts}
@@ -560,10 +558,8 @@ function App(props) {
                 localProvider={localProvider}
                 address={address}
               />
-            </Suspense>
-          </Route>
-          <Route path="/order">
-            <Suspense fallback={<Spin />}>
+            </Route>
+            <Route path="/order">
               <Order
                 yourLocalBalance={yourLocalBalance}
                 writeContracts={writeContracts}
@@ -572,10 +568,8 @@ function App(props) {
                 localProvider={localProvider}
                 address={address}
               />
-            </Suspense>
-          </Route>
-          <Route path="/signatures">
-            <Suspense fallback={<Spin />}>
+            </Route>
+            <Route path="/signatures">
               <SignatureList
                 address={address}
                 yourLocalBalance={yourLocalBalance}
@@ -585,10 +579,8 @@ function App(props) {
                 events={events}
                 visible={visible}
               />
-            </Suspense>
-          </Route>
-          <Route path="/sign">
-            <Suspense fallback={<Spin />}>
+            </Route>
+            <Route path="/sign">
               <Sign
                 mainnetProvider={mainnetProvider}
                 injectedProvider={injectedProvider}
@@ -600,10 +592,8 @@ function App(props) {
                 firebaseConfig={firebaseConfig}
                 events={events}
               />
-            </Suspense>
-          </Route>
-          <Route path="/profile">
-            <Suspense fallback={<Spin />}>
+            </Route>
+            <Route path="/profile">
               <Profile
                 firebaseConfig={firebaseConfig}
                 yourLocalBalance={yourLocalBalance}
@@ -614,50 +604,11 @@ function App(props) {
                 address={address}
                 tokenId={tokenId}
               />
-            </Suspense>
-          </Route>
-        </CustomSwitch>
-
-        {/* 👨‍💼 Your account is in the top right with a wallet at connect options */}
-
-        {/* 🗺 Extra UI like gas price, eth price, faucet, and support: */}
-        {/* <div style={{ position: "fixed", textAlign: "left", left: 0, bottom: 20, padding: 10 }}>
-        <Row align="middle" gutter={[4, 4]}>
-          <Col span={8}>
-            <Ramp price={price} address={address} networks={NETWORKS} />
-          </Col>
-
-          <Col span={8} style={{ textAlign: "center", opacity: 0.8 }}>
-            <GasGauge gasPrice={gasPrice} />
-          </Col>
-          <Col span={8} style={{ textAlign: "center", opacity: 1 }}>
-            <Button
-              onClick={() => {
-                window.open("https://t.me/joinchat/KByvmRe5wkR-8F_zz6AjpA");
-              }}
-              size="large"
-              shape="round"
-            >
-              <span style={{ marginRight: 8 }} role="img" aria-label="support">
-                💬
-              </span>
-              Support
-            </Button>
-          </Col>
-        </Row>
-
-        <Row align="middle" gutter={[4, 4]}>
-          <Col span={24}>
-            {faucetAvailable ? (
-              <Faucet localProvider={localProvider} price={price} ensProvider={mainnetProvider} />
-            ) : (
-              ""
-            )}
-          </Col>
-        </Row>
-      </div> */}
-      </div>
-    </Suspense>
+            </Route>
+          </CustomSwitch>
+        </div>
+      )}
+    </div>
   );
 }
 
