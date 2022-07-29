@@ -169,7 +169,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
             </div>
 
             <div className="pt-8 mx-auto font-spacemono bg-circle bg-left bg-6 sm:bg-fit bg-no-repeat">
-          <h3 className="text-center text-sm md:text-xl mx-8 my-8">
+          <h3 className="text-center text-sm md:text-xl mx-8 mt-2 mb-4">
               Pledge any amount of ETH above to request a digitally signed book plate from Vitalik.   You'll mint a non-transferable NFT and, when the book is available, you'll gain access to your signed digital copy.
               </h3>
             <h3 className="text-left text-sm md:text-xl mx-8">

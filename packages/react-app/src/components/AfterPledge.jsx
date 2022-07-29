@@ -11,7 +11,7 @@ export default function AfterPledge() {
         <h3 className="text-2xl">
           You've minted a non-transferable NFT which you may update as Vitalik signs these digital bookplates. Check for
           message updates on your{" "}
-          <a href="/profile" rel="noreferrer">
+          <a href="/profile" rel="_self noreferrer">
             Profile
           </a>
         </h3>

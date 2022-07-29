@@ -154,6 +154,9 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
       {address && tokenId ? (
         <div>
           <div className="bg-headerBackground bg-cover bg-center bg-no-repeat">
+            <h5 className="mt-3 mb-2 sm:mb-3 md:mb-4 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">
+              ✨ Profile ✨
+            </h5>
             {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
             {/* prettier-ignore */}
             <div className="flex flex-wrap items-center justify-center pt-5 mx-auto">
@@ -209,8 +212,6 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                   Update Token
                 </button>
                 <br/>
-                {/* <p class="text-sky-400">Click "Update" to display your personalized message on your bookplate</p> */}
-                
               </div>
 
               ) : (
@@ -346,10 +347,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
         <div className="bg-headerBackground h-screen w-full bg-fill bg-center overflow-hidden">
           <div className="">
             <div className="flex items-center justify-center mt-10">
-              <Spin />
-              <br />
               <h3 className="text-center text-md md:text-3xl"> Please connect your wallet, or mint a token.. </h3>
-              <Spin />
             </div>
           </div>
         </div>

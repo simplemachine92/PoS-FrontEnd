@@ -105,7 +105,7 @@ export default function Address2(props) {
             <div className="flex-auto sm:hidden">
               <Blockies seed={address.toLowerCase()} size={8} scale={1} />
               <a
-                className="text-2xs"
+                className="text-xs"
                 style={{ color: currentTheme === "light" ? "#222222" : "#ddd" }}
                 target="_blank"
                 href={etherscanLink}

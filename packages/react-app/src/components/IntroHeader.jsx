@@ -81,10 +81,7 @@ export default function IntroHeader() {
       >
         <div className="block">
           {/* <span class="text-gray-700">Radio Buttons</span> */}
-          <div className="mt-2">
-            <p className="text-2xs mb-4">
-              (We'll redirect you to the right page in a new window so you can come back.)
-            </p>
+          <div className="">
             <div onChange={setPath.bind(this)}>
               <label className="inline-flex items-center">
                 <input type="radio" className="form-radio text-pink-400" name="radio" value="pledge" />

@@ -287,7 +287,7 @@ function App(props) {
         <div className="w-full h-screen ">
           <div className="w-1/2 sm:w-1/4 sm:mt-0 md:w-5/12 mx-auto flex justify-center items-center">
             <SmolSVG />
-            <div className="text-2xs sm:text-xs md:text-base lg:text-lg animate-pulse">Patience, anon...</div>
+            <div className="text-2xs sm:text-xs md:text-base lg:text-lg animate-pulse">Welcome, anon...</div>
           </div>
         </div>
       ) : (

@@ -95,17 +95,22 @@ export default function Waitlist({
         {ready ? (
           <div className="mx-auto mr-1 ml-1 px-5">
             <h5 className="mt-3 mb-2 sm:mb-3 md:mb-4 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">
-              ✨ Supporters ✨
+              ✨ Top Donors ✨
             </h5>
-            <Table className="mx-auto" pagination={{ pageSize: 5 }} columns={columns2} dataSource={dataSource2} />
+            <Table
+              className="mx-auto sm:p-5"
+              pagination={{ pageSize: 5 }}
+              columns={columns2}
+              dataSource={dataSource2}
+            />
           </div>
         ) : (
-          <div className="">
+          <div className="mx-auto mr-1 ml-1 px-5">
             <h5 className="mt-3 mb-2 sm:mb-3 md:mb-4 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">
-              ✨ Supporters ✨
+              ✨ Top Donors ✨
             </h5>
             <svg
-              className="w-full px-5 mx-auto animate-pulse"
+              className="w-full sm:p-5 mx-auto animate-pulse"
               viewBox="0 0 600 600"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
