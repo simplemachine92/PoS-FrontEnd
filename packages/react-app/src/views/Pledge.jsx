@@ -19,6 +19,8 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
   // in this case, let's keep track of 'purpose' variable from our contract
   const [uValue, setU] = useState("0.01337");
   const [eValue, setE] = useState("placeholder");
+  const [loaded, setLoaded] = useState(false);
+  const [loaded2, setLoaded2] = useState(false);
 
   // Initialize Firebase
 
@@ -43,52 +45,45 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
   return (
     <>
       <div>
-        {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
         {/* prettier-ignore */}
         <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
-            {/* <div className="flex flex-wrap w-2/5 mx-auto">
-              <img class="shadow" className="object-scale-down mb-12" src="assets/DonationText.png" />
-            </div> */}
             <div className="py-2 flex w-3/4 sm:w-1/2 mx-auto justify-center">
               <div className="mx-auto">
               <h5 className="mb-4 font-bold text-xs sm:text-tiny md:text-lg lg:text-2xl">✨ Your Personal Digital Copy & NFT ✨</h5>
                 <div className="flex py-0 backdrop-filter content-center mx-auto">
-                {/* <img alt="Book_Spread" className="w-full" src="assets/bind_fix.png" /> */}
-                <Suspense
-              fallback={
-                <svg
-                  className="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
-                  viewBox="0 0 600 830"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
-                </svg>
-              }
-            >
-              <img className="w-1/2 p-2 sm:mt-0 md:w-5/12 mx-auto" src="assets/RasCover.png" />
-            </Suspense>
-                  {/* <img alt="Book" className="w-1/2 sm:w-1/2 md:w-1/2 mx-auto" src="assets/RasCover.png" /> */}
-                  <Suspense
-              fallback={
-                <svg
-                  className="mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl"
-                  viewBox="0 0 600 830"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
-                </svg>
-              }
-            >
-              <img alt="Bookplate" className="lg:mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl" src="assets/plate.png" />
-            </Suspense>
+                {loaded ? null : (
+              <svg
+                className="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
+                viewBox="0 0 600 830"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
+              </svg>
+            )}
+            <img
+              className={loaded ? "w-1/2 p-2 sm:mt-0 md:w-5/12 mx-auto" : "hidden"}
+              src="assets/RasCover.png"
+              onLoad={() => setLoaded(true)}
+            />
+              {loaded2 ? null : (
+              <svg
+                className="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
+                viewBox="0 0 600 830"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
+              </svg>
+            )}
+            <img
+              className={loaded ? "lg:mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl" : "hidden"}
+              src="assets/plate.png"
+              onLoad={() => setLoaded2(true)}
+            />
                 </div>
-                
               </div>
             </div>
-            {/* <div className="mt-2 flex-wrap w-1/2 content-center mx-auto"><img alt="Book_Spread" className="w-3/4" src="assets/bind_fix.png" /></div> */}
-          
             <div className="flex-wrap mt-2 px-1 py-1 sm:px-4 sm:py-4 w-3/4 sm:w-1/3 mx-auto rounded overflow-hidden shadow-2xl">
             <h5 className="font-bold pt-4 sm:pt-4 md:py-6 text-xs sm:text-lg md:text-2xl lg:text-3xl">Donate & Mint</h5>
               <label className="text-2xs sm:text-sm md:text-md lg:text-xl">Enter ETH Amount</label>
