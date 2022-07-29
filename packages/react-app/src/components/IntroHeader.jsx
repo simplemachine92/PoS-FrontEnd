@@ -1,4 +1,4 @@
-import React, { useState, Suspense } from "react";
+import React, { useState } from "react";
 
 import { Modal } from "antd";
 
@@ -6,6 +6,8 @@ export default function IntroHeader() {
   const [isModal1Visible, setisModal1Visible] = useState(false);
   const [isModal2Visible, setisModal2Visible] = useState(false);
   const [path, sPath] = useState("");
+
+  const [loaded, setLoaded] = useState(false);
 
   const showModal = () => {
     setisModal1Visible(true);
@@ -113,40 +115,28 @@ export default function IntroHeader() {
       <div className="flex flex-wrap items-center bg-smallBackground bg-auto bg-right bg-no-repeat sm:bg-ringsBackground">
         <div className="flex flex-wrap w-1/2 sm:w-1/2 justify-center bg-no-repeat">
           <div className="max-w-lg py-5">
-            <Suspense
-              fallback={
-                <svg
-                  className="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
-                  viewBox="0 0 600 830"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
-                </svg>
-              }
-            >
-              <img className="w-1/2 sm:mt-0 md:w-5/12 mx-auto" src="assets/RasCover.png" />
-            </Suspense>
-            <Suspense
-              fallback={
-                <svg
-                  className="w-2/3 mt-2 sm:w-3/5 md:w-7/12 mx-auto animate-pulse"
-                  viewBox="0 0 600 100"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect x="5" y="15" rx="5" ry="5" width="600" height="100" fill="gray" />
-                </svg>
-              }
-            >
-              <button
-                className="w-4/5 sm:w-3/5 md:w-7/12 mt-4 py-1 sm:py-4 text-2xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                type="btn btn-primary"
-                onClick={showModal}
+            {loaded ? null : (
+              <svg
+                className="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
+                viewBox="0 0 600 830"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
               >
-                Get Started!
-              </button>
-            </Suspense>
+                <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
+              </svg>
+            )}
+            <img
+              className={loaded ? "w-1/2 sm:mt-0 md:w-5/12 mx-auto" : "hidden"}
+              src="assets/RasCover.png"
+              onLoad={() => setLoaded(true)}
+            />
+            <button
+              className="w-4/5 sm:w-3/5 md:w-7/12 mt-4 py-1 sm:py-4 text-2xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+              type="btn btn-primary"
+              onClick={showModal}
+            >
+              Get Started!
+            </button>
           </div>
         </div>
         <div className="flex flex-wrap w-1/2 mx-auto 2xl:w-1/3 3xl:w-1/4 mb-4 md:mb-8">
