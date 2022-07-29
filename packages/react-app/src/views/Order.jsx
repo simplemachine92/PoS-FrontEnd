@@ -66,18 +66,7 @@ const buyLinks = [
  * @returns react component
  */
 function Order({ writeContracts, tx }) {
-  // you can also use hooks locally in your component of choice
-  // in this case, let's keep track of 'purpose' variable from our contract
-  const [uValue, setU] = useState("0.0001337");
-
-  /*  const columns = [
-    {
-        title: "Retailer",
-        dataIndex: "pledge",
-  
-        sorter: (a, b) => a.pledge - b.pledge,
-        sortDirections: ["ascend"],
-      },] */
+  const [loaded, setLoaded] = useState(false);
 
   return (
     <>
@@ -90,20 +79,21 @@ function Order({ writeContracts, tx }) {
             <div className="flex flex-wrap w-1/2 content-center items-left mx-auto">
               <div className="max-w-md py-3 mx-auto justify-center">
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
-                  <Suspense
-                    fallback={
-                      <svg
-                        className="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
-                        viewBox="0 0 600 830"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
-                      </svg>
-                    }
-                  >
-                    <img className="w-1/2 sm:mt-0 mx-auto" src="assets/RasCover.png" />
-                  </Suspense>
+                  {loaded ? null : (
+                    <svg
+                      className="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
+                      viewBox="0 0 600 830"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
+                    </svg>
+                  )}
+                  <img
+                    className={loaded ? "w-1/2 sm:mt-0 mx-auto" : "hidden"}
+                    src="assets/RasCover.png"
+                    onLoad={() => setLoaded(true)}
+                  />
                 </div>
               </div>
             </div>
