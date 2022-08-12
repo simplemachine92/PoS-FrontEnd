@@ -417,6 +417,10 @@ input {
   background: #31dbe5;
 }
 
+.ant-input-number-handler-wrap {
+  visibility: hidden;
+}
+
 /* input[type="table"] {
 } */
 
