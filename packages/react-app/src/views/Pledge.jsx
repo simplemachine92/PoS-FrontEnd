@@ -49,7 +49,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
         <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
             <div className="py-2 flex w-3/4 sm:w-1/2 mx-auto justify-center">
               <div className="mx-auto">
-              <h5 className="mb-4 font-bold text-xs sm:text-tiny md:text-lg lg:text-2xl">✨ Your Personal Digital Copy & NFT ✨</h5>
+              <h5 className="mb-4 font-bold text-2xs sm:text-tiny md:text-lg lg:text-2xl">✨ Your Personal Digital Copy & NFT ✨</h5>
                 <div className="flex py-0 backdrop-filter content-center mx-auto">
                 {loaded ? null : (
               <svg
@@ -84,21 +84,20 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                 </div>
               </div>
             </div>
-            <div className="flex-wrap mt-2 px-1 py-1 sm:px-4 sm:py-4 w-3/4 sm:w-1/3 mx-auto rounded overflow-hidden shadow-2xl">
+            <div className="flex-wrap mt-2 px-1 py-1 sm:px-4 sm:py-10 md:py-12 lg:py-16 xl:py-18 w-3/4 sm:w-2/5 mx-auto content-center rounded overflow-hidden shadow-2xl">
             <h5 className="font-bold pt-4 sm:pt-4 md:py-6 text-xs sm:text-lg md:text-2xl lg:text-3xl">Donate & Mint</h5>
               <label className="text-2xs sm:text-sm md:text-md lg:text-xl">Enter ETH Amount</label>
               <InputNumber
-                className="form mx-auto w-full sm:w-1/2 md:w-3/4"
+                className="form mx-auto w-full mb-2 sm:w-1/2 md:w-3/4"
                 bordered={false}
                 onChange={e => {
                   const currValue = String(e);
                   setU(currValue);
                 }}
-                step={0.1}
                 defaultValue={0.01337}
               />
-              <h3 className="text-2xs sm:text-2xs md:text-xs mt-3 md:mt-5 mx-2">Optional: Provide an email for notifications.</h3>
-              <input
+              {/* <h3 className="text-2xs sm:text-2xs md:text-xs mt-3 md:mt-5 mx-2">Optional: Provide an email for notifications.</h3> */}
+             {/*  <input
               type="form"
                   maxLength="160"
                   className="mx-auto w-4/5"
@@ -107,8 +106,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                     const currValue2 = f;
                     setE(currValue2);
                   }}
-                />
-                <h3 className="text-2xs sm:text-2xs md:text-xs md:mt-5 mx-2">Note: We will never share your email address.</h3>
+                /> */}
               {address ? (
                 <button
                 type="btn btn-primary"
@@ -166,6 +164,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                   Connect
                 </button>
               )}
+              <h3 className="mb-2 sm:mb-0 text-2xs sm:text-2xs md:text-xs md:mt-4">New here? More info below. 👇</h3>
             </div>
 
             <div className="pt-8 mx-auto font-spacemono bg-circle bg-left bg-6 sm:bg-fit bg-no-repeat">
