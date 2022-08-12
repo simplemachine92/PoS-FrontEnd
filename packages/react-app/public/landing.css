@@ -332,6 +332,7 @@ a:hover {
 .ant-table-thead > tr > th {
   color: black;
   background: #7ee6cd;
+  font-size: 1.9vw;
 }
 
 .ant-table table {
@@ -409,11 +410,22 @@ input {
   border-radius: 8px;
   outline: none;
   text-align: center;
-  font-size: 30px;
+  font-size: 2vw;
   font-size: 2.5vw;
   font-family: Space Mono, sans-serif;
   color: #ffffff;
   background: #31dbe5;
+}
+
+/* input[type="table"] {
+} */
+
+input[type="table"]::placeholder {
+  color: #ffffff;
+  font-family: Space Mono, sans-serif;
+  font-style: normal;
+  font-size: 1.7vw;
+  text-align: center;
 }
 
 input:focus,
@@ -453,7 +465,7 @@ hover {
   color: #02e2ac;
   font-family: Space Mono, sans-serif;
   font-weight: bold;
-  font-size: 2.5vw;
+  font-size: 2vw;
   text-align: center;
 }
 

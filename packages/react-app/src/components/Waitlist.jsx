@@ -22,13 +22,13 @@ export default function Waitlist({
   // Get a list of tokens from a tokenlist -> see tokenlists.org!
 
   const [ready, setReady] = useState(false);
-  const [list, setList] = useState();
   const [value2, setValue2] = useState("");
 
   const [dataSource2, setDataSource2] = useState(events);
 
   useEffect(async () => {
     const copy = events;
+    console.log("events", copy);
     for (const v of copy) {
       const total = await readContracts.ProofOfStake_Pages.udonationTotal(v.args[0]);
       v.donototal = utils.formatEther(total._hex);
@@ -38,8 +38,10 @@ export default function Waitlist({
   }, [events, readContracts]);
 
   const FilterByNameInput2 = (
-    <Input
+    <input
       placeholder="Search"
+      type="table"
+      className="w-full bg-green-400 sm:text-xl"
       value={value2}
       onChange={e => {
         const currValue = e.target.value;
@@ -77,15 +79,23 @@ export default function Waitlist({
       dataIndex: "donototal",
       render: value => {
         return (
-          <div className="text-xs sm:text-sm md:text-base lg:text-lg mx-auto text-black">{value.substring(0, 6)}</div>
+          <div className="text-2xs sm:text-sm md:text-base lg:text-lg mx-auto text-black">{value.substring(0, 6)}</div>
         );
       },
       sorter: (a, b) => a.args[1] - b.args[1],
       sortDirections: ["ascend", "descend"],
       defaultSortOrder: "descend",
-
-      /* render: record => (record != undefined ? ethers.utils.formatEther(ethers.BigNumber.from(record[1])) : <Spin />),
-      key: "2", */
+    },
+    {
+      title: "Block",
+      dataIndex: "blockNumber",
+      render: value => {
+        return <div className="text-2xs sm:text-sm md:text-base lg:text-lg mx-auto text-black">{value}</div>;
+      },
+      sorter: (b, c) => b.blockNumber - c.blockNumber,
+      sortDirections: ["ascend", "descend"],
+      defaultSortOrder: "descend",
+      key: "2",
     },
   ];
 
@@ -93,19 +103,19 @@ export default function Waitlist({
     <div className="bg-headerBackground bg-contain bg-top-right bg-no-repeat">
       <div className="">
         {ready ? (
-          <div className="mx-auto mr-1 ml-1 px-5">
+          <div className="mx-auto px-2 sm:px-3 md:px-4 lg:px-5">
             <h5 className="mt-3 mb-2 sm:mb-3 md:mb-4 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">
               ✨ Top Donors ✨
             </h5>
             <Table
               className="mx-auto sm:p-5"
-              pagination={{ pageSize: 5 }}
+              pagination={{ pageSize: 10 }}
               columns={columns2}
               dataSource={dataSource2}
             />
           </div>
         ) : (
-          <div className="mx-auto mr-1 ml-1 px-5">
+          <div className="mx-auto px-5">
             <h5 className="mt-3 mb-2 sm:mb-3 md:mb-4 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">
               ✨ Top Donors ✨
             </h5>

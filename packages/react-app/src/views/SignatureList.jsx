@@ -81,9 +81,11 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
   ); */
 
   const FilterByNameInput2 = (
-    <Input
+    <input
+      type="table"
       placeholder="Search"
       value={value}
+      className="mx-auto w-full sm:w-2/3 md:w-full bg-green-400 sm:text-xl"
       onChange={e => {
         const currValue = e.target.value;
         setValue(currValue);
@@ -142,7 +144,7 @@ export default function Signatures({ yourLocalBalance, mainnetProvider, price, a
         </h5>
         {ready ? (
           <div className="mx-auto mr-1 ml-1 px-5">
-            <Table className="sm:p-5" pagination={{ pageSize: 5 }} columns={columns} dataSource={dataSource} />
+            <Table className="sm:p-5" pagination={{ pageSize: 10 }} columns={columns} dataSource={dataSource} />
           </div>
         ) : (
           <div>
