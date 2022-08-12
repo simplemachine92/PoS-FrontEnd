@@ -68,16 +68,16 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
             />
               {loaded2 ? null : (
               <svg
-                className="lg:mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl animate-pulse"
-                viewBox="0 0 700 930"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
-              </svg>
+              className="px-2 py-2 ml-4 w-1/2 sm:w-1/3 lg:w-1/4 xl:w-3/12 md:py-2 md:px-2 animate-pulse"
+              viewBox="0 0 600 830"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
+            </svg>
             )}
             <img
-              className={loaded ? "lg:mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl" : "hidden"}
+              className={loaded2 ? "lg:mx-4 pt-1 w-1/2 sm:w-1/2 md:w-1/2 rounded-xl md:rounded-2xl" : "hidden"}
               src="assets/plate.png"
               onLoad={() => setLoaded2(true)}
             />
