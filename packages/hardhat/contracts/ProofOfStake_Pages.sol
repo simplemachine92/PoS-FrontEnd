@@ -18,7 +18,7 @@ error InvalidSignature();
 error ZeroSignature();
 error DoesNotExist();
 
-abstract contract Name_Resolver {
+abstract contract ENS_Resolver {
     function getNames(address[] calldata addresses)
         external
         view
@@ -27,8 +27,7 @@ abstract contract Name_Resolver {
 }
 
 contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
-    Name_Resolver res =
-        Name_Resolver(0x3671aE578E63FdF66ad4F3E12CC0c0d71Ac7510C);
+    ENS_Resolver res = ENS_Resolver(0x3671aE578E63FdF66ad4F3E12CC0c0d71Ac7510C);
 
     using Counters for Counters.Counter;
     using Strings for uint256;
@@ -237,10 +236,6 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         tokens[tokenid].writtenMsg = _message;
     }
 
-    /* function initCollection(address[] memory _donors, uint256[] memory _amounts) external onlyOwner {
-        
-    } */
-
     /*///////////////////////////////////////////////////////////////
                             TOKEN LOGIC
     //////////////////////////////////////////////////////////////*/
@@ -375,6 +370,8 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
                             abi.encodePacked(
                                 '{"signed_to":"',
                                 tokens[cID].recipient,
+                                '", "external_url":"',
+                                "https://proofofstake.gitcoin.co/",
                                 '", "timestamp":"',
                                 tokens[cID].timestamp,
                                 '", "pledge":"',
@@ -406,6 +403,41 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         return constructTokenURI(id);
     }
 
+    function contractURI() external pure returns (string memory) {
+        return
+            string(
+                abi.encodePacked(
+                    "data:application/json;base64,",
+                    Base64.encode(
+                        bytes(
+                            abi.encodePacked(
+                                "{",
+                                '"name":"',
+                                "Proof of Stake",
+                                '",'
+                                '"description":"',
+                                "Vitalik is committed to supporting open-source public goods, he's releasing a book on September 13. We're pre-gaming by raising funds for public goods with a truly unique NFT, where Vitalik signs a message directly on your token. This token is then inserted into your digital copy upon the books release!",
+                                '",'
+                                '"image_data":"',
+                                // Yeah, looks like CORS may not be letting this resolve, fix l8r
+                                "https://clear-donkey.surge.sh/assets/RasCover.png",
+                                '",'
+                                '"external_link":"',
+                                "https://clear-donkey.surge.sh/",
+                                '",'
+                                '"seller_fee_basis_points":"',
+                                "0",
+                                '",'
+                                '"fee_recipient":"',
+                                "0x00",
+                                '"}'
+                            )
+                        )
+                    )
+                )
+            );
+    }
+
     /*///////////////////////////////////////////////////////////////
                              SIG LOGIC
     //////////////////////////////////////////////////////////////*/
@@ -433,23 +465,5 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
                     address(this)
                 )
             );
-    }
-
-    function resolveENS(address _user) internal view returns (string memory) {
-        string memory resolved;
-
-        address[] memory forCall = new address[](1);
-
-        forCall[0] = _user;
-
-        string[] memory callres = res.getNames(forCall);
-
-        if (bytes(callres[0]).length == 0) {
-            resolved = string.concat("0x", Transforms.toAsciiString(_user));
-        } else {
-            resolved = callres[0];
-        }
-
-        return resolved;
     }
 }
