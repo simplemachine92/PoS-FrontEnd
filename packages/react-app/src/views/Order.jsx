@@ -76,7 +76,7 @@ function Order({ writeContracts, tx }) {
           {/* prettier-ignore */}
           <h5 className="mt-2 mb-2 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">✨ Pre-Order ✨</h5>
           <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
-            <div className="flex flex-wrap w-1/2 content-center items-left mx-auto">
+            <div className="flex flex-wrap w-full sm:w-1/3 content-center items-left mx-auto">
               <div className="max-w-md py-3 mx-auto justify-center">
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
                   {loaded ? null : (
