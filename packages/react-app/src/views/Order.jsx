@@ -81,7 +81,7 @@ function Order({ writeContracts, tx }) {
                 <div className="py-0 backdrop-filter rounded-lg content-center mx-auto">
                   {loaded ? null : (
                     <svg
-                      className="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-pulse"
+                      className="w-1/2 sm:mt-0 mx-auto animate-pulse"
                       viewBox="0 0 600 830"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
