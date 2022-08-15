@@ -1,7 +1,6 @@
 pragma solidity >=0.8.0 <0.9.0;
 
 //SPDX-License-Identifier: Apache-2.0
-
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
@@ -40,6 +39,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
 
     bool public pledgeOpen;
 
+    // confirm with team
     uint256 internal constant price = 0.01337 ether;
 
     uint256 internal constant tokenlimitperuser = 1;
@@ -80,6 +80,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
     //////////////////////////////////////////////////////////////*/
 
     //prettier-ignore
+    // also, confirm with team
     address internal immutable vitalik = 0x55A178b6AfB3879F4a16c239A9F528663e7d76b3;
 
     uint256 internal immutable INITIAL_CHAIN_ID;
@@ -106,7 +107,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         for (uint256 i = 0; i < _donors.length; ++i) {
             pledgeLimit[_donors[i]] = pledgeLimit[_donors[i]] + 1;
 
-            string memory resolved = "placeholder";
+            string memory resolved = resolveENS(_donors[i]);
 
             udonationTotal[_donors[i]] += _amounts[i];
 
@@ -134,13 +135,6 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
     //////////////////////////////////////////////////////////////*/
 
     /**
-     * @notice Toggles Pledging On / Off
-     */
-    function togglePledging() public onlyOwner {
-        pledgeOpen == false ? pledgeOpen = true : pledgeOpen = false;
-    }
-
-    /**
      * @notice Pledges ETH to GTC & "whitelists" pledger
      */
     //prettier-ignore
@@ -149,7 +143,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         
         if (msg.value < price) revert NotMinimumPledge();
 
-        string memory resolved = 'placeholder';
+        string memory resolved = resolveENS(msg.sender);
 
         uint sShare = (msg.value * publisherSplit) / 100;
 
@@ -157,7 +151,6 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         (bool success3, ) = gitcoin.call{value: msg.value - sShare}("");
         if (!success3) revert SendFailed();
         
-
         (bool success4, ) = sevenStories.call{value: sShare}("");
         if (!success4) revert SendFailed();
         
@@ -194,6 +187,24 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         emit Pledge(msg.sender, msg.value);
     }
 
+    function resolveENS(address _user) internal view returns (string memory) {
+        string memory resolved;
+
+        address[] memory forCall = new address[](1);
+
+        forCall[0] = _user;
+
+        string[] memory callres = res.getNames(forCall);
+
+        if (bytes(callres[0]).length == 0) {
+            resolved = string.concat("0x", Transforms.toAsciiString(_user));
+        } else {
+            resolved = callres[0];
+        }
+
+        return resolved;
+    }
+
     /**
      * @notice Updates the user token if we have a valid msg from Vitalik
      */
@@ -204,7 +215,6 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         string calldata _timestamp,
         string calldata _message
     ) external nonReentrant {
-        //require(balanceOf(msg.sender) < 1, "UNIQUE: One per Address");
 
         (uint8 v, bytes32 r, bytes32 s) = Transforms.splitSignature(_signature);
 
@@ -234,6 +244,13 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
         uint256 tokenid = tokenOfOwnerByIndex(msg.sender, 0) - 1;
 
         tokens[tokenid].writtenMsg = _message;
+    }
+
+    /**
+     * @notice Toggles Pledging On / Off
+     */
+    function togglePledging() public onlyOwner {
+        pledgeOpen == false ? pledgeOpen = true : pledgeOpen = false;
     }
 
     /*///////////////////////////////////////////////////////////////

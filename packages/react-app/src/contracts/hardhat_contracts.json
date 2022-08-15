@@ -5,7 +5,7 @@
       "chainId": "4",
       "contracts": {
         "ProofOfStake_Pages": {
-          "address": "0xFFc57FF604949376f423C389E22175e075704971",
+          "address": "0x3e29Eb57C6B67bb972ABBD4558BF94096b2f01b8",
           "abi": [
             {
               "inputs": [
@@ -237,6 +237,19 @@
             {
               "inputs": [],
               "name": "contractAddressString",
+              "outputs": [
+                {
+                  "internalType": "string",
+                  "name": "",
+                  "type": "string"
+                }
+              ],
+              "stateMutability": "view",
+              "type": "function"
+            },
+            {
+              "inputs": [],
+              "name": "contractURI",
               "outputs": [
                 {
                   "internalType": "string",
