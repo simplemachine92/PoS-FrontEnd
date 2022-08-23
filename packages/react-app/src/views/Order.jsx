@@ -90,7 +90,7 @@ function Order({ writeContracts, tx }) {
                     </svg>
                   )}
                   <img
-                    className={loaded ? "w-1/2 sm:mt-0 mx-auto" : "hidden"}
+                    className={loaded ? "w-1/2 md:w-5/12 lg:w-7/12 xl:w-9/12 sm:mt-0 mx-auto" : "hidden"}
                     src="assets/RasCover.png"
                     onLoad={() => setLoaded(true)}
                   />
