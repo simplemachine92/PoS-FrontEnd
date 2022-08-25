@@ -41,51 +41,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
 
-  const auth = getAuth(app);
-  if (isSignInWithEmailLink(auth, window.location.href)) {
-    // Additional state parameters can also be passed via URL.
-    // This can be used to continue the user's intended action before triggering
-    // the sign-in operation.
-    // Get the email if available. This should be available if the user completes
-    // the flow on the same device where they started it.
-    const email = window.localStorage.getItem("emailForSignIn");
-    /* if (!email) {
-      // User opened the link on a different device. To prevent session fixation
-      // attacks, ask the user to provide the associated email again. For example:
-      email = window.prompt("Please provide your email for confirmation");
-    } */
-    // The client SDK will parse the code from the link for you.
-    signInWithEmailLink(auth, email, window.location.href)
-      .then(result => {
-        // Clear email from storage.
-        /* window.localStorage.removeItem("emailForSignIn"); */
-        /* console.log("email cleared, user:", result.user); */
-        setAlert(false);
-        // You can access the new user via result.user
-        // Additional user info profile not available via:
-        // result.additionalUserInfo.profile == null
-        // You can check if the user is new or existing:
-        // result.additionalUserInfo.isNewUser
-      })
-      .catch(error => {
-        // Some error occurred, you can inspect the code: error.code
-        // Common errors could be invalid email and invalid or expired OTPs.
-      });
-  }
-
-  onAuthStateChanged(auth, user => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/firebase.User
-      const uid = user.uid;
-      setUserEmail(user.reloadUserInfo.email);
-      setUser(uid);
-      // ...
-    } else {
-      // User is signed out
-      // ...
-    }
-  });
+  const database = getDatabase(app);
 
   const decompressTypedData = async data => {
     const _typedData = await codec.decompress(data);
@@ -95,7 +51,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
   const actionCodeSettings = {
     // URL you want to redirect back to. The domain (www.example.com) for this
     // URL must be in the authorized domains list in the Firebase Console.
-    url: "https://proofofstake.gitcoin.co/profile",
+    url: "http://invincible-purpose.surge.sh/profile",
     // This must be true.
     handleCodeInApp: true,
   };
@@ -264,29 +220,19 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                         placement: "topRight",
                       });
                     } else {
-                      sendSignInLinkToEmail(auth, eValue2.target.value, actionCodeSettings)
-                        .then(() => {
-                          // The link was successfully sent. Inform the user.
-                          // Save the email locally so you don't need to ask the user for it again
-                          // if they open the link on the same device.
-                          window.localStorage.setItem("emailForSignIn", eValue2.target.value);
-                          setAlert(true);
-                          // ...
-                        })
-                        .catch(error => {
-                          const errorCode = error.code;
-                          const errorMessage = error.message;
-                          // ...
-                        });
+                      const db = database;
+                      set(ref(db, `Emails/` + "placeholder"), { email: eValue2.target.value }).catch(error => {
+                        // ...
+                      });
+                      setAlert(true);
                     }
                   }}
                 >
                   Subscribe
                 </button>
                 {userAlert == true ? (
-                  <h3 className="text-red-400 text-center text-md md:text-lg">
-                    <br /> We have sent a confirmation link to your email address. <br />
-                    Please follow the link to continue.
+                  <h3 className="text-red-400 mt-2 text-center text-md md:text-lg">
+                    Your Email has been updated! <br />
                   </h3>
                 ) : null}
               </div>
@@ -295,7 +241,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                 <h3 className="text-gray-600 text-center text-sm md:text-lg">Thank you for Registering!</h3>
                 {userEmail ? <h3 className="text-gray-500 mt-2 text-center text-sm md:text-md">{userEmail}</h3> : null}
                 <h3 className="text-gray-500 mt-6 text-center text-2xs md:text-base">
-                  👇 Need to update your email? 👇
+                  👇 Need to update your email address? 👇
                 </h3>
                 <input
                   className="text-center h-1/2 w-full sm:w-2/3 mt-4 p-2 text-md md:text-lg"
@@ -319,18 +265,14 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                         placement: "topRight",
                       });
                     } else {
-                      sendSignInLinkToEmail(auth, eValue2.target.value, actionCodeSettings)
-                        .then(() => {
-                          // The link was successfully sent. Inform the user.
-                          // Save the email locally so you don't need to ask the user for it again
-                          // if they open the link on the same device.
-                          window.localStorage.setItem("emailForSignIn", eValue2.target.value);
-                          setAlert(true);
+                      const db = database;
+                      set(ref(db, `Emails/` + "placeholder"), {
+                        email: eValue2.target.value,
+                      })
+                        .catch(error => {
                           // ...
                         })
                         .catch(error => {
-                          const errorCode = error.code;
-                          const errorMessage = error.message;
                           // ...
                         });
                     }
