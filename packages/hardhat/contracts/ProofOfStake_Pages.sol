@@ -40,7 +40,7 @@ contract ProofOfStake_Pages is ERC721Enumerable, Ownable, ReentrancyGuard {
     bool public pledgeOpen;
 
     // confirm with team
-    uint256 internal constant price = 0.01337 ether;
+    uint256 internal constant price = 0.0001337 ether;
 
     uint256 internal constant tokenlimitperuser = 1;
 
