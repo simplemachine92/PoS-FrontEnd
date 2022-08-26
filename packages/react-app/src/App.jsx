@@ -342,8 +342,8 @@ function App(props) {
   return (
     <div className="App">
       {loading ? (
-        <div className="w-full h-screen ">
-          <div className="w-1/2 sm:w-1/4 sm:mt-0 md:w-5/12 mx-auto flex justify-center items-center">
+        <div className="w-full h-screen">
+          <div className="h-screen w-1/2 sm:w-1/4 sm:mt-0 md:w-5/12 mx-auto flex justify-center items-center">
             <svg
               className="w-1/2 sm:mt-0 md:w-5/12 mx-auto animate-spin"
               width="500"
