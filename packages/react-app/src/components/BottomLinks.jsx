@@ -26,7 +26,7 @@ export default function BottomLinks({ daoLogo }) {
         </a>
       </div>
       <div>
-        <p className="text-3xs sm:text-2xs md:text-xs text-gray-500 mb-5 mt-1 text-white font-spacemono">
+        <p className="text-2xs sm:text-xs md:text-sm text-gray-500 mb-5 mt-1 text-white font-spacemono">
           <span className="text-white">Art by</span>{" "}
           <a href="https://twitter.com/g_uist" className="text-white">
             guist.eth

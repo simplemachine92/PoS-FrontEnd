@@ -154,9 +154,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
       {address && tokenId ? (
         <div>
           <div className="bg-headerBackground bg-cover bg-center bg-no-repeat">
-            <h5 className="mt-3 mb-2 sm:mb-3 md:mb-4 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">
-              ✨ Profile ✨
-            </h5>
+            <h5 className="mt-3 mb-2 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">✨ Profile ✨</h5>
             {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
             {/* prettier-ignore */}
             <div className="flex flex-wrap items-center justify-center pt-5 mx-auto">
@@ -215,7 +213,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
               </div>
 
               ) : (
-                <div className="w-full sm:w-1/2 mx-auto p-1 sm:p-2 rounded overflow-hidden shadow-xl">
+                <div className="w-full sm:w-1/2 mx-2 my-2 sm:my-0 sm:mx-auto sm:p-2 rounded overflow-hidden shadow-xl">
                 
                 <p className="text-white text-center text-lg md:text-3xl">
                   View on <a href={url}>OpenSea</a>
@@ -239,9 +237,9 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
             {/* <Quotes /> */}
             {!userReady ? (
               <div className="mx-4 p-5 rounded overflow-hidden shadow-xl">
-                <p className="text-gray-500 text-center text-md md:text-lg">
+                <h3 className="text-gray-500 text-center text-md md:text-lg">
                   Want notifications? Enter your E-mail below!
-                </p>
+                </h3>
                 <input
                   className="text-center h-1/2 w-full sm:w-2/3 mt-4 p-2 text-md md:text-lg"
                   placeholder="Your @.com"
