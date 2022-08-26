@@ -217,11 +217,11 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
               ) : (
                 <div className="w-full sm:w-1/2 mx-auto p-1 sm:p-2 rounded overflow-hidden shadow-xl">
                 
-                <h3 className="text-center text-lg md:text-3xl">
+                <p className="text-white text-center text-lg md:text-3xl">
                   View on <a href={url}>OpenSea</a>
-                </h3>
+                </p>
                 <br/>
-                <h3 className="text-center text-sm md:text-lg">Download your personalized copy starting on September 13, 2022.</h3>
+                <p className="text-white text-center text-sm md:text-lg">Download your personalized copy starting on September 13, 2022.</p>
                 <br/>
               </div>
               )}
@@ -239,9 +239,9 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
             {/* <Quotes /> */}
             {!userReady ? (
               <div className="mx-4 p-5 rounded overflow-hidden shadow-xl">
-                <h3 className="text-gray-500 text-center text-md md:text-lg">
+                <p className="text-gray-500 text-center text-md md:text-lg">
                   Want notifications? Enter your E-mail below!
-                </h3>
+                </p>
                 <input
                   className="text-center h-1/2 w-full sm:w-2/3 mt-4 p-2 text-md md:text-lg"
                   placeholder="Your @.com"

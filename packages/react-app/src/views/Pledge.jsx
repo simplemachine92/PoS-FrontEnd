@@ -168,15 +168,15 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
             </div>
 
             <div className="pt-8 mx-auto font-spacemono bg-circle bg-left bg-6 sm:bg-fit bg-no-repeat">
-          <h3 className="text-center text-sm md:text-xl mx-8 mt-2 mb-4">
+          <p className="text-white text-left text-sm md:text-xl mb-4 mx-8 sm:mb-4 md:mb-8">
               Donate any amount of ETH above to receive an NFT and digitally signed book from Vitalik.   You'll mint a non-transferable NFT and, when the book is available, you'll gain access to your signed digital copy.
-              </h3>
-            <h3 className="text-left text-sm md:text-xl mx-8">
+              </p>
+            <p className="text-white text-left text-sm md:text-xl mx-8">
           For pledges made here, funds will go 90% to the Gitcoin Grants matching pool and 10% to our publishing
           partner, <a href="https://www.sevenstories.com/books/4443-proof-of-stake">Seven Stories Press</a>, for
           supporting public goods in independent publishing. For book copies purchased here or anywhere, Vitalik has
           committed all of his proceeds to Gitcoin Grants.
-        </h3>
+        </p>
           </div>
           </div>
         {/* Removing this component until sizing is fixed */}

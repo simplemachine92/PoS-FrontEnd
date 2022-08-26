@@ -98,12 +98,12 @@ function Order({ writeContracts, tx }) {
               </div>
             </div>
             <div className="w-full sm:w-1/2 mx-auto mt-2 rounded overflow-hidden content-center shadow-2xl px-5 py-3">
-              <h5 className="font-bold text-center sm:text-left mb-2 text-xs sm:text-tiny md:text-lg lg:text-xl">
-                Preorder from your local bookstore,
-              </h5>
-              <h5 className="font-bold text-center sm:text-left mb-2 text-xs sm:text-tiny md:text-lg lg:text-xl">
+              <p className="text-white font-bold text-center sm:text-left mb-2 text-xs sm:text-tiny md:text-lg lg:text-xl">
+                Preorder from your local bookstore
+              </p>
+              <p className="text-white font-bold text-center sm:text-left mb-2 text-xs sm:text-tiny md:text-lg lg:text-xl">
                 or from these retailers:
-              </h5>
+              </p>
               <div className="flex flex-wrap">
                 {buyLinks.map(item => (
                   <div className="py-1 px-2 w-1/2 justify-center">
