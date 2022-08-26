@@ -208,7 +208,9 @@ export default function Tweets({ yourLocalBalance, mainnetProvider, price, addre
     >
       {ready ? (
         <div style={{ marginTop: 0 }}>
-          <h1>Tweet to Recently Signed</h1>
+          <h5 className="mt-3 mb-2 sm:mb-3 md:mb-4 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">
+            Tweet to Recently Signed
+          </h5>
 
           <Table columns={columns} dataSource={dataSource} />
         </div>

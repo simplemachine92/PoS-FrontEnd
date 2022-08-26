@@ -52,9 +52,10 @@ export default function Signator({
   const [dataSource2, setDataSource2] = useState(events);
 
   const FilterByNameInput2 = (
-    <Input
-      className="w-2/3"
-      placeholder="Sort by ENS or 0x.."
+    <input
+      placeholder="Search"
+      type="table"
+      className="w-full bg-green-400 sm:text-xl"
       value={value2}
       onChange={e => {
         const currValue = e.target.value;
@@ -73,7 +74,6 @@ export default function Signator({
               setDataSource2(filteredData2);
             }
           });
-          /* console.log("ensName", ensName) */
         }
       }}
     />
@@ -93,7 +93,11 @@ export default function Signator({
       dataIndex: "args",
       key: "donation",
       render: value => {
-        return ethers.utils.formatEther(ethers.BigNumber.from(value[1]));
+        return (
+          <div className="text-2xs sm:text-sm md:text-base lg:text-lg mx-auto text-black">
+            {ethers.utils.formatEther(ethers.BigNumber.from(value[1])).substring(0, 6)}
+          </div>
+        );
       },
       sorter: (a, b) => a.args[1] - b.args[1],
       sortDirections: ["ascend", "descend"],
@@ -207,7 +211,7 @@ export default function Signator({
       domain: {
         name: "ProofOfStake_Pages",
         version: "0",
-        chainId: 31337,
+        chainId: 4,
         verifyingContract: contracts.ProofOfStake_Pages.address,
       },
       message: {
@@ -375,133 +379,108 @@ export default function Signator({
   }, [list]);
 
   return (
-    <div
-      style={{
-        width: "10px auto",
-        margin: "10px auto",
-        paddingLeft: 20,
-        paddingRight: 20,
-        paddingBottom: 20,
-      }}
-    >
+    <div>
       {userReady ? (
         <>
-          <Row>
-            <Col span={12}>
-              <Card>
-                {type === "message" && (
-                  <Input.TextArea
-                    style={{ fontSize: 18 }}
-                    size="large"
+          <div className="flex-wrap mt-2 px-1 py-1 sm:px-4 sm:py-10 md:py-12 lg:py-16 xl:py-18 w-full mx-auto content-center rounded overflow-hidden shadow-2xl">
+            {type === "message" && (
+              <input
+                class="text-center  mt-4 text-md md:text-lg"
+                value={messageText}
+                onChange={e => {
+                  setMessageText(e.target.value);
+                }}
+              />
+            )}
+            <h5 className="mt-3 mb-2 sm:mb-3 md:mb-4 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">
+              Signing to:
+            </h5>
+            <Space direction="vertical" style={{ width: "auto" }}>
+              <div className="w-full">
+                <List
+                  bordered
+                  dataSource={list}
+                  split={false}
+                  pagination={{
+                    defaultPageSize: "1",
+                    total: "1",
+                    hideOnSinglePage: true,
+                  }}
+                  renderItem={item => (
+                    <List.Item key={item}>
+                      <Address2
+                        value={item.args[0]}
+                        ensProvider={mainnetProvider}
+                        fontSize={32}
+                        style={{ display: "flex", flex: 1, alignItems: "center" }}
+                      />
+                    </List.Item>
+                  )}
+                />
+              </div>
+            </Space>
+            {type === "typedData" && (
+              <>
+                <h1 className="text-xs sm:text-sm md:text-base lg:text-lg mt-2">Message:</h1>
+                <Space direction="vertical" style={{ width: "50%" }}>
+                  <input
+                    className="w-full"
+                    maxLength={60}
                     autoSize={{ minRows: 1 }}
                     value={messageText}
                     onChange={e => {
                       setMessageText(e.target.value);
                     }}
                   />
-                )}
-                <h1>Queued / Selected:</h1>
-                <Space direction="vertical" style={{ width: "auto" }}>
-                  <div
-                    style={{
-                      width: "10px auto",
-                      margin: "10px auto",
-                      paddingLeft: 20,
-                      paddingRight: 20,
-                      paddingBottom: 20,
-                    }}
-                  >
-                    <List
-                      bordered
-                      dataSource={list}
-                      split={false}
-                      pagination={{
-                        defaultPageSize: "1",
-                        total: "1",
-                        hideOnSinglePage: true,
-                      }}
-                      renderItem={item => (
-                        <List.Item key={item}>
-                          <Address
-                            value={item.args[0]}
-                            ensProvider={mainnetProvider}
-                            fontSize={32}
-                            style={{ display: "flex", flex: 1, alignItems: "center" }}
-                          />
-                        </List.Item>
-                      )}
-                    />
-                  </div>
+                  {invalidJson && <Alert message="Invalid Json" type="error" />}
+                  {/* typedDataChecks.domain===false&&<Alert message="No domain specified" type="info" /> */}
+                  {typedDataChecks.types === false && <Alert message="Missing types" type="error" />}
+                  {typedDataChecks.message === false && <Alert message="Missing message" type="error" />}
+                  {!invalidJson && !typedDataChecks.hash && <Alert message="Invalid EIP-712 input data" type="error" />}
                 </Space>
-                {type === "typedData" && (
-                  <>
-                    <h1>Message:</h1>
-                    <Space direction="vertical" style={{ width: "50%" }}>
-                      <Input.TextArea
-                        style={{ fontSize: 18 }}
-                        maxLength={60}
-                        showCount
-                        size="large"
-                        autoSize={{ minRows: 1 }}
-                        value={messageText}
-                        onChange={e => {
-                          setMessageText(e.target.value);
-                        }}
-                      />
-                      {invalidJson && <Alert message="Invalid Json" type="error" />}
-                      {/* typedDataChecks.domain===false&&<Alert message="No domain specified" type="info" /> */}
-                      {typedDataChecks.types === false && <Alert message="Missing types" type="error" />}
-                      {typedDataChecks.message === false && <Alert message="Missing message" type="error" />}
-                      {!invalidJson && !typedDataChecks.hash && (
-                        <Alert message="Invalid EIP-712 input data" type="error" />
-                      )}
-                    </Space>
-                  </>
-                )}
-                <Collapse ghost />
-                <Space>
-                  <Button
-                    size="large"
-                    type="primary"
-                    onClick={action !== "sign" ? signMessage : injectedProvider ? signMessage : loadWeb3Modal}
-                    disabled={
-                      (type === "typedData" && (!typedDataChecks.hash || invalidJson)) ||
-                      (action === "verify" && (!ethers.utils.isAddress(manualAddress) || !manualSignature))
-                    }
-                    loading={signing}
-                    style={{ marginTop: 10 }}
-                  >
-                    {action !== "sign" ? action : injectedProvider ? action : "Connect account to sign"}
-                  </Button>
-                  {signing && (
-                    <Button
-                      size="large"
-                      onClick={() => {
-                        setSigning(false);
-                      }}
-                      style={{ marginTop: 10 }}
-                    >
-                      Cancel
-                    </Button>
-                  )}
-                </Space>
-              </Card>
-            </Col>
+              </>
+            )}
+            <Collapse ghost />
+            <Space>
+              <button
+                className="w-full mt-4 px-2 py-1 sm:py-4 text-2xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                type="primary"
+                onClick={action !== "sign" ? signMessage : injectedProvider ? signMessage : loadWeb3Modal}
+                disabled={
+                  (type === "typedData" && (!typedDataChecks.hash || invalidJson)) ||
+                  (action === "verify" && (!ethers.utils.isAddress(manualAddress) || !manualSignature))
+                }
+                loading={signing}
+                style={{ marginTop: 10 }}
+              >
+                {action !== "sign" ? action : injectedProvider ? action : "Connect account to sign"}
+              </button>
+              {signing && (
+                <Button
+                  size="large"
+                  onClick={() => {
+                    setSigning(false);
+                  }}
+                  style={{ marginTop: 10 }}
+                >
+                  Cancel
+                </Button>
+              )}
+            </Space>
 
-            <Col span={12}>
-              <Tweets
+            {/*  <Col span={12}>
+               <Tweets
                 address={address}
                 mainnetProvider={mainnetProvider}
                 firebaseConfig={firebaseConfig}
                 events={events}
               />
-            </Col>
-          </Row>
-
-          <div className="" style={{ height: "auto", width: "auto", marginTop: 20 }}>
+            </Col> */}
+          </div>
+          <div className="">
             {ready ? (
-              <div className="mx-auto mr-1 ml-1">
-                <h6 className="text-yellow-pos font-bold text-3xl mt-5">Select a User to Sign</h6>
+              <div className="mx-auto mr-1 ml-1 px-5">
+                {/* <h5 className="font-bold text-sm sm:text-base md:text-lg lg:text-4xl">Select a User</h5> */}
                 <br />
                 <Table
                   pagination={{ pageSize: 5 }}
@@ -519,7 +498,7 @@ export default function Signator({
           </div>
         </>
       ) : (
-        <div style={{ margintop: 50 }}>
+        <div style={{ margintop: 50, padding: 12 }}>
           <Form
             name="basic"
             labelCol={{
