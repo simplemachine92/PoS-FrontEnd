@@ -17,10 +17,8 @@ function SignatureDisplay({
   const [closed, setClosed] = useState(false);
 
   let signatureDisplay = "";
-  console.log("blank");
   if (ready && address && sData && visit == false && closed == false) {
     const filteredData = sData.filter(entry => entry.recipient.includes(address));
-    console.log("filtered", filteredData);
     if (filteredData[0] && filteredData[0].recipient.includes(address) == true && filteredData[0].msg != uMessage) {
       signatureDisplay = (
         <div

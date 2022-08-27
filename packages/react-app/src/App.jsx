@@ -83,7 +83,7 @@ const web3Modal = Web3ModalSetup();
 // 🛰 providers
 const providers = [
   /* "https://eth-mainnet.gateway.pokt.network/v1/lb/611156b4a585a20035148406", */
-  `https://rpc.ankr.com/eth_rinkeby`,
+  process.env.REACT_APP_ANKR,
 ];
 
 function App(props) {
@@ -196,13 +196,15 @@ function App(props) {
     console.log(`⛓ A new mainnet block is here: ${mainnetProvider._lastBlockNumber}`);
   }); */
 
-  // Then read your DAI balance like:
-  const myMainnetDAIBalance = useContractReader(mainnetContracts, "DAI", "balanceOf", [
-    "0x34aA3F359A9D614239015126635CE7732c18fDF3",
-  ]);
-
   // keep track of a variable from the contract in the local React state:
-  const tokenId = useContractReader(readContracts, "ProofOfStake_Pages", "tokenOfOwnerByIndex", [address, "0"]);
+  const tokenId = useContractReader(
+    readContracts,
+    "ProofOfStake_Pages",
+    "tokenOfOwnerByIndex",
+    [address, "0"],
+    60000,
+    null,
+  );
   /* console.log("purpose", purpose); */
 
   //
