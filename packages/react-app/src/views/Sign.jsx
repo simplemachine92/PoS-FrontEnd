@@ -44,6 +44,8 @@ export default function Signator({
   localProvider,
   firebaseConfig,
   events,
+  tx,
+  writeContracts,
 }) {
   const [list, setList] = useState();
   const [ready, setReady] = useState(false);
@@ -132,6 +134,7 @@ export default function Signator({
 };
 
   const [messageText, setMessageText] = useLocalStorage("messageText", "Type Your Message Here");
+  const [globalText, setGlobalText] = useLocalStorage("globalText", "Global Message Here");
   const [hashMessage, setHashMessage] = useState(false);
   const [signing, setSigning] = useState(false);
   const [typedData, setTypedData] = useLocalStorage("typedData", eip712Example);
@@ -296,7 +299,12 @@ export default function Signator({
 
         if (action === "sign")
           _signature = await injectedSigner._signTypedData(_typedData.domain, _typedData.types, _typedData.message);
+
+        /* if (ethers.utils.verifyMessage(_signature) != ) {} */
+
         const _compressedData = await codec.compress(_typedData);
+
+        /* const ourSigner = ethers.utils.verifyMessage(_signature); */
 
         const db = database;
         set(ref(db, `PoS/` + _typedData.message.recipient), {
@@ -382,21 +390,22 @@ export default function Signator({
     <div>
       {userReady ? (
         <>
-          <div className="flex-wrap mt-2 px-1 py-1 sm:px-4 sm:py-10 md:py-12 lg:py-16 xl:py-18 w-full mx-auto content-center rounded overflow-hidden shadow-2xl">
-            {type === "message" && (
-              <input
-                class="text-center  mt-4 text-md md:text-lg"
-                value={messageText}
-                onChange={e => {
-                  setMessageText(e.target.value);
-                }}
-              />
-            )}
-            <h5 className="mt-3 mb-2 sm:mb-3 md:mb-4 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">
-              Signing to:
-            </h5>
-            <Space direction="vertical" style={{ width: "auto" }}>
-              <div className="w-full">
+          <div className="flex flex-wrap w-full mx-auto content-center rounded overflow-hidden shadow-2xl">
+            <div className="flex flex-wrap w-1/2 mx-auto content-center rounded overflow-hidden shadow-2xl">
+              {type === "message" && (
+                <input
+                  class="text-center mt-4 text-md md:text-lg"
+                  value={messageText}
+                  onChange={e => {
+                    setMessageText(e.target.value);
+                  }}
+                />
+              )}
+              <h5 className="content-center w-full mt-3 mb-2 sm:mb-3 md:mb-4 font-bold text-sm sm:text-base">
+                Set a Global Message
+              </h5>
+
+              {/* <div className="w-1/2">
                 <List
                   bordered
                   dataSource={list}
@@ -417,14 +426,119 @@ export default function Signator({
                     </List.Item>
                   )}
                 />
-              </div>
-            </Space>
-            {type === "typedData" && (
+              </div> */}
+
               <>
-                <h1 className="text-xs sm:text-sm md:text-base lg:text-lg mt-2">Message:</h1>
-                <Space direction="vertical" style={{ width: "50%" }}>
-                  <input
-                    className="w-full"
+                {/* <h1 className="text-xs w-full sm:text-sm md:text-base lg:text-lg mt-2">Message:</h1> */}
+
+                <textarea
+                  className="text-2xs sm:text-xs md:text-base w-full mx-auto sm:mx-3 md:mx-4 lg:mx-6"
+                  maxLength={60}
+                  autoSize={{ minRows: 1 }}
+                  value={globalText}
+                  onChange={e => {
+                    setGlobalText(e.target.value);
+                  }}
+                />
+              </>
+
+              <Collapse ghost />
+              {address ? (
+                <button
+                  type="btn btn-primary"
+                  className="w-1/2 mx-auto sm:w-1/2 mb-2 mt-2 sm:mt-4 md:mt-6 lg:mt-10 mx-auto sm:py-2 sm:px-2 text-xs md:text-lg sm:mt-5 lg:mt-8 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  onClick={async () => {
+                    try {
+                      const result = tx(
+                        writeContracts && writeContracts.ProofOfStake_Pages.setMessage(globalText),
+                        async update => {
+                          if (update && (update.status === "confirmed" || update.status === 1)) {
+                            console.log(
+                              " ⛽️ " +
+                                update.gasUsed +
+                                "/" +
+                                (update.gasLimit || update.gas) +
+                                " @ " +
+                                parseFloat(update.gasPrice) / 1000000000 +
+                                " gwei",
+                            );
+
+                            // send notification of stream creation
+                            notification.success({
+                              message: "Donation Successful",
+                              description: `Donation from ${address} successful`,
+                              placement: "topRight",
+                            });
+                          }
+                        },
+                      );
+                    } catch (err) {
+                      notification.error({
+                        message: "Donation Not Processed",
+                        description: err,
+                        placement: "topRight",
+                      });
+                    }
+                  }}
+                >
+                  Send
+                </button>
+              ) : (
+                <button
+                  type="btn btn-primary"
+                  className="w-1/3 sm:w-1/2 mb-2 mt-2 sm:mt-4 md:mt-6 lg:mt-10 mx-auto sm:py-2 sm:px-2 text-xs md:text-lg sm:mt-5 lg:mt-8 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                  onClick={loadWeb3Modal}
+                >
+                  Connect
+                </button>
+              )}
+              {/*  <Col span={12}>
+               <Tweets
+                address={address}
+                mainnetProvider={mainnetProvider}
+                firebaseConfig={firebaseConfig}
+                events={events}
+              />
+            </Col> */}
+            </div>
+            <div className="flex flex-wrap w-1/2 mx-auto content-center rounded overflow-hidden shadow-2xl">
+              {type === "message" && (
+                <input
+                  class="text-center mt-2 text-md md:text-lg"
+                  value={messageText}
+                  onChange={e => {
+                    setMessageText(e.target.value);
+                  }}
+                />
+              )}
+              <h5 className="w-full mt-3 mb-2 sm:mb-3 md:mb-4 font-bold text-2xs sm:text-base md:text-lg">
+                Sign directly to user:
+                <br />
+                (Select from list below)
+              </h5>
+              <div className="w-full">
+                <List
+                  dataSource={list}
+                  split={false}
+                  pagination={{
+                    defaultPageSize: "1",
+                    total: "1",
+                    hideOnSinglePage: true,
+                  }}
+                  renderItem={item => (
+                    <List.Item key={item}>
+                      <div className="w-full">
+                        <Address value={item.args[0]} ensProvider={mainnetProvider} />
+                      </div>
+                    </List.Item>
+                  )}
+                />
+              </div>
+              {type === "typedData" && (
+                <>
+                  {/* <h1 className="w-full text-xs sm:text-sm md:text-base lg:text-lg mt-2">Message:</h1> */}
+                  <textarea
+                    className="text-2xs sm:text-xs md:text-base w-full mx-auto sm:mx-3 md:mx-4 lg:mx-6"
                     maxLength={60}
                     autoSize={{ minRows: 1 }}
                     value={messageText}
@@ -437,26 +551,26 @@ export default function Signator({
                   {typedDataChecks.types === false && <Alert message="Missing types" type="error" />}
                   {typedDataChecks.message === false && <Alert message="Missing message" type="error" />}
                   {!invalidJson && !typedDataChecks.hash && <Alert message="Invalid EIP-712 input data" type="error" />}
-                </Space>
-              </>
-            )}
-            <Collapse ghost />
-            <Space>
+                </>
+              )}
+              <Collapse ghost />
+
               <button
-                className="w-full mt-4 px-2 py-1 sm:py-4 text-2xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                type="primary"
+                type="btn btn-primary"
+                className="w-1/2 mx-auto sm:w-1/2 mb-2 mt-2 sm:mt-4 md:mt-6 lg:mt-10 mx-auto sm:py-2 sm:px-2 text-xs md:text-lg sm:mt-5 lg:mt-8 bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                 onClick={action !== "sign" ? signMessage : injectedProvider ? signMessage : loadWeb3Modal}
                 disabled={
                   (type === "typedData" && (!typedDataChecks.hash || invalidJson)) ||
-                  (action === "verify" && (!ethers.utils.isAddress(manualAddress) || !manualSignature))
+                  address != process.env.REACT_APP_SIGNER
                 }
                 loading={signing}
                 style={{ marginTop: 10 }}
               >
-                {action !== "sign" ? action : injectedProvider ? action : "Connect account to sign"}
+                {action !== "sign" ? action : injectedProvider ? action : "Connect"}
               </button>
               {signing && (
-                <Button
+                <button
+                  className="w-1/3 mt-4 px-2 py-1 sm:py-4 text-2xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
                   size="large"
                   onClick={() => {
                     setSigning(false);
@@ -464,11 +578,10 @@ export default function Signator({
                   style={{ marginTop: 10 }}
                 >
                   Cancel
-                </Button>
+                </button>
               )}
-            </Space>
 
-            {/*  <Col span={12}>
+              {/*  <Col span={12}>
                <Tweets
                 address={address}
                 mainnetProvider={mainnetProvider}
@@ -476,6 +589,7 @@ export default function Signator({
                 events={events}
               />
             </Col> */}
+            </div>
           </div>
           <div className="">
             {ready ? (

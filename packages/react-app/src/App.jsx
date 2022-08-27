@@ -675,6 +675,8 @@ function App(props) {
                 localProvider={localProvider}
                 firebaseConfig={firebaseConfig}
                 events={events}
+                tx={tx}
+                writeContracts={writeContracts}
               />
             </Route>
             <Route path="/profile">
