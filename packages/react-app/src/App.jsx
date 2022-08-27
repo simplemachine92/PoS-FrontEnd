@@ -123,7 +123,7 @@ function App(props) {
   const localProvider = useStaticJsonRPC([
     process.env.REACT_APP_PROVIDER ? process.env.REACT_APP_PROVIDER : targetNetwork.rpcUrl,
   ]);
-  const mainnetProvider = useStaticJsonRPC(providers);
+  const mainnetProvider = useStaticJsonRPC(providers[0]);
 
   if (DEBUG) console.log(`Using ${selectedNetwork} network`);
 
