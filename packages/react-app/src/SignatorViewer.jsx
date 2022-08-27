@@ -27,7 +27,7 @@ import styled from "styled-components";
 import { PDFDocument } from "pdf-lib";
 import { useHistory, useLocation } from "react-router-dom";
 import { create, urlSource } from "ipfs-http-client";
-import { Address } from "./components";
+import { Address, Footer } from "./components";
 
 const codec = require("json-url")("lzw");
 
@@ -494,7 +494,7 @@ function SignatorViewer({
         <br />
         {dataImage != undefined ? (
           <div class="flex items-center justify-center">
-            <img className="px-2 py-2 mb-10 w-1/3 sm:w-1/3 lg:w-1/4 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" src={dataImage} />
+            <img className="px-2 py-2 mb-10 w-2/3 sm:w-1/3 lg:w-1/4 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out" src={dataImage} />
             
 
             
@@ -522,32 +522,28 @@ function SignatorViewer({
         />
       </Modal>
       <div>
-        <Card className="" style={{ paddingTop: 10, background: "#2bcfd9" }}>
+        <Card className="mx-auto" style={{ paddingTop: 10, background: "#2bcfd9" }}>
           {message ? (
             <Text style={{ fontSize: 18, marginBottom: "0px" }}>{`${message}`}</Text>
           ) : (
             <div style={{ textAlign: "left" }}>
               Signed Message Details
+              <br/>
+              <p className="text-left text-gray-100 text-3xs sm:text-2xs md:text-xs mb-1">Note: This may be out of date until a user updates their token.</p>
               <Input.TextArea
+              className="text-2xs sm:text-xs md:text-sm lg:text-base xl:text-xl"
                 size="large"
                 autoSize={{ minRows: 2 }}
                 value={typedData && JSON.stringify(showAll === true ? typedData : typedData.message, null, "\t")}
                 style={{ marginBottom: 10, background: "#96f9ff" }}
               />
               <Space>
-                
-                <Switch
-                  checkedChildren="all"
-                  unCheckedChildren="msg"
-                  onChange={checked => {
-                    setShowAll(checked);
-                  }}
-                />
               </Space>
             </div>
           )}
         </Card>
       </div>
+      <Footer/>
     </>
   );
 }
