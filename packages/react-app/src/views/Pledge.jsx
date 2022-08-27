@@ -17,7 +17,7 @@ const { utils, BigNumber } = require("ethers");
 function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
   // you can also use hooks locally in your component of choice
   // in this case, let's keep track of 'purpose' variable from our contract
-  const [uValue, setU] = useState("0.01337");
+  const [uValue, setU] = useState("0.0001337");
   const [eValue, setE] = useState("placeholder");
   const [loaded, setLoaded] = useState(false);
   const [loaded2, setLoaded2] = useState(false);
@@ -94,7 +94,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                   const currValue = String(e);
                   setU(currValue);
                 }}
-                defaultValue={0.01337}
+                defaultValue={0.0001337}
               />
               {/* <h3 className="text-2xs sm:text-2xs md:text-xs mt-3 md:mt-5 mx-2">Optional: Provide an email for notifications.</h3> */}
              {/*  <input

@@ -28,7 +28,7 @@ const { isAddress, getAddress, formatUnits, parseUnits } = utils;
 //
 const defaultNetwork = "mainnet";
 
-const mainnetGwei = 50;
+const mainnetGwei = 6;
 
 function mnemonic() {
   try {
@@ -53,7 +53,7 @@ module.exports = {
    */
   gasReporter: {
     currency: "USD",
-    coinmarketcap: process.env.COINMARKETCAP || null,
+    coinmarketcap: "400925a6-02e3-4afb-8ab8-f176a4f2dc39" || null,
   },
 
   // if you want to deploy to a testnet, mainnet, or xdai, you will need to configure:
@@ -100,7 +100,7 @@ module.exports = {
     // },
 
     rinkeby: {
-      url: "https://rinkeby.infura.io/v3/481f9311c96348a4b1bf3bc79be0d8ac", // <---- YOUR INFURA ID! (or it won't work)
+      url: "https://eth-rinkeby.alchemyapi.io/v2/4CsGall2al68xQLmGzzSdF_N64hq4Xsi", // <---- YOUR INFURA ID! (or it won't work)
 
       //    url: "https://speedy-nodes-nyc.moralis.io/XXXXXXXXXXXXXXXXXXXXXXX/eth/rinkeby", // <---- YOUR MORALIS ID! (not limited to infura)
 
