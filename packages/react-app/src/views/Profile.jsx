@@ -184,7 +184,7 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
                 <h3 className="w-full text-sm text-center text-md md:text-3xl mt-4 mb-4">
               View it on <a href={url}>OpenSea</a>
             </h3>
-                <h3 className="text-xs text-center text-md md:text-2xl">You received a message!</h3>
+                <h3 className="text-xs text-center text-md md:text-2xl">You received a personal message!</h3>
                 <h3 className="text-2xs text-center text-md md:text-xl mt-4">"{typedData.message.msg}"</h3>
                 <br />
                 <button
