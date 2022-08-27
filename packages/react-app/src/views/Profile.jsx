@@ -137,7 +137,8 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
     if (readContracts.ProofOfStake_Pages && address && tokenId) {
       const nId = await readContracts.ProofOfStake_Pages.tokenOfOwnerByIndex(address, "0");
       const token = await readContracts.ProofOfStake_Pages.tokenURI(nId);
-      setURL(`https://opensea.io/assets/${readContracts.ProofOfStake_Pages.address}/${nId}`);
+      /* "https://opensea.io/assets/ethereum/0x5bf5bcc5362f88721167c1068b58c60cad075aac/1" */
+      setURL(`https://opensea.io/assets/ethereum/${readContracts.ProofOfStake_Pages.address}/${nId}`);
       const json = atob(token.substring(29));
       const result = JSON.parse(json);
 
