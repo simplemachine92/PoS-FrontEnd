@@ -123,7 +123,7 @@ export default function IntroHeader() {
               </svg>
             )}
             <img
-              className={loaded ? "w-1/2 sm:mt-0 md:w-5/12 xl:w-10/12 mx-auto" : "hidden"}
+              className={loaded ? "w-1/2 sm:mt-0 md:w-5/12 xl:w-3/4 mx-auto" : "hidden"}
               src="assets/RasCover.png"
               onLoad={() => setLoaded(true)}
             />

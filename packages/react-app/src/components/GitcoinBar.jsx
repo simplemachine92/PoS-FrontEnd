@@ -9,7 +9,7 @@ export default function GitcoinBar() {
       <img
         alt="Ethereum Hand"
         className="absolute right-4 bottom-0 h-24 w-24 sm:w-32 sm:h-32 md:w-56 md:h-56 lg:h-64 lg:w-64 xl:w-96 xl:h-96 xl:right-32 object-fill"
-        src="assets/EthereumHand.gif"
+        src="assets/hand-animation.gif"
       />
     </div>
   );
