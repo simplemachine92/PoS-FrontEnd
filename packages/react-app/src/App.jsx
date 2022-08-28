@@ -618,6 +618,7 @@ function App(props) {
                 localProvider={localProvider}
                 loadWeb3Modal={loadWeb3Modal}
                 address={address}
+                tokenId={tokenId}
               />
             </Route>
             <Route path="/view">

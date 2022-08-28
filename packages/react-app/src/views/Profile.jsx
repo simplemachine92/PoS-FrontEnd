@@ -346,7 +346,10 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
         <div className="bg-headerBackground h-screen w-full bg-fill bg-center overflow-hidden">
           <div className="">
             <div className="flex items-center justify-center mt-10">
-              <h3 className="text-center text-md md:text-3xl"> Please connect your wallet, or mint a token.. </h3>
+              <h3 className="text-center text-md md:text-2xl">
+                {" "}
+                Please connect your wallet, mint a token, or refresh the page.{" "}
+              </h3>
             </div>
           </div>
         </div>
