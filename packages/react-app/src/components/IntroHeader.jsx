@@ -109,7 +109,7 @@ export default function IntroHeader() {
           </div>
         </div>
       </Modal>
-      <div className="flex flex-wrap items-center bg-smallBackground bg-auto bg-right bg-no-repeat sm:bg-ringsBackground xl:bg-center">
+      <div className="flex flex-wrap items-center bg-smallBackground bg-auto bg-right bg-no-repeat sm:bg-ringsBackground xl:bg-ringsBig xl:bg-right">
         <div className="flex flex-wrap w-1/2 sm:w-1/2 justify-center bg-no-repeat">
           <div className="max-w-lg py-5">
             {loaded ? null : (
@@ -136,19 +136,18 @@ export default function IntroHeader() {
             </button>
           </div>
         </div>
-        <div className="flex flex-wrap w-1/2 mx-auto 2xl:w-1/3 3xl:w-1/4 mb-4 md:mb-8">
-          <div className="bg-gradient-to-b p-2 from-teal-400 rounded overflow-hidden mr-2 xs:mr-6 xs2:mr-6 lg:mr-20 shadow-xl">
+        <div className="flex flex-wrap w-1/2 2xl:w-1/3 3xl:w-1/4 mb-4 md:mb-8">
+          <div className="mx-auto bg-gradient-to-b p-2 from-teal-400 rounded overflow-hidden mr-2 xs:mr-6 xs2:mr-6 lg:mr-20 shadow-xl">
             <p className="text-3xs xs:text-2xs xs2:text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl text-right title-font text-yellow-300">
               Coming September 27, 2022
             </p>
-            <p className="font-display text-right text-white text-2xl xs:text-3xl xs1:text-4xl xs2:text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-snug">
+            <p className="font-display text-right text-white text-2xl xs:text-3xl xs1:text-4xl xs2:text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold leading-snug">
               Proof of Stake
             </p>
             <h1 className="text-2xs xs2:text-xs sm:text-sm lg:text-lg xl:text-xl text-right leading-relaxed text-base text-blue-900">
               By Vitalik Buterin
             </h1>
           </div>
-          {/* <img className="object-fit px-2 sm:px-3 md:px-4 lg:px-6" src="assets/rastextneu.png" /> */}
         </div>
       </div>
     </>
