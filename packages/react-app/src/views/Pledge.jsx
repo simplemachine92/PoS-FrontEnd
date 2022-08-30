@@ -94,7 +94,7 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                   const currValue = String(e);
                   setU(currValue);
                 }}
-                defaultValue={0.0001337}
+                defaultValue={0.1337}
               />
               {/* <h3 className="text-2xs sm:text-2xs md:text-xs mt-3 md:mt-5 mx-2">Optional: Provide an email for notifications.</h3> */}
              {/*  <input

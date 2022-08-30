@@ -123,12 +123,12 @@ export default function IntroHeader() {
               </svg>
             )}
             <img
-              className={loaded ? "w-1/2 sm:mt-0 md:w-5/12 xl:w-3/4 mx-auto" : "hidden"}
+              className={loaded ? "w-1/2 sm:mt-0 md:w-5/12 xl:w-7/12 mx-auto" : "hidden"}
               src="assets/RasCover.png"
               onLoad={() => setLoaded(true)}
             />
             <button
-              className="w-4/5 sm:w-3/5 md:w-7/12 xl:w-full mt-4 py-1 sm:py-4 text-2xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+              className="w-4/5 sm:w-3/5 md:w-7/12 xl:w-3/4 mt-4 py-1 sm:py-4 text-2xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
               type="btn btn-primary"
               onClick={showModal}
             >
