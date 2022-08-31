@@ -56,7 +56,7 @@ export default function IntroHeader() {
       >
         <div className="">
           <h1 className="text-black text-2xs sm:text-xs ml-2 text-center">
-            Vitalik is committed to supporting open-source public goods, he's releasing a book on September 13.
+            Vitalik is committed to supporting open-source public goods, he's releasing a book on September 27.
           </h1>
           <h1 className="text-black text-2xs sm:text-xs mt-4 ml-2 text-center">
             We're pre-gaming by raising funds for public goods with a truly unique NFT, where Vitalik signs a message

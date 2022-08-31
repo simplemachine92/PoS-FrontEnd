@@ -39,6 +39,10 @@ export default function BottomLinks({ daoLogo }) {
           <a href="https://github.com/scaffold-eth" className="text-white">
             🏗 Scaffold-eth
           </a>
+          <br />
+          <a href="https://etherscan.io/address/0x5bf5bcc5362f88721167c1068b58c60cad075aac" className="text-white">
+            Etherscan
+          </a>
         </p>
       </div>
     </>

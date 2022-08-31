@@ -42,11 +42,13 @@ module.exports = {
       "6xl": "4.5rem",
       "7xl": "5rem",
       "8xl": "5.5rem",
+      "9xl": "6rem",
     },
     extend: {
       backgroundImage: {
         headerBackground: "url('/src/assets/Bareheader.svg')",
         ringsBackground: "url('/src/assets/RotatingRings.svg')",
+        ringsBig: "url('/src/assets/RotatingRingsBig.svg')",
         smallBackground: "url('/src/assets/Rings_small.svg')",
         circle: "url('/src/assets/eth_circle_3.svg')",
         midpage: "url('/src/assets/variant3.svg')",

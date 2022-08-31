@@ -35,7 +35,7 @@ import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
 import Profile from "./views/Profile";
 import { Suspense } from "react";
-import { CustomSwitch, Waitlist, AfterPledge } from "./components";
+import { CustomSwitch, Waitlist2, Waitlist, AfterPledge } from "./components";
 import { Home, Pledge, Order, SignatureList, Sign } from "./views";
 
 export const StyledMenu = styled(Menu)`
@@ -120,10 +120,9 @@ function App(props) {
   const blockExplorer = targetNetwork.blockExplorer;
 
   // load all your providers
-  const localProvider = useStaticJsonRPC([
-    process.env.REACT_APP_PROVIDER ? process.env.REACT_APP_PROVIDER : targetNetwork.rpcUrl,
-  ]);
-  const mainnetProvider = useStaticJsonRPC(providers[0]);
+  const localProvider = useStaticJsonRPC([providers[0]]);
+
+  const mainnetProvider = useStaticJsonRPC([providers[0]]);
 
   if (DEBUG) console.log(`Using ${selectedNetwork} network`);
 
@@ -182,7 +181,7 @@ function App(props) {
   // Load in your local 📝 contract and read a value from it:
   const readContracts = useContractLoader(localProvider, contractConfig);
 
-  const events = useEventListener(readContracts, "ProofOfStake_Pages", "Pledge", localProvider, "1");
+  const events = useEventListener(readContracts, "ProofOfStake_Pages", "Pledge", localProvider, "15444054");
   // If you want to make 🔐 write transactions to your contracts, use the userSigner:
   const writeContracts = useContractLoader(userSigner, contractConfig, localChainId);
 
