@@ -35,7 +35,7 @@ import SignatorViewer from "./SignatorViewer";
 import styled from "styled-components";
 import Profile from "./views/Profile";
 import { Suspense } from "react";
-import { CustomSwitch, Waitlist2, Waitlist, AfterPledge } from "./components";
+import { CustomSwitch, Waitlist2, Waitlist, AfterPledge, Maintenance } from "./components";
 import { Home, Pledge, Order, SignatureList, Sign } from "./views";
 
 export const StyledMenu = styled(Menu)`
@@ -181,7 +181,7 @@ function App(props) {
   // Load in your local 📝 contract and read a value from it:
   const readContracts = useContractLoader(localProvider, contractConfig);
 
-  const events = useEventListener(readContracts, "ProofOfStake_Pages", "Pledge", localProvider, "15444054");
+  const events = "";
   // If you want to make 🔐 write transactions to your contracts, use the userSigner:
   const writeContracts = useContractLoader(userSigner, contractConfig, localChainId);
 
@@ -594,7 +594,7 @@ function App(props) {
               />
             </Route>
             <Route path="/donations">
-              <Waitlist
+              <Waitlist2
                 yourLocalBalance={yourLocalBalance}
                 mainnetProvider={mainnetProvider}
                 writeContracts={writeContracts}
@@ -654,7 +654,8 @@ function App(props) {
               />
             </Route>
             <Route path="/signatures">
-              <SignatureList
+              <Maintenance />
+              {/* <SignatureList
                 address={address}
                 yourLocalBalance={yourLocalBalance}
                 mainnetProvider={mainnetProvider}
@@ -662,7 +663,7 @@ function App(props) {
                 firebaseConfig={firebaseConfig}
                 events={events}
                 visible={visible}
-              />
+              /> */}
             </Route>
             <Route path="/sign">
               <Sign

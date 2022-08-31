@@ -2,23 +2,23 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Footer, Quotes, AboutTheBook, GitcoinBar, IntroHeader } from ".";
 
-export default function Waitlist2({ readContracts, address, tokenId }) {
+export default function Maintenance({ readContracts, address, tokenId }) {
   return (
     <>
       <div className="mx-auto px-2 sm:px-3 md:px-4 lg:px-5">
-        <iframe
+        {/* <iframe
           className="mx-auto w-full mt-5 rounded shadow-xl bg-green-200 h-96"
           src="https://dune.com/embeds/1223834/2096259/d95211f8-bb8e-40bf-8545-d8f757bd5d50"
           title="chart 1"
-        ></iframe>
-        {/* <h6 className="text-yellow-pos font-bold mt-3 text-2xs sm:text-base md:text-2xl">
+        ></iframe> */}
+        <h6 className="text-yellow-pos font-bold mt-3 text-2xs sm:text-base md:text-2xl">
           🚧 Maintenance, check back ina bit! 🚧
           <br />
           In the meantime, view the contract on{" "}
           <a className="text-white" href="https://etherscan.io/address/0x5bf5bcc5362f88721167c1068b58c60cad075aac">
             Etherscan
           </a>
-        </h6> */}
+        </h6>
         {/* <br />
         <h6 className="text-yellow-pos font-bold text-sm sm:text-base md:text-2xl">
           ❤️✍️ Thanks for donating! What now, you ask? 🤖❤️

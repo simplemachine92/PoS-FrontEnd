@@ -34,3 +34,4 @@ export { default as Address2 } from "./Address2";
 export { default as SignatureDisplay } from "./SignedDisplay";
 export { default as CustomSwitch } from "./CustomSwitch";
 export { default as Waitlist2 } from "./Waitlist2";
+export { default as Maintenance } from "./Maintenance";
