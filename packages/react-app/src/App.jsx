@@ -169,10 +169,10 @@ function App(props) {
   const tx = Transactor(userSigner, gasPrice);
 
   // 🏗 scaffold-eth is full of handy hooks like this one to get your balance:
-  const yourLocalBalance = useBalance(localProvider, address);
+  const yourLocalBalance = "";
 
   // Just plug in different 🛰 providers to get your balance on different chains:
-  const yourMainnetBalance = useBalance(mainnetProvider, address);
+  const yourMainnetBalance = "";
 
   // const contractConfig = useContractConfig();
 
