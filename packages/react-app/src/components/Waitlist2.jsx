@@ -7,7 +7,7 @@ export default function Waitlist2({ readContracts, address, tokenId }) {
     <>
       <div className="mx-auto px-2 sm:px-3 md:px-4 lg:px-5">
         <iframe
-          className="mx-auto w-full mt-5 rounded shadow-xl bg-green-200 h-96"
+          className="mx-auto w-full mt-5 rounded shadow-xl bg-green-200 h-screen"
           src="https://dune.com/embeds/1223834/2096259/d95211f8-bb8e-40bf-8545-d8f757bd5d50"
           title="chart 1"
         ></iframe>

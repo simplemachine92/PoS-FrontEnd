@@ -140,10 +140,6 @@ function Pledge({ writeContracts, tx, address, loadWeb3Modal }) {
                           }
                         }
                       );
-                      const db = database;
-                      set(ref(db, `PoS/` + address), {
-                       email: eValue
-                      });
                     } catch(err) {
                       notification.error({
                         message: "Donation Not Processed",

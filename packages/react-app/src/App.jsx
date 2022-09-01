@@ -201,7 +201,7 @@ function App(props) {
     "ProofOfStake_Pages",
     "tokenOfOwnerByIndex",
     [address, "0"],
-    60000,
+    6000000,
     null,
   );
   /* console.log("purpose", purpose); */
@@ -328,7 +328,7 @@ function App(props) {
       });
   }, [tokenId, address, readContracts]);
 
-  useEffect(async () => {
+  /* useEffect(async () => {
     if (tokenId && readContracts.ProofOfStake_Pages && address) {
       const nId = await readContracts.ProofOfStake_Pages.tokenOfOwnerByIndex(address, "0");
       const token = await readContracts.ProofOfStake_Pages.tokenURI(nId);
@@ -338,7 +338,7 @@ function App(props) {
       setMessage(result.message);
     }
     setReady2(true);
-  }, [tokenId, address, readContracts, sData]);
+  }, [tokenId, address, readContracts, sData]); */
 
   return (
     <div className="App">
@@ -380,7 +380,7 @@ function App(props) {
               logoutOfWeb3Modal={logoutOfWeb3Modal}
               USE_NETWORK_SELECTOR={USE_NETWORK_SELECTOR}
             />
-            <SignatureDisplay
+            {/* <SignatureDisplay
               NETWORKCHECK={NETWORKCHECK}
               address={address}
               localChainId={localChainId}
@@ -395,7 +395,7 @@ function App(props) {
               ready2={ready2}
               uMessage={uMessage}
               sData={sData}
-            />
+            /> */}
             <StyledMenu
               className="hidden justify-start items-center md:flex"
               selectedKeys={[location.pathname]}
@@ -621,7 +621,7 @@ function App(props) {
               />
             </Route>
             <Route path="/view">
-              <SignatorViewer
+              {/* <SignatorViewer
                 mainnetProvider={mainnetProvider}
                 injectedProvider={injectedProvider}
                 address={address}
@@ -631,7 +631,7 @@ function App(props) {
                 readContracts={readContracts}
                 tx={tx}
                 firebaseConfig={firebaseConfig}
-              />
+              /> */}
             </Route>
             <Route path="/pledge">
               <Pledge
@@ -666,7 +666,7 @@ function App(props) {
               /> */}
             </Route>
             <Route path="/sign">
-              <Sign
+              {/* <Sign
                 mainnetProvider={mainnetProvider}
                 injectedProvider={injectedProvider}
                 address={address}
@@ -678,7 +678,7 @@ function App(props) {
                 events={events}
                 tx={tx}
                 writeContracts={writeContracts}
-              />
+              /> */}
             </Route>
             <Route path="/profile">
               <Profile
