@@ -6,10 +6,10 @@ export default function Waitlist2({ readContracts, address, tokenId }) {
   return (
     <>
       <div className="mx-auto px-2 sm:px-3 md:px-4 lg:px-5">
-        forked from <a href="https://twitter.com/ivanmolto">@ivanmolto</a>
+        {/* forked from <a href="https://twitter.com/ivanmolto">@ivanmolto</a> */}
         <iframe
           className="mx-auto w-full mt-5 rounded shadow-xl bg-green-200 h-screen"
-          src="https://dune.com/embeds/1226737/2101656/14c01478-18d1-495a-b84a-ac01ad884558"
+          src="https://dune.com/embeds/1223834/2096259/8a52fc93-52cc-4581-957b-90826bf326f1"
           title="chart 1"
         ></iframe>
         {/* <h6 className="text-yellow-pos font-bold mt-3 text-2xs sm:text-base md:text-2xl">
