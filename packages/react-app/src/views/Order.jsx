@@ -74,7 +74,7 @@ function Order({ writeContracts, tx }) {
         <div className="">
           {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
           {/* prettier-ignore */}
-          <h5 className="mt-2 mb-2 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">✨ Pre-Order ✨</h5>
+          <h5 className="mt-2 mb-2 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">✨ Order ✨</h5>
           <div className="flex flex-wrap bg-headerBackground bg-contain bg-top-right bg-no-repeat">
             <div className="flex flex-wrap w-full sm:w-1/3 content-center items-left mx-auto">
               <div className="max-w-md py-3 mx-auto justify-center">
@@ -99,7 +99,7 @@ function Order({ writeContracts, tx }) {
             </div>
             <div className="w-full sm:w-1/2 mx-auto mt-2 rounded overflow-hidden content-center shadow-2xl px-5 py-3">
               <p className="text-white font-bold text-center sm:text-left mb-2 text-xs sm:text-tiny md:text-lg lg:text-xl">
-                Preorder from your local bookstore
+                Order from your local bookstore
               </p>
               <p className="text-white font-bold text-center sm:text-left mb-2 text-xs sm:text-tiny md:text-lg lg:text-xl">
                 or from these retailers:
