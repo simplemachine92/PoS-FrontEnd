@@ -411,20 +411,11 @@ function App(props) {
               </Menu.Item>
               <Menu.Item
                 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-                key="mail"
-                className="modified-item"
-                icon={<BookOutlined />}
-              >
-                Donate & Mint
-                <Link to="/pledge"></Link>
-              </Menu.Item>
-              <Menu.Item
-                style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
                 key="order"
                 className="modified-item"
                 icon={<ShoppingCartOutlined />}
               >
-                Pre-Order
+                Order Book
                 <Link to="/order"></Link>
               </Menu.Item>
               <Menu.Item
@@ -436,7 +427,7 @@ function App(props) {
                 Donors
                 <Link to="/donations"></Link>
               </Menu.Item>
-              <Menu.Item
+              {/* <Menu.Item
                 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
                 key="signatures"
                 className="modified-item"
@@ -444,7 +435,7 @@ function App(props) {
               >
                 Signatures
                 <Link to="/signatures"></Link>
-              </Menu.Item>
+              </Menu.Item> */}
 
               <Menu.Item
                 style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
@@ -503,19 +494,10 @@ function App(props) {
                   <Menu.Item
                     className="flex justify-start items-center"
                     onClick={() => setVisible(false)}
-                    key="mail"
-                    icon={<BookOutlined />}
-                  >
-                    Donate & Mint
-                    <Link to="/pledge"></Link>
-                  </Menu.Item>
-                  <Menu.Item
-                    className="flex justify-start items-center"
-                    onClick={() => setVisible(false)}
                     key="order"
                     icon={<ShoppingCartOutlined />}
                   >
-                    Pre-Order
+                    Order Book
                     <Link to="/order"></Link>
                   </Menu.Item>
                   <Menu.Item
@@ -527,7 +509,7 @@ function App(props) {
                     Donors
                     <Link to="/donations"></Link>
                   </Menu.Item>
-                  <Menu.Item
+                  {/* <Menu.Item
                     className="flex justify-start items-center"
                     onClick={() => setVisible(false)}
                     key="signatures"
@@ -535,7 +517,7 @@ function App(props) {
                   >
                     Signatures
                     <Link to="/signatures"></Link>
-                  </Menu.Item>
+                  </Menu.Item> */}
                   <Menu.Item
                     className="flex justify-start items-center"
                     onClick={() => setVisible(false)}
@@ -581,7 +563,7 @@ function App(props) {
                 address={address}
               />
             </Route>
-            <Route path="/pledge">
+            {/* <Route path="/pledge">
               <Pledge
                 yourLocalBalance={yourLocalBalance}
                 writeContracts={writeContracts}
@@ -591,7 +573,7 @@ function App(props) {
                 loadWeb3Modal={loadWeb3Modal}
                 address={address}
               />
-            </Route>
+            </Route> */}
             <Route path="/donations">
               <Waitlist2
                 yourLocalBalance={yourLocalBalance}
@@ -632,7 +614,7 @@ function App(props) {
                 firebaseConfig={firebaseConfig}
               /> */}
             </Route>
-            <Route path="/pledge">
+            {/* <Route path="/pledge">
               <Pledge
                 yourLocalBalance={yourLocalBalance}
                 writeContracts={writeContracts}
@@ -641,7 +623,7 @@ function App(props) {
                 localProvider={localProvider}
                 address={address}
               />
-            </Route>
+            </Route> */}
             <Route path="/order">
               <Order
                 yourLocalBalance={yourLocalBalance}
@@ -652,9 +634,9 @@ function App(props) {
                 address={address}
               />
             </Route>
-            <Route path="/signatures">
-              <Maintenance />
-              {/* <SignatureList
+            {/* <Route path="/signatures">
+              <Maintenance /> */}
+            {/* <SignatureList
                 address={address}
                 yourLocalBalance={yourLocalBalance}
                 mainnetProvider={mainnetProvider}
@@ -663,7 +645,7 @@ function App(props) {
                 events={events}
                 visible={visible}
               /> */}
-            </Route>
+            {/* </Route> */}
             <Route path="/sign">
               {/* <Sign
                 mainnetProvider={mainnetProvider}

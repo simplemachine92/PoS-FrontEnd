@@ -11,7 +11,7 @@ import {
   sendSignInLinkToEmail,
   onAuthStateChanged,
 } from "firebase/auth";
-import { Footer, Quotes } from "../components";
+import { Footer, Quotes, Book } from "../components";
 
 const codec = require("json-url")("lzw");
 
@@ -156,73 +156,71 @@ function Profile({ writeContracts, tx, address, loadWeb3Modal, readContracts, to
         <div>
           <div className="bg-headerBackground bg-cover bg-center bg-no-repeat">
             <h5 className="mt-3 mb-2 font-bold text-sm sm:text-base md:text-lg lg:text-4xl">✨ Profile ✨</h5>
-            {/* dev-note This header needs to be split into elements, so loading isn't as clunky */}
-            {/* prettier-ignore */}
             <div className="flex flex-wrap items-center justify-center pt-5 mx-auto">
               {/* <h5 className="text-xl font-bold">Your Token</h5> */}
               {image ? (
                 <>
-                <img
-                  className="px-2 py-2 w-1/2 sm:w-1/3 md:w-1/4 md:mx-auto xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                  src={image}
-                />
+                  <img
+                    className="px-2 py-2 w-1/2 sm:w-1/3 md:w-1/4 md:mx-auto xl:w-3/12 md:py-2 md:px-2 bg-gradient-to-r from-blue-100 to-yellow-pos hover:from-blue-100 hover:to-yellow-poslight rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                    src={image}
+                  />
                 </>
               ) : (
                 <>
-                <svg
-                  className="px-2 py-2 ml-4 w-1/2 sm:w-1/3 lg:w-1/4 xl:w-3/12 md:py-2 md:px-2 animate-pulse"
-                  viewBox="0 0 600 830"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
-                </svg>
-              </>
+                  <svg
+                    className="px-2 py-2 ml-4 w-1/2 sm:w-1/3 lg:w-1/4 xl:w-3/12 md:py-2 md:px-2 animate-pulse"
+                    viewBox="0 0 600 830"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect x="5" y="15" rx="5" ry="5" width="590" height="800" fill="gray" />
+                  </svg>
+                </>
               )}
 
               {typedData && uMessage != typedData.message.msg ? (
-              <div className="w-full md:w-1/2 mx-4 py-4 sm:p-3 md:p-4 lg:p-5 rounded overflow-hidden shadow-xl">
-                <h3 className="w-full text-sm text-center text-md md:text-3xl mt-4 mb-4">
-              View it on <a href={url}>OpenSea</a>
-            </h3>
-                <h3 className="text-xs text-center text-md md:text-2xl">You received a personal message!</h3>
-                <h3 className="text-2xs text-center text-md md:text-xl mt-4">"{typedData.message.msg}"</h3>
-                <br />
-                <button
-                  className="w- mb-4 py-2 px-2 sm:py-4 text-xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
-                  type="btn btn-primary"
-                  onClick={async () => {
-                    try {
-                      const txCur = tx(
-                        writeContracts &&
-                          writeContracts.ProofOfStake_Pages.updateIfSigned(
-                            sData[0].signature,
-                            typedData.message.pledge,
-                            typedData.message.timestamp,
-                            typedData.message.msg,
-                          ),
-                      );
-                      await txCur.wait();
-                    } catch (e) {
-                      
-                    }
-                  }}
-                >
-                  Update Token
-                </button>
-                <br/>
-              </div>
-
+                <div className="w-full md:w-1/2 mx-4 py-4 sm:p-3 md:p-4 lg:p-5 rounded overflow-hidden shadow-xl">
+                  <h3 className="w-full text-sm text-center text-md md:text-3xl mt-4 mb-4">
+                    View it on <a href={url}>OpenSea</a>
+                  </h3>
+                  <h3 className="text-xs text-center text-md md:text-2xl">You received a personal message!</h3>
+                  <h3 className="text-2xs text-center text-md md:text-xl mt-4">"{typedData.message.msg}"</h3>
+                  <br />
+                  <button
+                    className="w-1/4 mb-4 py-2 px-2 sm:py-4 text-xs sm:text-xl bg-gradient-to-r from-yellow-300 to-yellow-pos hover:from-yellow-pos hover:to-yellow-poslight text-gray-900 font-bold rounded focus:ring transform transition hover:scale-105 duration-300 ease-in-out"
+                    type="btn btn-primary"
+                    onClick={async () => {
+                      try {
+                        const txCur = tx(
+                          writeContracts &&
+                            writeContracts.ProofOfStake_Pages.updateIfSigned(
+                              sData[0].signature,
+                              typedData.message.pledge,
+                              typedData.message.timestamp,
+                              typedData.message.msg,
+                            ),
+                        );
+                        await txCur.wait();
+                      } catch (e) {}
+                    }}
+                  >
+                    Update Token
+                  </button>
+                  <Book address={address} readContracts={readContracts} />
+                  <br />
+                </div>
               ) : (
                 <div className="w-full sm:w-1/2 mx-2 my-2 sm:my-0 sm:mx-auto sm:p-2 rounded overflow-hidden shadow-xl">
-                
-                <p className="text-white text-center text-lg md:text-3xl">
-                  View on <a href={url}>OpenSea</a>
-                </p>
-                <br/>
-                <p className="text-white text-center text-sm md:text-lg">Download your personalized copy starting on September 13, 2022.</p>
-                <br/>
-              </div>
+                  <p className="text-white text-center text-lg md:text-3xl">
+                    View on <a href={url}>OpenSea</a>
+                  </p>
+                  <br />
+                  <p className="text-white text-center text-sm md:text-lg">
+                    Your Digital Book is available, allow us a second to load!
+                  </p>
+                  <br />
+                  <Book address={address} readContracts={readContracts} />
+                </div>
               )}
 
               {/* Enable when book releases and we have full pdf */}
